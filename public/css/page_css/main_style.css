@@ -1,0 +1,204 @@
+html, body {
+    background-color: #fff;
+    height: 100%;
+    margin: 0;
+}
+.larafont{
+    color: #303952 !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 200;
+}
+.larafont-navlink{
+    color: #303952 !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 200;
+    font-size:1.2rem;
+    text-decoration: none !important;
+}
+.larafont-nav{
+    color: #303952 !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 200;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+}
+.larafont-nav:hover{
+    text-decoration: none;
+    text-color:#636b6f !important;
+    cursor:pointer;
+}
+.fs-modal-title{
+    font-size:1.5rem;
+    text-align: center;
+}
+.fb-center{
+    display:flex;
+    justify-content: center;
+}
+.fb-center-xy{
+    display:flex;
+    justify-content: center;
+    align-content: center;
+}
+.fb-right{
+    display:flex;
+    justify-content: flex-end;
+}
+.fb-around{
+    display:flex;
+    justify-content: space-around;
+}
+.f-r{
+    color:#d63031;
+}
+/*.tableIcon:hover{*/
+/*    background-color: rgba(234, 134, 133, 0.5);*/
+/*    transition: 0.3s;*/
+/*}*/
+.linkText{
+    color: #636b6f !important;
+    padding: 0 25px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: .1rem !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+}
+.good-icon{
+    color:#2ecc71;
+}
+.c-p{
+    cursor:pointer;
+}
+.page-height-default{
+    min-height:100vh;
+}
+
+.orange-light{
+    background-color:#FEA47F;
+}
+.orange-stress{
+    background-color:#F97F51;
+}
+.orange-stress-transparent{
+    transition-timing-function: ease-out;
+    transition: 0.5s;
+    background-color:rgba(249, 127, 81, 0.5);
+}
+.orange-stress-transparent:hover{
+    transition-timing-function: ease-in;
+    transition: 0.5s;
+    background-color:rgba(249, 127, 81, 1);
+}
+.orange-lighter{
+    background-color:#f19066;
+}
+.orange-lightest{
+    background-color:#f19066;
+}
+.grey-lightest{
+    background-color: #f1f2f6;
+}
+.grey-light{
+    background-color: #dfe4ea;
+}
+@media (min-width: 992px){
+    .li-stretch{
+        transition-timing-function: ease-out;
+        transition: 0.5s;
+        text-align: center !important;
+        width:100% !important;
+        height:100%;
+    }
+    .li-stretch:hover{
+        transition-timing-function: ease-in;
+        transition: 0.5s;
+        background-color:#f19066;
+        /*border-radius: 0.25rem;*/
+        height:100%;
+    }
+}
+.larafont-navlink-dropdown{
+    color: #303952 !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 200;
+    text-decoration: none !important;
+}
+.content-mt{
+    margin-top: 3.5rem !important;
+}
+.md-scrollbar::-webkit-scrollbar-thumb {
+    transition-timing-function: ease-out;
+    transition: 0.5s;
+    border-radius: 8px;
+    background-color: rgba(52, 73, 94, 0.5);
+}
+.md-scrollbar::-webkit-scrollbar-thumb:hover {
+    transition-timing-function: ease-out;
+    transition: 0.5s;
+    border-radius: 8px;
+    background-color: rgba(52, 73, 94, 1);
+}
+#navbar_element{
+    padding:0 !important;
+    height:39px;
+}
+.fb-around-align-center{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar-toggler{
+    background-color:rgba(241, 242, 246, 0.5);
+}
+
+.super-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: #303952 !important;
+    font-family: 'Nunito', sans-serif !important;
+    text-transform: uppercase;
+    font-size: 8vw;
+    font-weight:300;
+    letter-spacing: 4px;
+    height:10rem;
+    overflow: hidden;
+    background: linear-gradient(90deg, #303952, #fff, #303952);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    animation: animate 10s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+.super-text-main{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+@keyframes animate {
+    0% {
+        background-position: -500%;
+    }
+    100% {
+        background-position: 500%;
+    }
+}
+.manage-data-wrapper{
+    display:flex;
+    justify-content: center;
+}
+.p-t-b{
+    padding-top:5rem;
+    padding-bottom:5rem;
+}
+.p-t{
+    padding-top:5rem;
+}
