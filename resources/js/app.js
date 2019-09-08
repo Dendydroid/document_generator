@@ -6,9 +6,6 @@ window.Vue = require('vue');
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
 
-import DataTable from 'laravel-vue-datatable';
-Vue.use(DataTable);
-
 Vue.use(VueMaterial);
 
 import MainPage from './components/MainPage';

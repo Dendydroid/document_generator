@@ -15,7 +15,6 @@ class DataController extends Controller
     /**
      * @var EntityManager
      */
-
     private $entityManager;
 
     /**
