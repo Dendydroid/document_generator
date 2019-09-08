@@ -119,7 +119,7 @@
                     </md-table-toolbar>
 
                     <md-table-empty-state
-                        md-label="Факультет не найден"
+                        md-label="Факультеты не найдены"
                         :md-description="'Не было найдено ни одного факультета. Измените запрос или создайте новый факультет.'">
                         <md-button class="md-primary md-raised" v-on:click="toggleModalAdd=true">Добавить</md-button>
                     </md-table-empty-state>
@@ -328,16 +328,16 @@ button.btn-warn{
                         objects: this.selected
                     })
                     .then(response => {
-                        this.dataSet.forEach(function(el,index,arr){
-                            for(let i=0; i<response.data.length;i++)
-                            {
-                                if(el.id === response.data[i].id)
-                                {
-                                    arr.splice(index, 1);
-                                    console.log('removed');
-                                }
-                            }
-                        });
+                        // this.dataSet.forEach(function(el,index,arr){
+                        //     for(let i=0; i<response.data.length;i++)
+                        //     {
+                        //         if(el.id === response.data[i].id)
+                        //         {
+                        //             arr.splice(index, 1);
+                        //         }
+                        //     }
+                        // });
+                        this.getFaculties();
                     })
                     .catch(e => {
                         this.errors.push(e)

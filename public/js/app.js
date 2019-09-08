@@ -2112,14 +2112,16 @@ var searchByColumn = function searchByColumn(items, term, column) {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/deleteFaculties', {
         objects: this.selected
       }).then(function (response) {
-        _this4.dataSet.forEach(function (el, index, arr) {
-          for (var i = 0; i < response.data.length; i++) {
-            if (el.id === response.data[i].id) {
-              arr.splice(index, 1);
-              console.log('removed');
-            }
-          }
-        });
+        // this.dataSet.forEach(function(el,index,arr){
+        //     for(let i=0; i<response.data.length;i++)
+        //     {
+        //         if(el.id === response.data[i].id)
+        //         {
+        //             arr.splice(index, 1);
+        //         }
+        //     }
+        // });
+        _this4.getFaculties();
       })["catch"](function (e) {
         _this4.errors.push(e);
       });
@@ -38939,7 +38941,7 @@ var render = function() {
                     "md-table-empty-state",
                     {
                       attrs: {
-                        "md-label": "Факультет не найден",
+                        "md-label": "Факультеты не найдены",
                         "md-description":
                           "Не было найдено ни одного факультета. Измените запрос или создайте новый факультет."
                       }

@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d2c251a4-e1cc-4783-b479-dcfda0d73dae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/FacultyRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/FacultyRepo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ManageFaculties.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageFaculties.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -213,7 +210,7 @@
       <workItem from="1567858525751" duration="15977000" />
       <workItem from="1567900567526" duration="2614000" />
       <workItem from="1567941700755" duration="17962000" />
-      <workItem from="1567962708537" duration="14832000" />
+      <workItem from="1567962708537" duration="17321000" />
     </task>
     <task id="LOCAL-00001" summary="Added:&#10;-Register&#10;-Login&#10;-Logout&#10;-Profile&#10;-Change Password&#10;-Remove Account">
       <created>1566408908580</created>
@@ -278,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567957077254</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="ADDED FULL FACULTY MANAGEMENT WITH VUE AND MATERIAL DESIGN">
+      <created>1567980545793</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1567980545793</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,6 +312,7 @@
     <MESSAGE value="Changed Institutes to Specializations" />
     <MESSAGE value="removed extra stuff oops" />
     <MESSAGE value="Added front end material table for data management&#10;(Faculty)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added front end material table for data management&#10;(Faculty)" />
+    <MESSAGE value="ADDED FULL FACULTY MANAGEMENT WITH VUE AND MATERIAL DESIGN" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADDED FULL FACULTY MANAGEMENT WITH VUE AND MATERIAL DESIGN" />
   </component>
 </project>
