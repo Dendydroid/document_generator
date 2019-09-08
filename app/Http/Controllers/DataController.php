@@ -102,12 +102,9 @@ class DataController extends Controller
         $data = $request->all();
         $faculty = $this->repoFaculties->createFaculty($data);
         if($faculty instanceof Faculty){
-            return array_merge(
-                Constants::OPERATION_SUCCESSFUL,
-                ["id" => $faculty->getId()]
-            );
+            return $faculty->getTableArray();
         }else{
-            return array_merge(Constants::OPERATION_FAILED,$faculty);
+            return response()->json(array_merge(Constants::OPERATION_FAILED,$faculty), 400);
         }
     }
 
@@ -117,15 +114,12 @@ class DataController extends Controller
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function deleteFaculty(Request $request)
+    public function deleteFaculties(Request $request)
     {
         $data = $request->all();
-        if(isset($data['id']) && !empty($data['id']))
+        if(isset($data['objects']) && !empty($data['objects']))
         {
-            if($this->repoFaculties->deleteFaculty($data['id']))
-            {
-                return Constants::OPERATION_SUCCESSFUL;
-            }
+            return $this->repoFaculties->deleteFaculties($data['objects']);
         }
         return Constants::OPERATION_FAILED;
     }
@@ -141,12 +135,9 @@ class DataController extends Controller
         $data = $request->all();
         $faculty = $this->repoFaculties->editFaculty($data);
         if($faculty instanceof Faculty){
-            return array_merge(
-                Constants::OPERATION_SUCCESSFUL,
-                ["id" => $faculty->getId()]
-            );
+            return $faculty->getTableArray();
         }else{
-            return array_merge(Constants::OPERATION_FAILED,$faculty);
+            return response()->json(array_merge(Constants::OPERATION_FAILED,$faculty), 400);
         }
     }
 

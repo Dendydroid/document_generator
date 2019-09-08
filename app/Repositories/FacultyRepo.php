@@ -6,6 +6,7 @@ use App\Entities\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -39,12 +40,13 @@ class FacultyRepo extends EntityRepository {
 
     public function getFaculties(Request $request)
     {
+        $results = [];
         $qb = $this->_em->createQueryBuilder();
         $qb->select('f')
             ->from('App\Entities\Faculty', 'f')
             ->orderBy('f.fullName', 'ASC');
 
-        $results = $qb->getQuery()->getResult();
+        $results = $qb->getQuery()->getResult(Query::HYDRATE_ARRAY);
         return $results;
     }
 
@@ -95,21 +97,26 @@ class FacultyRepo extends EntityRepository {
     }
 
     /**
-     * @param int $id
-     * @return bool
+     * @param array $objects
+     * @return array
      * @throws ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function deleteFaculty(int $id)
+    public function deleteFaculties(array $objects)
     {
-        $faculty = $this->find($id);
-        if($faculty instanceof Faculty)
-        {
-            $this->_em->remove($faculty);
-            $this->_em->flush();
-            return true;
+        $removed = [];
+        foreach ($objects as $object){
+            $faculty = $this->find($object['id']);
+            if($faculty instanceof Faculty)
+            {
+                $this->_em->remove($faculty);
+                $this->_em->flush();
+                $removed[] = $object;
+            }else{
+                $removed[] = null;
+            }
         }
-        return false;
+        return $removed;
     }
 }
 

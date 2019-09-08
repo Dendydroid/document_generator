@@ -69,9 +69,9 @@ Route::post('/removeUser', 'UserController@removeUser')->name('removeUser')->mid
 Route::get('/getFaculties', 'DataController@getFacultyData')->name('getFaculties');
 Route::post('/getInstitutes', 'DataController@getInstitutesData')->name('getInstitutes')->middleware('logged');
 
-Route::post('/createFaculty', 'DataController@createFaculty')->name('createFaculty')->middleware('logged');
-Route::post('/deleteFaculty', 'DataController@deleteFaculty')->name('deleteFaculty')->middleware('logged');
-Route::post('/editFaculty', 'DataController@editFaculty')->name('editFaculty')->middleware('logged');
+Route::post('/createFaculty', 'DataController@createFaculty')->name('createFaculty');
+Route::post('/deleteFaculties', 'DataController@deleteFaculties')->name('deleteFaculties');
+Route::post('/editFaculty', 'DataController@editFaculty')->name('editFaculty');
 
 Route::post('/createInstitute', 'DataController@createInstitute')->name('createInstitute')->middleware('logged');
 Route::post('/deleteInstitute', 'DataController@deleteInstitute')->name('deleteInstitute')->middleware('logged');

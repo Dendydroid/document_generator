@@ -1869,16 +1869,117 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
 
 var toLower = function toLower(text) {
   return text.toString().toLowerCase();
 };
 
-var searchByName = function searchByName(items, term) {
+var searchByColumn = function searchByColumn(items, term, column) {
   if (term) {
     return items.filter(function (item) {
-      return toLower(item.fullName).includes(toLower(term));
+      return toLower(item[column]).includes(toLower(term));
     });
   }
 
@@ -1889,60 +1990,29 @@ var searchByName = function searchByName(items, term) {
   name: 'ManageFaculties',
   data: function data() {
     return {
+      snackbar: {
+        showSnackbar: false,
+        position: 'center',
+        duration: 4000,
+        bg: 'background-color:rgba(33, 33, 33, 0.6)'
+      },
+      searchColumn: 'fullName',
+      errorMessage: '',
+      editId: '',
+      removeConfirm: false,
+      add_fullName: '',
+      add_abbreviation: '',
+      edit_fullName: '',
+      edit_abbreviation: '',
+      toggleModalAdd: false,
+      toggleModalEdit: false,
+      toggleModalSure: false,
       showEditButton: false,
       selected: [],
       search: null,
       searched: [],
       errors: [],
-      dataSet: [{
-        id: 1,
-        fullName: 'Shawna Dubbin',
-        abbreviation: 'wwwfa@geocities.com'
-      }, {
-        id: 2,
-        fullName: 'KSI Youtuber',
-        abbreviation: 'ksi21340@mail.com'
-      }, {
-        id: 3,
-        fullName: 'Jenna Marbles',
-        abbreviation: 'jmb220@gmail.com1'
-      }, {
-        id: 4,
-        fullName: 'Tony Kas1',
-        abbreviation: 'sdubbin0@geocities.com1'
-      }, {
-        id: 5,
-        fullName: 'Shawna Dubbin1',
-        abbreviation: 'wwwfa@geocities.com1'
-      }, {
-        id: 6,
-        fullName: 'KSI Youtuber1',
-        abbreviation: 'ksi21340@mail.com1'
-      }, {
-        id: 7,
-        fullName: 'Jenna Marbles2',
-        abbreviation: 'jmb220@gmail.com2'
-      }, {
-        id: 8,
-        fullName: 'Tony Kas2',
-        abbreviation: 'sdubbin0@geocities.com2'
-      }, {
-        id: 9,
-        fullName: 'Shawna Dubbin2',
-        abbreviation: 'wwwfa@geocities.com2'
-      }, {
-        id: 10,
-        fullName: 'KSI Youtuber3',
-        abbreviation: 'ksi21340@mail.com3'
-      }, {
-        id: 11,
-        fullName: 'Jenna Marbles3',
-        abbreviation: 'jmb220@gmail.com3'
-      }, {
-        id: 12,
-        fullName: 'Tony Kas3',
-        abbreviation: 'sdubbin0@geocities.com3'
-      }]
+      dataSet: []
     };
   },
   methods: {
@@ -1952,6 +2022,7 @@ var searchByName = function searchByName(items, term) {
     },
     getAlternateLabel: function getAlternateLabel(count) {
       var plural = '';
+      var plural2 = '';
 
       if (parseInt(count.toString().split('').pop()) === 1) {
         plural = '';
@@ -1965,17 +2036,23 @@ var searchByName = function searchByName(items, term) {
         plural = 'ов';
       }
 
-      return "\u0412\u044B\u0434\u0435\u043B\u0435\u043D\u043E ".concat(count, " \u0444\u0430\u043A\u0443\u043B\u044C\u0442\u0435\u0442").concat(plural);
+      if (count !== 1) {
+        plural2 = 'о';
+      } else {
+        plural2 = '';
+      }
+
+      return "\u0412\u044B\u0434\u0435\u043B\u0435\u043D".concat(plural2, " ").concat(count, " \u0444\u0430\u043A\u0443\u043B\u044C\u0442\u0435\u0442").concat(plural);
     },
-    add: function add() {},
-    refresh: function refresh() {},
     searchOnTable: function searchOnTable() {
-      this.searched = searchByName(this.dataSet, this.search);
+      if (this.searchColumn) {
+        this.searched = searchByColumn(this.dataSet, this.search, this.searchColumn);
+      }
     },
     clearSelected: function clearSelected() {
       this.selected = [];
     },
-    editSelected: function editSelected() {},
+    // editSelected() {},
     toggleShowEditButton: function toggleShowEditButton(items) {
       if (items.length === 1) {
         this.showEditButton = true;
@@ -1983,19 +2060,100 @@ var searchByName = function searchByName(items, term) {
       }
 
       this.showEditButton = false;
+    },
+    getFaculties: function getFaculties() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getFaculties').then(function (response) {
+        return _this.dataSet = response.data;
+      })["catch"](function (e) {
+        _this.errors.push(e);
+      });
+    },
+    createFaculty: function createFaculty() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/createFaculty', {
+        fullName: this.add_fullName,
+        abbreviation: this.add_abbreviation
+      }).then(function (response) {
+        return _this2.dataSet.push(response.data);
+      })["catch"](function (e) {
+        _this2.errors.push(e.response.data.errors);
+      });
+      this.toggleModalAdd = false;
+    },
+    editFaculty: function editFaculty() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/editFaculty', {
+        id: this.editId,
+        fullName: this.edit_fullName,
+        abbreviation: this.edit_abbreviation
+      }).then(function (response) {
+        _this3.dataSet.forEach(function (el, index, arr) {
+          if (el.id === response.data.id) {
+            arr[index].fullName = response.data.fullName;
+            arr[index].abbreviation = response.data.abbreviation;
+          }
+        });
+      })["catch"](function (e) {
+        _this3.errors.push(e.response.data.errors);
+      });
+      this.editId = '';
+      this.edit_fullName = '';
+      this.edit_abbreviation = '';
+      this.clearSelected();
+      this.toggleModalEdit = false;
+    },
+    deleteFaculties: function deleteFaculties() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/deleteFaculties', {
+        objects: this.selected
+      }).then(function (response) {
+        _this4.dataSet.forEach(function (el, index, arr) {
+          for (var i = 0; i < response.data.length; i++) {
+            if (el.id === response.data[i].id) {
+              arr.splice(index, 1);
+              console.log('removed');
+            }
+          }
+        });
+      })["catch"](function (e) {
+        _this4.errors.push(e);
+      });
+      this.clearSelected();
+      this.toggleModalSure = false;
+    },
+    editSelected: function editSelected() {
+      if (this.selected.length === 1) {
+        var element = this.selected[0];
+        this.edit_fullName = element.fullName;
+        this.edit_abbreviation = element.abbreviation;
+        this.editId = element.id;
+        this.toggleModalEdit = true;
+      }
+    },
+    onCancel: function onCancel() {
+      this.toggleModalSure = false;
+    },
+    onConfirm: function onConfirm() {
+      this.deleteFaculties();
+      this.toggleModalSure = false;
     }
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getFaculties').then(function (response) {
-      return _this.dataSet = response.data;
-    })["catch"](function (e) {
-      _this.errors.push(e);
-    });
+  watch: {
+    errors: function errors(val) {
+      this.errorMessage = val[0][Object.keys(val[0])[0]][0];
+      this.snackbar.showSnackbar = true;
+    },
+    dataSet: function dataSet(val) {
+      this.searched = val;
+    }
   },
   created: function created() {
-    this.searched = this.dataSet;
+    this.getFaculties();
   }
 });
 
@@ -6518,7 +6676,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:orange !important;\n    color:#448aff;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n", ""]);
+exports.push([module.i, "\n.f-e{\n        display: flex;\n        justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -38190,20 +38348,367 @@ var render = function() {
     { staticClass: "container grey-light page-height-default" },
     [
       _c(
+        "md-snackbar",
+        {
+          style: _vm.snackbar.bg,
+          attrs: {
+            "md-position": _vm.snackbar.position,
+            "md-duration": _vm.snackbar.duration,
+            "md-active": _vm.snackbar.showSnackbar,
+            "md-persistent": ""
+          },
+          on: {
+            "update:mdActive": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            },
+            "update:md-active": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            }
+          }
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass: "c-alert",
+              model: {
+                value: _vm.errorMessage,
+                callback: function($$v) {
+                  _vm.errorMessage = $$v
+                },
+                expression: "errorMessage"
+              }
+            },
+            [_vm._v(_vm._s(_vm.errorMessage))]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-button",
+            {
+              staticClass: "md-icon-button md-accent",
+              attrs: { title: "Закрыть окно" },
+              on: {
+                click: function($event) {
+                  _vm.snackbar.showSnackbar = false
+                }
+              }
+            },
+            [_c("md-icon", [_vm._v("clear")])],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
         "div",
         { staticClass: "p-t" },
         [
+          _c(
+            "md-dialog",
+            {
+              staticClass: " of-auto",
+              attrs: { "md-active": _vm.toggleModalSure, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalSure = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalSure = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _c(
+                  "p",
+                  [
+                    _vm._v("Вы уверены? "),
+                    _c("md-icon", { staticClass: "mb-1 md-accent" }, [
+                      _vm._v("warning")
+                    ])
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "pl-3 pr-3 pb-3 larafont" }, [
+                _vm._v("\n                    Эта операция "),
+                _c("span", { staticClass: "c-r" }, [_vm._v("необратима")]),
+                _vm._v(", нажимая '"),
+                _c("span", { staticClass: "c-p" }, [_vm._v("подтвердить")]),
+                _vm._v("' "),
+                _c("br"),
+                _vm._v(
+                  " вы безвозвратно удаляете запись/записи.\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3 pl-2 pr-2" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.onConfirm()
+                        }
+                      }
+                    },
+                    [_vm._v("Подтвердить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.onCancel()
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-dialog",
+            {
+              staticClass: "pl-5 pr-5 of-auto",
+              attrs: { "md-active": _vm.toggleModalAdd, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalAdd = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalAdd = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _vm._v("Добавить факультет")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "pl-2 pr-2 pb-3" },
+                [
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Наименование")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_fullName,
+                          callback: function($$v) {
+                            _vm.add_fullName = $$v
+                          },
+                          expression: "add_fullName"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя, Название")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Аббревиатура")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_abbreviation,
+                          callback: function($$v) {
+                            _vm.add_abbreviation = $$v
+                          },
+                          expression: "add_abbreviation"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Сокращенное имя")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.createFaculty()
+                        }
+                      }
+                    },
+                    [_vm._v("Сохранить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          _vm.toggleModalAdd = false
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-dialog",
+            {
+              staticClass: "pl-5 pr-5 of-auto",
+              attrs: { "md-active": _vm.toggleModalEdit, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalEdit = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalEdit = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _vm._v("Изменить факультет")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "pl-2 pr-2 pb-3" },
+                [
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Наименование")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_fullName,
+                          callback: function($$v) {
+                            _vm.edit_fullName = $$v
+                          },
+                          expression: "edit_fullName"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя, Название")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Аббревиатура")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_abbreviation,
+                          callback: function($$v) {
+                            _vm.edit_abbreviation = $$v
+                          },
+                          expression: "edit_abbreviation"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Сокращенное имя")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.editFaculty()
+                        }
+                      }
+                    },
+                    [_vm._v("Сохранить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          _vm.toggleModalEdit = false
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
           _c(
             "md-card",
             [
               _c("md-card-header", [
                 _c("div", { staticClass: "md-title" }, [
-                  _vm._v("\n                    Факультеты\n                ")
+                  _vm._v(
+                    "\n                        Факультеты\n                    "
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "md-subhead" }, [
                   _vm._v(
-                    "\n                    Управление данными\n                "
+                    "\n                        Управление данными\n                    "
                   )
                 ])
               ]),
@@ -38219,13 +38724,13 @@ var render = function() {
                         staticClass: "md-raised md-primary",
                         on: {
                           click: function($event) {
-                            return _vm.add()
+                            _vm.toggleModalAdd = true
                           }
                         }
                       },
                       [
                         _vm._v(
-                          "\n                        Добавить\n                    "
+                          "\n                            Добавить\n                        "
                         )
                       ]
                     ),
@@ -38234,7 +38739,12 @@ var render = function() {
                       "md-button",
                       {
                         staticClass:
-                          "md-icon-button md-dense md-raised md-primary upd-icon"
+                          "md-icon-button md-dense md-raised md-primary upd-icon",
+                        on: {
+                          click: function($event) {
+                            return _vm.getFaculties()
+                          }
+                        }
                       },
                       [_c("md-icon", [_vm._v("cached")])],
                       1
@@ -38302,7 +38812,12 @@ var render = function() {
                                 {
                                   staticClass:
                                     "md-icon-button md-raised md-accent",
-                                  attrs: { title: "Удалить выделенное" }
+                                  attrs: { title: "Удалить выделенное" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.toggleModalSure = true
+                                    }
+                                  }
                                 },
                                 [_c("md-icon", [_vm._v("delete")])],
                                 1
@@ -38368,7 +38883,7 @@ var render = function() {
                               "md-table-cell",
                               {
                                 attrs: {
-                                  "md-label": "Аббривиатура",
+                                  "md-label": "Аббревиатура",
                                   "md-sort-by": "abbreviation"
                                 }
                               },
@@ -38402,7 +38917,7 @@ var render = function() {
                         },
                         [
                           _c("md-input", {
-                            attrs: { placeholder: "Искать по наименованию.." },
+                            attrs: { placeholder: "Поиск по наименованию.." },
                             on: { input: _vm.searchOnTable },
                             model: {
                               value: _vm.search,
@@ -38436,7 +38951,7 @@ var render = function() {
                           staticClass: "md-primary md-raised",
                           on: {
                             click: function($event) {
-                              return _vm.add()
+                              _vm.toggleModalAdd = true
                             }
                           }
                         },
@@ -38447,17 +38962,15 @@ var render = function() {
                   )
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _c("p", [_vm._v("Selected:")]),
-              _vm._v("\n            " + _vm._s(_vm.selected) + "\n\n        ")
+              )
             ],
             1
           )
         ],
         1
       )
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = []
