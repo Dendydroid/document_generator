@@ -624,4 +624,13 @@ class DataController extends Controller
 
         return response()->json(array_merge(Constants::OPERATION_FAILED,$student), 400);
     }
+
+    public function getSubjectsByGroup($id)
+    {
+        $group = $this->repoGroup->find($id);
+        if($group instanceof Group)
+        {
+            return $group->getTableArray();
+        }
+    }
 }

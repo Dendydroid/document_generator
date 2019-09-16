@@ -6,8 +6,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav fb-around-align-center w-100">
-                <li class="nav-item active li-stretch">
-                    <a class="nav-link larafont-navlink" href="#">Генерировать <span class="sr-only">(current)</span></a>
+                <li class="nav-item dropdown li-stretch">
+                    <a class="nav-link dropdown-toggle larafont-navlink" href="#" id="generateDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Генерировать
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="generateDropdown">
+                        <a class="dropdown-item larafont-navlink-dropdown" href="/generate/zajavaIspit">Заява - іспит</a>
+                    </div>
                 </li>
                 <li class="nav-item li-stretch">
                     <a class="nav-link larafont-navlink" href="/manage">База данных</a>
