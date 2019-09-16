@@ -93,6 +93,12 @@ class Faculty {
         return $this->specialities->getValues();
     }
 
+
+    public function getSpecialitiesCollection()
+    {
+        return $this->specialities;
+    }
+
     /**
      * @param Speciality $speciality
      */

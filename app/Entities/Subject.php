@@ -185,4 +185,20 @@ class Subject {
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getTableArray()
+    {
+        return [
+            "id" => $this->id,
+            "name" => $this->name,
+            "professor" => $this->mainProfessor,
+            "headOfDepartment" => $this->headOfDepartment,
+            "moduleCount" => $this->moduleCount,
+            "hoursCount" => $this->hoursCount,
+            "creditsCount" => $this->creditsCount,
+            "dateBegin" => $this->date,
+        ];
+    }
 }

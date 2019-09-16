@@ -41,17 +41,21 @@ Route::get('/manageFaculties', function(\Illuminate\Http\Request $request){
     return view('manage.faculties');
 })->name('manageFaculties');
 
-Route::get('/manageInstitutes', function(\Illuminate\Http\Request $request){
-    return view('data.instituteData');
-})->name('manageInstitutes')->middleware('logged');
+Route::get('/manageSpecialities', function(\Illuminate\Http\Request $request){
+    return view('manage.specialities');
+})->name('manageSpecialities');
+
+Route::get('/manageSubjects', function(\Illuminate\Http\Request $request){
+    return view('manage.subjects');
+})->name('manageSubjects');
 
 Route::get('/manageGroups', function(\Illuminate\Http\Request $request){
-    return view('data.groupData');
-})->name('manageGroups')->middleware('logged');
+    return view('manage.groups');
+})->name('manageGroups');
 
 Route::get('/manageStudents', function(\Illuminate\Http\Request $request){
-    return view('data.studentData');
-})->name('manageStudents')->middleware('logged');
+    return view('manage.students');
+})->name('manageStudents');
 
 //END DATA VIEWS
 
@@ -66,15 +70,34 @@ Route::post('/updatePassword', 'UserController@updatePassword')->name('updatePas
 
 Route::post('/removeUser', 'UserController@removeUser')->name('removeUser')->middleware('logged');
 
-Route::get('/getFaculties', 'DataController@getFacultyData')->name('getFaculties');
-Route::post('/getInstitutes', 'DataController@getInstitutesData')->name('getInstitutes')->middleware('logged');
 
+
+Route::get('/getFaculties', 'DataController@getFacultyData')->name('getFaculties');
 Route::post('/createFaculty', 'DataController@createFaculty')->name('createFaculty');
 Route::post('/deleteFaculties', 'DataController@deleteFaculties')->name('deleteFaculties');
 Route::post('/editFaculty', 'DataController@editFaculty')->name('editFaculty');
 
-Route::post('/createInstitute', 'DataController@createInstitute')->name('createInstitute')->middleware('logged');
-Route::post('/deleteInstitute', 'DataController@deleteInstitute')->name('deleteInstitute')->middleware('logged');
+Route::get('/getSpecialities', 'DataController@getSpecialityData')->name('getSpecialities');
+Route::post('/createSpeciality', 'DataController@createSpeciality')->name('createSpeciality');
+Route::post('/deleteSpecialities', 'DataController@deleteSpecialities')->name('deleteSpecialities');
+Route::post('/editSpeciality', 'DataController@editSpeciality')->name('editSpeciality');
+
+Route::get('/getSubjects', 'DataController@getSubjectData')->name('getSubjects');
+Route::post('/createSubject', 'DataController@createSubject')->name('createSubject');
+Route::post('/deleteSubjects', 'DataController@deleteSubjects')->name('deleteSubjects');
+Route::post('/editSubject', 'DataController@editSubject')->name('editSubject');
+
+Route::get('/getGroups', 'DataController@getGroupData')->name('getGroups');
+Route::post('/createGroup', 'DataController@createGroup')->name('createGroup');
+Route::post('/deleteGroups', 'DataController@deleteGroups')->name('deleteGroups');
+Route::post('/editGroup', 'DataController@editGroup')->name('editGroup');
+
+Route::get('/getStudents', 'DataController@getStudentData')->name('getStudents');
+Route::post('/createStudent', 'DataController@createStudent')->name('createStudent');
+Route::post('/deleteStudents', 'DataController@deleteStudents')->name('deleteStudents');
+Route::post('/editStudent', 'DataController@editStudent')->name('editStudent');
+
+
 
 //END_API_METHODS
 
@@ -86,7 +109,5 @@ Route::post('/deleteInstitute', 'DataController@deleteInstitute')->name('deleteI
 //Route::get('/test', function(){
 //    dd(Carbon::now()->format('d/m/Y H:i:s'));
 //});
-Route::get('/t', function(\Illuminate\Http\Request $request){
-   return view('test');
-});
+Route::get('/t', 'DataController@getF');
 //END TEST ROUTES

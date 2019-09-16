@@ -119,6 +119,12 @@ class Speciality {
         return $this->groups->getValues();
     }
 
+
+    public function getGroupsCollection()
+    {
+        return $this->groups;
+    }
+
     /**
      * @param array $groups
      * @return Speciality
@@ -133,6 +139,13 @@ class Speciality {
         return $this;
     }
 
+
+    public function addGroup(Group $group): Speciality
+    {
+        $this->groups->add($group);
+        return $this;
+    }
+
     /**
      * @return array
      */
@@ -143,8 +156,8 @@ class Speciality {
             "fullName" => $this->fullName,
             "abbreviation" => $this->abbreviation,
             "faculty" => [
-                $this->faculty->getId()."",
-                $this->faculty->getFullName()
+                "id" => $this->faculty->getId(),
+                "fullName" => $this->faculty->getFullName()
             ],
         ];
     }

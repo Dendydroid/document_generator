@@ -7,9 +7,11 @@ use App\Entities\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\ORMException;
-use http\Env\Request;
+use Doctrine\ORM\Query;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * Class SpecialityRepo
@@ -27,14 +29,40 @@ class SpecialityRepo extends EntityRepository {
      * @param array $request
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function validateInstitute(array $request)
+    public function validateSpeciality(array $request)
     {
         $validator = Validator::make($request, [
             "fullName" => "required|max:255",
             "abbreviation" => "required|max:255",
+            "faculty" => "required|numeric",
         ]);
 
         return $validator;
+    }
+
+    public function updateSpeciality(Speciality $speciality)
+    {
+        $this->_em->persist($speciality);
+        $this->_em->flush();
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function getSpecialities(Request $request)
+    {
+        $results = [];
+        $q = $this->findAll();
+
+        /**
+         * @var Speciality $speciality
+         */
+        foreach ($q as $speciality)
+        {
+            $results[] = $speciality->getTableArray();
+        }
+        return $results;
     }
 
     /**
@@ -44,46 +72,92 @@ class SpecialityRepo extends EntityRepository {
      * @throws ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function createInstitute(array $data,Faculty $faculty)
+    public function createSpeciality(array $data,Faculty $faculty)
     {
         $errors = ["errors" => null];
-        $validation = $this->validateInstitute($data);
+        $validation = $this->validateSpeciality($data);
         if(!$validation->fails())
         {
-
-            $institute = new Speciality();
-            $institute->setFullName($data['fullName'])
+            $speciality = new Speciality();
+            $speciality->setFullName($data['fullName'])
                 ->setAbbreviation($data['abbreviation'])
                 ->setFaculty($faculty);
-            $this->_em->persist($institute);
+            $this->_em->persist($speciality);
             $this->_em->flush();
 
-            $faculty->addInstitute($institute);
-            $this->_em->persist($faculty);
-            $this->_em->flush();
-
-            return $institute;
+            return $speciality;
         }
         $errors["errors"] = $validation->errors()->getMessages();
         return $errors;
     }
 
     /**
-     * @param int $id
-     * @return bool
+     * @param $data
+     * @param Faculty $faculty
+     * @return array|object|null
      * @throws ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function deleteInstitute(int $id)
+    public function editSpeciality($data,Faculty $faculty)
     {
-        $institute = $this->find($id);
-        if($institute instanceof Speciality)
+        $errors = ["errors" => null];
+        $validation = $this->validateSpeciality($data);
+        if(!$validation->fails())
         {
-            $this->_em->remove($institute);
+
+            $speciality = $this->find($data['id']);
+            $speciality->setFullName($data['fullName'])
+                ->setAbbreviation($data['abbreviation'])
+                ->setFaculty($faculty);
+            $this->_em->persist($speciality);
             $this->_em->flush();
-            return true;
+
+            return $speciality;
         }
-        return false;
+        $errors["errors"] = $validation->errors()->getMessages();
+        return $errors;
+    }
+
+
+    /**
+     * @param array $objects
+     * @return array
+     * @throws ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function deleteSpecialities(array $objects)
+    {
+        $removed = [];
+        foreach ($objects as $object){
+            $speciality = $this->find($object['id']);
+
+            if($speciality instanceof Speciality)
+            {
+                $this->_em->remove($speciality);
+                $this->_em->flush();
+                $removed[] = $object;
+            }else{
+                $removed[] = null;
+            }
+        }
+        return $removed;
+    }
+
+    /**
+     * @param $array
+     * @throws ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function removeSpecialityArray($array)
+    {
+        if(!empty($array))
+        {
+            foreach ($array as $speciality)
+            {
+                $this->_em->remove($speciality);
+                $this->_em->flush();
+            }
+        }
     }
 }
 

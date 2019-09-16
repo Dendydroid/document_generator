@@ -38,6 +38,21 @@ class FacultyRepo extends EntityRepository {
         return $validator;
     }
 
+    /**
+     * @param Faculty $faculty
+     * @throws ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function updateFaculty(Faculty $faculty)
+    {
+        $this->_em->persist($faculty);
+        $this->_em->flush();
+    }
+
+    /**
+     * @param Request $request
+     * @return array|mixed
+     */
     public function getFaculties(Request $request)
     {
         $results = [];

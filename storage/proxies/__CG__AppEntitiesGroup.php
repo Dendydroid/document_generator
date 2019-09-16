@@ -64,10 +64,10 @@ class Group extends \App\Entities\Group implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'institute', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'speciality', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'institute', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'speciality', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects'];
     }
 
     /**
@@ -213,23 +213,23 @@ class Group extends \App\Entities\Group implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getInstitute(): string
+    public function getSpeciality(): \App\Entities\Speciality
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getInstitute', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSpeciality', []);
 
-        return parent::getInstitute();
+        return parent::getSpeciality();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setInstitute(string $institute): \App\Entities\Group
+    public function setSpeciality(\App\Entities\Speciality $speciality): \App\Entities\Group
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setInstitute', [$institute]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSpeciality', [$speciality]);
 
-        return parent::setInstitute($institute);
+        return parent::setSpeciality($speciality);
     }
 
     /**
@@ -268,12 +268,67 @@ class Group extends \App\Entities\Group implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getDefaultSubjectsCollection()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDefaultSubjectsCollection', []);
+
+        return parent::getDefaultSubjectsCollection();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setDefaultSubjects(array $defaultSubjects): \App\Entities\Group
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDefaultSubjects', [$defaultSubjects]);
 
         return parent::setDefaultSubjects($defaultSubjects);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addDefaultSubject(\App\Entities\Subject $subject): \App\Entities\Group
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addDefaultSubject', [$subject]);
+
+        return parent::addDefaultSubject($subject);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addStudent(\App\Entities\Student $student)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addStudent', [$student]);
+
+        return parent::addStudent($student);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getStudentsCollection()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getStudentsCollection', []);
+
+        return parent::getStudentsCollection();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTableArray()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTableArray', []);
+
+        return parent::getTableArray();
     }
 
 }

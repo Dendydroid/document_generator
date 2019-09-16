@@ -40,7 +40,7 @@ class Group {
      * @ORM\ManyToMany(targetEntity="Subject")
      * @ORM\JoinTable(name="groups_subjects",
      *      joinColumns={@ORM\JoinColumn(name="groupId", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="subjectId", referencedColumnName="id", unique=true)}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="subjectId", referencedColumnName="id", unique=false)}
      *      )
      */
     private $defaultSubjects;
@@ -81,9 +81,9 @@ class Group {
     }
 
     /**
-     * @return string
+     * @return Speciality
      */
-    public function getSpeciality(): string
+    public function getSpeciality(): Speciality
     {
         return $this->speciality;
     }
@@ -128,6 +128,12 @@ class Group {
         return $this->defaultSubjects->getValues();
     }
 
+
+    public function getDefaultSubjectsCollection()
+    {
+        return $this->defaultSubjects;
+    }
+
     /**
      * @param array $defaultSubjects
      * @return Group
@@ -140,5 +146,46 @@ class Group {
             $this->defaultSubjects->add($defaultSubject);
         }
         return $this;
+    }
+
+    public function addDefaultSubject(Subject $subject): Group
+    {
+        $this->defaultSubjects->add($subject);
+        return $this;
+    }
+
+    public function addStudent(Student $student)
+    {
+        $this->students->add($student);
+    }
+
+    public function getStudentsCollection()
+    {
+        return $this->students;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTableArray()
+    {
+        $defaultSubjects = $this->defaultSubjects->toArray();
+        $defaultSubjectArr = [];
+        /**
+         * @var Subject $subject
+         */
+        foreach ($defaultSubjects as $subject)
+        {
+            $defaultSubjectArr[] = $subject->getTableArray();
+        }
+        return [
+            "id" => $this->id,
+            "idName" => $this->idName,
+            "speciality" => [
+                "id" => $this->speciality->getId(),
+                "fullName" => $this->speciality->getFullName(),
+            ],
+            "defaultSubjects" => $defaultSubjectArr
+        ];
     }
 }

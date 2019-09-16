@@ -55,57 +55,57 @@ class Student {
     private $gender;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $familyState;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $marriageAddress;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $addressUniversityBegin;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $beforeNauEduInfo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $beforeNauJobInfo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $militaryServiceDates;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nauEntryConditionsInfo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nauEduContractInfo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $privilegesInfo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $hostelInfo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $additionalInfo;
 
@@ -115,19 +115,29 @@ class Student {
     private $creationDate;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $preparationAbbrev;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $specialityAbbrev;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $specializationInfo;
+
+    /**
+     * Many students have many additional subjects.
+     * @ORM\ManyToMany(targetEntity="Subject")
+     * @ORM\JoinTable(name="students_subjects",
+     *      joinColumns={@ORM\JoinColumn(name="studentId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="subjectId", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    private $additionalSubjects;
 
     /**
      * Many students have many encouragement/penalty orders.
@@ -172,6 +182,7 @@ class Student {
         $this->parents = new ArrayCollection();
         $this->encouragementPenaltyList = new ArrayCollection();
         $this->otherOrderList = new ArrayCollection();
+        $this->additionalSubjects = new ArrayCollection();
     }
 
     /**
@@ -356,7 +367,7 @@ class Student {
      * @param string $addressUniversityBegin
      * @return Student
      */
-    public function setAddressUniversityBegin(string $addressUniversityBegin): string
+    public function setAddressUniversityBegin(string $addressUniversityBegin): Student
     {
         $this->addressUniversityBegin = $addressUniversityBegin;
         return $this;
@@ -625,6 +636,38 @@ class Student {
     /**
      * @return array
      */
+    public function getAdditionalSubjects(): array
+    {
+        return $this->additionalSubjects->getValues();
+    }
+
+    public function getAdditionalSubjectsCollection()
+    {
+        return $this->additionalSubjects;
+    }
+
+    /**
+     * @param array $subjects
+     * @return Student
+     */
+    public function setAdditionalSubjects(array $subjects): Student
+    {
+        $this->additionalSubjects->clear();
+        foreach ($subjects as $subject)
+        {
+            $this->additionalSubjects->add($subject);
+        }
+        return $this;
+    }
+
+    public function addAdditionalSubject($subject)
+    {
+        $this->additionalSubjects->add($subject);
+    }
+
+    /**
+     * @return array
+     */
     public function getOtherOrderList(): array
     {
         return $this->otherOrderList->getValues();
@@ -662,4 +705,46 @@ class Student {
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getTableArray()
+    {
+        $additionalSubjects = $this->additionalSubjects->toArray();
+        $additionalSubjectArr = [];
+        /**
+         * @var Subject $subject
+         */
+        foreach ($additionalSubjects as $subject)
+        {
+            $additionalSubjectArr[] = $subject->getTableArray();
+        }
+        return [
+            "id" => $this->id,
+            "firstName" => $this->firstName,
+            "surname" => $this->surname,
+            "middleName" => $this->middleName,
+            "studentId" => $this->idNumber,
+            "dateOfBirth" => $this->dateOfBirth,
+            "citizenship" => $this->citizenship,
+            "gender" => $this->gender,
+            "familyState" => $this->familyState,
+            "familyAddress" => $this->marriageAddress,
+            "addressBegin" => $this->addressUniversityBegin,
+            "beforeNauEdu" => $this->beforeNauEduInfo,
+            "beforeNauJob" => $this->beforeNauJobInfo,
+            "militaryService" => $this->militaryServiceDates,
+            "nauConditions" => $this->nauEntryConditionsInfo,
+            "nauContract" => $this->nauEduContractInfo,
+            "nauPrivileges" => $this->privilegesInfo,
+            "hostel" => $this->hostelInfo,
+            "additionalInfo" => $this->additionalInfo,
+            "creationDate" => $this->creationDate,
+            "group" => [
+                "id" => $this->group->getId(),
+                "idName" => $this->group->getIdName(),
+            ],
+            "additionalSubjects" => $additionalSubjectArr
+        ];
+    }
 }

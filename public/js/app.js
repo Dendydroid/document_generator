@@ -1766,6 +1766,15 @@ module.exports = {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 
@@ -2156,6 +2165,2104 @@ var searchByColumn = function searchByColumn(items, term, column) {
   },
   created: function created() {
     this.getFaculties();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageGroups.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageGroups.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
+
+var toLower = function toLower(text) {
+  return text.toString().toLowerCase();
+};
+
+var searchByColumn = function searchByColumn(items, term, column) {
+  if (term) {
+    return items.filter(function (item) {
+      return toLower(item[column]).includes(toLower(term));
+    });
+  }
+
+  return items;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ManageGroups',
+  data: function data() {
+    return {
+      snackbar: {
+        showSnackbar: false,
+        position: 'center',
+        duration: 4000,
+        bg: 'background-color:rgba(33, 33, 33, 0.6)'
+      },
+      searchColumn: 'idName',
+      errorMessage: '',
+      specialityList: '',
+      subjectList: '',
+      editId: '',
+      removeConfirm: false,
+      add_id_name: '',
+      add_speciality: '',
+      add_default_subjects: [],
+      edit_id_name: '',
+      edit_speciality: '',
+      edit_default_subjects: [],
+      toggleModalAdd: false,
+      toggleModalEdit: false,
+      toggleModalSure: false,
+      showEditButton: false,
+      selected: [],
+      search: null,
+      searched: [],
+      errors: [],
+      dataSet: []
+    };
+  },
+  methods: {
+    onSelect: function onSelect(items) {
+      this.selected = items;
+      this.toggleShowEditButton(items);
+    },
+    loadSpecialities: function loadSpecialities() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSpecialities').then(function (response) {
+        return _this.specialityList = response.data;
+      })["catch"](function (e) {
+        _this.errors.push(e);
+      });
+    },
+    loadSubjects: function loadSubjects() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSubjects').then(function (response) {
+        return _this2.subjectList = response.data;
+      })["catch"](function (e) {
+        _this2.errors.push(e);
+      });
+    },
+    getAlternateLabel: function getAlternateLabel(count) {
+      var plural = 'а';
+      var plural2 = '';
+
+      if (parseInt(count.toString().split('').pop()) === 1) {
+        plural = 'а';
+      } else if (parseInt(count.toString().split('').pop()) > 1 && parseInt(count.toString().split('').pop()) < 5) {
+        plural = 'ы';
+      } else {
+        plural = '';
+      }
+
+      if (count > 10 && count < 21) {
+        plural = '';
+      }
+
+      if (count !== 1) {
+        plural2 = 'о';
+      } else {
+        plural2 = 'а';
+      }
+
+      return "\u0412\u044B\u0434\u0435\u043B\u0435\u043D".concat(plural2, " ").concat(count, " \u0433\u0440\u0443\u043F\u043F").concat(plural);
+    },
+    searchOnTable: function searchOnTable() {
+      if (this.searchColumn) {
+        this.searched = searchByColumn(this.dataSet, this.search, this.searchColumn);
+      }
+    },
+    clearSelected: function clearSelected() {
+      this.selected = [];
+    },
+    toggleShowEditButton: function toggleShowEditButton(items) {
+      if (items.length === 1) {
+        this.showEditButton = true;
+        return;
+      }
+
+      this.showEditButton = false;
+    },
+    getGroups: function getGroups() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getGroups').then(function (response) {
+        return _this3.dataSet = response.data;
+      })["catch"](function (e) {
+        _this3.errors.push(e);
+      });
+    },
+    createGroup: function createGroup() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/createGroup', {
+        idName: this.add_id_name,
+        speciality: this.add_speciality,
+        defaultSubjects: this.add_default_subjects
+      }).then(function (response) {
+        return _this4.dataSet.push(response.data);
+      })["catch"](function (e) {
+        _this4.errors.push(e.response.data.errors);
+      });
+      this.toggleModalAdd = false;
+    },
+    editGroup: function editGroup() {
+      var _this5 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/editGroup', {
+        id: this.editId,
+        idName: this.edit_id_name,
+        speciality: this.edit_speciality,
+        defaultSubjects: this.edit_default_subjects
+      }).then(function (response) {
+        _this5.dataSet.forEach(function (el, index, arr) {
+          if (el.id === response.data.id) {
+            arr[index].idName = response.data.idName;
+            arr[index].speciality = response.data.speciality;
+            arr[index].defaultSubjects = response.data.defaultSubjects;
+          }
+        });
+      })["catch"](function (e) {
+        _this5.errors.push(e.response.data.errors);
+      });
+      this.editId = '';
+      this.edit_id_name = '';
+      this.edit_speciality = '';
+      this.edit_default_subjects = [];
+      this.clearSelected();
+      this.toggleModalEdit = false;
+    },
+    deleteGroups: function deleteGroups() {
+      var _this6 = this;
+
+      var allObjects = this.selected;
+      allObjects.forEach(function (value, index, array) {
+        array[index].speciality = array[index].speciality.id;
+
+        for (var i = 0; i < array[index].defaultSubjects.length; i++) {
+          array[index].defaultSubjects[i] = array[index].defaultSubjects[i].id;
+        }
+      });
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/deleteGroups', {
+        objects: this.selected
+      }).then(function (response) {
+        // this.dataSet.forEach(function(el,index,arr){
+        //     for(let i=0; i<response.data.length;i++)
+        //     {
+        //         if(el.id === response.data[i].id)
+        //         {
+        //             arr.splice(index, 1);
+        //         }
+        //     }
+        // });
+        _this6.getGroups();
+      })["catch"](function (e) {
+        _this6.errors.push(e);
+      });
+      this.clearSelected();
+      this.toggleModalSure = false;
+    },
+    editSelected: function editSelected() {
+      if (this.selected.length === 1) {
+        var element = this.selected[0];
+        var defSubjArr = [];
+        element.defaultSubjects.forEach(function (value, index, array) {
+          defSubjArr.push(Object.values(array[index])[0]);
+        });
+        this.edit_id_name = element.idName;
+        this.edit_speciality = element.speciality.id;
+        this.edit_default_subjects = defSubjArr;
+        this.editId = element.id;
+        this.toggleModalEdit = true;
+      }
+    },
+    onCancel: function onCancel() {
+      this.toggleModalSure = false;
+    },
+    onConfirm: function onConfirm() {
+      this.deleteGroups();
+      this.toggleModalSure = false;
+    }
+  },
+  watch: {
+    errors: function errors(val) {
+      if (val) {
+        this.errorMessage = val[0][Object.keys(val[0])[0]][0];
+      }
+
+      this.snackbar.showSnackbar = true;
+    },
+    dataSet: function dataSet(val) {
+      this.searched = val;
+    }
+  },
+  created: function created() {
+    this.getGroups();
+    this.loadSpecialities();
+    this.loadSubjects();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSpecialities.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageSpecialities.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
+
+var toLower = function toLower(text) {
+  return text.toString().toLowerCase();
+};
+
+var searchByColumn = function searchByColumn(items, term, column) {
+  if (term) {
+    return items.filter(function (item) {
+      return toLower(item[column]).includes(toLower(term));
+    });
+  }
+
+  return items;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ManageSpecialities',
+  data: function data() {
+    return {
+      snackbar: {
+        showSnackbar: false,
+        position: 'center',
+        duration: 4000,
+        bg: 'background-color:rgba(33, 33, 33, 0.6)'
+      },
+      searchColumn: 'fullName',
+      errorMessage: '',
+      facultyList: '',
+      editId: '',
+      removeConfirm: false,
+      add_fullName: '',
+      add_abbreviation: '',
+      add_faculty: '',
+      edit_faculty: '',
+      edit_fullName: '',
+      edit_abbreviation: '',
+      toggleModalAdd: false,
+      toggleModalEdit: false,
+      toggleModalSure: false,
+      showEditButton: false,
+      selected: [],
+      search: null,
+      searched: [],
+      errors: [],
+      dataSet: []
+    };
+  },
+  methods: {
+    onSelect: function onSelect(items) {
+      this.selected = items;
+      this.toggleShowEditButton(items);
+    },
+    getAlternateLabel: function getAlternateLabel(count) {
+      var plural = '';
+      var plural2 = '';
+
+      if (parseInt(count.toString().split('').pop()) === 1) {
+        plural = 'ь';
+      } else if (parseInt(count.toString().split('').pop()) > 1 && parseInt(count.toString().split('').pop()) < 5) {
+        plural = 'и';
+      } else {
+        plural = 'ей';
+      }
+
+      if (count > 10 && count < 21) {
+        plural = 'ей';
+      }
+
+      if (count !== 1) {
+        plural2 = 'о';
+      } else {
+        plural2 = 'а';
+      }
+
+      return "\u0412\u044B\u0434\u0435\u043B\u0435\u043D".concat(plural2, " ").concat(count, " \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0441\u0442").concat(plural);
+    },
+    searchOnTable: function searchOnTable() {
+      if (this.searchColumn) {
+        this.searched = searchByColumn(this.dataSet, this.search, this.searchColumn);
+      }
+    },
+    clearSelected: function clearSelected() {
+      this.selected = [];
+    },
+    loadFaculties: function loadFaculties() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getFaculties').then(function (response) {
+        return _this.facultyList = response.data;
+      })["catch"](function (e) {
+        _this.errors.push(e);
+      });
+    },
+    // editSelected() {},
+    toggleShowEditButton: function toggleShowEditButton(items) {
+      if (items.length === 1) {
+        this.showEditButton = true;
+        return;
+      }
+
+      this.showEditButton = false;
+    },
+    getSpecialities: function getSpecialities() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSpecialities').then(function (response) {
+        return _this2.dataSet = response.data;
+      })["catch"](function (e) {
+        _this2.errors.push(e);
+      });
+    },
+    createSpeciality: function createSpeciality() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/createSpeciality', {
+        fullName: this.add_fullName,
+        abbreviation: this.add_abbreviation,
+        faculty: this.add_faculty
+      }).then(function (response) {
+        return _this3.dataSet.push(response.data);
+      })["catch"](function (e) {
+        _this3.errors.push(e.response.data.errors);
+      });
+      this.toggleModalAdd = false;
+    },
+    editSpeciality: function editSpeciality() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/editSpeciality', {
+        id: this.editId,
+        fullName: this.edit_fullName,
+        abbreviation: this.edit_abbreviation,
+        faculty: this.edit_faculty
+      }).then(function (response) {
+        _this4.dataSet.forEach(function (el, index, arr) {
+          if (el.id === response.data.id) {
+            arr[index].fullName = response.data.fullName;
+            arr[index].abbreviation = response.data.abbreviation;
+            arr[index].faculty = response.data.faculty;
+          }
+        });
+      })["catch"](function (e) {
+        _this4.errors.push(e.response.data.errors);
+      });
+      this.editId = '';
+      this.edit_fullName = '';
+      this.edit_abbreviation = '';
+      this.clearSelected();
+      this.toggleModalEdit = false;
+    },
+    deleteSpecialities: function deleteSpecialities() {
+      var _this5 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/deleteSpecialities', {
+        objects: this.selected
+      }).then(function (response) {
+        // this.dataSet.forEach(function(el,index,arr){
+        //     for(let i=0; i<response.data.length;i++)
+        //     {
+        //         if(el.id === response.data[i].id)
+        //         {
+        //             arr.splice(index, 1);
+        //         }
+        //     }
+        // });
+        _this5.getSpecialities();
+      })["catch"](function (e) {
+        _this5.errors.push(e);
+      });
+      this.clearSelected();
+      this.toggleModalSure = false;
+    },
+    editSelected: function editSelected() {
+      if (this.selected.length === 1) {
+        var element = this.selected[0];
+        this.edit_fullName = element.fullName;
+        this.edit_abbreviation = element.abbreviation;
+        this.edit_faculty = element.faculty.id;
+        this.editId = element.id;
+        this.toggleModalEdit = true;
+      }
+    },
+    onCancel: function onCancel() {
+      this.toggleModalSure = false;
+    },
+    onConfirm: function onConfirm() {
+      this.deleteSpecialities();
+      this.toggleModalSure = false;
+    }
+  },
+  watch: {
+    errors: function errors(val) {
+      this.errorMessage = val[0][Object.keys(val[0])[0]][0];
+      this.snackbar.showSnackbar = true;
+    },
+    dataSet: function dataSet(val) {
+      this.searched = val;
+    }
+  },
+  created: function created() {
+    this.getSpecialities();
+    this.loadFaculties();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageStudents.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageStudents.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
+
+var toLower = function toLower(text) {
+  return text.toString().toLowerCase();
+};
+
+var searchByColumn = function searchByColumn(items, term, column) {
+  if (term) {
+    return items.filter(function (item) {
+      return toLower(item[column]).includes(toLower(term));
+    });
+  }
+
+  return items;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ManageStudents',
+  data: function data() {
+    return {
+      snackbar: {
+        showSnackbar: false,
+        position: 'center',
+        duration: 4000,
+        bg: 'background-color:rgba(33, 33, 33, 0.6)'
+      },
+      full_student_data: false,
+      searchColumn: 'idName',
+      errorMessage: '',
+      groupList: '',
+      subjectList: '',
+      editId: '',
+      removeConfirm: false,
+      add_first_name: '',
+      add_surname: '',
+      add_middle_name: '',
+      add_student_id: '',
+      add_date_of_birth: '',
+      add_gender: '',
+      add_citizenship: '',
+      add_group: '',
+      add_family_state: '',
+      add_family_address: '',
+      add_address_begin: '',
+      add_before_nau_edu: '',
+      add_before_nau_job: '',
+      add_military_service: '',
+      add_nau_conditions: '',
+      add_nau_contract: '',
+      add_nau_privileges: '',
+      add_hostel: '',
+      add_additional_info: '',
+      add_additional_subjects: [],
+      edit_first_name: '',
+      edit_surname: '',
+      edit_middle_name: '',
+      edit_student_id: '',
+      edit_date_of_birth: '',
+      edit_gender: '',
+      edit_citizenship: '',
+      edit_group: '',
+      edit_family_state: '',
+      edit_family_address: '',
+      edit_address_begin: '',
+      edit_before_nau_edu: '',
+      edit_before_nau_job: '',
+      edit_military_service: '',
+      edit_nau_conditions: '',
+      edit_nau_contract: '',
+      edit_nau_privileges: '',
+      edit_hostel: '',
+      edit_additional_info: '',
+      edit_additional_subjects: [],
+      toggleModalAdd: false,
+      toggleModalEdit: false,
+      toggleModalSure: false,
+      showEditButton: false,
+      selected: [],
+      search: null,
+      searched: [],
+      errors: [],
+      dataSet: []
+    };
+  },
+  methods: {
+    onSelect: function onSelect(items) {
+      this.selected = items;
+      this.toggleShowEditButton(items);
+    },
+    loadGroups: function loadGroups() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getGroups').then(function (response) {
+        return _this.groupList = response.data;
+      })["catch"](function (e) {
+        _this.errors.push(e);
+      });
+    },
+    loadSubjects: function loadSubjects() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSubjects').then(function (response) {
+        return _this2.subjectList = response.data;
+      })["catch"](function (e) {
+        _this2.errors.push(e);
+      });
+    },
+    getAlternateLabel: function getAlternateLabel(count) {
+      var plural = '';
+      var plural2 = '';
+
+      if (parseInt(count.toString().split('').pop()) === 1) {
+        plural = '';
+      } else if (parseInt(count.toString().split('').pop()) > 1 && parseInt(count.toString().split('').pop()) < 5) {
+        plural = 'а';
+      } else {
+        plural = 'ов';
+      }
+
+      if (count > 10 && count < 21) {
+        plural = 'ов';
+      }
+
+      if (count !== 1) {
+        plural2 = 'о';
+      } else {
+        plural2 = '';
+      }
+
+      return "\u0412\u044B\u0434\u0435\u043B\u0435\u043D".concat(plural2, " ").concat(count, " \u0441\u0442\u0443\u0434\u0435\u043D\u0442").concat(plural);
+    },
+    searchOnTable: function searchOnTable() {
+      if (this.searchColumn) {
+        this.searched = searchByColumn(this.dataSet, this.search, this.searchColumn);
+      }
+    },
+    clearSelected: function clearSelected() {
+      this.selected = [];
+    },
+    toggleShowEditButton: function toggleShowEditButton(items) {
+      if (items.length === 1) {
+        this.showEditButton = true;
+        return;
+      }
+
+      this.showEditButton = false;
+    },
+    getStudents: function getStudents() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getStudents').then(function (response) {
+        return _this3.dataSet = response.data;
+      })["catch"](function (e) {
+        _this3.errors.push(e);
+      });
+    },
+    createStudent: function createStudent() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/createStudent', {
+        firstName: this.add_first_name,
+        surname: this.add_surname,
+        middleName: this.add_middle_name,
+        studentId: this.add_student_id,
+        dateOfBirth: this.add_date_of_birth,
+        gender: this.add_gender,
+        citizenship: this.add_citizenship,
+        group: this.add_group,
+        familyState: this.add_family_state,
+        familyAddress: this.add_family_address,
+        addressBegin: this.add_address_begin,
+        beforeNauEdu: this.add_before_nau_edu,
+        beforeNauJob: this.add_before_nau_job,
+        militaryService: this.add_military_service,
+        nauConditions: this.add_nau_conditions,
+        nauContract: this.add_nau_contract,
+        nauPrivileges: this.add_nau_privileges,
+        hostel: this.add_hostel,
+        additionalInfo: this.add_additional_info,
+        additionalSubjects: this.add_additional_subjects
+      }).then(function (response) {
+        return _this4.dataSet.push(response.data);
+      })["catch"](function (e) {
+        _this4.errors.push(e.response.data.errors);
+      });
+      this.toggleModalAdd = false;
+    },
+    editStudent: function editStudent() {
+      var _this5 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/editStudent', {
+        id: this.editId,
+        firstName: this.edit_first_name,
+        surname: this.edit_surname,
+        middleName: this.edit_middle_name,
+        studentId: this.edit_student_id,
+        dateOfBirth: this.edit_date_of_birth,
+        gender: this.edit_family_state,
+        citizenship: this.edit_citizenship,
+        group: this.edit_group,
+        familyState: this.edit_family_state,
+        familyAddress: this.edit_family_address,
+        addressBegin: this.edit_address_begin,
+        beforeNauEdu: this.edit_before_nau_edu,
+        beforeNauJob: this.edit_before_nau_job,
+        militaryService: this.edit_military_service,
+        nauConditions: this.edit_nau_conditions,
+        nauContract: this.edit_nau_contract,
+        nauPrivileges: this.edit_nau_privileges,
+        hostel: this.edit_hostel,
+        additionalInfo: this.edit_additional_info,
+        additionalSubjects: this.edit_additional_subjects
+      }).then(function (response) {
+        // this.dataSet.forEach(function(el,index,arr){
+        //     if(el.id === response.data.id)
+        //     {
+        //         arr[index].idName = response.data.idName;
+        //         arr[index].speciality = response.data.speciality;
+        //         arr[index].defaultSubjects = response.data.defaultSubjects;
+        //     }
+        // });
+        _this5.getStudents();
+      })["catch"](function (e) {
+        _this5.errors.push(e.response.data.errors);
+      });
+      this.editId = '';
+      this.edit_first_name = '';
+      this.edit_surname = '';
+      this.edit_middle_name = '';
+      this.edit_student_id = '';
+      this.edit_date_of_birth = '';
+      this.edit_gender = '';
+      this.edit_citizenship = '';
+      this.edit_group = '';
+      this.edit_family_state = '';
+      this.edit_family_address = '';
+      this.edit_address_begin = '';
+      this.edit_before_nau_edu = '';
+      this.edit_before_nau_job = '';
+      this.edit_military_service = '';
+      this.edit_nau_conditions = '';
+      this.edit_nau_contract = '';
+      this.edit_nau_privileges = '';
+      this.edit_hostel = '';
+      this.edit_additional_info = '';
+      this.edit_additional_subjects = '';
+      this.clearSelected();
+      this.toggleModalEdit = false;
+    },
+    deleteStudents: function deleteStudents() {
+      var _this6 = this;
+
+      var allObjects = this.selected;
+      allObjects.forEach(function (value, index, array) {
+        array[index].group = array[index].group.id;
+
+        for (var i = 0; i < array[index].additionalSubjects.length; i++) {
+          array[index].additionalSubjects[i] = array[index].additionalSubjects[i].id;
+        }
+      });
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/deleteStudents', {
+        objects: this.selected
+      }).then(function (response) {
+        // this.dataSet.forEach(function(el,index,arr){
+        //     for(let i=0; i<response.data.length;i++)
+        //     {
+        //         if(el.id === response.data[i].id)
+        //         {
+        //             arr.splice(index, 1);
+        //         }
+        //     }
+        // });
+        _this6.getStudents();
+      })["catch"](function (e) {
+        _this6.errors.push(e);
+      });
+      this.clearSelected();
+      this.toggleModalSure = false;
+    },
+    editSelected: function editSelected() {
+      if (this.selected.length === 1) {
+        var element = this.selected[0];
+        var defSubjArr = [];
+        element.additionalSubjects.forEach(function (value, index, array) {
+          defSubjArr.push(Object.values(array[index])[0]);
+        });
+        this.edit_additional_subjects = defSubjArr;
+        this.editId = element.id;
+        this.edit_first_name = element.firstName;
+        this.edit_surname = element.surname;
+        this.edit_middle_name = element.middleName;
+        this.edit_student_id = element.studentId;
+        this.edit_date_of_birth = element.dateOfBirth;
+        this.edit_gender = element.gender;
+        this.edit_citizenship = element.citizenship;
+        this.edit_group = element.group.id;
+        this.edit_family_state = element.familyState;
+        this.edit_family_address = element.familyAddress;
+        this.edit_address_begin = element.addressBegin;
+        this.edit_before_nau_edu = element.beforeNauEdu;
+        this.edit_before_nau_job = element.beforeNauJob;
+        this.edit_military_service = element.militaryService;
+        this.edit_nau_conditions = element.nauConditions;
+        this.edit_nau_contract = element.nauContract;
+        this.edit_nau_privileges = element.nauPrivileges;
+        this.edit_hostel = element.hostel;
+        this.edit_additional_info = element.additionalInfo;
+        this.toggleModalEdit = true;
+      }
+    },
+    onCancel: function onCancel() {
+      this.toggleModalSure = false;
+    },
+    onConfirm: function onConfirm() {
+      this.deleteStudents();
+      this.toggleModalSure = false;
+    }
+  },
+  watch: {
+    errors: function errors(val) {
+      if (val) {
+        this.errorMessage = val[0][Object.keys(val[0])[0]][0];
+      }
+
+      this.snackbar.showSnackbar = true;
+    },
+    dataSet: function dataSet(val) {
+      this.searched = val;
+    }
+  },
+  created: function created() {
+    this.getStudents();
+    this.loadGroups();
+    this.loadSubjects();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSubjects.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageSubjects.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
+
+var toLower = function toLower(text) {
+  return text.toString().toLowerCase();
+};
+
+var searchByColumn = function searchByColumn(items, term, column) {
+  if (term) {
+    return items.filter(function (item) {
+      return toLower(item[column]).includes(toLower(term));
+    });
+  }
+
+  return items;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ManageSubjects',
+  data: function data() {
+    return {
+      snackbar: {
+        showSnackbar: false,
+        position: 'center',
+        duration: 4000,
+        bg: 'background-color:rgba(33, 33, 33, 0.6)'
+      },
+      searchColumn: 'name',
+      errorMessage: '',
+      facultyList: '',
+      editId: '',
+      removeConfirm: false,
+      add_name: '',
+      add_professor: '',
+      add_head_of_department: '',
+      add_module_count: '',
+      add_hours_count: '',
+      add_credits_count: '',
+      add_begin_date: '',
+      edit_name: '',
+      edit_professor: '',
+      edit_head_of_department: '',
+      edit_module_count: '',
+      edit_hours_count: '',
+      edit_credits_count: '',
+      edit_begin_date: '',
+      toggleModalAdd: false,
+      toggleModalEdit: false,
+      toggleModalSure: false,
+      showEditButton: false,
+      selected: [],
+      search: null,
+      searched: [],
+      errors: [],
+      dataSet: []
+    };
+  },
+  methods: {
+    onSelect: function onSelect(items) {
+      this.selected = items;
+      this.toggleShowEditButton(items);
+    },
+    getAlternateLabel: function getAlternateLabel(count) {
+      var plural = '';
+      var plural2 = '';
+
+      if (parseInt(count.toString().split('').pop()) === 1) {
+        plural = '';
+      } else if (parseInt(count.toString().split('').pop()) > 1 && parseInt(count.toString().split('').pop()) < 5) {
+        plural = 'а';
+      } else {
+        plural = 'ов';
+      }
+
+      if (count > 10 && count < 21) {
+        plural = 'ов';
+      }
+
+      if (count !== 1) {
+        plural2 = 'о';
+      } else {
+        plural2 = '';
+      }
+
+      return "\u0412\u044B\u0434\u0435\u043B\u0435\u043D".concat(plural2, " ").concat(count, " \u043F\u0440\u0435\u0434\u043C\u0435\u0442").concat(plural);
+    },
+    searchOnTable: function searchOnTable() {
+      if (this.searchColumn) {
+        this.searched = searchByColumn(this.dataSet, this.search, this.searchColumn);
+      }
+    },
+    clearSelected: function clearSelected() {
+      this.selected = [];
+    },
+    // editSelected() {},
+    toggleShowEditButton: function toggleShowEditButton(items) {
+      if (items.length === 1) {
+        this.showEditButton = true;
+        return;
+      }
+
+      this.showEditButton = false;
+    },
+    getSubjects: function getSubjects() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSubjects').then(function (response) {
+        return _this.dataSet = response.data;
+      })["catch"](function (e) {
+        _this.errors.push(e);
+      });
+    },
+    createSubject: function createSubject() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/createSubject', {
+        name: this.add_name,
+        professor: this.add_professor,
+        headOfDepartment: this.add_head_of_department,
+        moduleCount: this.add_module_count,
+        hoursCount: this.add_hours_count,
+        creditsCount: this.add_credits_count,
+        date: this.add_begin_date
+      }).then(function (response) {
+        return _this2.dataSet.push(response.data);
+      })["catch"](function (e) {
+        _this2.errors.push(e.response.data.errors);
+      });
+      this.toggleModalAdd = false;
+    },
+    editSubject: function editSubject() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/editSubject', {
+        id: this.editId,
+        name: this.edit_name,
+        professor: this.edit_professor,
+        headOfDepartment: this.edit_head_of_department,
+        moduleCount: this.edit_module_count,
+        hoursCount: this.edit_hours_count,
+        creditsCount: this.edit_credits_count,
+        date: this.edit_begin_date
+      }).then(function (response) {
+        _this3.dataSet.forEach(function (el, index, arr) {
+          if (el.id === response.data.id) {
+            arr[index].name = response.data.name;
+            arr[index].professor = response.data.professor;
+            arr[index].headOfDepartment = response.data.headOfDepartment;
+            arr[index].moduleCount = response.data.moduleCount;
+            arr[index].hoursCount = response.data.hoursCount;
+            arr[index].creditsCount = response.data.creditsCount;
+            arr[index].dateBegin = response.data.dateBegin;
+          }
+        });
+      })["catch"](function (e) {
+        _this3.errors.push(e.response.data.errors);
+      });
+      this.editId = '';
+      this.edit_name = '';
+      this.edit_professor = '';
+      this.edit_head_of_department = '';
+      this.edit_module_count = '';
+      this.edit_hours_count = '';
+      this.edit_credits_count = '';
+      this.edit_begin_date = '';
+      this.clearSelected();
+      this.toggleModalEdit = false;
+    },
+    deleteSubjects: function deleteSubjects() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/deleteSubjects', {
+        objects: this.selected
+      }).then(function (response) {
+        // this.dataSet.forEach(function(el,index,arr){
+        //     for(let i=0; i<response.data.length;i++)
+        //     {
+        //         if(el.id === response.data[i].id)
+        //         {
+        //             arr.splice(index, 1);
+        //         }
+        //     }
+        // });
+        _this4.getSubjects();
+      })["catch"](function (e) {
+        _this4.errors.push(e);
+      });
+      this.clearSelected();
+      this.toggleModalSure = false;
+    },
+    editSelected: function editSelected() {
+      if (this.selected.length === 1) {
+        var element = this.selected[0];
+        this.edit_name = element.name;
+        this.edit_professor = element.professor;
+        this.edit_head_of_department = element.headOfDepartment;
+        this.edit_module_count = element.moduleCount;
+        this.edit_hours_count = element.hoursCount;
+        this.edit_credits_count = element.creditsCount;
+        this.edit_begin_date = element.dateBegin;
+        this.editId = element.id;
+        this.toggleModalEdit = true;
+      }
+    },
+    onCancel: function onCancel() {
+      this.toggleModalSure = false;
+    },
+    onConfirm: function onConfirm() {
+      this.deleteSubjects();
+      this.toggleModalSure = false;
+    }
+  },
+  watch: {
+    errors: function errors(val) {
+      this.errorMessage = val[0][Object.keys(val[0])[0]][0];
+      this.snackbar.showSnackbar = true;
+    },
+    dataSet: function dataSet(val) {
+      this.searched = val;
+    }
+  },
+  created: function created() {
+    this.getSubjects();
   }
 });
 
@@ -6679,6 +8786,82 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\n.f-e{\n        display: flex;\n        justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageGroups.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageGroups.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSpecialities.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageSpecialities.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageStudents.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageStudents.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSubjects.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageSubjects.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -37561,6 +39744,126 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageGroups.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageGroups.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageGroups.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageGroups.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSpecialities.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageSpecialities.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageSpecialities.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSpecialities.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageStudents.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageStudents.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageStudents.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageStudents.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSubjects.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageSubjects.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageSubjects.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSubjects.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -38217,7 +40520,10 @@ var render = function() {
             "md-card",
             {
               staticClass: "orange-stress-transparent mt-2",
-              attrs: { "md-with-hover": "" }
+              attrs: {
+                "md-with-hover": "",
+                onclick: "window.location='/manageStudents'"
+              }
             },
             [
               _c(
@@ -38243,7 +40549,10 @@ var render = function() {
             "md-card",
             {
               staticClass: "orange-stress-transparent mt-2",
-              attrs: { "md-with-hover": "" }
+              attrs: {
+                "md-with-hover": "",
+                onclick: "window.location='/manageGroups'"
+              }
             },
             [
               _c(
@@ -38267,7 +40576,10 @@ var render = function() {
             "md-card",
             {
               staticClass: "orange-stress-transparent mt-2",
-              attrs: { "md-with-hover": "" }
+              attrs: {
+                "md-with-hover": "",
+                onclick: "window.location='/manageSpecialities'"
+              }
             },
             [
               _c(
@@ -38305,6 +40617,35 @@ var render = function() {
                   _c("md-card-header", [
                     _c("div", { staticClass: "md-title" }, [
                       _vm._v("Факультеты")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "md-subhead" }, [
+                      _vm._v("Добавить / Удалить / Изменить")
+                    ])
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-card",
+            {
+              staticClass: "orange-stress-transparent mt-2",
+              attrs: {
+                "md-with-hover": "",
+                onclick: "window.location='/manageSubjects'"
+              }
+            },
+            [
+              _c(
+                "md-ripple",
+                [
+                  _c("md-card-header", [
+                    _c("div", { staticClass: "md-title" }, [
+                      _vm._v("Предметы")
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "md-subhead" }, [
@@ -38944,6 +41285,4061 @@ var render = function() {
                         "md-label": "Факультеты не найдены",
                         "md-description":
                           "Не было найдено ни одного факультета. Измените запрос или создайте новый факультет."
+                      }
+                    },
+                    [
+                      _c(
+                        "md-button",
+                        {
+                          staticClass: "md-primary md-raised",
+                          on: {
+                            click: function($event) {
+                              _vm.toggleModalAdd = true
+                            }
+                          }
+                        },
+                        [_vm._v("Добавить")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageGroups.vue?vue&type=template&id=ec01f9f8&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageGroups.vue?vue&type=template&id=ec01f9f8& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container grey-light page-height-default" },
+    [
+      _c(
+        "md-snackbar",
+        {
+          style: _vm.snackbar.bg,
+          attrs: {
+            "md-position": _vm.snackbar.position,
+            "md-duration": _vm.snackbar.duration,
+            "md-active": _vm.snackbar.showSnackbar,
+            "md-persistent": ""
+          },
+          on: {
+            "update:mdActive": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            },
+            "update:md-active": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            }
+          }
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass: "c-alert",
+              model: {
+                value: _vm.errorMessage,
+                callback: function($$v) {
+                  _vm.errorMessage = $$v
+                },
+                expression: "errorMessage"
+              }
+            },
+            [_vm._v(_vm._s(_vm.errorMessage))]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-button",
+            {
+              staticClass: "md-icon-button md-accent",
+              attrs: { title: "Закрыть окно" },
+              on: {
+                click: function($event) {
+                  _vm.snackbar.showSnackbar = false
+                }
+              }
+            },
+            [_c("md-icon", [_vm._v("clear")])],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "p-t" },
+        [
+          _c(
+            "md-dialog",
+            {
+              staticClass: " of-auto",
+              attrs: { "md-active": _vm.toggleModalSure, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalSure = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalSure = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _c(
+                  "p",
+                  [
+                    _vm._v("Вы уверены? "),
+                    _c("md-icon", { staticClass: "mb-1 md-accent" }, [
+                      _vm._v("warning")
+                    ])
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "pl-3 pr-3 pb-3 larafont" }, [
+                _vm._v("\n                Эта операция "),
+                _c("span", { staticClass: "c-r" }, [_vm._v("необратима")]),
+                _vm._v(", нажимая '"),
+                _c("span", { staticClass: "c-p" }, [_vm._v("подтвердить")]),
+                _vm._v("' "),
+                _c("br"),
+                _vm._v(" вы безвозвратно удаляете запись/записи.\n            ")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3 pl-2 pr-2" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.onConfirm()
+                        }
+                      }
+                    },
+                    [_vm._v("Подтвердить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.onCancel()
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-dialog",
+            {
+              staticClass: "pl-5 pr-5 of-auto",
+              attrs: { "md-active": _vm.toggleModalAdd, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalAdd = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalAdd = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _vm._v("Добавить группу")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "pl-2 pr-2 pb-3" },
+                [
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Наименование")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_id_name,
+                          callback: function($$v) {
+                            _vm.add_id_name = $$v
+                          },
+                          expression: "add_id_name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Сокращенное имя группы")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Специальность")]),
+                      _vm._v(" "),
+                      _c(
+                        "md-select",
+                        {
+                          attrs: { name: "add_faculty", id: "add_faculty" },
+                          model: {
+                            value: _vm.add_speciality,
+                            callback: function($$v) {
+                              _vm.add_speciality = $$v
+                            },
+                            expression: "add_speciality"
+                          }
+                        },
+                        _vm._l(_vm.specialityList, function(speciality) {
+                          return _c(
+                            "md-option",
+                            { attrs: { value: speciality.id } },
+                            [_vm._v(_vm._s(speciality.fullName))]
+                          )
+                        }),
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Выберите специальность")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Предметы по умолчанию")]),
+                      _vm._v(" "),
+                      _c(
+                        "md-select",
+                        {
+                          attrs: { multiple: "" },
+                          model: {
+                            value: _vm.add_default_subjects,
+                            callback: function($$v) {
+                              _vm.add_default_subjects = $$v
+                            },
+                            expression: "add_default_subjects"
+                          }
+                        },
+                        _vm._l(_vm.subjectList, function(subject) {
+                          return _c(
+                            "md-option",
+                            { attrs: { value: subject.id } },
+                            [_vm._v(_vm._s(subject.name))]
+                          )
+                        }),
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.createGroup()
+                        }
+                      }
+                    },
+                    [_vm._v("Сохранить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          _vm.toggleModalAdd = false
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-dialog",
+            {
+              staticClass: "pl-5 pr-5 of-auto",
+              attrs: { "md-active": _vm.toggleModalEdit, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalEdit = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalEdit = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _vm._v("Изменить группу")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "pl-2 pr-2 pb-3" },
+                [
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Наименование")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_id_name,
+                          callback: function($$v) {
+                            _vm.edit_id_name = $$v
+                          },
+                          expression: "edit_id_name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Сокращенное имя группы")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Специальность")]),
+                      _vm._v(" "),
+                      _c(
+                        "md-select",
+                        {
+                          attrs: { name: "add_faculty", id: "add_faculty" },
+                          model: {
+                            value: _vm.edit_speciality,
+                            callback: function($$v) {
+                              _vm.edit_speciality = $$v
+                            },
+                            expression: "edit_speciality"
+                          }
+                        },
+                        _vm._l(_vm.specialityList, function(speciality) {
+                          return _c(
+                            "md-option",
+                            { attrs: { value: speciality.id } },
+                            [_vm._v(_vm._s(speciality.fullName))]
+                          )
+                        }),
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Выберите специальность")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Предметы по умолчанию")]),
+                      _vm._v(" "),
+                      _c(
+                        "md-select",
+                        {
+                          attrs: { multiple: "" },
+                          model: {
+                            value: _vm.edit_default_subjects,
+                            callback: function($$v) {
+                              _vm.edit_default_subjects = $$v
+                            },
+                            expression: "edit_default_subjects"
+                          }
+                        },
+                        _vm._l(_vm.subjectList, function(subject) {
+                          return _c(
+                            "md-option",
+                            { attrs: { value: subject.id } },
+                            [_vm._v(_vm._s(subject.name))]
+                          )
+                        }),
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.editGroup()
+                        }
+                      }
+                    },
+                    [_vm._v("Сохранить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          _vm.toggleModalEdit = false
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-card",
+            [
+              _c("md-card-header", [
+                _c("div", { staticClass: "md-title" }, [
+                  _vm._v("\n                    Группы\n                ")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "md-subhead" }, [
+                  _vm._v(
+                    "\n                    Управление данными\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("md-card-content", [
+                _c(
+                  "div",
+                  { staticClass: "buttons" },
+                  [
+                    _c(
+                      "md-button",
+                      {
+                        staticClass: "md-raised md-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.toggleModalAdd = true
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Добавить\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-button",
+                      {
+                        staticClass:
+                          "md-icon-button md-dense md-raised md-primary upd-icon",
+                        on: {
+                          click: function($event) {
+                            return _vm.getGroups()
+                          }
+                        }
+                      },
+                      [_c("md-icon", [_vm._v("cached")])],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "md-table",
+                {
+                  attrs: {
+                    "md-card": "",
+                    "md-sort": "id",
+                    "md-sort-order": "asc",
+                    "md-fixed-header": "",
+                    "md-selected-value": _vm.selected
+                  },
+                  on: {
+                    "md-selected": _vm.onSelect,
+                    "update:mdSelectedValue": function($event) {
+                      _vm.selected = $event
+                    },
+                    "update:md-selected-value": function($event) {
+                      _vm.selected = $event
+                    }
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "md-table-alternate-header",
+                      fn: function(ref) {
+                        var count = ref.count
+                        return _c("md-table-toolbar", {}, [
+                          _c(
+                            "div",
+                            { staticClass: "md-toolbar-section-start" },
+                            [_vm._v(_vm._s(_vm.getAlternateLabel(count)))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "md-toolbar-section-end" },
+                            [
+                              _vm.showEditButton
+                                ? _c(
+                                    "md-button",
+                                    {
+                                      staticClass:
+                                        "md-icon-button md-raised btn-warn",
+                                      attrs: { title: "Изменить выделенный" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.editSelected()
+                                        }
+                                      }
+                                    },
+                                    [_c("md-icon", [_vm._v("create")])],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "md-button",
+                                {
+                                  staticClass:
+                                    "md-icon-button md-raised md-accent",
+                                  attrs: { title: "Удалить выделенное" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.toggleModalSure = true
+                                    }
+                                  }
+                                },
+                                [_c("md-icon", [_vm._v("delete")])],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "md-button",
+                                {
+                                  staticClass: "md-icon-button md-raised",
+                                  attrs: { title: "Сбросить выделение" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.clearSelected()
+                                    }
+                                  }
+                                },
+                                [_c("md-icon", [_vm._v("clear")])],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      }
+                    },
+                    {
+                      key: "md-table-row",
+                      fn: function(ref) {
+                        var item = ref.item
+                        return _c(
+                          "md-table-row",
+                          {
+                            attrs: {
+                              "md-selectable": "multiple",
+                              "md-auto-select": ""
+                            }
+                          },
+                          [
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "ID",
+                                  "md-sort-by": "id",
+                                  "md-numeric": ""
+                                }
+                              },
+                              [_vm._v(_vm._s(item.id))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Предметы",
+                                  "md-sort-by": "defaultSubjects"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    item.defaultSubjects
+                                      .map(function(elem) {
+                                        return elem.name
+                                      })
+                                      .join(",")
+                                  )
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Наименование",
+                                  "md-sort-by": "idName"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.idName))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Специальность",
+                                  "md-sort-by": "speciality.fullName"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.speciality.fullName))]
+                            )
+                          ],
+                          1
+                        )
+                      }
+                    }
+                  ]),
+                  model: {
+                    value: _vm.searched,
+                    callback: function($$v) {
+                      _vm.searched = $$v
+                    },
+                    expression: "searched"
+                  }
+                },
+                [
+                  _c(
+                    "md-table-toolbar",
+                    [
+                      _c("h1", { staticClass: "md-title" }),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        {
+                          staticClass: "md-toolbar-section-end",
+                          attrs: { "md-clearable": "" }
+                        },
+                        [
+                          _c("md-input", {
+                            attrs: { placeholder: "Поиск по наименованию.." },
+                            on: { input: _vm.searchOnTable },
+                            model: {
+                              value: _vm.search,
+                              callback: function($$v) {
+                                _vm.search = $$v
+                              },
+                              expression: "search"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm._v(" "),
+                  _c(
+                    "md-table-empty-state",
+                    {
+                      attrs: {
+                        "md-label": "Группы не найдены",
+                        "md-description":
+                          "Не было найдено ни одной группы. Измените запрос или создайте новую группу."
+                      }
+                    },
+                    [
+                      _c(
+                        "md-button",
+                        {
+                          staticClass: "md-primary md-raised",
+                          on: {
+                            click: function($event) {
+                              _vm.toggleModalAdd = true
+                            }
+                          }
+                        },
+                        [_vm._v("Добавить")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSpecialities.vue?vue&type=template&id=a1b5df3a&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageSpecialities.vue?vue&type=template&id=a1b5df3a& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container grey-light page-height-default" },
+    [
+      _c(
+        "md-snackbar",
+        {
+          style: _vm.snackbar.bg,
+          attrs: {
+            "md-position": _vm.snackbar.position,
+            "md-duration": _vm.snackbar.duration,
+            "md-active": _vm.snackbar.showSnackbar,
+            "md-persistent": ""
+          },
+          on: {
+            "update:mdActive": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            },
+            "update:md-active": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            }
+          }
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass: "c-alert",
+              model: {
+                value: _vm.errorMessage,
+                callback: function($$v) {
+                  _vm.errorMessage = $$v
+                },
+                expression: "errorMessage"
+              }
+            },
+            [_vm._v(_vm._s(_vm.errorMessage))]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-button",
+            {
+              staticClass: "md-icon-button md-accent",
+              attrs: { title: "Закрыть окно" },
+              on: {
+                click: function($event) {
+                  _vm.snackbar.showSnackbar = false
+                }
+              }
+            },
+            [_c("md-icon", [_vm._v("clear")])],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "p-t" },
+        [
+          _c(
+            "md-dialog",
+            {
+              staticClass: " of-auto",
+              attrs: { "md-active": _vm.toggleModalSure, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalSure = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalSure = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _c(
+                  "p",
+                  [
+                    _vm._v("Вы уверены? "),
+                    _c("md-icon", { staticClass: "mb-1 md-accent" }, [
+                      _vm._v("warning")
+                    ])
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "pl-3 pr-3 pb-3 larafont" }, [
+                _vm._v("\n                Эта операция "),
+                _c("span", { staticClass: "c-r" }, [_vm._v("необратима")]),
+                _vm._v(", нажимая '"),
+                _c("span", { staticClass: "c-p" }, [_vm._v("подтвердить")]),
+                _vm._v("' "),
+                _c("br"),
+                _vm._v(" вы безвозвратно удаляете запись/записи.\n            ")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3 pl-2 pr-2" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.onConfirm()
+                        }
+                      }
+                    },
+                    [_vm._v("Подтвердить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.onCancel()
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-dialog",
+            {
+              staticClass: "pl-5 pr-5 of-auto",
+              attrs: { "md-active": _vm.toggleModalAdd, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalAdd = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalAdd = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _vm._v("Добавить специальность")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "pl-2 pr-2 pb-3" },
+                [
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Наименование")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_fullName,
+                          callback: function($$v) {
+                            _vm.add_fullName = $$v
+                          },
+                          expression: "add_fullName"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя, Название")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Аббревиатура")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_abbreviation,
+                          callback: function($$v) {
+                            _vm.add_abbreviation = $$v
+                          },
+                          expression: "add_abbreviation"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Сокращенное имя")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Факультет")]),
+                      _vm._v(" "),
+                      _c(
+                        "md-select",
+                        {
+                          attrs: { name: "add_faculty", id: "add_faculty" },
+                          model: {
+                            value: _vm.add_faculty,
+                            callback: function($$v) {
+                              _vm.add_faculty = $$v
+                            },
+                            expression: "add_faculty"
+                          }
+                        },
+                        _vm._l(_vm.facultyList, function(faculty) {
+                          return _c(
+                            "md-option",
+                            { attrs: { value: faculty.id } },
+                            [_vm._v(_vm._s(faculty.fullName))]
+                          )
+                        }),
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Выберите факультет")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.createSpeciality()
+                        }
+                      }
+                    },
+                    [_vm._v("Сохранить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          _vm.toggleModalAdd = false
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-dialog",
+            {
+              staticClass: "pl-5 pr-5 of-auto",
+              attrs: { "md-active": _vm.toggleModalEdit, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalEdit = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalEdit = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _vm._v("Изменить специальность")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "pl-2 pr-2 pb-3" },
+                [
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Наименование")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_fullName,
+                          callback: function($$v) {
+                            _vm.edit_fullName = $$v
+                          },
+                          expression: "edit_fullName"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя, Название")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Аббревиатура")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_abbreviation,
+                          callback: function($$v) {
+                            _vm.edit_abbreviation = $$v
+                          },
+                          expression: "edit_abbreviation"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Сокращенное имя")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Факультет")]),
+                      _vm._v(" "),
+                      _c(
+                        "md-select",
+                        {
+                          attrs: { name: "edit_faculty", id: "edit_faculty" },
+                          model: {
+                            value: _vm.edit_faculty,
+                            callback: function($$v) {
+                              _vm.edit_faculty = $$v
+                            },
+                            expression: "edit_faculty"
+                          }
+                        },
+                        _vm._l(_vm.facultyList, function(faculty) {
+                          return _c(
+                            "md-option",
+                            { attrs: { value: faculty.id } },
+                            [_vm._v(_vm._s(faculty.fullName))]
+                          )
+                        }),
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Выберите факультет")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.editSpeciality()
+                        }
+                      }
+                    },
+                    [_vm._v("Сохранить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          _vm.toggleModalEdit = false
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-card",
+            [
+              _c("md-card-header", [
+                _c("div", { staticClass: "md-title" }, [
+                  _vm._v(
+                    "\n                    Специальности\n                "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "md-subhead" }, [
+                  _vm._v(
+                    "\n                    Управление данными\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("md-card-content", [
+                _c(
+                  "div",
+                  { staticClass: "buttons" },
+                  [
+                    _c(
+                      "md-button",
+                      {
+                        staticClass: "md-raised md-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.toggleModalAdd = true
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Добавить\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-button",
+                      {
+                        staticClass:
+                          "md-icon-button md-dense md-raised md-primary upd-icon",
+                        on: {
+                          click: function($event) {
+                            return _vm.getSpecialities()
+                          }
+                        }
+                      },
+                      [_c("md-icon", [_vm._v("cached")])],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "md-table",
+                {
+                  attrs: {
+                    "md-card": "",
+                    "md-sort": "id",
+                    "md-sort-order": "asc",
+                    "md-fixed-header": "",
+                    "md-selected-value": _vm.selected
+                  },
+                  on: {
+                    "md-selected": _vm.onSelect,
+                    "update:mdSelectedValue": function($event) {
+                      _vm.selected = $event
+                    },
+                    "update:md-selected-value": function($event) {
+                      _vm.selected = $event
+                    }
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "md-table-alternate-header",
+                      fn: function(ref) {
+                        var count = ref.count
+                        return _c("md-table-toolbar", {}, [
+                          _c(
+                            "div",
+                            { staticClass: "md-toolbar-section-start" },
+                            [_vm._v(_vm._s(_vm.getAlternateLabel(count)))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "md-toolbar-section-end" },
+                            [
+                              _vm.showEditButton
+                                ? _c(
+                                    "md-button",
+                                    {
+                                      staticClass:
+                                        "md-icon-button md-raised btn-warn",
+                                      attrs: { title: "Изменить выделенный" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.editSelected()
+                                        }
+                                      }
+                                    },
+                                    [_c("md-icon", [_vm._v("create")])],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "md-button",
+                                {
+                                  staticClass:
+                                    "md-icon-button md-raised md-accent",
+                                  attrs: { title: "Удалить выделенное" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.toggleModalSure = true
+                                    }
+                                  }
+                                },
+                                [_c("md-icon", [_vm._v("delete")])],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "md-button",
+                                {
+                                  staticClass: "md-icon-button md-raised",
+                                  attrs: { title: "Сбросить выделение" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.clearSelected()
+                                    }
+                                  }
+                                },
+                                [_c("md-icon", [_vm._v("clear")])],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      }
+                    },
+                    {
+                      key: "md-table-row",
+                      fn: function(ref) {
+                        var item = ref.item
+                        return _c(
+                          "md-table-row",
+                          {
+                            attrs: {
+                              "md-selectable": "multiple",
+                              "md-auto-select": ""
+                            }
+                          },
+                          [
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "ID",
+                                  "md-sort-by": "id",
+                                  "md-numeric": ""
+                                }
+                              },
+                              [_vm._v(_vm._s(item.id))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Наименование",
+                                  "md-sort-by": "fullName"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.fullName))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Аббревиатура",
+                                  "md-sort-by": "abbreviation"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.abbreviation))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Факультет",
+                                  "md-sort-by": "faculty.fullName"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.faculty.fullName))]
+                            )
+                          ],
+                          1
+                        )
+                      }
+                    }
+                  ]),
+                  model: {
+                    value: _vm.searched,
+                    callback: function($$v) {
+                      _vm.searched = $$v
+                    },
+                    expression: "searched"
+                  }
+                },
+                [
+                  _c(
+                    "md-table-toolbar",
+                    [
+                      _c("h1", { staticClass: "md-title" }),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        {
+                          staticClass: "md-toolbar-section-end",
+                          attrs: { "md-clearable": "" }
+                        },
+                        [
+                          _c("md-input", {
+                            attrs: { placeholder: "Поиск по наименованию.." },
+                            on: { input: _vm.searchOnTable },
+                            model: {
+                              value: _vm.search,
+                              callback: function($$v) {
+                                _vm.search = $$v
+                              },
+                              expression: "search"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm._v(" "),
+                  _c(
+                    "md-table-empty-state",
+                    {
+                      attrs: {
+                        "md-label": "Специальности не найдены",
+                        "md-description":
+                          "Не было найдено ни одной специальности. Измените запрос или создайте новую специальность."
+                      }
+                    },
+                    [
+                      _c(
+                        "md-button",
+                        {
+                          staticClass: "md-primary md-raised",
+                          on: {
+                            click: function($event) {
+                              _vm.toggleModalAdd = true
+                            }
+                          }
+                        },
+                        [_vm._v("Добавить")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageStudents.vue?vue&type=template&id=6591a6c8&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageStudents.vue?vue&type=template&id=6591a6c8& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container grey-light page-height-default" },
+    [
+      _c(
+        "md-snackbar",
+        {
+          style: _vm.snackbar.bg,
+          attrs: {
+            "md-position": _vm.snackbar.position,
+            "md-duration": _vm.snackbar.duration,
+            "md-active": _vm.snackbar.showSnackbar,
+            "md-persistent": ""
+          },
+          on: {
+            "update:mdActive": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            },
+            "update:md-active": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            }
+          }
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass: "c-alert",
+              model: {
+                value: _vm.errorMessage,
+                callback: function($$v) {
+                  _vm.errorMessage = $$v
+                },
+                expression: "errorMessage"
+              }
+            },
+            [_vm._v(_vm._s(_vm.errorMessage))]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-button",
+            {
+              staticClass: "md-icon-button md-accent",
+              attrs: { title: "Закрыть окно" },
+              on: {
+                click: function($event) {
+                  _vm.snackbar.showSnackbar = false
+                }
+              }
+            },
+            [_c("md-icon", [_vm._v("clear")])],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "p-t" },
+        [
+          _c(
+            "md-dialog",
+            {
+              staticClass: " of-auto",
+              attrs: { "md-active": _vm.toggleModalSure, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalSure = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalSure = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _c(
+                  "p",
+                  [
+                    _vm._v("Вы уверены? "),
+                    _c("md-icon", { staticClass: "mb-1 md-accent" }, [
+                      _vm._v("warning")
+                    ])
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "pl-3 pr-3 pb-3 larafont" }, [
+                _vm._v("\n                    Эта операция "),
+                _c("span", { staticClass: "c-r" }, [_vm._v("необратима")]),
+                _vm._v(", нажимая '"),
+                _c("span", { staticClass: "c-p" }, [_vm._v("подтвердить")]),
+                _vm._v("' "),
+                _c("br"),
+                _vm._v(
+                  " вы безвозвратно удаляете запись/записи.\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3 pl-2 pr-2" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.onConfirm()
+                        }
+                      }
+                    },
+                    [_vm._v("Подтвердить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.onCancel()
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-dialog",
+            {
+              staticClass: "pl-5 pr-5 of-auto",
+              attrs: { "md-active": _vm.toggleModalAdd, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalAdd = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalAdd = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _vm._v("Добавить студента")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "pl-2 pr-2 pb-3" },
+                [
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Имя")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_first_name,
+                          callback: function($$v) {
+                            _vm.add_first_name = $$v
+                          },
+                          expression: "add_first_name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Фимилия")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_surname,
+                          callback: function($$v) {
+                            _vm.add_surname = $$v
+                          },
+                          expression: "add_surname"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Фамилия студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Отчество")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_middle_name,
+                          callback: function($$v) {
+                            _vm.add_middle_name = $$v
+                          },
+                          expression: "add_middle_name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Отчество студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("ИН")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_student_id,
+                          callback: function($$v) {
+                            _vm.add_student_id = $$v
+                          },
+                          expression: "add_student_id"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Индивидуальный номер студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-datepicker",
+                    {
+                      model: {
+                        value: _vm.add_date_of_birth,
+                        callback: function($$v) {
+                          _vm.add_date_of_birth = $$v
+                        },
+                        expression: "add_date_of_birth"
+                      }
+                    },
+                    [
+                      _c("label", [_vm._v("Дата рождения")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Дата рождения студента")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Пол")]),
+                      _vm._v(" "),
+                      _c(
+                        "md-select",
+                        {
+                          attrs: { name: "add_gender", id: "add_gender" },
+                          model: {
+                            value: _vm.add_gender,
+                            callback: function($$v) {
+                              _vm.add_gender = $$v
+                            },
+                            expression: "add_gender"
+                          }
+                        },
+                        [
+                          _c("md-option", { attrs: { value: "Мужской" } }, [
+                            _vm._v("Мужской")
+                          ]),
+                          _vm._v(" "),
+                          _c("md-option", { attrs: { value: "Женский" } }, [
+                            _vm._v("Женский")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Пол студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Гражданство")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_citizenship,
+                          callback: function($$v) {
+                            _vm.add_citizenship = $$v
+                          },
+                          expression: "add_citizenship"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Гражданство студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Группа")]),
+                      _vm._v(" "),
+                      _c(
+                        "md-select",
+                        {
+                          model: {
+                            value: _vm.add_group,
+                            callback: function($$v) {
+                              _vm.add_group = $$v
+                            },
+                            expression: "add_group"
+                          }
+                        },
+                        _vm._l(_vm.groupList, function(group) {
+                          return _c(
+                            "md-option",
+                            { attrs: { value: group.id } },
+                            [_vm._v(_vm._s(group.idName))]
+                          )
+                        }),
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.full_student_data,
+                          expression: "full_student_data"
+                        }
+                      ]
+                    },
+                    [
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Семейное положение")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.add_family_state,
+                              callback: function($$v) {
+                                _vm.add_family_state = $$v
+                              },
+                              expression: "add_family_state"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("Семейный положение студента")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Адрес проживания семьи")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.add_family_address,
+                              callback: function($$v) {
+                                _vm.add_family_address = $$v
+                              },
+                              expression: "add_family_address"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v(
+                              "Адрес проживания супруги/мужа, имя, год рождения детей"
+                            )
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Адрес ПМЖ")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.add_address_begin,
+                              callback: function($$v) {
+                                _vm.add_address_begin = $$v
+                              },
+                              expression: "add_address_begin"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("Адрес ПМЖ на момент поступления")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Обучение до НАУ")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.add_before_nau_edu,
+                              callback: function($$v) {
+                                _vm.add_before_nau_edu = $$v
+                              },
+                              expression: "add_before_nau_edu"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v(
+                              "УЗ, название, серия и № документа об образовании, иностранные языки"
+                            )
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Работа до НАУ")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.add_before_nau_job,
+                              callback: function($$v) {
+                                _vm.add_before_nau_job = $$v
+                              },
+                              expression: "add_before_nau_job"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v(
+                              "Где и кем работал(а), стаж, трудовая книга, №, когда и кем выдана"
+                            )
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Военная служба")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.add_military_service,
+                              callback: function($$v) {
+                                _vm.add_military_service = $$v
+                              },
+                              expression: "add_military_service"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("С какого по какой год")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Условия поступления")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.add_nau_conditions,
+                              callback: function($$v) {
+                                _vm.add_nau_conditions = $$v
+                              },
+                              expression: "add_nau_conditions"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("Лицей, на общих основаниях, по контракту")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("№ и дата договора")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.add_nau_contract,
+                              callback: function($$v) {
+                                _vm.add_nau_contract = $$v
+                              },
+                              expression: "add_nau_contract"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("№ и дата договора об обучении")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Льготы")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.add_nau_privileges,
+                              callback: function($$v) {
+                                _vm.add_nau_privileges = $$v
+                              },
+                              expression: "add_nau_privileges"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v(
+                              "Льготы в соответствии с действующим законом"
+                            )
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Общажитие")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.add_hostel,
+                              callback: function($$v) {
+                                _vm.add_hostel = $$v
+                              },
+                              expression: "add_hostel"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("Общажитие, комната проживания")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Дополнительная информация")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.add_additional_info,
+                              callback: function($$v) {
+                                _vm.add_additional_info = $$v
+                              },
+                              expression: "add_additional_info"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("Номер телефона и т.д.")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Дополнительные предметы")]),
+                          _vm._v(" "),
+                          _c(
+                            "md-select",
+                            {
+                              attrs: { multiple: "" },
+                              model: {
+                                value: _vm.add_additional_subjects,
+                                callback: function($$v) {
+                                  _vm.add_additional_subjects = $$v
+                                },
+                                expression: "add_additional_subjects"
+                              }
+                            },
+                            _vm._l(_vm.subjectList, function(subject) {
+                              return _c(
+                                "md-option",
+                                { attrs: { value: subject.id } },
+                                [_vm._v(_vm._s(subject.name))]
+                              )
+                            }),
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.createStudent()
+                        }
+                      }
+                    },
+                    [_vm._v("Сохранить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          _vm.toggleModalAdd = false
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-dialog",
+            {
+              staticClass: "pl-5 pr-5 of-auto",
+              attrs: { "md-active": _vm.toggleModalEdit, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalEdit = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalEdit = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _vm._v("Изменить студента")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "pl-2 pr-2 pb-3" },
+                [
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Имя")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_first_name,
+                          callback: function($$v) {
+                            _vm.edit_first_name = $$v
+                          },
+                          expression: "edit_first_name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Фимилия")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_surname,
+                          callback: function($$v) {
+                            _vm.edit_surname = $$v
+                          },
+                          expression: "edit_surname"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Фамилия студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Отчество")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_middle_name,
+                          callback: function($$v) {
+                            _vm.edit_middle_name = $$v
+                          },
+                          expression: "edit_middle_name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Отчество студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("ИН")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_student_id,
+                          callback: function($$v) {
+                            _vm.edit_student_id = $$v
+                          },
+                          expression: "edit_student_id"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Индивидуальный номер студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-datepicker",
+                    {
+                      model: {
+                        value: _vm.edit_date_of_birth,
+                        callback: function($$v) {
+                          _vm.edit_date_of_birth = $$v
+                        },
+                        expression: "edit_date_of_birth"
+                      }
+                    },
+                    [
+                      _c("label", [_vm._v("Дата рождения")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Дата рождения студента")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Пол")]),
+                      _vm._v(" "),
+                      _c(
+                        "md-select",
+                        {
+                          attrs: { name: "add_gender", id: "add_gender" },
+                          model: {
+                            value: _vm.edit_gender,
+                            callback: function($$v) {
+                              _vm.edit_gender = $$v
+                            },
+                            expression: "edit_gender"
+                          }
+                        },
+                        [
+                          _c("md-option", { attrs: { value: "Мужской" } }, [
+                            _vm._v("Мужской")
+                          ]),
+                          _vm._v(" "),
+                          _c("md-option", { attrs: { value: "Женский" } }, [
+                            _vm._v("Женский")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Пол студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Гражданство")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_citizenship,
+                          callback: function($$v) {
+                            _vm.edit_citizenship = $$v
+                          },
+                          expression: "edit_citizenship"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Гражданство студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Группа")]),
+                      _vm._v(" "),
+                      _c(
+                        "md-select",
+                        {
+                          model: {
+                            value: _vm.edit_group,
+                            callback: function($$v) {
+                              _vm.edit_group = $$v
+                            },
+                            expression: "edit_group"
+                          }
+                        },
+                        _vm._l(_vm.groupList, function(group) {
+                          return _c(
+                            "md-option",
+                            { attrs: { value: group.id } },
+                            [_vm._v(_vm._s(group.idName))]
+                          )
+                        }),
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.full_student_data,
+                          expression: "full_student_data"
+                        }
+                      ]
+                    },
+                    [
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Семейное положение")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.edit_family_state,
+                              callback: function($$v) {
+                                _vm.edit_family_state = $$v
+                              },
+                              expression: "edit_family_state"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("Семейный положение студента")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Адрес проживания семьи")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.edit_family_address,
+                              callback: function($$v) {
+                                _vm.edit_family_address = $$v
+                              },
+                              expression: "edit_family_address"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v(
+                              "Адрес проживания супруги/мужа, имя, год рождения детей"
+                            )
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Адрес ПМЖ")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.edit_address_begin,
+                              callback: function($$v) {
+                                _vm.edit_address_begin = $$v
+                              },
+                              expression: "edit_address_begin"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("Адрес ПМЖ на момент поступления")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Обучение до НАУ")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.edit_before_nau_edu,
+                              callback: function($$v) {
+                                _vm.edit_before_nau_edu = $$v
+                              },
+                              expression: "edit_before_nau_edu"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v(
+                              "УЗ, название, серия и № документа об образовании, иностранные языки"
+                            )
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Работа до НАУ")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.edit_before_nau_job,
+                              callback: function($$v) {
+                                _vm.edit_before_nau_job = $$v
+                              },
+                              expression: "edit_before_nau_job"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v(
+                              "Где и кем работал(а), стаж, трудовая книга, №, когда и кем выдана"
+                            )
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Военная служба")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.edit_military_service,
+                              callback: function($$v) {
+                                _vm.edit_military_service = $$v
+                              },
+                              expression: "edit_military_service"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("С какого по какой год")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Условия поступления")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.edit_nau_conditions,
+                              callback: function($$v) {
+                                _vm.edit_nau_conditions = $$v
+                              },
+                              expression: "edit_nau_conditions"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("Лицей, на общих основаниях, по контракту")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("№ и дата договора")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.edit_nau_contract,
+                              callback: function($$v) {
+                                _vm.edit_nau_contract = $$v
+                              },
+                              expression: "edit_nau_contract"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("№ и дата договора об обучении")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Льготы")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.edit_nau_privileges,
+                              callback: function($$v) {
+                                _vm.edit_nau_privileges = $$v
+                              },
+                              expression: "edit_nau_privileges"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v(
+                              "Льготы в соответствии с действующим законом"
+                            )
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Общажитие")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.edit_hostel,
+                              callback: function($$v) {
+                                _vm.edit_hostel = $$v
+                              },
+                              expression: "edit_hostel"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("Общажитие, комната проживания")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Дополнительная информация")]),
+                          _vm._v(" "),
+                          _c("md-input", {
+                            attrs: { maxlength: "255" },
+                            model: {
+                              value: _vm.edit_additional_info,
+                              callback: function($$v) {
+                                _vm.edit_additional_info = $$v
+                              },
+                              expression: "edit_additional_info"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-helper-text" }, [
+                            _vm._v("Номер телефона и т.д.")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("label", [_vm._v("Дополнительные предметы")]),
+                          _vm._v(" "),
+                          _c(
+                            "md-select",
+                            {
+                              attrs: { multiple: "" },
+                              model: {
+                                value: _vm.edit_additional_subjects,
+                                callback: function($$v) {
+                                  _vm.edit_additional_subjects = $$v
+                                },
+                                expression: "edit_additional_subjects"
+                              }
+                            },
+                            _vm._l(_vm.subjectList, function(subject) {
+                              return _c(
+                                "md-option",
+                                { attrs: { value: subject.id } },
+                                [_vm._v(_vm._s(subject.name))]
+                              )
+                            }),
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.editStudent()
+                        }
+                      }
+                    },
+                    [_vm._v("Сохранить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          _vm.toggleModalEdit = false
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-card",
+            [
+              _c("md-card-header", [
+                _c("div", { staticClass: "md-title" }, [
+                  _vm._v(
+                    "\n                        Студенты\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "md-subhead" }, [
+                  _vm._v(
+                    "\n                        Управление данными\n                    "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("md-card-content", [
+                _c(
+                  "div",
+                  { staticClass: "buttons" },
+                  [
+                    _c(
+                      "span",
+                      [
+                        _c(
+                          "md-switch",
+                          {
+                            model: {
+                              value: _vm.full_student_data,
+                              callback: function($$v) {
+                                _vm.full_student_data = $$v
+                              },
+                              expression: "full_student_data"
+                            }
+                          },
+                          [_vm._v("Полное заполнение")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "md-button",
+                          {
+                            staticClass: "md-raised md-primary",
+                            on: {
+                              click: function($event) {
+                                _vm.toggleModalAdd = true
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Добавить\n                            "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-button",
+                      {
+                        staticClass:
+                          "md-icon-button md-dense md-raised md-primary upd-icon",
+                        on: {
+                          click: function($event) {
+                            return _vm.getGroups()
+                          }
+                        }
+                      },
+                      [_c("md-icon", [_vm._v("cached")])],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "md-table",
+                {
+                  attrs: {
+                    "md-card": "",
+                    "md-sort": "id",
+                    "md-sort-order": "asc",
+                    "md-fixed-header": "",
+                    "md-selected-value": _vm.selected
+                  },
+                  on: {
+                    "md-selected": _vm.onSelect,
+                    "update:mdSelectedValue": function($event) {
+                      _vm.selected = $event
+                    },
+                    "update:md-selected-value": function($event) {
+                      _vm.selected = $event
+                    }
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "md-table-alternate-header",
+                      fn: function(ref) {
+                        var count = ref.count
+                        return _c("md-table-toolbar", {}, [
+                          _c(
+                            "div",
+                            { staticClass: "md-toolbar-section-start" },
+                            [_vm._v(_vm._s(_vm.getAlternateLabel(count)))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "md-toolbar-section-end" },
+                            [
+                              _vm.showEditButton
+                                ? _c(
+                                    "md-button",
+                                    {
+                                      staticClass:
+                                        "md-icon-button md-raised btn-warn",
+                                      attrs: { title: "Изменить выделенный" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.editSelected()
+                                        }
+                                      }
+                                    },
+                                    [_c("md-icon", [_vm._v("create")])],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "md-button",
+                                {
+                                  staticClass:
+                                    "md-icon-button md-raised md-accent",
+                                  attrs: { title: "Удалить выделенное" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.toggleModalSure = true
+                                    }
+                                  }
+                                },
+                                [_c("md-icon", [_vm._v("delete")])],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "md-button",
+                                {
+                                  staticClass: "md-icon-button md-raised",
+                                  attrs: { title: "Сбросить выделение" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.clearSelected()
+                                    }
+                                  }
+                                },
+                                [_c("md-icon", [_vm._v("clear")])],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      }
+                    },
+                    {
+                      key: "md-table-row",
+                      fn: function(ref) {
+                        var item = ref.item
+                        return _c(
+                          "md-table-row",
+                          {
+                            attrs: {
+                              "md-selectable": "multiple",
+                              "md-auto-select": ""
+                            }
+                          },
+                          [
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "ID",
+                                  "md-sort-by": "id",
+                                  "md-numeric": ""
+                                }
+                              },
+                              [_vm._v(_vm._s(item.id))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "ФИО",
+                                  "md-sort-by": "surname"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    item.surname +
+                                      " " +
+                                      item.firstName +
+                                      " " +
+                                      item.middleName
+                                  )
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "ИН",
+                                  "md-sort-by": "idNumber"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.studentId))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Пол",
+                                  "md-sort-by": "gender"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.gender))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Гражданство",
+                                  "md-sort-by": "citizenship"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.citizenship))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Дата рождения",
+                                  "md-sort-by": "dateOfBirth"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.dateOfBirth))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Группа",
+                                  "md-sort-by": "item.group.id"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.group.idName))]
+                            )
+                          ],
+                          1
+                        )
+                      }
+                    }
+                  ]),
+                  model: {
+                    value: _vm.searched,
+                    callback: function($$v) {
+                      _vm.searched = $$v
+                    },
+                    expression: "searched"
+                  }
+                },
+                [
+                  _c(
+                    "md-table-toolbar",
+                    [
+                      _c("h1", { staticClass: "md-title" }),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        {
+                          staticClass: "md-toolbar-section-end",
+                          attrs: { "md-clearable": "" }
+                        },
+                        [
+                          _c("md-input", {
+                            attrs: { placeholder: "Поиск по фамилии.." },
+                            on: { input: _vm.searchOnTable },
+                            model: {
+                              value: _vm.search,
+                              callback: function($$v) {
+                                _vm.search = $$v
+                              },
+                              expression: "search"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm._v(" "),
+                  _c(
+                    "md-table-empty-state",
+                    {
+                      attrs: {
+                        "md-label": "Студенты не найдены",
+                        "md-description":
+                          "Не было найдено ни одного студента. Измените запрос или создайте нового студента."
+                      }
+                    },
+                    [
+                      _c(
+                        "md-button",
+                        {
+                          staticClass: "md-primary md-raised",
+                          on: {
+                            click: function($event) {
+                              _vm.toggleModalAdd = true
+                            }
+                          }
+                        },
+                        [_vm._v("Добавить")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSubjects.vue?vue&type=template&id=0cb90277&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageSubjects.vue?vue&type=template&id=0cb90277& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container grey-light page-height-default" },
+    [
+      _c(
+        "md-snackbar",
+        {
+          style: _vm.snackbar.bg,
+          attrs: {
+            "md-position": _vm.snackbar.position,
+            "md-duration": _vm.snackbar.duration,
+            "md-active": _vm.snackbar.showSnackbar,
+            "md-persistent": ""
+          },
+          on: {
+            "update:mdActive": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            },
+            "update:md-active": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            }
+          }
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass: "c-alert",
+              model: {
+                value: _vm.errorMessage,
+                callback: function($$v) {
+                  _vm.errorMessage = $$v
+                },
+                expression: "errorMessage"
+              }
+            },
+            [_vm._v(_vm._s(_vm.errorMessage))]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-button",
+            {
+              staticClass: "md-icon-button md-accent",
+              attrs: { title: "Закрыть окно" },
+              on: {
+                click: function($event) {
+                  _vm.snackbar.showSnackbar = false
+                }
+              }
+            },
+            [_c("md-icon", [_vm._v("clear")])],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "p-t" },
+        [
+          _c(
+            "md-dialog",
+            {
+              staticClass: " of-auto",
+              attrs: { "md-active": _vm.toggleModalSure, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalSure = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalSure = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _c(
+                  "p",
+                  [
+                    _vm._v("Вы уверены? "),
+                    _c("md-icon", { staticClass: "mb-1 md-accent" }, [
+                      _vm._v("warning")
+                    ])
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "pl-3 pr-3 pb-3 larafont" }, [
+                _vm._v("\n                Эта операция "),
+                _c("span", { staticClass: "c-r" }, [_vm._v("необратима")]),
+                _vm._v(", нажимая '"),
+                _c("span", { staticClass: "c-p" }, [_vm._v("подтвердить")]),
+                _vm._v("' "),
+                _c("br"),
+                _vm._v(" вы безвозвратно удаляете запись/записи.\n            ")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3 pl-2 pr-2" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.onConfirm()
+                        }
+                      }
+                    },
+                    [_vm._v("Подтвердить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.onCancel()
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-dialog",
+            {
+              staticClass: "pl-5 pr-5 of-auto",
+              attrs: { "md-active": _vm.toggleModalAdd, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalAdd = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalAdd = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _vm._v("Добавить предмет")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "pl-2 pr-2 pb-3" },
+                [
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Наименование")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_name,
+                          callback: function($$v) {
+                            _vm.add_name = $$v
+                          },
+                          expression: "add_name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя, Название")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Преподователь")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_professor,
+                          callback: function($$v) {
+                            _vm.add_professor = $$v
+                          },
+                          expression: "add_professor"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя преподавателя")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Заведующий кафедры")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_head_of_department,
+                          callback: function($$v) {
+                            _vm.add_head_of_department = $$v
+                          },
+                          expression: "add_head_of_department"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя заведующего кафедры")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Модули")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { type: "number", min: "1" },
+                        model: {
+                          value: _vm.add_module_count,
+                          callback: function($$v) {
+                            _vm.add_module_count = $$v
+                          },
+                          expression: "add_module_count"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Количество модулей")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Часы")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { type: "number", min: "1" },
+                        model: {
+                          value: _vm.add_hours_count,
+                          callback: function($$v) {
+                            _vm.add_hours_count = $$v
+                          },
+                          expression: "add_hours_count"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Количество часов")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Кредиты")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { type: "number", min: "1" },
+                        model: {
+                          value: _vm.add_credits_count,
+                          callback: function($$v) {
+                            _vm.add_credits_count = $$v
+                          },
+                          expression: "add_credits_count"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Количество кредитов")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-datepicker",
+                    {
+                      model: {
+                        value: _vm.add_begin_date,
+                        callback: function($$v) {
+                          _vm.add_begin_date = $$v
+                        },
+                        expression: "add_begin_date"
+                      }
+                    },
+                    [
+                      _c("label", [_vm._v("От")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Дата начала обучения")
+                      ])
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.createSubject()
+                        }
+                      }
+                    },
+                    [_vm._v("Сохранить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          _vm.toggleModalAdd = false
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-dialog",
+            {
+              staticClass: "pl-5 pr-5 of-auto",
+              attrs: { "md-active": _vm.toggleModalEdit, "md-scrollbar": "" },
+              on: {
+                "update:mdActive": function($event) {
+                  _vm.toggleModalEdit = $event
+                },
+                "update:md-active": function($event) {
+                  _vm.toggleModalEdit = $event
+                }
+              }
+            },
+            [
+              _c("md-dialog-title", { staticClass: "fb-center" }, [
+                _vm._v("Изменить предмет")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "pl-2 pr-2 pb-3" },
+                [
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Наименование")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_name,
+                          callback: function($$v) {
+                            _vm.edit_name = $$v
+                          },
+                          expression: "edit_name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя, Название")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Преподователь")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_professor,
+                          callback: function($$v) {
+                            _vm.edit_professor = $$v
+                          },
+                          expression: "edit_professor"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя преподавателя")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Заведующий кафедры")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_head_of_department,
+                          callback: function($$v) {
+                            _vm.edit_head_of_department = $$v
+                          },
+                          expression: "edit_head_of_department"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Имя заведующего кафедры")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Модули")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { type: "number", min: "1" },
+                        model: {
+                          value: _vm.edit_module_count,
+                          callback: function($$v) {
+                            _vm.edit_module_count = $$v
+                          },
+                          expression: "edit_module_count"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Количество модулей")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Часы")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { type: "number", min: "1" },
+                        model: {
+                          value: _vm.edit_hours_count,
+                          callback: function($$v) {
+                            _vm.edit_hours_count = $$v
+                          },
+                          expression: "edit_hours_count"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Количество часов")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Кредиты")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { type: "number", min: "1" },
+                        model: {
+                          value: _vm.edit_credits_count,
+                          callback: function($$v) {
+                            _vm.edit_credits_count = $$v
+                          },
+                          expression: "edit_credits_count"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Количество кредитов")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-datepicker",
+                    {
+                      model: {
+                        value: _vm.edit_begin_date,
+                        callback: function($$v) {
+                          _vm.edit_begin_date = $$v
+                        },
+                        expression: "edit_begin_date"
+                      }
+                    },
+                    [
+                      _c("label", [_vm._v("От")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Дата начала обучения")
+                      ])
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons pb-3" },
+                [
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-primary md-raised",
+                      on: {
+                        click: function($event) {
+                          return _vm.editSubject()
+                        }
+                      }
+                    },
+                    [_vm._v("Сохранить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-accent md-raised",
+                      on: {
+                        click: function($event) {
+                          _vm.toggleModalEdit = false
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-card",
+            [
+              _c("md-card-header", [
+                _c("div", { staticClass: "md-title" }, [
+                  _vm._v("\n                    Предметы\n                ")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "md-subhead" }, [
+                  _vm._v(
+                    "\n                    Управление данными\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("md-card-content", [
+                _c(
+                  "div",
+                  { staticClass: "buttons" },
+                  [
+                    _c(
+                      "md-button",
+                      {
+                        staticClass: "md-raised md-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.toggleModalAdd = true
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Добавить\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-button",
+                      {
+                        staticClass:
+                          "md-icon-button md-dense md-raised md-primary upd-icon",
+                        on: {
+                          click: function($event) {
+                            return _vm.getSubjects()
+                          }
+                        }
+                      },
+                      [_c("md-icon", [_vm._v("cached")])],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "md-table",
+                {
+                  attrs: {
+                    "md-card": "",
+                    "md-sort": "id",
+                    "md-sort-order": "asc",
+                    "md-fixed-header": "",
+                    "md-selected-value": _vm.selected
+                  },
+                  on: {
+                    "md-selected": _vm.onSelect,
+                    "update:mdSelectedValue": function($event) {
+                      _vm.selected = $event
+                    },
+                    "update:md-selected-value": function($event) {
+                      _vm.selected = $event
+                    }
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "md-table-alternate-header",
+                      fn: function(ref) {
+                        var count = ref.count
+                        return _c("md-table-toolbar", {}, [
+                          _c(
+                            "div",
+                            { staticClass: "md-toolbar-section-start" },
+                            [_vm._v(_vm._s(_vm.getAlternateLabel(count)))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "md-toolbar-section-end" },
+                            [
+                              _vm.showEditButton
+                                ? _c(
+                                    "md-button",
+                                    {
+                                      staticClass:
+                                        "md-icon-button md-raised btn-warn",
+                                      attrs: { title: "Изменить выделенный" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.editSelected()
+                                        }
+                                      }
+                                    },
+                                    [_c("md-icon", [_vm._v("create")])],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "md-button",
+                                {
+                                  staticClass:
+                                    "md-icon-button md-raised md-accent",
+                                  attrs: { title: "Удалить выделенное" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.toggleModalSure = true
+                                    }
+                                  }
+                                },
+                                [_c("md-icon", [_vm._v("delete")])],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "md-button",
+                                {
+                                  staticClass: "md-icon-button md-raised",
+                                  attrs: { title: "Сбросить выделение" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.clearSelected()
+                                    }
+                                  }
+                                },
+                                [_c("md-icon", [_vm._v("clear")])],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      }
+                    },
+                    {
+                      key: "md-table-row",
+                      fn: function(ref) {
+                        var item = ref.item
+                        return _c(
+                          "md-table-row",
+                          {
+                            attrs: {
+                              "md-selectable": "multiple",
+                              "md-auto-select": ""
+                            }
+                          },
+                          [
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "ID",
+                                  "md-sort-by": "id",
+                                  "md-numeric": ""
+                                }
+                              },
+                              [_vm._v(_vm._s(item.id))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Наименование",
+                                  "md-sort-by": "name"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.name))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Преподователь",
+                                  "md-sort-by": "professor"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.professor))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Зав. кафедры",
+                                  "md-sort-by": "headOfDepartment"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.headOfDepartment))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Кол-во модулей",
+                                  "md-sort-by": "moduleCount"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.moduleCount))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Кол-во часов",
+                                  "md-sort-by": "hoursCount"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.hoursCount))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Кол-во кредитов",
+                                  "md-sort-by": "creditsCount"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.creditsCount))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-table-cell",
+                              {
+                                attrs: {
+                                  "md-label": "Дата начала",
+                                  "md-sort-by": "dateBegin"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.dateBegin))]
+                            )
+                          ],
+                          1
+                        )
+                      }
+                    }
+                  ]),
+                  model: {
+                    value: _vm.searched,
+                    callback: function($$v) {
+                      _vm.searched = $$v
+                    },
+                    expression: "searched"
+                  }
+                },
+                [
+                  _c(
+                    "md-table-toolbar",
+                    [
+                      _c("h1", { staticClass: "md-title" }),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        {
+                          staticClass: "md-toolbar-section-end",
+                          attrs: { "md-clearable": "" }
+                        },
+                        [
+                          _c("md-input", {
+                            attrs: { placeholder: "Поиск по наименованию.." },
+                            on: { input: _vm.searchOnTable },
+                            model: {
+                              value: _vm.search,
+                              callback: function($$v) {
+                                _vm.search = $$v
+                              },
+                              expression: "search"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm._v(" "),
+                  _c(
+                    "md-table-empty-state",
+                    {
+                      attrs: {
+                        "md-label": "Предметы не найдены",
+                        "md-description":
+                          "Не было найдено ни одного предмета. Измените запрос или создайте новый предмет."
                       }
                     },
                     [
@@ -84164,6 +90560,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Navbar */ "./resources/js/components/Navbar.vue");
 /* harmony import */ var _components_ManageData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ManageData */ "./resources/js/components/ManageData.vue");
 /* harmony import */ var _components_ManageFaculties__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ManageFaculties */ "./resources/js/components/ManageFaculties.vue");
+/* harmony import */ var _components_ManageSpecialities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/ManageSpecialities */ "./resources/js/components/ManageSpecialities.vue");
+/* harmony import */ var _components_ManageGroups__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ManageGroups */ "./resources/js/components/ManageGroups.vue");
+/* harmony import */ var _components_ManageSubjects__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ManageSubjects */ "./resources/js/components/ManageSubjects.vue");
+/* harmony import */ var _components_ManageStudents__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/ManageStudents */ "./resources/js/components/ManageStudents.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -84174,10 +90574,18 @@ Vue.use(vue_material__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 
 
+
+
+
+
 Vue.component('main-page', _components_MainPage__WEBPACK_IMPORTED_MODULE_2__["default"]);
 Vue.component('navbar', _components_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"]);
 Vue.component('manage-data', _components_ManageData__WEBPACK_IMPORTED_MODULE_4__["default"]);
 Vue.component('manage-faculties', _components_ManageFaculties__WEBPACK_IMPORTED_MODULE_5__["default"]);
+Vue.component('manage-specialities', _components_ManageSpecialities__WEBPACK_IMPORTED_MODULE_6__["default"]);
+Vue.component('manage-groups', _components_ManageGroups__WEBPACK_IMPORTED_MODULE_7__["default"]);
+Vue.component('manage-subjects', _components_ManageSubjects__WEBPACK_IMPORTED_MODULE_8__["default"]);
+Vue.component('manage-students', _components_ManageStudents__WEBPACK_IMPORTED_MODULE_9__["default"]);
 var app = new Vue({
   el: '#app'
 });
@@ -84468,6 +90876,354 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageFaculties_vue_vue_type_template_id_fcbc47fc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageFaculties_vue_vue_type_template_id_fcbc47fc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageGroups.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/ManageGroups.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ManageGroups_vue_vue_type_template_id_ec01f9f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageGroups.vue?vue&type=template&id=ec01f9f8& */ "./resources/js/components/ManageGroups.vue?vue&type=template&id=ec01f9f8&");
+/* harmony import */ var _ManageGroups_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageGroups.vue?vue&type=script&lang=js& */ "./resources/js/components/ManageGroups.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ManageGroups_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ManageGroups.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ManageGroups.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ManageGroups_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ManageGroups_vue_vue_type_template_id_ec01f9f8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ManageGroups_vue_vue_type_template_id_ec01f9f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ManageGroups.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageGroups.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/ManageGroups.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageGroups_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageGroups.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageGroups.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageGroups_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageGroups.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/ManageGroups.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageGroups_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageGroups.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageGroups.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageGroups_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageGroups_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageGroups_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageGroups_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageGroups_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageGroups.vue?vue&type=template&id=ec01f9f8&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/ManageGroups.vue?vue&type=template&id=ec01f9f8& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageGroups_vue_vue_type_template_id_ec01f9f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageGroups.vue?vue&type=template&id=ec01f9f8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageGroups.vue?vue&type=template&id=ec01f9f8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageGroups_vue_vue_type_template_id_ec01f9f8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageGroups_vue_vue_type_template_id_ec01f9f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageSpecialities.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/ManageSpecialities.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ManageSpecialities_vue_vue_type_template_id_a1b5df3a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageSpecialities.vue?vue&type=template&id=a1b5df3a& */ "./resources/js/components/ManageSpecialities.vue?vue&type=template&id=a1b5df3a&");
+/* harmony import */ var _ManageSpecialities_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageSpecialities.vue?vue&type=script&lang=js& */ "./resources/js/components/ManageSpecialities.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ManageSpecialities_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ManageSpecialities.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ManageSpecialities.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ManageSpecialities_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ManageSpecialities_vue_vue_type_template_id_a1b5df3a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ManageSpecialities_vue_vue_type_template_id_a1b5df3a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ManageSpecialities.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageSpecialities.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/ManageSpecialities.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSpecialities_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageSpecialities.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSpecialities.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSpecialities_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageSpecialities.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/ManageSpecialities.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSpecialities_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageSpecialities.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSpecialities.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSpecialities_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSpecialities_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSpecialities_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSpecialities_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSpecialities_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageSpecialities.vue?vue&type=template&id=a1b5df3a&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/ManageSpecialities.vue?vue&type=template&id=a1b5df3a& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSpecialities_vue_vue_type_template_id_a1b5df3a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageSpecialities.vue?vue&type=template&id=a1b5df3a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSpecialities.vue?vue&type=template&id=a1b5df3a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSpecialities_vue_vue_type_template_id_a1b5df3a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSpecialities_vue_vue_type_template_id_a1b5df3a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageStudents.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/ManageStudents.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ManageStudents_vue_vue_type_template_id_6591a6c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageStudents.vue?vue&type=template&id=6591a6c8& */ "./resources/js/components/ManageStudents.vue?vue&type=template&id=6591a6c8&");
+/* harmony import */ var _ManageStudents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageStudents.vue?vue&type=script&lang=js& */ "./resources/js/components/ManageStudents.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ManageStudents_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ManageStudents.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ManageStudents.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ManageStudents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ManageStudents_vue_vue_type_template_id_6591a6c8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ManageStudents_vue_vue_type_template_id_6591a6c8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ManageStudents.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageStudents.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/ManageStudents.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageStudents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageStudents.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageStudents.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageStudents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageStudents.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/ManageStudents.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageStudents_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageStudents.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageStudents.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageStudents_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageStudents_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageStudents_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageStudents_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageStudents_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageStudents.vue?vue&type=template&id=6591a6c8&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/ManageStudents.vue?vue&type=template&id=6591a6c8& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageStudents_vue_vue_type_template_id_6591a6c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageStudents.vue?vue&type=template&id=6591a6c8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageStudents.vue?vue&type=template&id=6591a6c8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageStudents_vue_vue_type_template_id_6591a6c8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageStudents_vue_vue_type_template_id_6591a6c8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageSubjects.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/ManageSubjects.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ManageSubjects_vue_vue_type_template_id_0cb90277___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageSubjects.vue?vue&type=template&id=0cb90277& */ "./resources/js/components/ManageSubjects.vue?vue&type=template&id=0cb90277&");
+/* harmony import */ var _ManageSubjects_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageSubjects.vue?vue&type=script&lang=js& */ "./resources/js/components/ManageSubjects.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ManageSubjects_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ManageSubjects.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ManageSubjects.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ManageSubjects_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ManageSubjects_vue_vue_type_template_id_0cb90277___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ManageSubjects_vue_vue_type_template_id_0cb90277___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ManageSubjects.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageSubjects.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/ManageSubjects.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSubjects_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageSubjects.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSubjects.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSubjects_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageSubjects.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/ManageSubjects.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSubjects_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageSubjects.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSubjects.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSubjects_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSubjects_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSubjects_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSubjects_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSubjects_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ManageSubjects.vue?vue&type=template&id=0cb90277&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/ManageSubjects.vue?vue&type=template&id=0cb90277& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSubjects_vue_vue_type_template_id_0cb90277___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageSubjects.vue?vue&type=template&id=0cb90277& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageSubjects.vue?vue&type=template&id=0cb90277&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSubjects_vue_vue_type_template_id_0cb90277___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSubjects_vue_vue_type_template_id_0cb90277___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
