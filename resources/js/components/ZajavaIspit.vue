@@ -20,11 +20,16 @@
                     </md-field>
                 </div>
                 <div class="col-4 center-button" v-show="subjectIsChosen">
-                    <md-button class="md-dense md-raised md-primary">Генерировать</md-button>
+                    <form action="/generate/xlsx" method="POST">
+                        <input type="hidden" name="_token" :value="csrf">
+                        <input type="text" name="html" v-model="requestTable" style="display:none">
+                        <md-button type="submit" class="md-dense md-raised md-primary" @click="requestTable=$('#tableWrapper').html()">Генерировать</md-button>
+                    </form>
+
                 </div>
             </div>
             <md-card id="tableWrapper">
-                <table id="documentTable">
+                <table id="documentTable" border="1">
                     <thead>
                         <tr class="tr-doc">
                             <th>&nbsp;</th>
@@ -45,9 +50,10 @@
                     <tbody>
 <!--                        tr.tr-doc*45>td*13>{&nbsp;} -->
                         <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+
+                            <td _excel-styles='{"borders":{"outline":{"style":"PhpSpreadsheet_Style_Border::BORDER_THICK", "color":{"rgb":"FFFF0000"}}}}}'>f&nbsp;</td>
+                            <td>d&nbsp;</td>
+                            <td>d&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -731,7 +737,7 @@
         min-height:100vh;
     }
     .tr-doc>td , .tr-doc>th{
-        border: 1px solid grey;
+        border: 1px solid red;
         min-height:100px;
     }
     #documentTable{
@@ -795,12 +801,15 @@
         name: 'ZajavaIspit',
         data () {
             return {
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 groupList:[],
                 groupSubjects:[],
                 chosenSubject:'',
                 chosenGroup:'',
                 groupIsChosen:false,
-                subjectIsChosen:false
+                subjectIsChosen:false,
+                responseXLSX:[],
+                requestTable:''
             }
         },
         methods: {
@@ -819,6 +828,17 @@
                     .catch(e => {
                         this.errors.push(e)
                     });
+            },
+            sendHtml()
+            {
+                axios
+                    .post('/generate/xlsx', {
+                        html: $("#tableWrapper").html()
+                    })
+                    .then(response => (this.responseXLSX.push(response.data)))
+                    .catch(e => {
+                        this.errors.push(e.response.data.errors);
+                    });
             }
         },
         watch: {
@@ -835,6 +855,7 @@
                 if(val!='')
                 {
                     this.subjectIsChosen = true;
+                    this.requestTable = $("#tableWrapper").html();
                 }
             }
         },

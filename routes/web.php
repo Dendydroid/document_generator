@@ -101,6 +101,7 @@ Route::post('/editStudent', 'DataController@editStudent')->name('editStudent');
 
 //END_API_METHODS
 Route::get('/generate/zajavaIspit', 'GeneratorController@getZajavaIspit')->name('getZajavaIspit');
+Route::post('/generate/xlsx', 'GeneratorController@generateXLSX')->name('generateXLSX');
 Route::get('/getSubjectsByGroup/{id}', 'DataController@getSubjectsByGroup')->name('getSubjectsByGroup');
 
 

@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2c251a4-e1cc-4783-b479-dcfda0d73dae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/GeneratorController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/ZajavaIspit.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/generate/zajava_ispit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/generator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/generator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GeneratorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GeneratorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Navbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ZajavaIspit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ZajavaIspit.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -148,6 +148,10 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
       <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/vendor/ticketpark/htmlphpexcel" />
     </include_path>
   </component>
   <component name="ProjectId" id="1PjMQw3bw5MpldAG9qWIqBYZ03T" />
@@ -217,7 +221,8 @@
       <workItem from="1567900567526" duration="2614000" />
       <workItem from="1567941700755" duration="17962000" />
       <workItem from="1567962708537" duration="17321000" />
-      <workItem from="1568550474239" duration="45999000" />
+      <workItem from="1568550474239" duration="46332000" />
+      <workItem from="1568637224218" duration="6658000" />
     </task>
     <task id="LOCAL-00001" summary="Added:&#10;-Register&#10;-Login&#10;-Logout&#10;-Profile&#10;-Change Password&#10;-Remove Account">
       <created>1566408908580</created>
@@ -296,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568597109193</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Ready to make docs">
+      <created>1568601480191</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1568601480191</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,6 +340,7 @@
     <MESSAGE value="Added front end material table for data management&#10;(Faculty)" />
     <MESSAGE value="ADDED FULL FACULTY MANAGEMENT WITH VUE AND MATERIAL DESIGN" />
     <MESSAGE value="Added all data management&#10;add/edit/delete etc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added all data management&#10;add/edit/delete etc" />
+    <MESSAGE value="Ready to make docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ready to make docs" />
   </component>
 </project>

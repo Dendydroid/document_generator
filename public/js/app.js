@@ -5110,6 +5110,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -5119,12 +5125,15 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   name: 'ZajavaIspit',
   data: function data() {
     return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       groupList: [],
       groupSubjects: [],
       chosenSubject: '',
       chosenGroup: '',
       groupIsChosen: false,
-      subjectIsChosen: false
+      subjectIsChosen: false,
+      responseXLSX: [],
+      requestTable: ''
     };
   },
   methods: {
@@ -5145,6 +5154,17 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       })["catch"](function (e) {
         _this2.errors.push(e);
       });
+    },
+    sendHtml: function sendHtml() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/generate/xlsx', {
+        html: $("#tableWrapper").html()
+      }).then(function (response) {
+        return _this3.responseXLSX.push(response.data);
+      })["catch"](function (e) {
+        _this3.errors.push(e.response.data.errors);
+      });
     }
   },
   watch: {
@@ -5157,6 +5177,7 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
     chosenSubject: function chosenSubject(val) {
       if (val != '') {
         this.subjectIsChosen = true;
+        this.requestTable = $("#tableWrapper").html();
       }
     }
   },
@@ -9738,7 +9759,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid grey;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -46611,17 +46632,58 @@ var render = function() {
               },
               [
                 _c(
-                  "md-button",
-                  { staticClass: "md-dense md-raised md-primary" },
-                  [_vm._v("Генерировать")]
+                  "form",
+                  { attrs: { action: "/generate/xlsx", method: "POST" } },
+                  [
+                    _c("input", {
+                      attrs: { type: "hidden", name: "_token" },
+                      domProps: { value: _vm.csrf }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.requestTable,
+                          expression: "requestTable"
+                        }
+                      ],
+                      staticStyle: { display: "none" },
+                      attrs: { type: "text", name: "html" },
+                      domProps: { value: _vm.requestTable },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.requestTable = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "md-button",
+                      {
+                        staticClass: "md-dense md-raised md-primary",
+                        attrs: { type: "submit" },
+                        on: {
+                          click: function($event) {
+                            _vm.requestTable = _vm.$("#tableWrapper").html()
+                          }
+                        }
+                      },
+                      [_vm._v("Генерировать")]
+                    )
+                  ],
+                  1
                 )
-              ],
-              1
+              ]
             )
           ]),
           _vm._v(" "),
           _c("md-card", { attrs: { id: "tableWrapper" } }, [
-            _c("table", { attrs: { id: "documentTable" } }, [
+            _c("table", { attrs: { id: "documentTable", border: "1" } }, [
               _c("thead", [
                 _c("tr", { staticClass: "tr-doc" }, [
                   _c("th", [_vm._v(" ")]),
@@ -46654,11 +46716,20 @@ var render = function() {
               _vm._v(" "),
               _c("tbody", [
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
+                  _c(
+                    "td",
+                    {
+                      attrs: {
+                        "_excel-styles":
+                          '{"borders":{"outline":{"style":"PhpSpreadsheet_Style_Border::BORDER_THICK", "color":{"rgb":"FFFF0000"}}}}}'
+                      }
+                    },
+                    [_vm._v("f ")]
+                  ),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
+                  _c("td", [_vm._v("d ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
+                  _c("td", [_vm._v("d ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
