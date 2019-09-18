@@ -51,7 +51,7 @@
 <!--                        tr.tr-doc*45>td*13>{&nbsp;} -->
                         <tr class="tr-doc">
 
-                            <td _excel-styles='{"borders":{"outline":{"style":"PhpSpreadsheet_Style_Border::BORDER_THICK", "color":{"rgb":"FFFF0000"}}}}}'>f&nbsp;</td>
+                            <td _excel-styles='{"borders":{"outline":{"color":{"argb":"FF0000"},"borderStyle":"PhpSpreadsheet_Style_Border::BORDER_THICK"}}}'>f&nbsp;</td>
                             <td>d&nbsp;</td>
                             <td>d&nbsp;</td>
                             <td>&nbsp;</td>

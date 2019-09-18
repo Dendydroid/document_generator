@@ -46721,7 +46721,7 @@ var render = function() {
                     {
                       attrs: {
                         "_excel-styles":
-                          '{"borders":{"outline":{"style":"PhpSpreadsheet_Style_Border::BORDER_THICK", "color":{"rgb":"FFFF0000"}}}}}'
+                          '{"borders":{"outline":{"color":{"argb":"FF0000"},"borderStyle":"PhpSpreadsheet_Style_Border::BORDER_THICK"}}}'
                       }
                     },
                     [_vm._v("f ")]
