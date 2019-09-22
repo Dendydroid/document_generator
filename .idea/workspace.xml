@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d2c251a4-e1cc-4783-b479-dcfda0d73dae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Vidomist1Mod.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Vidomist2Mod.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/VidomistKR.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/VpiskaOzinok.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/ZvedenaVidomist.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/generate/vidomist_kr.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/generate/vidomist_mod_1.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/generate/vidomist_mod_2.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/generate/vpiska_ozinok.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/generate/zvedena_vidomist.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GeneratorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GeneratorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="d2c251a4-e1cc-4783-b479-dcfda0d73dae" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +214,7 @@
       <workItem from="1568550474239" duration="46332000" />
       <workItem from="1568637224218" duration="6729000" />
       <workItem from="1568839185889" duration="4706000" />
-      <workItem from="1569168452674" duration="2182000" />
+      <workItem from="1569168452674" duration="2448000" />
     </task>
     <task id="LOCAL-00001" summary="Added:&#10;-Register&#10;-Login&#10;-Logout&#10;-Profile&#10;-Change Password&#10;-Remove Account">
       <created>1566408908580</created>
@@ -331,7 +314,28 @@
       <option name="project" value="LOCAL" />
       <updated>1568844045256</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="added files">
+      <created>1569170755327</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1569170755327</updated>
+    </task>
+    <task id="LOCAL-00016" summary="added files222">
+      <created>1569170811313</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1569170811313</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added files333">
+      <created>1569170872755</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1569170872755</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,6 +370,9 @@
     <MESSAGE value="Ready to make docs" />
     <MESSAGE value="in the middle of creating generation" />
     <MESSAGE value="Borders finally work properly on xlsx export" />
-    <option name="LAST_COMMIT_MESSAGE" value="Borders finally work properly on xlsx export" />
+    <MESSAGE value="added files" />
+    <MESSAGE value="added files222" />
+    <MESSAGE value="added files333" />
+    <option name="LAST_COMMIT_MESSAGE" value="added files333" />
   </component>
 </project>
