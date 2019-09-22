@@ -26,6 +26,5 @@
         "vue-waves-button": "^1.0.4",
         "vuetify": "^2.0.12"
     },
-    "dependencies": {
-    }
+    "dependencies": {}
 }
