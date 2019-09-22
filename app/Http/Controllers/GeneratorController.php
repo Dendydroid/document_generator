@@ -29,6 +29,7 @@ class GeneratorController extends Controller
     }
     public function getVidomistMod2(Request $request)
     {
+
         return view('generate.vidomist_mod_2');
     }
 
