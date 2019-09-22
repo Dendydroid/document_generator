@@ -17,6 +17,11 @@ import ManageGroups from './components/ManageGroups';
 import ManageSubjects from './components/ManageSubjects';
 import ManageStudents from './components/ManageStudents';
 import ZajavaIspit from './components/ZajavaIspit';
+import ZvedenaVidomist from './components/ZvedenaVidomist';
+import VpiskaOzinok from './components/VpiskaOzinok';
+import Vidomist1Mod from './components/Vidomist1Mod';
+import Vidomist2Mod from './components/Vidomist2Mod';
+import VidomistKR from './components/VidomistKR';
 
 Vue.component('main-page', MainPage);
 Vue.component('navbar', Navbar);
@@ -27,6 +32,11 @@ Vue.component('manage-groups', ManageGroups);
 Vue.component('manage-subjects', ManageSubjects);
 Vue.component('manage-students', ManageStudents);
 Vue.component('zajava-ispit', ZajavaIspit);
+Vue.component('zvedena-vidomist', ZvedenaVidomist);
+Vue.component('vpiska-ozinok', VpiskaOzinok);
+Vue.component('vidomist-mod-1', Vidomist1Mod);
+Vue.component('vidomist-mod-2', Vidomist2Mod);
+Vue.component('vidomist-kr', VidomistKR);
 
 const app = new Vue({
     el: '#app'

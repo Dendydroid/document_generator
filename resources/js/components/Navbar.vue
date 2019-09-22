@@ -12,7 +12,13 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="generateDropdown">
                         <a class="dropdown-item larafont-navlink-dropdown" href="/generate/zajavaIspit">Заява - іспит</a>
+                        <a class="dropdown-item larafont-navlink-dropdown" href="/generate/zvedenaVidomist">Зведена вiдомiсть</a>
+                        <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vpiskaOzinok">Вписка оцiнок</a>
+                        <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistMod1">Вiдомiсть (модуль 1)</a>
+                        <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistMod2">Вiдомiсть (модуль 2)</a>
+                        <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistKr">Вiдомiсть КР</a>
                     </div>
+
                 </li>
                 <li class="nav-item li-stretch">
                     <a class="nav-link larafont-navlink" href="/manage">База данных</a>

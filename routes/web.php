@@ -101,6 +101,11 @@ Route::post('/editStudent', 'DataController@editStudent')->name('editStudent');
 
 //END_API_METHODS
 Route::get('/generate/zajavaIspit', 'GeneratorController@getZajavaIspit')->name('getZajavaIspit');
+Route::get('/generate/zvedenaVidomist', 'GeneratorController@getZvedenaVidomist')->name('getZvedenaVidomist');
+Route::get('/generate/vpiskaOzinok', 'GeneratorController@getVpiskaOzinok')->name('getVpiskaOzinok');
+Route::get('/generate/vidomistMod1', 'GeneratorController@getVidomistMod1')->name('getVidomistMod1');
+Route::get('/generate/vidomistMod2', 'GeneratorController@getVidomistMod2')->name('getVidomistMod2');
+Route::get('/generate/vidomistKr', 'GeneratorController@getVidomistKr')->name('getVidomistKr');
 Route::post('/generate/xlsx', 'GeneratorController@generateXLSX')->name('generateXLSX');
 Route::get('/getSubjectsByGroup/{id}', 'DataController@getSubjectsByGroup')->name('getSubjectsByGroup');
 
