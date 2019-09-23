@@ -798,7 +798,7 @@
     };
 
     export default {
-        name: 'ZajavaIspit',
+        name: 'VpiskaOzinok',
         data () {
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

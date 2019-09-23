@@ -37,6 +37,7 @@ class GeneratorController extends Controller
         $data = $request->all();
         if(isset($data['html']) && !empty($data['html']))
         {
+
             $html2xlsx = new HtmlPhpExcel($data['html']);
             $html2xlsx->process()->output();
         }

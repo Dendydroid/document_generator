@@ -15,6 +15,7 @@ use Carbon\Carbon;
 
 
 Route::get('/', function (\Illuminate\Http\Request $request){
+    //phpinfo();
     return view('mainPage');
 });
 Route::get('/manage', function(\Illuminate\Http\Request $request){

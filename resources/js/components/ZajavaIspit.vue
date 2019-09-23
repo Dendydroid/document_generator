@@ -28,8 +28,9 @@
 
                 </div>
             </div>
+
             <md-card id="tableWrapper">
-                <table id="documentTable" border="1">
+                <table lang="uk-UK" id="documentTable" border="1">
                     <thead>
                         <tr class="tr-doc">
                             <th>&nbsp;</th>
@@ -50,10 +51,9 @@
                     <tbody>
 <!--                        tr.tr-doc*45>td*13>{&nbsp;} -->
                         <tr class="tr-doc">
-
-                            <td _excel-styles='{"borders":{"outline":{"color":{"argb":"FF0000"},"borderStyle":"PhpSpreadsheet_Style_Border::BORDER_THICK"}}}'>f&nbsp;</td>
-                            <td>d&nbsp;</td>
-                            <td>d&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td> </td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -63,7 +63,7 @@
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td _excel-styles='{"font":{"size":14,"color":{"rgb":"000000"}}}'>(Ф 03.02-80)</td>
                         </tr>
                         <tr class="tr-doc">
                             <td>&nbsp;</td>
@@ -78,7 +78,7 @@
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td _excel-explicit='PhpSpreadsheet_Cell_DataType::TYPE_STRING' lang="uk-UK" _excel-styles='{"font":{"size":14,"color":{"rgb":"000000"}}}'>Декану ФККПІ</td>
                         </tr>
                         <tr class="tr-doc">
                             <td>&nbsp;</td>
@@ -93,7 +93,7 @@
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td _excel-styles='{"font":{"size":14,"color":{"rgb":"000000"}}}'>Азаренко О.В.</td>
                         </tr>
                         <tr class="tr-doc">
                             <td>&nbsp;</td>
@@ -107,23 +107,11 @@
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td>студентів</td>
+                            <td>групи СЗ-221</td>
                         </tr>
                         <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td colspan="13" _excel-styles='{"font":{"size":16,"color":{"rgb":"000000"}, "bold":true, "alignment":{"horizontal":"center"}}'>ЗАЯВА</td>
                         </tr>
                         <tr class="tr-doc">
                             <td>&nbsp;</td>
