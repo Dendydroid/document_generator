@@ -7414,343 +7414,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ZajavaIspit',
+  name: 'VpiskaOzinok',
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -55636,7 +55306,7 @@ var render = function() {
         { staticClass: "p-t-b" },
         [
           _c("p", { staticClass: "display-4 text-center" }, [
-            _vm._v("Заява - іспит")
+            _vm._v("Вписка оцінок")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row pl-3 pr-3 pt-3" }, [
@@ -55777,17 +55447,21 @@ var render = function() {
             _c("table", { attrs: { id: "documentTable", border: "1" } }, [
               _c("thead", [
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("th", [_vm._v(" ")]),
+                  _c("th", [_vm._v("МІНІСТЕРСТВО ОСВІТИ І НАУКИ УКРАЇНИ")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Національний авіайійний університет")]),
+                  _vm._v(" "),
+                  _c("th", [
+                    _vm._v(
+                      "Факультет кібербезпеки, комп'ютерної на програмної інженерії"
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("th"),
                   _vm._v(" "),
-                  _c("th"),
+                  _c("th", [_vm._v("Витяг с завчальної картки")]),
                   _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
+                  _c("th", [_vm._v("студентки  2  курсу АМ-271 групи")]),
                   _vm._v(" "),
                   _c("th"),
                   _vm._v(" "),
@@ -55807,16 +55481,7 @@ var render = function() {
               _vm._v(" "),
               _c("tbody", [
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c(
-                    "td",
-                    {
-                      attrs: {
-                        "_excel-styles":
-                          '{"borders":{"outline":{"color":{"argb":"FF0000"},"borderStyle":"PhpSpreadsheet_Style_Border::BORDER_THICK"}}}'
-                      }
-                    },
-                    [_vm._v("f ")]
-                  ),
+                  _c("th", [_vm._v("Національний авіайійний університет")]),
                   _vm._v(" "),
                   _c("td", [_vm._v("d ")]),
                   _vm._v(" "),
@@ -55832,27 +55497,15 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
+                  _c("th", [
+                    _vm._v(
+                      "Факультет кібербезпеки, комп'ютерної на програмної інженерії"
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
@@ -55872,15 +55525,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
+                  _c("th", [_vm._v("Витяг с завчальної картки")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
@@ -55900,17 +55545,9 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
+                  _c("th", [_vm._v("студентки  2  курсу АМ-271 групи")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
+                  _c("td", [_vm._v("Балан Ярослави Анатоліївни")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
@@ -55938,7 +55575,25 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
+                  _c("td", [_vm._v("ПІБ;")]),
+                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")])
+                ]),
+                _vm._v(" "),
+                _c("tr", { staticClass: "tr-doc" }, [
+                  _c("td", [
+                    _vm._v("Яка навчається за спеціальністю   122Кібербезбека")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      "Адміністративний менеджмент у сфері захисту інформації"
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
@@ -55962,19 +55617,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
+                  _c("td", [_vm._v("(назва спеціальністі)")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
+                  _c("td", [_vm._v("(назва спеціальністі)")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
@@ -55984,14 +55631,6 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -56028,54 +55667,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -56112,54 +55707,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -56196,54 +55747,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -56280,54 +55787,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -56364,54 +55827,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -56448,54 +55867,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -56532,54 +55907,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -56616,54 +55947,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -56700,54 +55987,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -56784,54 +56027,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
                 _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -56868,14 +56067,6 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
@@ -56896,184 +56087,38 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
+                _c("tr", { staticClass: "tr-doc" }),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
+                _c("tr", { staticClass: "tr-doc" }),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
+                _c("tr", { staticClass: "tr-doc" }),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
+                _c("tr", { staticClass: "tr-doc" }),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
+                _c("tr", { staticClass: "tr-doc" }),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ])
+                _c("tr", { staticClass: "tr-doc" }),
+                _vm._v(" "),
+                _c("tr", { staticClass: "tr-doc" }),
+                _vm._v(" "),
+                _c("tr", { staticClass: "tr-doc" }),
+                _vm._v(" "),
+                _c("tr", { staticClass: "tr-doc" }),
+                _vm._v(" "),
+                _c("tr", { staticClass: "tr-doc" }),
+                _vm._v(" "),
+                _c("tr", { staticClass: "tr-doc" }),
+                _vm._v(" "),
+                _c("tr", { staticClass: "tr-doc" }),
+                _vm._v(" "),
+                _c("tr", { staticClass: "tr-doc" }),
+                _vm._v(" "),
+                _c("tr", { staticClass: "tr-doc" }),
+                _vm._v(" "),
+                _c("tr", { staticClass: "tr-doc" })
               ])
             ])
           ])
@@ -106364,8 +105409,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /projects/DG/document_generator/generator/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /projects/DG/document_generator/generator/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\document_generator\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\document_generator\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
