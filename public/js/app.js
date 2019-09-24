@@ -8100,512 +8100,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -8623,7 +8117,8 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       groupIsChosen: false,
       subjectIsChosen: false,
       responseXLSX: [],
-      requestTable: ''
+      requestTable: '',
+      students: []
     };
   },
   methods: {
@@ -8636,31 +8131,44 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
         _this.errors.push(e);
       });
     },
-    getSubjectsByGroup: function getSubjectsByGroup() {
+    getStudentsByGroup: function getStudentsByGroup() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getSubjectsByGroup/".concat(this.chosenGroup)).then(function (response) {
-        return _this2.groupSubjects = response.data.defaultSubjects;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getStudentsByGroup/".concat(this.chosenGroup)).then(function (response) {
+        return _this2.students = response.data;
       })["catch"](function (e) {
         _this2.errors.push(e);
       });
     },
-    sendHtml: function sendHtml() {
+    getSubjectsByGroup: function getSubjectsByGroup() {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/generate/xlsx', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getSubjectsByGroup/".concat(this.chosenGroup)).then(function (response) {
+        return _this3.groupSubjects = response.data.defaultSubjects;
+      })["catch"](function (e) {
+        _this3.errors.push(e);
+      });
+    },
+    getAllData: function getAllData() {
+      this.getStudentsByGroup();
+      this.getSubjectsByGroup();
+    },
+    sendHtml: function sendHtml() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://127.0.0.1:5000/html2Excel', {
         html: $("#tableWrapper").html()
       }).then(function (response) {
-        return _this3.responseXLSX.push(response.data);
+        return _this4.responseXLSX.push(response.data);
       })["catch"](function (e) {
-        _this3.errors.push(e.response.data.errors);
+        _this4.errors.push(e.response.data.errors);
       });
     }
   },
   watch: {
     chosenGroup: function chosenGroup(val) {
       if (val != '') {
-        this.getSubjectsByGroup();
+        this.getAllData();
         this.groupIsChosen = true;
       }
     },
@@ -14199,7 +13707,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n", ""]);
 
 // exports
 
@@ -57204,13 +56712,13 @@ var render = function() {
               [
                 _c(
                   "form",
-                  { attrs: { action: "/generate/xlsx", method: "POST" } },
+                  {
+                    attrs: {
+                      action: "http://127.0.0.1:5000/html2Excel",
+                      method: "POST"
+                    }
+                  },
                   [
-                    _c("input", {
-                      attrs: { type: "hidden", name: "_token" },
-                      domProps: { value: _vm.csrf }
-                    }),
-                    _vm._v(" "),
                     _c("input", {
                       directives: [
                         {
@@ -57254,1319 +56762,585 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("md-card", { attrs: { id: "tableWrapper" } }, [
-            _c(
-              "table",
-              { attrs: { lang: "uk-UK", id: "documentTable", border: "1" } },
-              [
-                _c("thead", [
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("th", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("th"),
-                    _vm._v(" "),
-                    _c("th"),
-                    _vm._v(" "),
-                    _c("th"),
-                    _vm._v(" "),
-                    _c("th"),
-                    _vm._v(" "),
-                    _c("th"),
-                    _vm._v(" "),
-                    _c("th"),
-                    _vm._v(" "),
-                    _c("th"),
-                    _vm._v(" "),
-                    _c("th"),
-                    _vm._v(" "),
-                    _c("th"),
-                    _vm._v(" "),
-                    _c("th"),
-                    _vm._v(" "),
-                    _c("th"),
-                    _vm._v(" "),
-                    _c("th")
-                  ])
+            _c("table", { attrs: { lang: "uk-UK", id: "documentTable" } }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td"),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("(Ф 03.02-80)")])
                 ]),
                 _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        attrs: {
-                          "_excel-styles":
-                            '{"font":{"size":14,"color":{"rgb":"000000"}}}'
-                        }
+                _c("tr", [
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Декану ФККПІ")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Азаренко О.В.")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "right" } }, [
+                    _vm._v("студентів")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("групи СЗ-221")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "font-weight": "800"
                       },
-                      [_vm._v("(Ф 03.02-80)")]
-                    )
-                  ]),
+                      attrs: { colspan: "13" }
+                    },
+                    [_vm._v("ЗАЯВА")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        attrs: {
-                          "_excel-explicit":
-                            "PhpSpreadsheet_Cell_DataType::TYPE_STRING",
-                          lang: "uk-UK",
-                          "_excel-styles":
-                            '{"font":{"size":14,"color":{"rgb":"000000"}}}'
-                        }
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticStyle: { "text-align": "center" },
+                      attrs: { colspan: "13" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                без порушень встановлених термінів і позитивної підсумкової семестрової модульної рейтингової оцінки,"
+                      ),
+                      _c("br"),
+                      _vm._v(
+                        "\n                                просимо Вашого дозволу на звільнення нас від складання семестрового екзамену з даної дисципліни"
+                      ),
+                      _c("br"),
+                      _vm._v(
+                        "\n                                провідний викладач ______________________________________ і зарахування відповідної"
+                      ),
+                      _c("br"),
+                      _vm._v(
+                        "\n                                підсумкової семестрової рейтингової оцінки.\n                            "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticStyle: { "text-align": "center" },
+                      attrs: { colspan: "13" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                У зв’язку з отриманням у ___-му семестрі 2018/2019 навчального року позитивних підсумкових"
+                      ),
+                      _c("br"),
+                      _vm._v(
+                        "\n                                модульних рейтингових оцінок з усіх ____ модулів дисципліни _________________________________"
+                      ),
+                      _c("br"),
+                      _vm._v(
+                        "\n                                _______________________________________________________________________________\n                            "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
                       },
-                      [_vm._v("Декану ФККПІ")]
-                    )
-                  ]),
+                      attrs: { rowspan: "3" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                № п/п\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        attrs: {
-                          "_excel-styles":
-                            '{"font":{"size":14,"color":{"rgb":"000000"}}}'
-                        }
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
                       },
-                      [_vm._v("Азаренко О.В.")]
-                    )
-                  ]),
+                      attrs: { rowspan: "3" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Прізвище та ініціали студента\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("студентів")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("групи СЗ-221")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c(
-                      "td",
-                      {
-                        attrs: {
-                          colspan: "13",
-                          "_excel-styles":
-                            '{"font":{"size":16,"color":{"rgb":"000000"}, "bold":true, "alignment":{"horizontal":"center"}}'
-                        }
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
                       },
-                      [_vm._v("ЗАЯВА")]
-                    )
-                  ]),
+                      attrs: { colspan: "10" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Рейтингова оцінка\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      },
+                      attrs: { rowspan: "3" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Підпис студента\n                            "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      },
+                      attrs: { colspan: "3" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Підсумкова модульна (бали)\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      },
+                      attrs: { colspan: "2" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Підсумкова семестрова модульна рейтингова оцінка\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      },
+                      attrs: { colspan: "2" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Екзаменаційна\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      },
+                      attrs: { colspan: "2" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Підсумкова семестрова рейтингова оцінка\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c("td", [_c("br"), _vm._v(" ")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Мод. №1\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Мод. №2\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Мод. №3\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Бали\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Націон. шкала\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Бали\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Націон. шкала\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Бали\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Націон. шкала\n                            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", { staticClass: "tr-doc" }, [
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(" ")])
-                  ])
+                  _c(
+                    "td",
+                    {
+                      staticStyle: {
+                        "text-align": "center",
+                        "border-left": "3px solid black",
+                        "border-right": "3px solid black",
+                        "border-top": "3px solid black",
+                        "border-bottom": "3px solid black"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Шкала ECTS\n                            "
+                      )
+                    ]
+                  )
                 ])
-              ]
-            )
+              ])
+            ])
           ])
         ],
         1

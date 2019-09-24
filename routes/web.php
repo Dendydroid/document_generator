@@ -109,7 +109,7 @@ Route::get('/generate/vidomistMod2', 'GeneratorController@getVidomistMod2')->nam
 Route::get('/generate/vidomistKr', 'GeneratorController@getVidomistKr')->name('getVidomistKr');
 Route::post('/generate/xlsx', 'GeneratorController@generateXLSX')->name('generateXLSX');
 Route::get('/getSubjectsByGroup/{id}', 'DataController@getSubjectsByGroup')->name('getSubjectsByGroup');
-
+Route::get('/getStudentsByGroup/{id}', 'DataController@getStudentsByGroup')->name('getStudentsByGroup');
 
 
 //TEST ROUTES

@@ -20,8 +20,7 @@
                     </md-field>
                 </div>
                 <div class="col-4 center-button" v-show="subjectIsChosen">
-                    <form action="/generate/xlsx" method="POST">
-                        <input type="hidden" name="_token" :value="csrf">
+                    <form action="http://127.0.0.1:5000/html2Excel" method="POST">
                         <input type="text" name="html" v-model="requestTable" style="display:none">
                         <md-button type="submit" class="md-dense md-raised md-primary" @click="requestTable=$('#tableWrapper').html()">Генерировать</md-button>
                     </form>
@@ -30,9 +29,9 @@
             </div>
 
             <md-card id="tableWrapper">
-                <table lang="uk-UK" id="documentTable" border="1">
+                <table lang="uk-UK" id="documentTable">
                     <thead>
-                        <tr class="tr-doc">
+                        <tr>
                             <th>&nbsp;</th>
                             <th></th>
                             <th></th>
@@ -50,22 +49,23 @@
                     </thead>
                     <tbody>
 <!--                        tr.tr-doc*45>td*13>{&nbsp;} -->
-                        <tr class="tr-doc">
+<!-- <td rotate class="rotate" style="text-align:center;">ContentContentContentContentContent</td> -->
+                        <tr>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td> </td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td></td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td _excel-styles='{"font":{"size":14,"color":{"rgb":"000000"}}}'>(Ф 03.02-80)</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>(Ф 03.02-80)</td>
                         </tr>
-                        <tr class="tr-doc">
+                        <tr>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -78,9 +78,9 @@
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td _excel-explicit='PhpSpreadsheet_Cell_DataType::TYPE_STRING' lang="uk-UK" _excel-styles='{"font":{"size":14,"color":{"rgb":"000000"}}}'>Декану ФККПІ</td>
+                            <td>Декану ФККПІ</td>
                         </tr>
-                        <tr class="tr-doc">
+                        <tr>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -93,9 +93,9 @@
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td _excel-styles='{"font":{"size":14,"color":{"rgb":"000000"}}}'>Азаренко О.В.</td>
+                            <td>Азаренко О.В.</td>
                         </tr>
-                        <tr class="tr-doc">
+                        <tr>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -107,28 +107,13 @@
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td>студентів</td>
+                            <td style="text-align:right">студентів</td>
                             <td>групи СЗ-221</td>
                         </tr>
-                        <tr class="tr-doc">
-                            <td colspan="13" _excel-styles='{"font":{"size":16,"color":{"rgb":"000000"}, "bold":true, "alignment":{"horizontal":"center"}}'>ЗАЯВА</td>
+                        <tr>
+                            <td colspan="13" style="text-align:center;font-weight:800;">ЗАЯВА</td>
                         </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
+                        <tr>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -143,576 +128,84 @@
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                         </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                        <tr>
+                            <td colspan="13" style="text-align:center">
+                                без порушень встановлених термінів і позитивної підсумкової семестрової модульної рейтингової оцінки,<br>
+                                просимо Вашого дозволу на звільнення нас від складання семестрового екзамену з даної дисципліни<br>
+                                провідний викладач ______________________________________ і зарахування відповідної<br>
+                                підсумкової семестрової рейтингової оцінки.
+                            </td>
                         </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                        <tr>
+                            <td colspan="13" style="text-align:center">
+                                У зв’язку з отриманням у ___-му семестрі 2018/2019 навчального року позитивних підсумкових<br>
+                                модульних рейтингових оцінок з усіх ____ модулів дисципліни _________________________________<br>
+                                _______________________________________________________________________________
+                            </td>
                         </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                        <tr>
+                            <td rowspan="3" style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                № п/п
+                            </td>
+                            <td rowspan="3" style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Прізвище та ініціали студента
+                            </td>
+                            <td colspan="10" style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Рейтингова оцінка
+                            </td>
+                            <td rowspan="3" style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Підпис студента
+                            </td>
+
                         </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                        <tr>
+                            <td colspan="3" style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Підсумкова модульна (бали)
+                            </td>
+                            <td colspan="2" style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Підсумкова семестрова модульна рейтингова оцінка
+                            </td>
+                            <td colspan="2" style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Екзаменаційна
+                            </td>
+                            <td colspan="2" style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Підсумкова семестрова рейтингова оцінка
+                            </td>
+                            <td><br>&nbsp;</td>
                         </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                        <tr >
+                            <td  style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Мод. №1
+                            </td>
+                            <td  style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Мод. №2
+                            </td>
+                            <td  style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Мод. №3
+                            </td>
+                            <td style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Бали
+                            </td>
+                            <td style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Націон. шкала
+                            </td>
+                            <td  style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Бали
+                            </td>
+                            <td  style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Націон. шкала
+                            </td>
+                            <td style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Бали
+                            </td>
+                            <td style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Націон. шкала
+                            </td>
+                            <td  style="text-align:center;border-left:3px solid black;border-right:3px solid black;border-top:3px solid black;border-bottom:3px solid black;">
+                                Шкала ECTS
+                            </td>
                         </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="tr-doc">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
+
 
                     </tbody>
                 </table>
@@ -723,10 +216,6 @@
 <style>
     #tableWrapper{
         min-height:100vh;
-    }
-    .tr-doc>td , .tr-doc>th{
-        border: 1px solid red;
-        min-height:100px;
     }
     #documentTable{
         width:100%;
@@ -776,8 +265,16 @@
     .md-field.md-select{
         max-width:30%;
     }
+    .rotate {
+        -webkit-writing-mode: vertical-lr;
+        -ms-writing-mode: tb-lr;
+        writing-mode: sideways-lr;
+    }
 </style>
 <script>
+
+
+
     import axios from 'axios';
 
     axios.defaults.headers.common = {
@@ -797,7 +294,8 @@
                 groupIsChosen:false,
                 subjectIsChosen:false,
                 responseXLSX:[],
-                requestTable:''
+                requestTable:'',
+                students:[]
             }
         },
         methods: {
@@ -805,6 +303,14 @@
                 axios
                     .get('/getGroups')
                     .then(response => (this.groupList = response.data))
+                    .catch(e => {
+                        this.errors.push(e)
+                    });
+            },
+            getStudentsByGroup() {
+                axios
+                    .get(`/getStudentsByGroup/${this.chosenGroup}`)
+                    .then(response => (this.students = response.data))
                     .catch(e => {
                         this.errors.push(e)
                     });
@@ -817,10 +323,14 @@
                         this.errors.push(e)
                     });
             },
+            getAllData(){
+                this.getStudentsByGroup();
+                this.getSubjectsByGroup();
+            },
             sendHtml()
             {
                 axios
-                    .post('/generate/xlsx', {
+                    .post('http://127.0.0.1:5000/html2Excel', {
                         html: $("#tableWrapper").html()
                     })
                     .then(response => (this.responseXLSX.push(response.data)))
@@ -834,7 +344,7 @@
             {
                 if(val!='')
                 {
-                    this.getSubjectsByGroup();
+                    this.getAllData();
                     this.groupIsChosen = true;
                 }
             },
@@ -849,6 +359,7 @@
         },
         created () {
             this.loadGroups();
+
         }
     }
 </script>

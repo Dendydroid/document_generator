@@ -633,4 +633,20 @@ class DataController extends Controller
             return $group->getTableArray();
         }
     }
+    public function getStudentsByGroup($group_id)
+    {
+        $students = $this->repoStudent->findAll();
+        $arrStudents = [];
+        /**
+         * @var Student $student
+         */
+        foreach ($students as $student)
+        {
+            if($student->getGroup()->getId() == $group_id)
+            {
+                $arrStudents[] = $student->getTableArray();
+            }
+        }
+        return $arrStudents;
+    }
 }
