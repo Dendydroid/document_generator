@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories;
 use App\Constants;
-use App\Entities\Faculty;
+use App\Entities\Department;
 use App\Entities\Group;
 use App\Entities\Speciality;
 use App\Entities\Student;

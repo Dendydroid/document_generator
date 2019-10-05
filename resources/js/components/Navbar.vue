@@ -27,13 +27,11 @@
                     <a class="nav-link larafont-navlink" href="#">Профиль</a>
                 </li>
                 <li class="nav-item dropdown li-stretch">
-                    <a class="nav-link dropdown-toggle larafont-navlink" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle larafont-navlink" href="#" id="settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Настройки
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item larafont-navlink-dropdown" href="#">Action</a>
-                        <a class="dropdown-item larafont-navlink-dropdown" href="#">Another action</a>
-                        <a class="dropdown-item larafont-navlink-dropdown" href="#">Something else here</a>
+                    <div class="dropdown-menu" aria-labelledby="settings">
+                        <a class="dropdown-item larafont-navlink-dropdown" href="/settings">Основные</a>
                     </div>
                 </li>
             </ul>

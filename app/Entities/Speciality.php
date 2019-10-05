@@ -4,7 +4,7 @@ namespace App\Entities;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Illuminate\Validation\Rules\In;
-use App\Entities\Faculty;
+use App\Entities\Department;
 /**
  * @ORM\Entity(repositoryClass="App\Repositories\SpecialityRepo")
  * @ORM\Table(name="specialities")
@@ -26,14 +26,24 @@ class Speciality {
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $number;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $eduProgram;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $abbreviation;
 
     /**
-     * Many specialities have one faculty. This is the owning side.
-     * @ORM\ManyToOne(targetEntity="Faculty", inversedBy="specialities")
-     * @ORM\JoinColumn(name="facultyId", referencedColumnName="id")
+     * Many specialities have one department. This is the owning side.
+     * @ORM\ManyToOne(targetEntity="Department", inversedBy="specialities")
+     * @ORM\JoinColumn(name="departmentId", referencedColumnName="id")
      */
-    private $faculty;
+    private $department;
 
     /**
      * One speciality has many groups. This is the inverse side.
@@ -94,20 +104,20 @@ class Speciality {
     }
 
     /**
-     * @return Faculty
+     * @return Department
      */
-    public function getFaculty(): Faculty
+    public function getDepartment(): Department
     {
-        return $this->faculty;
+        return $this->department;
     }
 
     /**
-     * @param Faculty $faculty
+     * @param Department $department
      * @return Speciality
      */
-    public function setFaculty(Faculty $faculty): Speciality
+    public function setDepartment(Department $department): Speciality
     {
-        $this->faculty = $faculty;
+        $this->department = $department;
         return $this;
     }
 
@@ -147,6 +157,42 @@ class Speciality {
     }
 
     /**
+     * @return mixed
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param string $number
+     * @return Speciality
+     */
+    public function setNumber(string $number): Speciality
+    {
+        $this->number = $number;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEduProgram(): string
+    {
+        return $this->eduProgram;
+    }
+
+    /**
+     * @param string $eduProgram
+     * @return Speciality
+     */
+    public function setEduProgram(string $eduProgram): Speciality
+    {
+        $this->eduProgram = $eduProgram;
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getTableArray()
@@ -155,9 +201,11 @@ class Speciality {
             "id" => $this->id,
             "fullName" => $this->fullName,
             "abbreviation" => $this->abbreviation,
-            "faculty" => [
-                "id" => $this->faculty->getId(),
-                "fullName" => $this->faculty->getFullName()
+            "number" => $this->number,
+            "eduProgram" => $this->eduProgram,
+            "department" => [
+                "id" => $this->department->getId(),
+                "fullName" => $this->department->getFullName()
             ],
         ];
     }

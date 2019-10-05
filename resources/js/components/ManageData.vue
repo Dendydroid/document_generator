@@ -31,10 +31,10 @@
 
                 </md-ripple>
             </md-card>
-            <md-card md-with-hover class="orange-stress-transparent mt-2" onclick="window.location='/manageFaculties'">
+            <md-card md-with-hover class="orange-stress-transparent mt-2" onclick="window.location='/manageDepartments'">
                 <md-ripple>
                     <md-card-header>
-                        <div class="md-title">Факультеты</div>
+                        <div class="md-title">Кафедры</div>
                         <div class="md-subhead">Добавить / Удалить / Изменить</div>
                     </md-card-header>
 

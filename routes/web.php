@@ -29,7 +29,7 @@ Route::get('/logout', 'UserController@logout')->name('logout');
 Route::get('/profile', 'HomeController@index')->name('profile')->middleware('logged');
 
 
-
+Route::get('/settings', 'HomeController@settings')->name('settings');
 //END_VIEWS
 
 //DATA VIEWS
@@ -38,9 +38,9 @@ Route::get('/manageData', function(\Illuminate\Http\Request $request){
     return view('manageData');
 })->name('manageData')->middleware('logged');
 
-Route::get('/manageFaculties', function(\Illuminate\Http\Request $request){
-    return view('manage.faculties');
-})->name('manageFaculties');
+Route::get('/manageDepartments', function(\Illuminate\Http\Request $request){
+    return view('manage.departments');
+})->name('manageDepartments');
 
 Route::get('/manageSpecialities', function(\Illuminate\Http\Request $request){
     return view('manage.specialities');
@@ -73,10 +73,10 @@ Route::post('/removeUser', 'UserController@removeUser')->name('removeUser')->mid
 
 
 
-Route::get('/getFaculties', 'DataController@getFacultyData')->name('getFaculties');
-Route::post('/createFaculty', 'DataController@createFaculty')->name('createFaculty');
-Route::post('/deleteFaculties', 'DataController@deleteFaculties')->name('deleteFaculties');
-Route::post('/editFaculty', 'DataController@editFaculty')->name('editFaculty');
+Route::get('/getDepartments', 'DataController@getDepartmentData')->name('getDepartments');
+Route::post('/createDepartment', 'DataController@createDepartment')->name('createDepartment');
+Route::post('/deleteDepartments', 'DataController@deleteDepartments')->name('deleteDepartments');
+Route::post('/editDepartment', 'DataController@editDepartment')->name('editDepartment');
 
 Route::get('/getSpecialities', 'DataController@getSpecialityData')->name('getSpecialities');
 Route::post('/createSpeciality', 'DataController@createSpeciality')->name('createSpeciality');

@@ -35,11 +35,21 @@
                         <span class="md-helper-text">Сокращенное имя</span>
                     </md-field>
                     <md-field>
-                        <label>Факультет</label>
-                        <md-select v-model="add_faculty" name="add_faculty" id="add_faculty">
-                            <md-option v-for="faculty in facultyList" :value="faculty.id">{{faculty.fullName}}</md-option>
+                        <label>Номер специальности</label>
+                        <md-input v-model="add_number" maxlength="255"></md-input>
+                        <span class="md-helper-text">Номер специальности</span>
+                    </md-field>
+                    <md-field>
+                        <label>ОПП</label>
+                        <md-input v-model="add_eduProgram" maxlength="255"></md-input>
+                        <span class="md-helper-text">Образовательная программа</span>
+                    </md-field>
+                    <md-field>
+                        <label>Кафедра</label>
+                        <md-select v-model="add_department" name="add_department" id="add_department">
+                            <md-option v-for="department in departmentList" :value="department.id">{{department.fullName}}</md-option>
                         </md-select>
-                        <span class="md-helper-text">Выберите факультет</span>
+                        <span class="md-helper-text">Выберите кафедру</span>
                     </md-field>
                 </div>
                 <div class="buttons pb-3">
@@ -62,11 +72,21 @@
                         <span class="md-helper-text">Сокращенное имя</span>
                     </md-field>
                     <md-field>
-                        <label>Факультет</label>
-                        <md-select v-model="edit_faculty" name="edit_faculty" id="edit_faculty">
-                            <md-option v-for="faculty in facultyList" :value="faculty.id">{{faculty.fullName}}</md-option>
+                        <label>Номер специальности</label>
+                        <md-input v-model="edit_number" maxlength="255"></md-input>
+                        <span class="md-helper-text">Номер специальности</span>
+                    </md-field>
+                    <md-field>
+                        <label>ОПП</label>
+                        <md-input v-model="edit_eduProgram" maxlength="255"></md-input>
+                        <span class="md-helper-text">Образовательная программа</span>
+                    </md-field>
+                    <md-field>
+                        <label>Кафедра</label>
+                        <md-select v-model="edit_department" name="edit_department" id="edit_department">
+                            <md-option v-for="department in departmentList" :value="department.id">{{department.fullName}}</md-option>
                         </md-select>
-                        <span class="md-helper-text">Выберите факультет</span>
+                        <span class="md-helper-text">Выберите кафедру</span>
                     </md-field>
                 </div>
                 <div class="buttons pb-3">
@@ -142,7 +162,9 @@
                         <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
                         <md-table-cell md-label="Наименование" md-sort-by="fullName">{{ item.fullName }}</md-table-cell>
                         <md-table-cell md-label="Аббревиатура" md-sort-by="abbreviation">{{ item.abbreviation }}</md-table-cell>
-                        <md-table-cell md-label="Факультет" md-sort-by="faculty.fullName">{{ item.faculty.fullName }}</md-table-cell>
+                        <md-table-cell md-label="Кафедра" md-sort-by="department.fullName">{{ item.department.fullName }}</md-table-cell>
+                        <md-table-cell md-label="Номер" md-sort-by="department.number">{{ item.number }}</md-table-cell>
+                        <md-table-cell md-label="ОПП" md-sort-by="department.eduProgram">{{ item.eduProgram }}</md-table-cell>
                     </md-table-row>
 
                 </md-table>
@@ -231,13 +253,17 @@
                 },
                 searchColumn: 'fullName',
                 errorMessage: '',
-                facultyList:'',
+                departmentList:'',
                 editId: '',
                 removeConfirm: false,
                 add_fullName: '',
                 add_abbreviation: '',
-                add_faculty: '',
-                edit_faculty: '',
+                add_department: '',
+                add_number: '',
+                add_eduProgram: '',
+                edit_number: '',
+                edit_eduProgram: '',
+                edit_department: '',
                 edit_fullName: '',
                 edit_abbreviation: '',
                 toggleModalAdd: false,
@@ -287,10 +313,10 @@
             clearSelected() {
                 this.selected = [];
             },
-            loadFaculties() {
+            loadDepartments() {
                 axios
-                    .get('/getFaculties')
-                    .then(response => (this.facultyList = response.data))
+                    .get('/getDepartments')
+                    .then(response => (this.departmentList = response.data))
                     .catch(e => {
                         this.errors.push(e)
                     });
@@ -316,7 +342,9 @@
                     .post('/createSpeciality', {
                         fullName: this.add_fullName,
                         abbreviation: this.add_abbreviation,
-                        faculty: this.add_faculty,
+                        department: this.add_department,
+                        number: this.add_number,
+                        eduProgram: this.add_eduProgram,
                     })
                     .then(response => (this.dataSet.push(response.data)))
                     .catch(e => {
@@ -330,7 +358,9 @@
                         id: this.editId,
                         fullName: this.edit_fullName,
                         abbreviation: this.edit_abbreviation,
-                        faculty: this.edit_faculty,
+                        department: this.edit_department,
+                        number: this.edit_number,
+                        eduProgram: this.edit_eduProgram,
                     })
                     .then(response => {
                         this.dataSet.forEach(function(el,index,arr){
@@ -338,7 +368,9 @@
                             {
                                 arr[index].fullName = response.data.fullName;
                                 arr[index].abbreviation = response.data.abbreviation;
-                                arr[index].faculty = response.data.faculty;
+                                arr[index].department = response.data.department;
+                                arr[index].number = response.data.number;
+                                arr[index].eduProgram = response.data.eduProgram;
                             }
                         });
                     })
@@ -348,6 +380,8 @@
                 this.editId = '';
                 this.edit_fullName = '';
                 this.edit_abbreviation = '';
+                this.edit_number = '';
+                this.edit_eduProgram = '';
                 this.clearSelected();
                 this.toggleModalEdit=false;
             },
@@ -379,7 +413,9 @@
                     let element = this.selected[0];
                     this.edit_fullName = element.fullName;
                     this.edit_abbreviation = element.abbreviation;
-                    this.edit_faculty = element.faculty.id;
+                    this.edit_department = element.department.id;
+                    this.edit_number = element.number;
+                    this.edit_eduProgram = element.eduProgram;
                     this.editId = element.id;
                     this.toggleModalEdit = true;
                 }
@@ -403,7 +439,7 @@
         },
         created () {
             this.getSpecialities();
-            this.loadFaculties();
+            this.loadDepartments();
         }
     }
 </script>

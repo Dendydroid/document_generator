@@ -235,7 +235,7 @@ class Speciality extends \App\Entities\Speciality implements \Doctrine\ORM\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getFaculty(): \App\Entities\Faculty
+    public function getFaculty(): \App\Entities\Department
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFaculty', []);
@@ -246,7 +246,7 @@ class Speciality extends \App\Entities\Speciality implements \Doctrine\ORM\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setFaculty(\App\Entities\Faculty $faculty): \App\Entities\Speciality
+    public function setFaculty(\App\Entities\Department $faculty): \App\Entities\Speciality
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFaculty', [$faculty]);

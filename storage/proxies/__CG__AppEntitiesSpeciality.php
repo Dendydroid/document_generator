@@ -64,10 +64,10 @@ class Speciality extends \App\Entities\Speciality implements \Doctrine\ORM\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'fullName', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'abbreviation', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'faculty', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'groups'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'fullName', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'number', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'eduProgram', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'abbreviation', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'department', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'groups'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'fullName', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'abbreviation', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'faculty', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'groups'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'fullName', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'number', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'eduProgram', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'abbreviation', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'department', '' . "\0" . 'App\\Entities\\Speciality' . "\0" . 'groups'];
     }
 
     /**
@@ -235,23 +235,23 @@ class Speciality extends \App\Entities\Speciality implements \Doctrine\ORM\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getFaculty(): \App\Entities\Faculty
+    public function getDepartment(): \App\Entities\Department
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFaculty', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDepartment', []);
 
-        return parent::getFaculty();
+        return parent::getDepartment();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setFaculty(\App\Entities\Faculty $faculty): \App\Entities\Speciality
+    public function setDepartment(\App\Entities\Department $department): \App\Entities\Speciality
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFaculty', [$faculty]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDepartment', [$department]);
 
-        return parent::setFaculty($faculty);
+        return parent::setDepartment($department);
     }
 
     /**
@@ -296,6 +296,50 @@ class Speciality extends \App\Entities\Speciality implements \Doctrine\ORM\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'addGroup', [$group]);
 
         return parent::addGroup($group);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getNumber()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNumber', []);
+
+        return parent::getNumber();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setNumber(string $number): \App\Entities\Speciality
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNumber', [$number]);
+
+        return parent::setNumber($number);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEduProgram(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEduProgram', []);
+
+        return parent::getEduProgram();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEduProgram(string $eduProgram): \App\Entities\Speciality
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEduProgram', [$eduProgram]);
+
+        return parent::setEduProgram($eduProgram);
     }
 
     /**

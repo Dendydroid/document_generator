@@ -64,10 +64,10 @@ class Group extends \App\Entities\Group implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'speciality', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'speciality', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorPhone', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanPhone'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'speciality', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'speciality', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorPhone', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanPhone'];
     }
 
     /**
@@ -318,6 +318,94 @@ class Group extends \App\Entities\Group implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getStudentsCollection', []);
 
         return parent::getStudentsCollection();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCuratorFIO(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCuratorFIO', []);
+
+        return parent::getCuratorFIO();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCuratorFIO(string $curatorFIO): \App\Entities\Group
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCuratorFIO', [$curatorFIO]);
+
+        return parent::setCuratorFIO($curatorFIO);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCuratorPhone(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCuratorPhone', []);
+
+        return parent::getCuratorPhone();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCuratorPhone(string $curatorPhone): \App\Entities\Group
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCuratorPhone', [$curatorPhone]);
+
+        return parent::setCuratorPhone($curatorPhone);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHeadmanFIO(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHeadmanFIO', []);
+
+        return parent::getHeadmanFIO();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHeadmanFIO(string $headmanFIO): \App\Entities\Group
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setHeadmanFIO', [$headmanFIO]);
+
+        return parent::setHeadmanFIO($headmanFIO);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHeadmanPhone(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHeadmanPhone', []);
+
+        return parent::getHeadmanPhone();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHeadmanPhone(string $headmanPhone): \App\Entities\Group
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setHeadmanPhone', [$headmanPhone]);
+
+        return parent::setHeadmanPhone($headmanPhone);
     }
 
     /**

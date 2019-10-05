@@ -46,6 +46,26 @@ class Group {
     private $defaultSubjects;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $curatorFIO;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $curatorPhone;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $headmanFIO;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $headmanPhone;
+
+    /**
      * Group constructor.
      */
     public function __construct()
@@ -165,6 +185,78 @@ class Group {
     }
 
     /**
+     * @return string
+     */
+    public function getCuratorFIO(): string
+    {
+        return $this->curatorFIO;
+    }
+
+    /**
+     * @param string $curatorFIO
+     * @return Group
+     */
+    public function setCuratorFIO(string $curatorFIO): Group
+    {
+        $this->curatorFIO = $curatorFIO;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCuratorPhone(): string
+    {
+        return $this->curatorPhone;
+    }
+
+    /**
+     * @param string $curatorPhone
+     * @return Group
+     */
+    public function setCuratorPhone(string $curatorPhone): Group
+    {
+        $this->curatorPhone = $curatorPhone;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeadmanFIO(): string
+    {
+        return $this->headmanFIO;
+    }
+
+    /**
+     * @param string $headmanFIO
+     * @return Group
+     */
+    public function setHeadmanFIO(string $headmanFIO): Group
+    {
+        $this->headmanFIO = $headmanFIO;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeadmanPhone(): string
+    {
+        return $this->headmanPhone;
+    }
+
+    /**
+     * @param string $headmanPhone
+     * @return Group
+     */
+    public function setHeadmanPhone(string $headmanPhone): Group
+    {
+        $this->headmanPhone = $headmanPhone;
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getTableArray()
@@ -184,6 +276,14 @@ class Group {
             "speciality" => [
                 "id" => $this->speciality->getId(),
                 "fullName" => $this->speciality->getFullName(),
+            ],
+            "curator" => [
+                "fio" => $this->curatorFIO,
+                "phone" => $this->curatorPhone
+            ],
+            "headman" => [
+                "fio" => $this->headmanFIO,
+                "phone" => $this->headmanPhone
             ],
             "defaultSubjects" => $defaultSubjectArr
         ];

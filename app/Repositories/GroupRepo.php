@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories;
 use App\Constants;
-use App\Entities\Faculty;
+use App\Entities\Department;
 use App\Entities\Group;
 use App\Entities\Speciality;
 use App\Entities\User;
@@ -86,6 +86,24 @@ class GroupRepo extends EntityRepository {
 
             $group->setIdName($data['idName'])
                 ->setSpeciality($speciality);
+
+            if(isset($data['curatorFIO']) && !empty($data['curatorFIO']))
+            {
+                $group->setCuratorFIO($data['curatorFIO']);
+            }
+            if(isset($data['curatorPhone']) && !empty($data['curatorPhone']))
+            {
+                $group->setCuratorPhone($data['curatorPhone']);
+            }
+            if(isset($data['headmanFIO']) && !empty($data['headmanFIO']))
+            {
+                $group->setHeadmanFIO($data['headmanFIO']);
+            }
+            if(isset($data['headmanPhone']) && !empty($data['headmanPhone']))
+            {
+                $group->setHeadmanPhone($data['headmanPhone']);
+            }
+
             $this->_em->persist($group);
             $this->_em->flush();
 
@@ -118,6 +136,23 @@ class GroupRepo extends EntityRepository {
 
             $group->setIdName($data['idName'])
                  ->setSpeciality($speciality);
+
+            if(isset($data['curatorFIO']) && !empty($data['curatorFIO']))
+            {
+                $group->setCuratorFIO($data['curatorFIO']);
+            }
+            if(isset($data['curatorPhone']) && !empty($data['curatorPhone']))
+            {
+                $group->setCuratorPhone($data['curatorPhone']);
+            }
+            if(isset($data['headmanFIO']) && !empty($data['headmanFIO']))
+            {
+                $group->setHeadmanFIO($data['headmanFIO']);
+            }
+            if(isset($data['headmanPhone']) && !empty($data['headmanPhone']))
+            {
+                $group->setHeadmanPhone($data['headmanPhone']);
+            }
 
             $this->_em->persist($group);
             $this->_em->flush();

@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories;
 use App\Constants;
-use App\Entities\Faculty;
+use App\Entities\Department;
 use App\Entities\Speciality;
 use App\Entities\User;
 use Doctrine\ORM\EntityManager;
@@ -34,7 +34,9 @@ class SpecialityRepo extends EntityRepository {
         $validator = Validator::make($request, [
             "fullName" => "required|max:255",
             "abbreviation" => "required|max:255",
-            "faculty" => "required|numeric",
+            "department" => "required|numeric",
+            "number" => "required|max:255",
+            "eduProgram" => "required|max:255",
         ]);
 
         return $validator;
@@ -67,12 +69,12 @@ class SpecialityRepo extends EntityRepository {
 
     /**
      * @param array $data
-     * @param Faculty $faculty
+     * @param Department $department
      * @return Speciality|array
      * @throws ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function createSpeciality(array $data,Faculty $faculty)
+    public function createSpeciality(array $data, Department $department)
     {
         $errors = ["errors" => null];
         $validation = $this->validateSpeciality($data);
@@ -81,7 +83,9 @@ class SpecialityRepo extends EntityRepository {
             $speciality = new Speciality();
             $speciality->setFullName($data['fullName'])
                 ->setAbbreviation($data['abbreviation'])
-                ->setFaculty($faculty);
+                ->setNumber($data['number'])
+                ->setEduProgram($data['eduProgram'])
+                ->setDepartment($department);
             $this->_em->persist($speciality);
             $this->_em->flush();
 
@@ -93,12 +97,12 @@ class SpecialityRepo extends EntityRepository {
 
     /**
      * @param $data
-     * @param Faculty $faculty
+     * @param Department $department
      * @return array|object|null
      * @throws ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function editSpeciality($data,Faculty $faculty)
+    public function editSpeciality($data, Department $department)
     {
         $errors = ["errors" => null];
         $validation = $this->validateSpeciality($data);
@@ -108,7 +112,9 @@ class SpecialityRepo extends EntityRepository {
             $speciality = $this->find($data['id']);
             $speciality->setFullName($data['fullName'])
                 ->setAbbreviation($data['abbreviation'])
-                ->setFaculty($faculty);
+                ->setNumber($data['number'])
+                ->setEduProgram($data['eduProgram'])
+                ->setDepartment($department);
             $this->_em->persist($speciality);
             $this->_em->flush();
 

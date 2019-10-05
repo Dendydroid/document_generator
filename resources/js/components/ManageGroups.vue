@@ -42,6 +42,27 @@
                             <md-option v-for="subject in subjectList" :value="subject.id">{{subject.name}}</md-option>
                         </md-select>
                     </md-field>
+                    <md-field>
+                        <label>Куратор</label>
+                        <md-input v-model="add_curatorFIO" maxlength="255" ></md-input>
+                        <span class="md-helper-text">ФИО куратора группы <small>(не обязательное)</small></span>
+                    </md-field>
+                    <md-field>
+                        <label>Номер куратора</label>
+                        <md-input v-model="add_curatorPhone" maxlength="255" ></md-input>
+                        <span class="md-helper-text">Номер телефона куратора группы <small>(не обязательное)</small></span>
+                    </md-field>
+                    <md-field>
+                        <label>Командир</label>
+                        <md-input v-model="add_headmanFIO" maxlength="255" ></md-input>
+                        <span class="md-helper-text">ФИО командира группы <small>(не обязательное)</small></span>
+                    </md-field>
+                    <md-field>
+                        <label>Номер командира</label>
+                        <md-input v-model="add_headmanPhone" maxlength="255" ></md-input>
+                        <span class="md-helper-text">Номер телефона командира группы <small>(не обязательное)</small></span>
+                    </md-field>
+
                 </div>
                 <div class="buttons pb-3">
                     <md-button class="md-primary md-raised" @click="createGroup()">Сохранить</md-button>
@@ -69,6 +90,26 @@
                         <md-select v-model="edit_default_subjects" multiple>
                             <md-option v-for="subject in subjectList" :value="subject.id">{{subject.name}}</md-option>
                         </md-select>
+                    </md-field>
+                    <md-field>
+                        <label>Куратор</label>
+                        <md-input v-model="edit_curatorFIO" maxlength="255" ></md-input>
+                        <span class="md-helper-text">ФИО куратора группы <small>(не обязательное)</small></span>
+                    </md-field>
+                    <md-field>
+                        <label>Номер куратора</label>
+                        <md-input v-model="edit_curatorPhone" maxlength="255" ></md-input>
+                        <span class="md-helper-text">Номер телефона куратора группы <small>(не обязательное)</small></span>
+                    </md-field>
+                    <md-field>
+                        <label>Командир</label>
+                        <md-input v-model="edit_headmanFIO" maxlength="255" ></md-input>
+                        <span class="md-helper-text">ФИО командира группы <small>(не обязательное)</small></span>
+                    </md-field>
+                    <md-field>
+                        <label>Номер командира</label>
+                        <md-input v-model="edit_headmanPhone" maxlength="255" ></md-input>
+                        <span class="md-helper-text">Номер телефона командира группы <small>(не обязательное)</small></span>
                     </md-field>
                 </div>
                 <div class="buttons pb-3">
@@ -239,9 +280,17 @@
                 removeConfirm: false,
                 add_id_name: '',
                 add_speciality: '',
+                add_curatorFIO: '',
+                add_curatorPhone: '',
+                add_headmanFIO: '',
+                add_headmanPhone: '',
                 add_default_subjects: [],
                 edit_id_name: '',
                 edit_speciality: '',
+                edit_curatorFIO: '',
+                edit_curatorPhone: '',
+                edit_headmanFIO: '',
+                edit_headmanPhone: '',
                 edit_default_subjects: [],
                 toggleModalAdd: false,
                 toggleModalEdit: false,
@@ -327,6 +376,10 @@
                         idName: this.add_id_name,
                         speciality: this.add_speciality,
                         defaultSubjects: this.add_default_subjects,
+                        curatorFIO: this.add_curatorFIO,
+                        curatorPhone: this.add_curatorPhone,
+                        headmanFIO: this.add_headmanFIO,
+                        headmanPhone: this.add_headmanPhone,
                     })
                     .then(response => (this.dataSet.push(response.data)))
                     .catch(e => {
@@ -341,6 +394,10 @@
                         idName: this.edit_id_name,
                         speciality: this.edit_speciality,
                         defaultSubjects: this.edit_default_subjects,
+                        curatorFIO: this.edit_curatorFIO,
+                        curatorPhone: this.edit_curatorPhone,
+                        headmanFIO: this.edit_headmanFIO,
+                        headmanPhone: this.edit_headmanPhone,
                     })
                     .then(response => {
                         this.dataSet.forEach(function(el,index,arr){
@@ -349,6 +406,10 @@
                                 arr[index].idName = response.data.idName;
                                 arr[index].speciality = response.data.speciality;
                                 arr[index].defaultSubjects = response.data.defaultSubjects;
+                                arr[index].headmanFIO = response.data.headman.fio;
+                                arr[index].headmanPhone = response.data.headman.phone;
+                                arr[index].curatorFIO = response.data.curator.fio;
+                                arr[index].curatorPhone = response.data.curator.phone;
                             }
                         });
                     })
@@ -359,6 +420,10 @@
                 this.edit_id_name = '';
                 this.edit_speciality = '';
                 this.edit_default_subjects = [];
+                this.edit_curatorFIO = '';
+                this.edit_curatorPhone = '';
+                this.edit_headmanFIO = '';
+                this.edit_headmanPhone = '';
                 this.clearSelected();
                 this.toggleModalEdit=false;
             },
@@ -401,6 +466,11 @@
                         defSubjArr.push(Object.values(array[index])[0]);
                     });
                     this.edit_id_name = element.idName;
+                    this.edit_speciality = element.speciality.id;
+                    this.edit_curatorFIO = element.curator.fio;
+                    this.edit_curatorPhone = element.curator.phone;
+                    this.edit_headmanFIO = element.headman.fio;
+                    this.edit_headmanPhone = element.headman.phone;
                     this.edit_speciality = element.speciality.id;
                     this.edit_default_subjects = defSubjArr;
                     this.editId = element.id;

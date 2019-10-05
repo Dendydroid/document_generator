@@ -10,8 +10,9 @@ Vue.use(VueMaterial);
 
 import MainPage from './components/MainPage';
 import Navbar from './components/Navbar';
+import Settings from './components/Settings';
 import ManageData from './components/ManageData';
-import ManageFaculties from './components/ManageFaculties';
+import ManageDepartments from './components/ManageDepartments';
 import ManageSpecialities from './components/ManageSpecialities';
 import ManageGroups from './components/ManageGroups';
 import ManageSubjects from './components/ManageSubjects';
@@ -25,8 +26,9 @@ import VidomistKR from './components/VidomistKR';
 
 Vue.component('main-page', MainPage);
 Vue.component('navbar', Navbar);
+Vue.component('settings', Settings);
 Vue.component('manage-data', ManageData);
-Vue.component('manage-faculties', ManageFaculties);
+Vue.component('manage-departments', ManageDepartments);
 Vue.component('manage-specialities', ManageSpecialities);
 Vue.component('manage-groups', ManageGroups);
 Vue.component('manage-subjects', ManageSubjects);

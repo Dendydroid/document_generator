@@ -3,19 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Constants;
-use App\Entities\Faculty;
+use App\Entities\Department;
 use App\Entities\Group;
 use App\Entities\Speciality;
 use App\Entities\Student;
 use App\Entities\Subject;
 use App\Repositories\GroupRepo;
-use App\Repositories\InstituteRepo;
 use App\Repositories\SpecialityRepo;
 use App\Repositories\StudentRepo;
 use App\Repositories\SubjectRepo;
 use Doctrine\ORM\EntityManager;
 use Illuminate\Http\Request;
-use \App\Repositories\FacultyRepo;
+use \App\Repositories\DepartmentRepo;
 
 class DataController extends Controller
 {
@@ -27,12 +26,12 @@ class DataController extends Controller
     /**
      * @var string
      */
-    private $faculty = "App\Entities\Faculty";
+    private $department = "App\Entities\Department";
 
     /**
-     * @var FacultyRepo
+     * @var DepartmentRepo
      */
-    private $repoFaculties;
+    private $repoDepartments;
 
     /**
      * @var string
@@ -82,7 +81,7 @@ class DataController extends Controller
     {
         $this->entityManager = $entityManager;
 
-        $this->repoFaculties = $this->entityManager->getRepository($this->faculty);
+        $this->repoDepartments = $this->entityManager->getRepository($this->department);
         $this->repoSpeciality = $this->entityManager->getRepository($this->speciality);
         $this->repoSubjects = $this->entityManager->getRepository($this->subject);
         $this->repoGroup = $this->entityManager->getRepository($this->group);
@@ -91,15 +90,15 @@ class DataController extends Controller
 
     public function getF(Request $request)
     {
-        $fs = $this->repoFaculties->findAll();
+        $fs = $this->repoDepartments->findAll();
         $ar = [];
-        foreach ($fs as $fac)
+        foreach ($fs as $dep)
         {
-            $ar[$fac->getFullName()] = [];
-            $sArr = $fac->getSpecialities();
+            $ar[$dep->getFullName()] = [];
+            $sArr = $dep->getSpecialities();
             foreach ($sArr as $item)
             {
-                $ar[$fac->getFullName()][] = $item->getTableArray();
+                $ar[$dep->getFullName()][] = $item->getTableArray();
             }
         }
         return $ar;
@@ -145,9 +144,9 @@ class DataController extends Controller
      * @param Request $request
      * @return array|mixed
      */
-    public function getFacultyData(Request $request)
+    public function getDepartmentData(Request $request)
     {
-       return $this->repoFaculties->getFaculties($request);
+       return $this->repoDepartments->getDepartments($request);
     }
 
 
@@ -157,14 +156,14 @@ class DataController extends Controller
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function createFaculty(Request $request)
+    public function createDepartment(Request $request)
     {
         $data = $request->all();
-        $faculty = $this->repoFaculties->createFaculty($data);
-        if($faculty instanceof Faculty){
-            return $faculty->getTableArray();
+        $department = $this->repoDepartments->createDepartment($data);
+        if($department instanceof Department){
+            return $department->getTableArray();
         }else{
-            return response()->json(array_merge(Constants::OPERATION_FAILED,$faculty), 400);
+            return response()->json(array_merge(Constants::OPERATION_FAILED,$department), 400);
         }
     }
 
@@ -174,19 +173,19 @@ class DataController extends Controller
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function deleteFaculties(Request $request)
+    public function deleteDepartments(Request $request)
     {
         $data = $request->all();
         if(isset($data['objects']) && !empty($data['objects']))
         {
-            foreach ($data['objects'] as $fac){
+            foreach ($data['objects'] as $dep){
                 /**
-                 * @var Faculty $faculty
+                 * @var Department $department
                  */
-                $faculty = $this->repoFaculties->find($fac['id']);
-                if($faculty instanceof Faculty)
+                $department = $this->repoDepartments->find($dep['id']);
+                if($department instanceof Department)
                 {
-                    $specialities = $faculty->getSpecialities();
+                    $specialities = $department->getSpecialities();
                     $this->repoSpeciality->removeSpecialityArray($specialities);
                     /**
                      * @var Speciality $speciality
@@ -198,7 +197,7 @@ class DataController extends Controller
                 }
             }
 
-            return $this->repoFaculties->deleteFaculties($data['objects']);
+            return $this->repoDepartments->deleteDepartments($data['objects']);
         }
         return Constants::OPERATION_FAILED;
     }
@@ -209,14 +208,14 @@ class DataController extends Controller
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function editFaculty(Request $request)
+    public function editDepartment(Request $request)
     {
         $data = $request->all();
-        $faculty = $this->repoFaculties->editFaculty($data);
-        if($faculty instanceof Faculty){
-            return $faculty->getTableArray();
+        $department = $this->repoDepartments->editDepartment($data);
+        if($department instanceof Department){
+            return $department->getTableArray();
         }else{
-            return response()->json(array_merge(Constants::OPERATION_FAILED,$faculty), 400);
+            return response()->json(array_merge(Constants::OPERATION_FAILED,$department), 400);
         }
     }
 
@@ -240,13 +239,13 @@ class DataController extends Controller
         $data = $request->all();
         $speciality = [];
 
-        $faculty = $this->repoFaculties->find($data['faculty']);
-        if($faculty instanceof Faculty)
+        $department = $this->repoDepartments->find($data['department']);
+        if($department instanceof Department)
         {
-            $speciality = $this->repoSpeciality->createSpeciality($data, $faculty);
+            $speciality = $this->repoSpeciality->createSpeciality($data, $department);
             if($speciality instanceof Speciality){
-                $faculty->addSpeciality($speciality);
-                $this->repoFaculties->updateFaculty($faculty);
+                $department->addSpeciality($speciality);
+                $this->repoDepartments->updateDepartment($department);
 
                 return $speciality->getTableArray();
             }
@@ -272,12 +271,12 @@ class DataController extends Controller
              */
             foreach ($data['objects'] as $speciality)
             {
-                $faculty = $this->repoFaculties->find($speciality['faculty']['id']);
+                $department = $this->repoDepartments->find($speciality['department']['id']);
                 $s = $this->repoSpeciality->find($speciality['id']);
-                if($faculty instanceof Faculty && $s instanceof Speciality)
+                if($department instanceof Department && $s instanceof Speciality)
                 {
-                    $faculty->getSpecialitiesCollection()->removeElement($s);
-                    $this->repoFaculties->updateFaculty($faculty);
+                    $department->getSpecialitiesCollection()->removeElement($s);
+                    $this->repoDepartments->updateDepartment($department);
                 }
 
                 $groups = $speciality->getGroupsCollection();
@@ -301,25 +300,25 @@ class DataController extends Controller
         $speciality = [];
 
 
-        $faculty = $this->repoFaculties->find($data['faculty']);
+        $department = $this->repoDepartments->find($data['department']);
 
-        if($faculty instanceof Faculty)
+        if($department instanceof Department)
         {
             $speciality = $this->repoSpeciality->find($data['id']);
 
             if($speciality instanceof Speciality)
             {
-                if($faculty->getId() != $speciality->getFaculty()->getId())
+                if($department->getId() != $speciality->getDepartment()->getId())
                 {
-                    $oldFac = $speciality->getFaculty();
-                    $oldFac->getSpecialitiesCollection()->removeElement($speciality);
-                    $faculty->addSpeciality($speciality);
-                    $this->repoFaculties->updateFaculty($oldFac);
-                    $this->repoFaculties->updateFaculty($faculty);
+                    $oldDep = $speciality->getDepartment();
+                    $oldDep->getSpecialitiesCollection()->removeElement($speciality);
+                    $department->addSpeciality($speciality);
+                    $this->repoDepartments->updateDepartment($oldDep);
+                    $this->repoDepartments->updateDepartment($department);
                 }
             }
 
-            $speciality = $this->repoSpeciality->editSpeciality($data, $faculty);
+            $speciality = $this->repoSpeciality->editSpeciality($data, $department);
         }
 
         if($speciality instanceof Speciality){
