@@ -761,10 +761,6 @@
     .upd-icon{
         margin-top:0.5rem;
     }
-    .md-primary{
-        background-color:#7e57c2 !important;
-        color:#448aff;
-    }
     .c-r{
         color:#ff5252;
         font-weight: 600 !important;
@@ -774,10 +770,6 @@
         color:white;
         font-weight: 600 !important;
         font-size: 1rem;
-    }
-    .c-p{
-        color:#7e57c2;
-        font-weight: 600 !important;
     }
     .md-numeric{
         text-align: center !important;

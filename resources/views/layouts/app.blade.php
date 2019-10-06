@@ -15,14 +15,163 @@
     <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.min.css">
     <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default.css">
     <link href="{{ asset('css/page_css/main_style.css') }}" rel="stylesheet">
+    <?php
+
+
+    function hex2rgba($color, $opacity = false) {
+
+        $default = 'rgb(0,0,0)';
+
+        //Return default if no color provided
+        if(empty($color))
+            return $default;
+
+        //Sanitize $color if "#" is provided
+        if ($color[0] == '#' ) {
+            $color = substr( $color, 1 );
+        }
+
+        //Check if color has 6 or 3 characters and get values
+        if (strlen($color) == 6) {
+            $hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
+        } elseif ( strlen( $color ) == 3 ) {
+            $hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
+        } else {
+            return $default;
+        }
+
+        //Convert hexadec to rgb
+        $rgb =  array_map('hexdec', $hex);
+
+        //Check if opacity is set(rgba or rgb)
+        if($opacity){
+            if(abs($opacity) > 1)
+                $opacity = 1.0;
+            $output = 'rgba('.implode(",",$rgb).','.$opacity.')';
+        } else {
+            $output = 'rgb('.implode(",",$rgb).')';
+        }
+
+        //Return rgb(a) color string
+        return $output;
+    }
+
+    $mainStyle = '';
+    $secondStyle = '';
+    $navbarStyle = '';
+    $navbarStyleLighter = '';
+    $navbarStyleHover = '';
+    $primaryStyle = '';
+    $primaryColor = '';
+    $navbarColor = '';
+        if(isset(session()->all()['theme']))
+        {
+            $mainColor = session()->all()['theme']['mainBG']['color'];
+            $secondColor = session()->all()['theme']['secondBG']['color'];
+            $navbarColor = session()->all()['theme']['navbarBG']['color'];
+            $primaryColor = session()->all()['theme']['primaryBG']['color'];
+
+            $secondColorTransparency = session()->all()['theme']['secondBG']['transparency'];
+            $navbarColorTransparency = session()->all()['theme']['navbarBG']['transparency'];
+            $primaryColorTransparency = session()->all()['theme']['primaryBG']['transparency'];
+
+            $mainStyle = hex2rgba($mainColor,1);
+            $secondStyle = hex2rgba($secondColor,$secondColorTransparency);
+            $navbarStyle = hex2rgba($navbarColor,$navbarColorTransparency);
+            $navbarStyleLighter = hex2rgba($navbarColor,floatval($navbarColorTransparency)+0.3);
+            $navbarStyleHover = hex2rgba($navbarColor,floatval($navbarColorTransparency)+0.1);
+            $primaryStyle = hex2rgba($primaryColor,$primaryColorTransparency);
+        }
+
+
+    ?>
+    <style>
+        @media only screen and (min-width: 595px)  {
+            .li-stretch{
+                width: 100%;
+                text-align: center;
+            }
+            .fb-around-align-center{
+
+            }
+        }
+        .grey-lightest{
+            <?=($mainStyle!=='' ? "background-color:$mainStyle;" : "background-color: #f1f2f6;")?>
+        }
+        .grey-light{
+            <?=($secondStyle!=='' ? "background-color:$secondStyle;" : "background-color: #dfe4ea;")?>
+        }
+        .orange-stress-transparent{
+            transition-timing-function: ease-out;
+            transition: 0.5s;
+            <?=($navbarStyleHover!=='' ? "background-color:$navbarStyleHover;" : "background-color:rgba(0, 0, 0, 0.5);")?>
+        }
+        .orange-stress-transparent:hover{
+            transition-timing-function: ease-in;
+            transition: 0.5s;
+        <?=($navbarStyle!=='' ? "background-color:$navbarStyle;" : "background-color:rgba(0, 0, 0, 0.2);")?>
+        }
+        .md-primary{
+            <?=($primaryStyle!=='' ? "background-color:$primaryStyle !important;" : "background-color:#7e57c2")?>
+            color:#448aff;
+        }
+        .c-p{
+            cursor:pointer;
+            <?=($primaryColor!=='' ? "color:$primaryColor;" : "color:#448aff;")?>
+
+        }
+
+        .li-stretch{
+            transition-timing-function: ease-out;
+            transition: 0.5s;
+            text-align: center !important;
+            width:100% !important;
+            height:100%;
+        }
+        .li-stretch:hover{
+            transition-timing-function: ease-in;
+            transition: 0.5s;
+            <?=($navbarStyleLighter!=='' ? "background-color:$navbarStyleLighter;" : "background-color:rgba(0, 0, 0, 0.2);")?>
+            height:100%;
+        }
+        :root {
+            --blue: #3490dc;
+            --indigo: #6574cd;
+            --purple: #9561e2;
+            --pink: #f66d9b;
+            --red: #e3342f;
+            --orange: #f6993f;
+            --yellow: #ffed4a;
+            --green: #38c172;
+            --teal: #4dc0b5;
+            --cyan: #6cb2eb;
+            --white: #fff;
+            --gray: #6c757d;
+            --gray-dark: #343a40;
+            --primary: #3490dc;
+            --secondary: #6c757d;
+            --success: #38c172;
+            --info: #6cb2eb;
+            --warning: #ffed4a;
+            --danger: #e3342f;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --md-theme-default-primary: <?=($primaryStyle!=='' ? $primaryStyle : "#448aff")?>  !important;
+            --breakpoint-xs: 0;
+            --breakpoint-sm: 576px;
+            --breakpoint-md: 768px;
+            --breakpoint-lg: 992px;
+            --breakpoint-xl: 1200px;
+            --font-family-sans-serif: "Nunito", sans-serif;
+            --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+    </style>
 </head>
 <body>
-<?php
-$appColor = isset(session()->all()['theme']) ? session()->all()['theme']['mainBG']['color']:'';
 
-?>
 
-    <div id="app" class="grey-lightest" style="<?=($appColor!=''?("background-color:".$appColor." !important"):'')?>">
+    <div id="app" class="grey-lightest" >
         <div class="container-fluid p-0">
             @yield('content')
         </div>

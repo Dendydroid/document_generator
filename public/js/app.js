@@ -1833,8 +1833,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   name: 'Login',
   data: function data() {
     return {
-      primaryStyle: '',
-      secondStyle: '',
       userEmail: '',
       userPassword: '',
       errors: [],
@@ -1865,26 +1863,8 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
       return result;
     },
-    getUserSession: function getUserSession() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
-        if (_this.user.theme !== '') {
-          _this.primaryStyle = "background-color:" + _this.convertHex(_this.user.theme.primaryBG.color, _this.user.theme.primaryBG.transparency) + ' !important;';
-          _this.secondStyle = "background-color:" + _this.convertHex(_this.user.theme.secondBG.color, _this.user.theme.secondBG.transparency) + ' !important;';
-        }
-
-        if (response.data.logged) {
-          window.location = '/';
-        }
-      })["catch"](function (e) {
-        console.log(e);
-
-        _this.errors.push(e.data);
-      });
-    },
     loginAttempt: function loginAttempt() {
-      var _this2 = this;
+      var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/loginUser', {
         email: this.userEmail,
@@ -1892,8 +1872,8 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       }).then(function (response) {
         return window.location = '/';
       })["catch"](function (e) {
-        _this2.errors = [];
-        _this2.errors = [{
+        _this.errors = [];
+        _this.errors = [{
           Password: ["Неверный E-mail или Пароль"]
         }];
       });
@@ -1908,9 +1888,7 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       this.snackbar.showSnackbar = true;
     }
   },
-  created: function created() {
-    this.getUserSession();
-  }
+  created: function created() {}
 });
 
 /***/ }),
@@ -1919,121 +1897,9 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MainPage.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
-  'X-Requested-With': 'XMLHttpRequest',
-  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-};
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      errors: [],
-      secondStyle: ''
-    };
-  },
-  methods: {
-    convertHex: function convertHex(hex, opacity) {
-      hex = hex.replace('#', '');
-      var r = parseInt(hex.substring(0, 2), 16);
-      var g = parseInt(hex.substring(2, 4), 16);
-      var b = parseInt(hex.substring(4, 6), 16);
-      var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    },
-    getUserSession: function getUserSession() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
-        if (response.data.theme !== '') {
-          _this.secondStyle = "background-color:" + _this.convertHex(response.data.theme.secondBG.color, response.data.theme.secondBG.transparency) + ' !important;';
-        }
-      })["catch"](function (e) {
-        console.log(e);
-
-        _this.errors.push(e.data);
-      });
-    }
-  },
-  created: function created() {
-    this.getUserSession();
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageData.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageData.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2045,44 +1911,70 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
-  'X-Requested-With': 'XMLHttpRequest',
-  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-};
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      errors: [],
-      secondStyle: ''
-    };
-  },
-  methods: {
-    convertHex: function convertHex(hex, opacity) {
-      hex = hex.replace('#', '');
-      var r = parseInt(hex.substring(0, 2), 16);
-      var g = parseInt(hex.substring(2, 4), 16);
-      var b = parseInt(hex.substring(4, 6), 16);
-      var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    },
-    getUserSession: function getUserSession() {
-      var _this = this;
+/***/ }),
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
-        if (response.data.theme !== '') {
-          _this.secondStyle = "background-color:" + _this.convertHex(response.data.theme.secondBG.color, response.data.theme.secondBG.transparency) + ' !important;';
-        }
-      })["catch"](function (e) {
-        console.log(e);
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageData.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ManageData.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-        _this.errors.push(e.data);
-      });
-    }
-  },
-  created: function created() {
-    this.getUserSession();
-  }
-});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 
@@ -2097,12 +1989,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2324,9 +2210,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
         duration: 4000,
         bg: 'background-color:rgba(33, 33, 33, 0.6)'
       },
-      secondStyle: '',
-      primaryStyle: '',
-      primaryTextStyle: '',
       searchColumn: 'fullName',
       errorMessage: '',
       editId: '',
@@ -2349,29 +2232,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
     };
   },
   methods: {
-    convertHex: function convertHex(hex, opacity) {
-      hex = hex.replace('#', '');
-      var r = parseInt(hex.substring(0, 2), 16);
-      var g = parseInt(hex.substring(2, 4), 16);
-      var b = parseInt(hex.substring(4, 6), 16);
-      var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    },
-    getUserSession: function getUserSession() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
-        if (response.data.theme !== '') {
-          _this.secondStyle = "background-color:" + _this.convertHex(response.data.theme.secondBG.color, response.data.theme.secondBG.transparency) + ' !important;';
-          _this.primaryStyle = "background-color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-          _this.primaryTextStyle = "color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-        }
-      })["catch"](function (e) {
-        console.log(e);
-
-        _this.errors.push(e.data);
-      });
-    },
     onSelect: function onSelect(items) {
       this.selected = items;
       this.toggleShowEditButton(items);
@@ -2418,30 +2278,30 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.showEditButton = false;
     },
     getDepartments: function getDepartments() {
-      var _this2 = this;
+      var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getDepartments').then(function (response) {
-        return _this2.dataSet = response.data;
+        return _this.dataSet = response.data;
       })["catch"](function (e) {
-        _this2.errors.push(e);
+        _this.errors.push(e);
       });
     },
     createDepartment: function createDepartment() {
-      var _this3 = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/createDepartment', {
         fullName: this.add_fullName,
         abbreviation: this.add_abbreviation,
         head: this.add_head
       }).then(function (response) {
-        return _this3.dataSet.push(response.data);
+        return _this2.dataSet.push(response.data);
       })["catch"](function (e) {
-        _this3.errors.push(e.response.data.errors);
+        _this2.errors.push(e.response.data.errors);
       });
       this.toggleModalAdd = false;
     },
     editDepartment: function editDepartment() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/editDepartment', {
         id: this.editId,
@@ -2449,7 +2309,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
         abbreviation: this.edit_abbreviation,
         head: this.edit_head
       }).then(function (response) {
-        _this4.dataSet.forEach(function (el, index, arr) {
+        _this3.dataSet.forEach(function (el, index, arr) {
           if (el.id === response.data.id) {
             arr[index].fullName = response.data.fullName;
             arr[index].abbreviation = response.data.abbreviation;
@@ -2457,7 +2317,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
           }
         });
       })["catch"](function (e) {
-        _this4.errors.push(e.response.data.errors);
+        _this3.errors.push(e.response.data.errors);
       });
       this.editId = '';
       this.edit_fullName = '';
@@ -2467,7 +2327,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.toggleModalEdit = false;
     },
     deleteDepartments: function deleteDepartments() {
-      var _this5 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/deleteDepartments', {
         objects: this.selected
@@ -2481,9 +2341,9 @@ var searchByColumn = function searchByColumn(items, term, column) {
         //         }
         //     }
         // });
-        _this5.getDepartments();
+        _this4.getDepartments();
       })["catch"](function (e) {
-        _this5.errors.push(e);
+        _this4.errors.push(e);
       });
       this.clearSelected();
       this.toggleModalSure = false;
@@ -2516,7 +2376,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
     }
   },
   created: function created() {
-    this.getUserSession();
     this.getDepartments();
   }
 });
@@ -2534,14 +2393,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2808,9 +2659,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
         duration: 4000,
         bg: 'background-color:rgba(33, 33, 33, 0.6)'
       },
-      secondStyle: '',
-      primaryStyle: '',
-      primaryTextStyle: '',
       searchColumn: 'idName',
       errorMessage: '',
       specialityList: '',
@@ -2843,49 +2691,26 @@ var searchByColumn = function searchByColumn(items, term, column) {
     };
   },
   methods: {
-    convertHex: function convertHex(hex, opacity) {
-      hex = hex.replace('#', '');
-      var r = parseInt(hex.substring(0, 2), 16);
-      var g = parseInt(hex.substring(2, 4), 16);
-      var b = parseInt(hex.substring(4, 6), 16);
-      var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    },
-    getUserSession: function getUserSession() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
-        if (response.data.theme !== '') {
-          _this.secondStyle = "background-color:" + _this.convertHex(response.data.theme.secondBG.color, response.data.theme.secondBG.transparency) + ' !important;';
-          _this.primaryStyle = "background-color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-          _this.primaryTextStyle = "color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-        }
-      })["catch"](function (e) {
-        console.log(e);
-
-        _this.errors.push(e.data);
-      });
-    },
     onSelect: function onSelect(items) {
       this.selected = items;
       this.toggleShowEditButton(items);
     },
     loadSpecialities: function loadSpecialities() {
-      var _this2 = this;
+      var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSpecialities').then(function (response) {
-        return _this2.specialityList = response.data;
+        return _this.specialityList = response.data;
       })["catch"](function (e) {
-        _this2.errors.push(e);
+        _this.errors.push(e);
       });
     },
     loadSubjects: function loadSubjects() {
-      var _this3 = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSubjects').then(function (response) {
-        return _this3.subjectList = response.data;
+        return _this2.subjectList = response.data;
       })["catch"](function (e) {
-        _this3.errors.push(e);
+        _this2.errors.push(e);
       });
     },
     getAlternateLabel: function getAlternateLabel(count) {
@@ -2929,16 +2754,16 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.showEditButton = false;
     },
     getGroups: function getGroups() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getGroups').then(function (response) {
-        return _this4.dataSet = response.data;
+        return _this3.dataSet = response.data;
       })["catch"](function (e) {
-        _this4.errors.push(e);
+        _this3.errors.push(e);
       });
     },
     createGroup: function createGroup() {
-      var _this5 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/createGroup', {
         idName: this.add_id_name,
@@ -2949,14 +2774,14 @@ var searchByColumn = function searchByColumn(items, term, column) {
         headmanFIO: this.add_headmanFIO,
         headmanPhone: this.add_headmanPhone
       }).then(function (response) {
-        return _this5.dataSet.push(response.data);
+        return _this4.dataSet.push(response.data);
       })["catch"](function (e) {
-        _this5.errors.push(e.response.data.errors);
+        _this4.errors.push(e.response.data.errors);
       });
       this.toggleModalAdd = false;
     },
     editGroup: function editGroup() {
-      var _this6 = this;
+      var _this5 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/editGroup', {
         id: this.editId,
@@ -2968,7 +2793,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
         headmanFIO: this.edit_headmanFIO,
         headmanPhone: this.edit_headmanPhone
       }).then(function (response) {
-        _this6.dataSet.forEach(function (el, index, arr) {
+        _this5.dataSet.forEach(function (el, index, arr) {
           if (el.id === response.data.id) {
             arr[index].idName = response.data.idName;
             arr[index].speciality = response.data.speciality;
@@ -2980,7 +2805,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
           }
         });
       })["catch"](function (e) {
-        _this6.errors.push(e.response.data.errors);
+        _this5.errors.push(e.response.data.errors);
       });
       this.editId = '';
       this.edit_id_name = '';
@@ -2994,7 +2819,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.toggleModalEdit = false;
     },
     deleteGroups: function deleteGroups() {
-      var _this7 = this;
+      var _this6 = this;
 
       var allObjects = this.selected;
       allObjects.forEach(function (value, index, array) {
@@ -3016,9 +2841,9 @@ var searchByColumn = function searchByColumn(items, term, column) {
         //         }
         //     }
         // });
-        _this7.getGroups();
+        _this6.getGroups();
       })["catch"](function (e) {
-        _this7.errors.push(e);
+        _this6.errors.push(e);
       });
       this.clearSelected();
       this.toggleModalSure = false;
@@ -3063,7 +2888,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
     }
   },
   created: function created() {
-    this.getUserSession();
     this.getGroups();
     this.loadSpecialities();
     this.loadSubjects();
@@ -3083,13 +2907,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3336,9 +3153,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
         duration: 4000,
         bg: 'background-color:rgba(33, 33, 33, 0.6)'
       },
-      secondStyle: '',
-      primaryStyle: '',
-      primaryTextStyle: '',
       searchColumn: 'fullName',
       errorMessage: '',
       departmentList: '',
@@ -3366,29 +3180,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
     };
   },
   methods: {
-    convertHex: function convertHex(hex, opacity) {
-      hex = hex.replace('#', '');
-      var r = parseInt(hex.substring(0, 2), 16);
-      var g = parseInt(hex.substring(2, 4), 16);
-      var b = parseInt(hex.substring(4, 6), 16);
-      var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    },
-    getUserSession: function getUserSession() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
-        if (response.data.theme !== '') {
-          _this.secondStyle = "background-color:" + _this.convertHex(response.data.theme.secondBG.color, response.data.theme.secondBG.transparency) + ' !important;';
-          _this.primaryStyle = "background-color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-          _this.primaryTextStyle = "color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-        }
-      })["catch"](function (e) {
-        console.log(e);
-
-        _this.errors.push(e.data);
-      });
-    },
     onSelect: function onSelect(items) {
       this.selected = items;
       this.toggleShowEditButton(items);
@@ -3426,12 +3217,12 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.selected = [];
     },
     loadDepartments: function loadDepartments() {
-      var _this2 = this;
+      var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getDepartments').then(function (response) {
-        return _this2.departmentList = response.data;
+        return _this.departmentList = response.data;
       })["catch"](function (e) {
-        _this2.errors.push(e);
+        _this.errors.push(e);
       });
     },
     // editSelected() {},
@@ -3444,16 +3235,16 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.showEditButton = false;
     },
     getSpecialities: function getSpecialities() {
-      var _this3 = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSpecialities').then(function (response) {
-        return _this3.dataSet = response.data;
+        return _this2.dataSet = response.data;
       })["catch"](function (e) {
-        _this3.errors.push(e);
+        _this2.errors.push(e);
       });
     },
     createSpeciality: function createSpeciality() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/createSpeciality', {
         fullName: this.add_fullName,
@@ -3462,14 +3253,14 @@ var searchByColumn = function searchByColumn(items, term, column) {
         number: this.add_number,
         eduProgram: this.add_eduProgram
       }).then(function (response) {
-        return _this4.dataSet.push(response.data);
+        return _this3.dataSet.push(response.data);
       })["catch"](function (e) {
-        _this4.errors.push(e.response.data.errors);
+        _this3.errors.push(e.response.data.errors);
       });
       this.toggleModalAdd = false;
     },
     editSpeciality: function editSpeciality() {
-      var _this5 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/editSpeciality', {
         id: this.editId,
@@ -3479,7 +3270,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
         number: this.edit_number,
         eduProgram: this.edit_eduProgram
       }).then(function (response) {
-        _this5.dataSet.forEach(function (el, index, arr) {
+        _this4.dataSet.forEach(function (el, index, arr) {
           if (el.id === response.data.id) {
             arr[index].fullName = response.data.fullName;
             arr[index].abbreviation = response.data.abbreviation;
@@ -3489,7 +3280,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
           }
         });
       })["catch"](function (e) {
-        _this5.errors.push(e.response.data.errors);
+        _this4.errors.push(e.response.data.errors);
       });
       this.editId = '';
       this.edit_fullName = '';
@@ -3500,7 +3291,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.toggleModalEdit = false;
     },
     deleteSpecialities: function deleteSpecialities() {
-      var _this6 = this;
+      var _this5 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/deleteSpecialities', {
         objects: this.selected
@@ -3514,9 +3305,9 @@ var searchByColumn = function searchByColumn(items, term, column) {
         //         }
         //     }
         // });
-        _this6.getSpecialities();
+        _this5.getSpecialities();
       })["catch"](function (e) {
-        _this6.errors.push(e);
+        _this5.errors.push(e);
       });
       this.clearSelected();
       this.toggleModalSure = false;
@@ -3551,7 +3342,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
     }
   },
   created: function created() {
-    this.getUserSession();
     this.getSpecialities();
     this.loadDepartments();
   }
@@ -3570,13 +3360,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3986,9 +3769,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
         duration: 4000,
         bg: 'background-color:rgba(33, 33, 33, 0.6)'
       },
-      secondStyle: '',
-      primaryStyle: '',
-      primaryTextStyle: '',
       full_student_data: false,
       searchColumn: 'idName',
       errorMessage: '',
@@ -4048,49 +3828,26 @@ var searchByColumn = function searchByColumn(items, term, column) {
     };
   },
   methods: {
-    convertHex: function convertHex(hex, opacity) {
-      hex = hex.replace('#', '');
-      var r = parseInt(hex.substring(0, 2), 16);
-      var g = parseInt(hex.substring(2, 4), 16);
-      var b = parseInt(hex.substring(4, 6), 16);
-      var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    },
-    getUserSession: function getUserSession() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
-        if (response.data.theme !== '') {
-          _this.secondStyle = "background-color:" + _this.convertHex(response.data.theme.secondBG.color, response.data.theme.secondBG.transparency) + ' !important;';
-          _this.primaryStyle = "background-color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-          _this.primaryTextStyle = "color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-        }
-      })["catch"](function (e) {
-        console.log(e);
-
-        _this.errors.push(e.data);
-      });
-    },
     onSelect: function onSelect(items) {
       this.selected = items;
       this.toggleShowEditButton(items);
     },
     loadGroups: function loadGroups() {
-      var _this2 = this;
+      var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getGroups').then(function (response) {
-        return _this2.groupList = response.data;
+        return _this.groupList = response.data;
       })["catch"](function (e) {
-        _this2.errors.push(e);
+        _this.errors.push(e);
       });
     },
     loadSubjects: function loadSubjects() {
-      var _this3 = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSubjects').then(function (response) {
-        return _this3.subjectList = response.data;
+        return _this2.subjectList = response.data;
       })["catch"](function (e) {
-        _this3.errors.push(e);
+        _this2.errors.push(e);
       });
     },
     getAlternateLabel: function getAlternateLabel(count) {
@@ -4134,16 +3891,16 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.showEditButton = false;
     },
     getStudents: function getStudents() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getStudents').then(function (response) {
-        return _this4.dataSet = response.data;
+        return _this3.dataSet = response.data;
       })["catch"](function (e) {
-        _this4.errors.push(e);
+        _this3.errors.push(e);
       });
     },
     createStudent: function createStudent() {
-      var _this5 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/createStudent', {
         firstName: this.add_first_name,
@@ -4167,14 +3924,14 @@ var searchByColumn = function searchByColumn(items, term, column) {
         additionalInfo: this.add_additional_info,
         additionalSubjects: this.add_additional_subjects
       }).then(function (response) {
-        return _this5.dataSet.push(response.data);
+        return _this4.dataSet.push(response.data);
       })["catch"](function (e) {
-        _this5.errors.push(e.response.data.errors);
+        _this4.errors.push(e.response.data.errors);
       });
       this.toggleModalAdd = false;
     },
     editStudent: function editStudent() {
-      var _this6 = this;
+      var _this5 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/editStudent', {
         id: this.editId,
@@ -4207,9 +3964,9 @@ var searchByColumn = function searchByColumn(items, term, column) {
         //         arr[index].defaultSubjects = response.data.defaultSubjects;
         //     }
         // });
-        _this6.getStudents();
+        _this5.getStudents();
       })["catch"](function (e) {
-        _this6.errors.push(e.response.data.errors);
+        _this5.errors.push(e.response.data.errors);
       });
       this.editId = '';
       this.edit_first_name = '';
@@ -4236,7 +3993,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.toggleModalEdit = false;
     },
     deleteStudents: function deleteStudents() {
-      var _this7 = this;
+      var _this6 = this;
 
       var allObjects = this.selected;
       allObjects.forEach(function (value, index, array) {
@@ -4258,9 +4015,9 @@ var searchByColumn = function searchByColumn(items, term, column) {
         //         }
         //     }
         // });
-        _this7.getStudents();
+        _this6.getStudents();
       })["catch"](function (e) {
-        _this7.errors.push(e);
+        _this6.errors.push(e);
       });
       this.clearSelected();
       this.toggleModalSure = false;
@@ -4317,7 +4074,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
     }
   },
   created: function created() {
-    this.getUserSession();
     this.getStudents();
     this.loadGroups();
     this.loadSubjects();
@@ -4337,13 +4093,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4607,9 +4356,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
         duration: 4000,
         bg: 'background-color:rgba(33, 33, 33, 0.6)'
       },
-      secondStyle: '',
-      primaryStyle: '',
-      primaryTextStyle: '',
       searchColumn: 'name',
       errorMessage: '',
       facultyList: '',
@@ -4641,29 +4387,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
     };
   },
   methods: {
-    convertHex: function convertHex(hex, opacity) {
-      hex = hex.replace('#', '');
-      var r = parseInt(hex.substring(0, 2), 16);
-      var g = parseInt(hex.substring(2, 4), 16);
-      var b = parseInt(hex.substring(4, 6), 16);
-      var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    },
-    getUserSession: function getUserSession() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
-        if (response.data.theme !== '') {
-          _this.secondStyle = "background-color:" + _this.convertHex(response.data.theme.secondBG.color, response.data.theme.secondBG.transparency) + ' !important;';
-          _this.primaryStyle = "background-color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-          _this.primaryTextStyle = "color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-        }
-      })["catch"](function (e) {
-        console.log(e);
-
-        _this.errors.push(e.data);
-      });
-    },
     onSelect: function onSelect(items) {
       this.selected = items;
       this.toggleShowEditButton(items);
@@ -4710,16 +4433,16 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.showEditButton = false;
     },
     getSubjects: function getSubjects() {
-      var _this2 = this;
+      var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSubjects').then(function (response) {
-        return _this2.dataSet = response.data;
+        return _this.dataSet = response.data;
       })["catch"](function (e) {
-        _this2.errors.push(e);
+        _this.errors.push(e);
       });
     },
     createSubject: function createSubject() {
-      var _this3 = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/createSubject', {
         name: this.add_name,
@@ -4730,14 +4453,14 @@ var searchByColumn = function searchByColumn(items, term, column) {
         creditsCount: this.add_credits_count,
         date: this.add_begin_date
       }).then(function (response) {
-        return _this3.dataSet.push(response.data);
+        return _this2.dataSet.push(response.data);
       })["catch"](function (e) {
-        _this3.errors.push(e.response.data.errors);
+        _this2.errors.push(e.response.data.errors);
       });
       this.toggleModalAdd = false;
     },
     editSubject: function editSubject() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/editSubject', {
         id: this.editId,
@@ -4749,7 +4472,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
         creditsCount: this.edit_credits_count,
         date: this.edit_begin_date
       }).then(function (response) {
-        _this4.dataSet.forEach(function (el, index, arr) {
+        _this3.dataSet.forEach(function (el, index, arr) {
           if (el.id === response.data.id) {
             arr[index].name = response.data.name;
             arr[index].professor = response.data.professor;
@@ -4761,7 +4484,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
           }
         });
       })["catch"](function (e) {
-        _this4.errors.push(e.response.data.errors);
+        _this3.errors.push(e.response.data.errors);
       });
       this.editId = '';
       this.edit_name = '';
@@ -4775,7 +4498,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.toggleModalEdit = false;
     },
     deleteSubjects: function deleteSubjects() {
-      var _this5 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/deleteSubjects', {
         objects: this.selected
@@ -4789,9 +4512,9 @@ var searchByColumn = function searchByColumn(items, term, column) {
         //         }
         //     }
         // });
-        _this5.getSubjects();
+        _this4.getSubjects();
       })["catch"](function (e) {
-        _this5.errors.push(e);
+        _this4.errors.push(e);
       });
       this.clearSelected();
       this.toggleModalSure = false;
@@ -4828,7 +4551,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
     }
   },
   created: function created() {
-    this.getUserSession();
     this.getSubjects();
   }
 });
@@ -4905,7 +4627,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   data: function data() {
     return {
       noUser: false,
-      navbarStyle: '',
       user: {
         firstName: '',
         surname: '',
@@ -4930,10 +4651,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
         _this.user = response.data;
-
-        if (_this.user.theme !== '') {
-          _this.navbarStyle = "background-color:" + _this.convertHex(_this.user.theme.navbarBG.color, _this.user.theme.navbarBG.transparency) + ' !important;';
-        }
       })["catch"](function (e) {
         _this.errors.push(e.response.data.errors);
       });
@@ -4944,14 +4661,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/hasNoUsers', {}).then(function (response) {
         return _this2.noUser = true;
       })["catch"](function (e) {});
-    },
-    convertHex: function convertHex(hex, opacity) {
-      hex = hex.replace('#', '');
-      var r = parseInt(hex.substring(0, 2), 16);
-      var g = parseInt(hex.substring(2, 4), 16);
-      var b = parseInt(hex.substring(4, 6), 16);
-      var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
     }
   },
   created: function created() {
@@ -5137,9 +4846,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -5149,8 +4855,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   name: 'Register',
   data: function data() {
     return {
-      secondStyle: '',
-      primaryStyle: '',
       userPassword: '',
       userPasswordConfirm: '',
       userEmail: '',
@@ -5169,14 +4873,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
     };
   },
   methods: {
-    convertHex: function convertHex(hex, opacity) {
-      hex = hex.replace('#', '');
-      var r = parseInt(hex.substring(0, 2), 16);
-      var g = parseInt(hex.substring(2, 4), 16);
-      var b = parseInt(hex.substring(4, 6), 16);
-      var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    },
     getUserSession: function getUserSession() {
       var _this = this;
 
@@ -5257,9 +4953,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
 //
 //
 //
@@ -5893,13 +5586,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -5910,8 +5596,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      secondStyle: '',
-      primaryStyle: '',
       groupList: [],
       groupSubjects: [],
       groupStudents: [],
@@ -5926,54 +5610,31 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
     };
   },
   methods: {
-    convertHex: function convertHex(hex, opacity) {
-      hex = hex.replace('#', '');
-      var r = parseInt(hex.substring(0, 2), 16);
-      var g = parseInt(hex.substring(2, 4), 16);
-      var b = parseInt(hex.substring(4, 6), 16);
-      var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    },
-    getUserSession: function getUserSession() {
+    loadGroups: function loadGroups() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
-        if (response.data.theme !== '') {
-          _this.secondStyle = "background-color:" + _this.convertHex(response.data.theme.secondBG.color, response.data.theme.secondBG.transparency) + ' !important;';
-          _this.primaryStyle = "background-color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-          _this.primaryTextStyle = "color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-        }
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getGroups').then(function (response) {
+        return _this.groupList = response.data;
       })["catch"](function (e) {
-        console.log(e);
-
-        _this.errors.push(e.data);
+        _this.errors.push(e);
       });
     },
-    loadGroups: function loadGroups() {
+    getStudentsByGroup: function getStudentsByGroup() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getGroups').then(function (response) {
-        return _this2.groupList = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getStudentsByGroup/".concat(this.chosenGroup)).then(function (response) {
+        return _this2.groupStudents = response.data;
       })["catch"](function (e) {
         _this2.errors.push(e);
       });
     },
-    getStudentsByGroup: function getStudentsByGroup() {
+    getSubjectsByGroup: function getSubjectsByGroup() {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getStudentsByGroup/".concat(this.chosenGroup)).then(function (response) {
-        return _this3.groupStudents = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getSubjectsByGroup/".concat(this.chosenGroup)).then(function (response) {
+        return _this3.groupSubjects = response.data.defaultSubjects;
       })["catch"](function (e) {
         _this3.errors.push(e);
-      });
-    },
-    getSubjectsByGroup: function getSubjectsByGroup() {
-      var _this4 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getSubjectsByGroup/".concat(this.chosenGroup)).then(function (response) {
-        return _this4.groupSubjects = response.data.defaultSubjects;
-      })["catch"](function (e) {
-        _this4.errors.push(e);
       });
     },
     getAllData: function getAllData() {
@@ -5981,14 +5642,14 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       this.getSubjectsByGroup();
     },
     sendHtml: function sendHtml() {
-      var _this5 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://127.0.0.1:5000/html2Excel', {
         html: $("#tableWrapper").html()
       }).then(function (response) {
-        return _this5.responseXLSX.push(response.data);
+        return _this4.responseXLSX.push(response.data);
       })["catch"](function (e) {
-        _this5.errors.push(e.response.data.errors);
+        _this4.errors.push(e.response.data.errors);
       });
     },
     prepareTable: function prepareTable() {
@@ -6027,7 +5688,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
     }
   },
   created: function created() {
-    this.getUserSession();
     console.log("CREATED");
     this.loadGroups();
     this.getInlineStyles();
@@ -6047,14 +5707,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7704,14 +7356,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -7795,14 +7439,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8988,13 +8624,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -9004,8 +8633,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   name: 'ZajavaIspit',
   data: function data() {
     return {
-      secondStyle: '',
-      primaryStyle: '',
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       groupList: [],
       groupSubjects: [],
@@ -9021,54 +8648,31 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
     };
   },
   methods: {
-    convertHex: function convertHex(hex, opacity) {
-      hex = hex.replace('#', '');
-      var r = parseInt(hex.substring(0, 2), 16);
-      var g = parseInt(hex.substring(2, 4), 16);
-      var b = parseInt(hex.substring(4, 6), 16);
-      var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    },
-    getUserSession: function getUserSession() {
+    loadGroups: function loadGroups() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
-        if (response.data.theme !== '') {
-          _this.secondStyle = "background-color:" + _this.convertHex(response.data.theme.secondBG.color, response.data.theme.secondBG.transparency) + ' !important;';
-          _this.primaryStyle = "background-color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-          _this.primaryTextStyle = "color:" + _this.convertHex(response.data.theme.primaryBG.color, response.data.theme.primaryBG.transparency) + ' !important;';
-        }
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getGroups').then(function (response) {
+        return _this.groupList = response.data;
       })["catch"](function (e) {
-        console.log(e);
-
-        _this.errors.push(e.data);
+        _this.errors.push(e);
       });
     },
-    loadGroups: function loadGroups() {
+    getStudentsByGroup: function getStudentsByGroup() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getGroups').then(function (response) {
-        return _this2.groupList = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getStudentsByGroup/".concat(this.chosenGroup)).then(function (response) {
+        return _this2.groupStudents = response.data;
       })["catch"](function (e) {
         _this2.errors.push(e);
       });
     },
-    getStudentsByGroup: function getStudentsByGroup() {
+    getSubjectsByGroup: function getSubjectsByGroup() {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getStudentsByGroup/".concat(this.chosenGroup)).then(function (response) {
-        return _this3.groupStudents = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getSubjectsByGroup/".concat(this.chosenGroup)).then(function (response) {
+        return _this3.groupSubjects = response.data.defaultSubjects;
       })["catch"](function (e) {
         _this3.errors.push(e);
-      });
-    },
-    getSubjectsByGroup: function getSubjectsByGroup() {
-      var _this4 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getSubjectsByGroup/".concat(this.chosenGroup)).then(function (response) {
-        return _this4.groupSubjects = response.data.defaultSubjects;
-      })["catch"](function (e) {
-        _this4.errors.push(e);
       });
     },
     getAllData: function getAllData() {
@@ -9076,14 +8680,14 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       this.getSubjectsByGroup();
     },
     sendHtml: function sendHtml() {
-      var _this5 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://127.0.0.1:5000/html2Excel', {
         html: $("#tableWrapper").html()
       }).then(function (response) {
-        return _this5.responseXLSX.push(response.data);
+        return _this4.responseXLSX.push(response.data);
       })["catch"](function (e) {
-        _this5.errors.push(e.response.data.errors);
+        _this4.errors.push(e.response.data.errors);
       });
     },
     prepareTable: function prepareTable() {
@@ -9122,7 +8726,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
     }
   },
   created: function created() {
-    this.getUserSession();
     console.log("CREATED");
     this.loadGroups();
     this.getInlineStyles();
@@ -9142,14 +8745,6 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -14500,7 +14095,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.f-e{\n        display: flex;\n        justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n.f-e{\n        display: flex;\n        justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -14519,7 +14114,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -14538,7 +14133,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -14557,7 +14152,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -14576,7 +14171,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -14595,7 +14190,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mc-auto{\n    margin:0 auto;\n}\n.form-content{\n    padding-top:1rem;\n    padding-bottom:1rem;\n    padding-left:3rem;\n    padding-right:3rem;\n}\n.p-custom{\n    padding:16px;\n}\n.color-input-label{\n    color:rgba(0,0,0,0.54);\n    font-size:1rem;\n}\n.input-color-transparency{\n    border-radius: 0.5rem;\n    border:1px solid grey;\n    max-width:100%;\n}\n.helper-text-custom{\n    color:rgba(0,0,0,0.54);\n}\n.input-color-wrapper{\n    border:1px solid grey;\n    border-radius:0.5rem;\n}\ninput[type=\"color\"] {\n    opacity: 0;\n    display: block;\n    border: none;\n    cursor:pointer;\n    width:100%;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-button.md-theme-default.md-primary {\n    color: white;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.f-s-a{\n    display:flex;\n    justify-content: space-around;\n}\n.f-s-c{\n    display:flex;\n    justify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n.mc-auto{\n    margin:0 auto;\n}\n.form-content{\n    padding-top:1rem;\n    padding-bottom:1rem;\n    padding-left:3rem;\n    padding-right:3rem;\n}\n.p-custom{\n    padding:16px;\n}\n.color-input-label{\n    color:rgba(0,0,0,0.54);\n    font-size:1rem;\n}\n.input-color-transparency{\n    border-radius: 0.5rem;\n    border:1px solid grey;\n    max-width:100%;\n}\n.helper-text-custom{\n    color:rgba(0,0,0,0.54);\n}\n.input-color-wrapper{\n    border:1px solid grey;\n    border-radius:0.5rem;\n}\ninput[type=\"color\"] {\n    opacity: 0;\n    display: block;\n    border: none;\n    cursor:pointer;\n    width:100%;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-button.md-theme-default.md-primary {\n    color: white;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.f-s-a{\n    display:flex;\n    justify-content: space-around;\n}\n.f-s-c{\n    display:flex;\n    justify-content: center;\n}\n", ""]);
 
 // exports
 
@@ -14614,7 +14209,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.p-custom{\n    padding:16px;\n}\n.color-input-label{\n    color:rgba(0,0,0,0.54);\n    font-size:1rem;\n}\n.input-color-transparency{\n    border-radius: 0.5rem;\n    border:1px solid grey;\n    max-width:100%;\n}\n.helper-text-custom{\n    color:rgba(0,0,0,0.54);\n}\n.input-color-wrapper{\n    border:1px solid grey;\n    border-radius:0.5rem;\n}\ninput[type=\"color\"] {\n    opacity: 0;\n    display: block;\n    border: none;\n    cursor:pointer;\n    width:100%;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-button.md-theme-default.md-primary {\n    color: white;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.f-s-a{\n    display:flex;\n    justify-content: space-around;\n}\n", ""]);
+exports.push([module.i, "\n.p-custom{\n    padding:16px;\n}\n.color-input-label{\n    color:rgba(0,0,0,0.54);\n    font-size:1rem;\n}\n.input-color-transparency{\n    border-radius: 0.5rem;\n    border:1px solid grey;\n    max-width:100%;\n}\n.helper-text-custom{\n    color:rgba(0,0,0,0.54);\n}\n.input-color-wrapper{\n    border:1px solid grey;\n    border-radius:0.5rem;\n}\ninput[type=\"color\"] {\n    opacity: 0;\n    display: block;\n    border: none;\n    cursor:pointer;\n    width:100%;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-button.md-theme-default.md-primary {\n    color: white;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.f-s-a{\n    display:flex;\n    justify-content: space-around;\n}\n", ""]);
 
 // exports
 
@@ -14633,7 +14228,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-auto{\n    width: 100%;\n    padding: 10px;\n    margin: 0px;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.bold{\n    font-weight:800;\n}\n.italic{\n    font-style: italic;\n}\n.fa-m{\n    font-size:18px;\n}\n#tableWrapper{\n    min-height:100vh;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n", ""]);
+exports.push([module.i, "\n.input-auto{\n    width: 100%;\n    padding: 10px;\n    margin: 0px;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.bold{\n    font-weight:800;\n}\n.italic{\n    font-style: italic;\n}\n.fa-m{\n    font-size:18px;\n}\n#tableWrapper{\n    min-height:100vh;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n", ""]);
 
 // exports
 
@@ -14652,7 +14247,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -14671,7 +14266,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -14690,7 +14285,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -14709,7 +14304,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-auto{\n    width: 100%;\n    padding: 10px;\n    margin: 0px;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.bold{\n    font-weight:800;\n}\n#tableWrapper{\n    min-height:100vh;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n", ""]);
+exports.push([module.i, "\n.input-auto{\n    width: 100%;\n    padding: 10px;\n    margin: 0px;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.bold{\n    font-weight:800;\n}\n#tableWrapper{\n    min-height:100vh;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n", ""]);
 
 // exports
 
@@ -14728,7 +14323,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.md-primary{\n    background-color:#7e57c2 !important;\n    color:#448aff;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
 
 // exports
 
@@ -46602,10 +46197,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "container grey-light page-height-default",
-      style: _vm.primaryStyle
-    },
+    { staticClass: "container grey-light page-height-default" },
     [
       _c(
         "md-snackbar",
@@ -46735,7 +46327,6 @@ var render = function() {
                         "md-button",
                         {
                           staticClass: "md-primary md-raised",
-                          style: _vm.primaryStyle,
                           on: {
                             click: function($event) {
                               return _vm.loginAttempt()
@@ -46782,20 +46373,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "container grey-light page-height-default super-text-main",
-      style: _vm.secondStyle
-    },
-    [
-      _c("p", { staticClass: "super-text" }, [
-        _vm._v("\n            GENERATOR\n        ")
-      ])
-    ]
-  )
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "container grey-light page-height-default super-text-main"
+      },
+      [
+        _c("p", { staticClass: "super-text" }, [
+          _vm._v("\n            GENERATOR\n        ")
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -46819,10 +46416,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "container grey-light page-height-default",
-      style: _vm.secondStyle
-    },
+    { staticClass: "container grey-light page-height-default" },
     [
       _c(
         "div",
@@ -47002,10 +46596,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "container grey-light page-height-default",
-      style: _vm.secondStyle
-    },
+    { staticClass: "container grey-light page-height-default" },
     [
       _c(
         "md-snackbar",
@@ -47096,11 +46687,7 @@ var render = function() {
                 _vm._v("\n                    Эта операция "),
                 _c("span", { staticClass: "c-r" }, [_vm._v("необратима")]),
                 _vm._v(", нажимая '"),
-                _c(
-                  "span",
-                  { staticClass: "c-p", style: _vm.primaryTextStyle },
-                  [_vm._v("подтвердить")]
-                ),
+                _c("span", { staticClass: "c-p" }, [_vm._v("подтвердить")]),
                 _vm._v("' "),
                 _c("br"),
                 _vm._v(
@@ -47116,7 +46703,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.onConfirm()
@@ -47248,7 +46834,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.createDepartment()
@@ -47380,7 +46965,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.editDepartment()
@@ -47435,7 +47019,6 @@ var render = function() {
                       "md-button",
                       {
                         staticClass: "md-raised md-primary",
-                        style: _vm.primaryStyle,
                         on: {
                           click: function($event) {
                             _vm.toggleModalAdd = true
@@ -47454,7 +47037,6 @@ var render = function() {
                       {
                         staticClass:
                           "md-icon-button md-dense md-raised md-primary upd-icon",
-                        style: _vm.primaryStyle,
                         on: {
                           click: function($event) {
                             return _vm.getDepartments()
@@ -47675,7 +47257,6 @@ var render = function() {
                         "md-button",
                         {
                           staticClass: "md-primary md-raised",
-                          style: _vm.primaryStyle,
                           on: {
                             click: function($event) {
                               _vm.toggleModalAdd = true
@@ -47724,10 +47305,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "container grey-light page-height-default",
-      style: _vm.secondStyle
-    },
+    { staticClass: "container grey-light page-height-default" },
     [
       _c(
         "md-snackbar",
@@ -47818,11 +47396,7 @@ var render = function() {
                 _vm._v("\n                Эта операция "),
                 _c("span", { staticClass: "c-r" }, [_vm._v("необратима")]),
                 _vm._v(", нажимая '"),
-                _c(
-                  "span",
-                  { staticClass: "c-p", style: _vm.primaryTextStyle },
-                  [_vm._v("подтвердить")]
-                ),
+                _c("span", { staticClass: "c-p" }, [_vm._v("подтвердить")]),
                 _vm._v("' "),
                 _c("br"),
                 _vm._v(" вы безвозвратно удаляете запись/записи.\n            ")
@@ -47836,7 +47410,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.onConfirm()
@@ -48082,7 +47655,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.createGroup()
@@ -48328,7 +47900,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.editGroup()
@@ -48381,7 +47952,6 @@ var render = function() {
                       "md-button",
                       {
                         staticClass: "md-raised md-primary",
-                        style: _vm.primaryStyle,
                         on: {
                           click: function($event) {
                             _vm.toggleModalAdd = true
@@ -48400,7 +47970,6 @@ var render = function() {
                       {
                         staticClass:
                           "md-icon-button md-dense md-raised md-primary upd-icon",
-                        style: _vm.primaryStyle,
                         on: {
                           click: function($event) {
                             return _vm.getGroups()
@@ -48631,7 +48200,6 @@ var render = function() {
                         "md-button",
                         {
                           staticClass: "md-primary md-raised",
-                          style: _vm.primaryStyle,
                           on: {
                             click: function($event) {
                               _vm.toggleModalAdd = true
@@ -48680,10 +48248,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "container grey-light page-height-default",
-      style: _vm.secondStyle
-    },
+    { staticClass: "container grey-light page-height-default" },
     [
       _c(
         "md-snackbar",
@@ -48774,11 +48339,7 @@ var render = function() {
                 _vm._v("\n                Эта операция "),
                 _c("span", { staticClass: "c-r" }, [_vm._v("необратима")]),
                 _vm._v(", нажимая '"),
-                _c(
-                  "span",
-                  { staticClass: "c-p", style: _vm.primaryTextStyle },
-                  [_vm._v("подтвердить")]
-                ),
+                _c("span", { staticClass: "c-p" }, [_vm._v("подтвердить")]),
                 _vm._v("' "),
                 _c("br"),
                 _vm._v(" вы безвозвратно удаляете запись/записи.\n            ")
@@ -48792,7 +48353,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.onConfirm()
@@ -48984,7 +48544,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.createSpeciality()
@@ -49176,7 +48735,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.editSpeciality()
@@ -49231,7 +48789,6 @@ var render = function() {
                       "md-button",
                       {
                         staticClass: "md-raised md-primary",
-                        style: _vm.primaryStyle,
                         on: {
                           click: function($event) {
                             _vm.toggleModalAdd = true
@@ -49250,7 +48807,6 @@ var render = function() {
                       {
                         staticClass:
                           "md-icon-button md-dense md-raised md-primary upd-icon",
-                        style: _vm.primaryStyle,
                         on: {
                           click: function($event) {
                             return _vm.getSpecialities()
@@ -49493,7 +49049,6 @@ var render = function() {
                         "md-button",
                         {
                           staticClass: "md-primary md-raised",
-                          style: _vm.primaryStyle,
                           on: {
                             click: function($event) {
                               _vm.toggleModalAdd = true
@@ -49542,10 +49097,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "container grey-light page-height-default",
-      style: _vm.secondStyle
-    },
+    { staticClass: "container grey-light page-height-default" },
     [
       _c(
         "md-snackbar",
@@ -49636,11 +49188,7 @@ var render = function() {
                 _vm._v("\n                    Эта операция "),
                 _c("span", { staticClass: "c-r" }, [_vm._v("необратима")]),
                 _vm._v(", нажимая '"),
-                _c(
-                  "span",
-                  { staticClass: "c-p", style: _vm.primaryTextStyle },
-                  [_vm._v("подтвердить")]
-                ),
+                _c("span", { staticClass: "c-p" }, [_vm._v("подтвердить")]),
                 _vm._v("' "),
                 _c("br"),
                 _vm._v(
@@ -49656,7 +49204,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.onConfirm()
@@ -50226,7 +49773,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.createStudent()
@@ -50796,7 +50342,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.editStudent()
@@ -50868,7 +50413,6 @@ var render = function() {
                           "md-button",
                           {
                             staticClass: "md-raised md-primary",
-                            style: _vm.primaryStyle,
                             on: {
                               click: function($event) {
                                 _vm.toggleModalAdd = true
@@ -50890,7 +50434,6 @@ var render = function() {
                       {
                         staticClass:
                           "md-icon-button md-dense md-raised md-primary upd-icon",
-                        style: _vm.primaryStyle,
                         on: {
                           click: function($event) {
                             return _vm.getGroups()
@@ -51154,7 +50697,6 @@ var render = function() {
                         "md-button",
                         {
                           staticClass: "md-primary md-raised",
-                          style: _vm.primaryStyle,
                           on: {
                             click: function($event) {
                               _vm.toggleModalAdd = true
@@ -51203,10 +50745,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "container grey-light page-height-default",
-      style: _vm.secondStyle
-    },
+    { staticClass: "container grey-light page-height-default" },
     [
       _c(
         "md-snackbar",
@@ -51297,11 +50836,7 @@ var render = function() {
                 _vm._v("\n                Эта операция "),
                 _c("span", { staticClass: "c-r" }, [_vm._v("необратима")]),
                 _vm._v(", нажимая '"),
-                _c(
-                  "span",
-                  { staticClass: "c-p", style: _vm.primaryTextStyle },
-                  [_vm._v("подтвердить")]
-                ),
+                _c("span", { staticClass: "c-p" }, [_vm._v("подтвердить")]),
                 _vm._v("' "),
                 _c("br"),
                 _vm._v(" вы безвозвратно удаляете запись/записи.\n            ")
@@ -51315,7 +50850,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.onConfirm()
@@ -51536,7 +51070,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.createSubject()
@@ -51757,7 +51290,6 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary md-raised",
-                      style: _vm.primaryStyle,
                       on: {
                         click: function($event) {
                           return _vm.editSubject()
@@ -51810,7 +51342,6 @@ var render = function() {
                       "md-button",
                       {
                         staticClass: "md-raised md-primary",
-                        style: _vm.primaryStyle,
                         on: {
                           click: function($event) {
                             _vm.toggleModalAdd = true
@@ -51829,7 +51360,6 @@ var render = function() {
                       {
                         staticClass:
                           "md-icon-button md-dense md-raised md-primary upd-icon",
-                        style: _vm.primaryStyle,
                         on: {
                           click: function($event) {
                             return _vm.getSubjects()
@@ -52094,7 +51624,6 @@ var render = function() {
                         "md-button",
                         {
                           staticClass: "md-primary md-raised",
-                          style: _vm.primaryStyle,
                           on: {
                             click: function($event) {
                               _vm.toggleModalAdd = true
@@ -52146,7 +51675,6 @@ var render = function() {
     {
       staticClass:
         "navbar navbar-expand-lg navbar-light fixed-top orange-stress-transparent",
-      style: _vm.navbarStyle,
       attrs: { id: "navbar_element" }
     },
     [
@@ -52432,10 +51960,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "container grey-light page-height-default reg-wrapper",
-      style: _vm.secondStyle
-    },
+    { staticClass: "container grey-light page-height-default reg-wrapper" },
     [
       _c(
         "md-snackbar",
@@ -52762,10 +52287,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "container grey-light page-height-default",
-      style: _vm.secondStyle
-    },
+    { staticClass: "container grey-light page-height-default" },
     [
       _c(
         "md-snackbar",
@@ -52990,7 +52512,6 @@ var render = function() {
                                       "md-button",
                                       {
                                         staticClass: "md-primary",
-                                        style: _vm.primaryStyle,
                                         attrs: {
                                           type: "button",
                                           disabled: _vm.sendingFacultyInfo
@@ -53214,7 +52735,7 @@ var render = function() {
                                         staticClass:
                                           "md-helper-text helper-text-custom"
                                       },
-                                      [_vm._v("Прозрачность")]
+                                      [_vm._v("Непрозрачность")]
                                     )
                                   ]
                                 )
@@ -53325,7 +52846,7 @@ var render = function() {
                                         staticClass:
                                           "md-helper-text helper-text-custom"
                                       },
-                                      [_vm._v("Прозрачность")]
+                                      [_vm._v("Непрозрачность")]
                                     )
                                   ]
                                 )
@@ -53436,7 +52957,7 @@ var render = function() {
                                         staticClass:
                                           "md-helper-text helper-text-custom"
                                       },
-                                      [_vm._v("Прозрачность")]
+                                      [_vm._v("Непрозрачность")]
                                     )
                                   ]
                                 )
@@ -53456,7 +52977,6 @@ var render = function() {
                                   "md-button",
                                   {
                                     staticClass: "md-primary",
-                                    style: _vm.primaryStyle,
                                     attrs: {
                                       type: "button",
                                       disabled: _vm.sendingTheme
@@ -53531,10 +53051,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "container grey-light page-height-default",
-      style: _vm.secondStyle
-    },
+    { staticClass: "container grey-light page-height-default" },
     [
       _c(
         "div",
@@ -53676,7 +53193,6 @@ var render = function() {
                       "md-button",
                       {
                         staticClass: "md-dense md-raised md-primary",
-                        style: _vm.primaryStyle,
                         attrs: { type: "submit" },
                         on: {
                           click: function($event) {
@@ -58806,10 +58322,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "container grey-light page-height-default",
-      style: _vm.secondStyle
-    },
+    { staticClass: "container grey-light page-height-default" },
     [
       _c(
         "div",
@@ -58951,7 +58464,6 @@ var render = function() {
                       "md-button",
                       {
                         staticClass: "md-dense md-raised md-primary",
-                        style: _vm.primaryStyle,
                         attrs: { type: "submit" },
                         on: {
                           click: function($event) {
@@ -106392,14 +105904,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************!*\
   !*** ./resources/js/components/MainPage.vue ***!
   \**********************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MainPage_vue_vue_type_template_id_2bd38d5a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MainPage.vue?vue&type=template&id=2bd38d5a& */ "./resources/js/components/MainPage.vue?vue&type=template&id=2bd38d5a&");
 /* harmony import */ var _MainPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainPage.vue?vue&type=script&lang=js& */ "./resources/js/components/MainPage.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _MainPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _MainPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -106429,13 +105942,15 @@ component.options.__file = "resources/js/components/MainPage.vue"
 /*!***********************************************************************!*\
   !*** ./resources/js/components/MainPage.vue?vue&type=script&lang=js& ***!
   \***********************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./MainPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MainPage.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -106461,14 +105976,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************!*\
   !*** ./resources/js/components/ManageData.vue ***!
   \************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ManageData_vue_vue_type_template_id_06bc83da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageData.vue?vue&type=template&id=06bc83da& */ "./resources/js/components/ManageData.vue?vue&type=template&id=06bc83da&");
 /* harmony import */ var _ManageData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageData.vue?vue&type=script&lang=js& */ "./resources/js/components/ManageData.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ManageData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ManageData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -106498,13 +106014,15 @@ component.options.__file = "resources/js/components/ManageData.vue"
 /*!*************************************************************************!*\
   !*** ./resources/js/components/ManageData.vue?vue&type=script&lang=js& ***!
   \*************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ManageData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ManageData.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

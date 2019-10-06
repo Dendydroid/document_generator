@@ -1,5 +1,5 @@
 <template>
-    <div class="container grey-light page-height-default" :style="primaryStyle">
+    <div class="container grey-light page-height-default">
 
         <md-snackbar v-bind:style="snackbar.bg" :md-position="snackbar.position" :md-duration="snackbar.duration" :md-active.sync="snackbar.showSnackbar" md-persistent>
             <span v-model="errorMessage" class="c-alert">{{errorMessage}}</span>
@@ -30,7 +30,7 @@
                         <span class="md-helper-text">Введите пароль</span>
                     </md-field>
                     <span class="f-s-c">
-                        <md-button :style="primaryStyle" class="md-primary md-raised" @click="loginAttempt()">Сохранить</md-button>
+                        <md-button  class="md-primary md-raised" @click="loginAttempt()">Сохранить</md-button>
                     </span>
                 </md-card-content>
             </md-card>
@@ -135,8 +135,6 @@
         name: 'Login',
         data () {
             return {
-                primaryStyle:'',
-                secondStyle:'',
                 userEmail:'',
                 userPassword:'',
                 errors:[],
@@ -168,26 +166,6 @@
                 let result = 'rgba('+r+','+g+','+b+','+opacity+')';
                 return result;
             },
-            getUserSession(){
-                axios
-                    .post('/getUserSession', {
-                    })
-                    .then(response => {
-                        if(this.user.theme!=='')
-                        {
-                            this.primaryStyle="background-color:"+this.convertHex(this.user.theme.primaryBG.color,this.user.theme.primaryBG.transparency)+' !important;';
-                            this.secondStyle="background-color:"+this.convertHex(this.user.theme.secondBG.color,this.user.theme.secondBG.transparency)+' !important;';
-                        }
-                        if(response.data.logged)
-                        {
-                            window.location='/';
-                        }
-
-                    }).catch(e => {
-                    console.log(e);
-                    this.errors.push(e.data);
-                });
-            },
             loginAttempt() {
                 axios
                     .post('/loginUser', {
@@ -210,7 +188,6 @@
             }
         },
         created() {
-            this.getUserSession();
         }
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <nav id="navbar_element" class="navbar navbar-expand-lg navbar-light fixed-top orange-stress-transparent" :style="navbarStyle">
+    <nav id="navbar_element" class="navbar navbar-expand-lg navbar-light fixed-top orange-stress-transparent">
         <a class="navbar-brand larafont-nav ml-2" href="/">Generator</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -60,7 +60,6 @@
         data () {
             return {
                 noUser:false,
-                navbarStyle:'',
                 user: {
                     firstName:'',
                     surname:'',
@@ -86,10 +85,6 @@
                     })
                     .then(response => {
                         this.user = response.data;
-                        if(this.user.theme!=='')
-                        {
-                            this.navbarStyle="background-color:"+this.convertHex(this.user.theme.navbarBG.color,this.user.theme.navbarBG.transparency)+' !important;';
-                        }
                     }).catch(e => {
                         this.errors.push(e.response.data.errors);
                     });
@@ -102,15 +97,6 @@
                     .catch(e => {
                     });
             },
-            convertHex(hex,opacity){
-                hex = hex.replace('#','');
-                let r = parseInt(hex.substring(0,2), 16);
-                let g = parseInt(hex.substring(2,4), 16);
-                let b = parseInt(hex.substring(4,6), 16);
-
-                let result = 'rgba('+r+','+g+','+b+','+opacity+')';
-                return result;
-            }
         },
         created() {
             this.getUserSession();

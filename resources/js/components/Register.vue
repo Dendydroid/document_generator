@@ -1,5 +1,5 @@
 <template>
-    <div class="container grey-light page-height-default reg-wrapper" :style="secondStyle">
+    <div class="container grey-light page-height-default reg-wrapper" >
 
         <md-snackbar v-bind:style="snackbar.bg" :md-position="snackbar.position" :md-duration="snackbar.duration" :md-active.sync="snackbar.showSnackbar" md-persistent>
             <span v-model="errorMessage" class="c-alert">{{errorMessage}}</span>
@@ -139,10 +139,7 @@
         font-weight: 600 !important;
         font-size: 1rem;
     }
-    .c-p{
-        color:#7e57c2;
-        font-weight: 600 !important;
-    }
+
     .md-button.md-theme-default.md-primary {
         color: white;
     }
@@ -177,8 +174,6 @@
         name: 'Register',
         data () {
             return {
-                secondStyle:'',
-                primaryStyle:'',
                 userPassword:'',
                 userPasswordConfirm:'',
                 userEmail:'',
@@ -197,15 +192,6 @@
             }
         },
         methods:{
-            convertHex(hex,opacity){
-                hex = hex.replace('#','');
-                let r = parseInt(hex.substring(0,2), 16);
-                let g = parseInt(hex.substring(2,4), 16);
-                let b = parseInt(hex.substring(4,6), 16);
-
-                let result = 'rgba('+r+','+g+','+b+','+opacity+')';
-                return result;
-            },
             getUserSession(){
                 axios
                     .post('/getUserSession', {

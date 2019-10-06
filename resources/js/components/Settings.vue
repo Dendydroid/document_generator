@@ -1,5 +1,5 @@
 <template>
-    <div class="container grey-light page-height-default" :style="secondStyle">
+    <div class="container grey-light page-height-default">
 
         <md-snackbar v-bind:style="snackbar.bg" :md-position="snackbar.position" :md-duration="snackbar.duration" :md-active.sync="snackbar.showSnackbar" md-persistent>
             <span v-model="errorMessage" class="c-alert">{{errorMessage}}</span>
@@ -49,7 +49,7 @@
                                     <md-progress-bar md-mode="indeterminate" v-if="sendingFacultyInfo" />
 
                                     <md-card-actions>
-                                        <md-button :style="primaryStyle" type="button" class="md-primary" :disabled="sendingFacultyInfo" @click="updateFacultyInfo()">Сохранить</md-button>
+                                        <md-button type="button" class="md-primary" :disabled="sendingFacultyInfo" @click="updateFacultyInfo()">Сохранить</md-button>
                                     </md-card-actions>
                                 </md-card>
 
@@ -85,7 +85,7 @@
                                             </div>
                                             <div class="col-md-3 p-custom text-left">
                                                 <input class="input-color-transparency" v-model="secondBGcolorTransparency" step="0.01" type="number" min="0" max="1">
-                                                <span class="md-helper-text helper-text-custom">Прозрачность</span>
+                                                <span class="md-helper-text helper-text-custom">Непрозрачность</span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -99,12 +99,12 @@
                                             </div>
                                             <div class="col-md-3 p-custom text-left">
                                                 <input class="input-color-transparency" v-model="navbarBGcolorTransparency" step="0.01" type="number" min="0" max="1">
-                                                <span class="md-helper-text helper-text-custom">Прозрачность</span>
+                                                <span class="md-helper-text helper-text-custom">Непрозрачность</span>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 p-custom">
-                                                <label class="color-input-label" for="secondBGcolor">Цвет кнопок</label>
+                                                <label class="color-input-label" for="secondBGcolor">Цвет действий</label>
                                             </div>
                                             <div class="col-md-3 p-custom text-left">
                                                 <div class="input-color-wrapper" :style="'background-color:'+primaryBGcolor">
@@ -113,7 +113,7 @@
                                             </div>
                                             <div class="col-md-3 p-custom text-left">
                                                 <input class="input-color-transparency" v-model="primaryBGcolorTransparency" step="0.01" type="number" min="0" max="1">
-                                                <span class="md-helper-text helper-text-custom">Прозрачность</span>
+                                                <span class="md-helper-text helper-text-custom">Непрозрачность</span>
                                             </div>
                                         </div>
                                     </md-card-content>
@@ -121,7 +121,7 @@
                                     <md-progress-bar md-mode="indeterminate" v-if="sendingTheme" />
 
                                     <md-card-actions>
-                                        <md-button :style="primaryStyle" type="button" class="md-primary" :disabled="sendingTheme" @click="updateTheme()">Сохранить</md-button>
+                                        <md-button type="button" class="md-primary" :disabled="sendingTheme" @click="updateTheme()">Сохранить</md-button>
                                     </md-card-actions>
                                 </md-card>
 
@@ -187,10 +187,7 @@
         font-weight: 600 !important;
         font-size: 1rem;
     }
-    .c-p{
-        color:#7e57c2;
-        font-weight: 600 !important;
-    }
+
     .md-button.md-theme-default.md-primary {
         color: white;
     }

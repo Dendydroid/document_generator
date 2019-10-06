@@ -67,9 +67,7 @@ html, body {
 .good-icon{
     color:#2ecc71;
 }
-.c-p{
-    cursor:pointer;
-}
+
 .page-height-default{
     min-height:100vh;
 }
@@ -80,44 +78,15 @@ html, body {
 .orange-stress{
     background-color:#F97F51;
 }
-.orange-stress-transparent{
-    transition-timing-function: ease-out;
-    transition: 0.5s;
-    background-color:rgba(0, 0, 0, 0.5);
-}
-.orange-stress-transparent:hover{
-    transition-timing-function: ease-in;
-    transition: 0.5s;
-    background-color:rgba(0, 0, 0, 0.2);
-}
+
 .orange-lighter{
     background-color:#f19066;
 }
 .orange-lightest{
     background-color:#f19066;
 }
-.grey-lightest{
-    background-color: #f1f2f6;
-}
-.grey-light{
-    background-color: #dfe4ea;
-}
-@media (min-width: 992px){
-    .li-stretch{
-        transition-timing-function: ease-out;
-        transition: 0.5s;
-        text-align: center !important;
-        width:100% !important;
-        height:100%;
-    }
-    .li-stretch:hover{
-        transition-timing-function: ease-in;
-        transition: 0.5s;
-        background-color:rgba(0,0,0,0.2);
-        /*border-radius: 0.25rem;*/
-        height:100%;
-    }
-}
+
+
 .larafont-navlink-dropdown{
     color: #303952 !important;
     font-family: 'Nunito', sans-serif !important;
@@ -202,3 +171,4 @@ html, body {
 .p-t{
     padding-top:5rem;
 }
+
