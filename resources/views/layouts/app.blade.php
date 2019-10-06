@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <?php $email = isset(session()->all()['email']) ? session()->all()['email']:'Anonymous'; ?>
+    <title>{{ config('app.name', 'Laravel') }} - <?=$email?></title>
     <!-- Scripts -->
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -17,9 +17,12 @@
     <link href="{{ asset('css/page_css/main_style.css') }}" rel="stylesheet">
 </head>
 <body>
+<?php
+$appColor = isset(session()->all()['theme']) ? session()->all()['theme']['mainBG']['color']:'';
 
+?>
 
-    <div id="app" class="grey-lightest">
+    <div id="app" class="grey-lightest" style="<?=($appColor!=''?("background-color:".$appColor." !important"):'')?>">
         <div class="container-fluid p-0">
             @yield('content')
         </div>

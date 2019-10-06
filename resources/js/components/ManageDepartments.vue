@@ -1,5 +1,5 @@
 <template>
-    <div class="container grey-light page-height-default">
+    <div class="container grey-light page-height-default" :style="secondStyle">
 
         <md-snackbar v-bind:style="snackbar.bg" :md-position="snackbar.position" :md-duration="snackbar.duration" :md-active.sync="snackbar.showSnackbar" md-persistent>
             <span v-model="errorMessage" class="c-alert">{{errorMessage}}</span>
@@ -13,10 +13,10 @@
             <md-dialog :md-active.sync="toggleModalSure" class=" of-auto" md-scrollbar>
                 <md-dialog-title class="fb-center"><p>Вы уверены? <md-icon class="mb-1 md-accent">warning</md-icon></p></md-dialog-title>
                 <div class="pl-3 pr-3 pb-3 larafont">
-                    Эта операция <span class="c-r">необратима</span>, нажимая '<span class="c-p">подтвердить</span>' <br> вы безвозвратно удаляете запись/записи.
+                    Эта операция <span class="c-r">необратима</span>, нажимая '<span class="c-p" :style="primaryTextStyle" >подтвердить</span>' <br> вы безвозвратно удаляете запись/записи.
                 </div>
                 <div class="buttons pb-3 pl-2 pr-2">
-                    <md-button class="md-primary md-raised" @click="onConfirm()">Подтвердить</md-button>
+                    <md-button :style="primaryStyle" class="md-primary md-raised" @click="onConfirm()">Подтвердить</md-button>
                     <md-button class="md-accent md-raised" @click="onCancel()">Отмена</md-button>
                 </div>
             </md-dialog>
@@ -41,7 +41,7 @@
                     </md-field>
                 </div>
                 <div class="buttons pb-3">
-                    <md-button class="md-primary md-raised" @click="createDepartment()">Сохранить</md-button>
+                    <md-button :style="primaryStyle" class="md-primary md-raised" @click="createDepartment()">Сохранить</md-button>
                     <md-button class="md-accent md-raised" @click="toggleModalAdd=false">Отмена</md-button>
                 </div>
             </md-dialog>
@@ -66,7 +66,7 @@
                     </md-field>
                 </div>
                 <div class="buttons pb-3">
-                    <md-button class="md-primary md-raised" @click="editDepartment()">Сохранить</md-button>
+                    <md-button :style="primaryStyle" class="md-primary md-raised" @click="editDepartment()">Сохранить</md-button>
                     <md-button class="md-accent md-raised" @click="toggleModalEdit=false">Отмена</md-button>
                 </div>
             </md-dialog>
@@ -85,10 +85,10 @@
                 </md-card-header>
                 <md-card-content>
                     <div class="buttons">
-                        <md-button class="md-raised md-primary" v-on:click="toggleModalAdd=true">
+                        <md-button :style="primaryStyle" class="md-raised md-primary" v-on:click="toggleModalAdd=true">
                             Добавить
                         </md-button>
-                        <md-button class="md-icon-button md-dense md-raised md-primary upd-icon" @click="getDepartments()">
+                        <md-button :style="primaryStyle" class="md-icon-button md-dense md-raised md-primary upd-icon" @click="getDepartments()">
                             <md-icon>cached</md-icon>
                         </md-button>
                     </div>
@@ -131,7 +131,7 @@
                     <md-table-empty-state
                         md-label="Кафедры не найдены"
                         :md-description="'Не было найдено ни одной кафедры. Измените запрос или создайте новую кафедру.'">
-                        <md-button class="md-primary md-raised" v-on:click="toggleModalAdd=true">Добавить</md-button>
+                        <md-button :style="primaryStyle" class="md-primary md-raised" v-on:click="toggleModalAdd=true">Добавить</md-button>
                     </md-table-empty-state>
 
                     <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="multiple" md-auto-select>
@@ -225,6 +225,9 @@ button.btn-warn{
                     duration: 4000,
                     bg: 'background-color:rgba(33, 33, 33, 0.6)'
                 },
+                secondStyle:'',
+                primaryStyle:'',
+                primaryTextStyle:'',
                 searchColumn: 'fullName',
                 errorMessage: '',
                 editId: '',
@@ -247,6 +250,32 @@ button.btn-warn{
             }
         },
         methods: {
+            convertHex(hex,opacity){
+                hex = hex.replace('#','');
+                let r = parseInt(hex.substring(0,2), 16);
+                let g = parseInt(hex.substring(2,4), 16);
+                let b = parseInt(hex.substring(4,6), 16);
+
+                let result = 'rgba('+r+','+g+','+b+','+opacity+')';
+                return result;
+            },
+            getUserSession(){
+                axios
+                    .post('/getUserSession', {
+                    })
+                    .then(response => {
+                        if(response.data.theme!=='')
+                        {
+                            this.secondStyle="background-color:"+this.convertHex(response.data.theme.secondBG.color,response.data.theme.secondBG.transparency)+' !important;';
+                            this.primaryStyle="background-color:"+this.convertHex(response.data.theme.primaryBG.color,response.data.theme.primaryBG.transparency)+' !important;';
+                            this.primaryTextStyle = "color:"+this.convertHex(response.data.theme.primaryBG.color,response.data.theme.primaryBG.transparency)+' !important;';
+                        }
+
+                    }).catch(e => {
+                    console.log(e);
+                    this.errors.push(e.data);
+                });
+            },
             onSelect (items) {
                 this.selected = items;
                 this.toggleShowEditButton(items);
@@ -390,6 +419,7 @@ button.btn-warn{
             }
         },
         created () {
+            this.getUserSession();
             this.getDepartments();
         }
     }

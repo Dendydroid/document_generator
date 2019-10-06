@@ -36,9 +36,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function registration()
+    public function register()
     {
-        return view('auth.registerUser');
+        return view('register');
     }
 
     /**
@@ -48,6 +48,6 @@ class HomeController extends Controller
      */
     public function login()
     {
-        return view('auth.loginUser');
+        return view('login');
     }
 }

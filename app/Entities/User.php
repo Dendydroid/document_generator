@@ -42,6 +42,35 @@ class User {
     private $password;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Theme",cascade={"persist"})
+     * @ORM\JoinColumn(name="themeId", referencedColumnName="id")
+     */
+    private $theme;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAdmin;
+
+    /**
+     * User constructor.
+     * @param $id
+     */
+    public function __construct()
+    {
+        $this->isAdmin = false;
+        $this->theme = new Theme([
+            'mainBGcolor' => "#f1f2f6",
+            'secondBGcolor' => "#dfe4ea",
+            'secondBGcolorTransparency' => 1,
+            'navbarBGcolor' => "#f97f51",
+            'navbarBGcolorTransparency' => 0.5,
+            'primaryBGcolor' => "#7e57c2",
+            'primaryBGcolorTransparency' => 1,
+        ]);
+    }
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -139,14 +168,52 @@ class User {
         return $this;
     }
 
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
+    }
+
+    /**
+     * @param bool $isAdmin
+     * @return User
+     */
+    public function setIsAdmin(bool $isAdmin): User
+    {
+        $this->isAdmin = $isAdmin;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTheme()
+    {
+        return $this->theme->getArrayData();
+    }
+
+    /**
+     * @param $themeArr
+     * @return $this
+     */
+    public function setTheme($themeArr)
+    {
+        $this->theme = new Theme($themeArr);
+        return $this;
+    }
+
     public function getUserArray(): array
     {
         return [
+            "id" => $this->id,
             "firstName" => $this->firstName,
             "surname" => $this->surname,
             "middleName" => $this->middleName,
             "email" => $this->email,
-            "password" => $this->password
+            "theme" => $this->theme->getArrayData(),
+            "isAdmin" => $this->isAdmin
         ];
     }
 

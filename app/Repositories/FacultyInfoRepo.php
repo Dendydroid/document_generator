@@ -1,5 +1,6 @@
 <?php
 namespace App\Repositories;
+use App\Constants;
 use App\Entities\FacultyInfo;
 use App\Entities\Group;
 use App\Entities\Speciality;
@@ -60,24 +61,25 @@ class FacultyInfoRepo extends EntityRepository {
 
             $this->_em->persist($facultyInfo);
             $this->_em->flush();
-            return $facultyInfo;
+            return $facultyInfo->getTableArray();
         }
+
         $errors["errors"] = $validation->errors()->getMessages();
-        return $errors;
+        return response()->json($errors, 400);
     }
 
     /**
      * @param bool $entity
-     * @return FacultyInfo|array|null
+     * @return array|null
      */
     public function getFacultyInfo($entity = false)
     {
         $facultyInfo = $this->findAll();
         if($entity)
         {
-            return $facultyInfo[0] instanceof FacultyInfo ? $facultyInfo[0] : null;
+            return isset($facultyInfo[0]) ? $facultyInfo[0] : null;
         }
-        return $facultyInfo[0] instanceof FacultyInfo ? $facultyInfo[0]->getTableArray() : [];
+        return isset($facultyInfo[0]) ? $facultyInfo[0]->getTableArray() : [];
     }
 }
 

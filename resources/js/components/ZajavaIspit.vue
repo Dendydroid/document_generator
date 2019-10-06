@@ -1,5 +1,5 @@
 <template>
-    <div class="container grey-light page-height-default">
+    <div class="container grey-light page-height-default" :style="secondStyle">
         <div class="p-t-b">
             <p class="display-4 text-center">Заява - іспит</p>
             <div class="row pl-3 pr-3 pt-3">
@@ -22,7 +22,7 @@
                 <div class="col-4 center-button" v-show="subjectIsChosen">
                     <form action="http://127.0.0.1:5000/html2Excel" method="POST"><!-- "<style>"+$("style:last").html()+"</style>"+" "+$("#tableWrapper").html() -->
                         <input type="text" name="html" v-model="requestTable" style="display:none">
-                        <md-button type="submit" class="md-dense md-raised md-primary" @click='prepareTable()'>Генерировать</md-button>
+                        <md-button :style="primaryStyle" type="submit" class="md-dense md-raised md-primary" @click='prepareTable()'>Генерировать</md-button>
                     </form>
 
                 </div>
@@ -337,6 +337,8 @@
         name: 'ZajavaIspit',
         data () {
             return {
+                secondStyle:'',
+                primaryStyle:'',
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 groupList:[],
                 groupSubjects:[],
@@ -352,6 +354,32 @@
             }
         },
         methods: {
+            convertHex(hex,opacity){
+                hex = hex.replace('#','');
+                let r = parseInt(hex.substring(0,2), 16);
+                let g = parseInt(hex.substring(2,4), 16);
+                let b = parseInt(hex.substring(4,6), 16);
+
+                let result = 'rgba('+r+','+g+','+b+','+opacity+')';
+                return result;
+            },
+            getUserSession(){
+                axios
+                    .post('/getUserSession', {
+                    })
+                    .then(response => {
+                        if(response.data.theme!=='')
+                        {
+                            this.secondStyle="background-color:"+this.convertHex(response.data.theme.secondBG.color,response.data.theme.secondBG.transparency)+' !important;';
+                            this.primaryStyle="background-color:"+this.convertHex(response.data.theme.primaryBG.color,response.data.theme.primaryBG.transparency)+' !important;';
+                            this.primaryTextStyle = "color:"+this.convertHex(response.data.theme.primaryBG.color,response.data.theme.primaryBG.transparency)+' !important;';
+                        }
+
+                    }).catch(e => {
+                    console.log(e);
+                    this.errors.push(e.data);
+                });
+            },
             loadGroups() {
                 axios
                     .get('/getGroups')
@@ -432,6 +460,7 @@
             }
         },
         created () {
+            this.getUserSession();
             console.log("CREATED");
             this.loadGroups();
             this.getInlineStyles();

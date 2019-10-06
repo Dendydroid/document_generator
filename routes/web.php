@@ -23,11 +23,15 @@ Route::get('/manage', function(\Illuminate\Http\Request $request){
 })->name('manage');
 
 //VIEWS
-Route::get('/registration', 'HomeController@registration')->name('registration');
+Route::get('/register', 'HomeController@register')->name('register');
 Route::get('/login', 'HomeController@login')->name('login');
 Route::get('/logout', 'UserController@logout')->name('logout');
-Route::get('/profile', 'HomeController@index')->name('profile')->middleware('logged');
-
+Route::get('/profile', 'HomeController@index')->name('profile');
+Route::post('/getUserSession', 'UserController@getUserSession')->name('getUserSession');
+Route::post('/hasNoUsers', 'UserController@hasNoUsers')->name('hasNoUsers');
+Route::post('/updateFacultyInfo','DataController@updateFacultyInfo')->name('updateFacultyInfo');
+Route::post('/getFacultyInfo','DataController@getFacultyInfo')->name('getFacultyInfo');
+Route::post('/updateTheme','UserController@updateTheme')->name('updateTheme');
 
 Route::get('/settings', 'HomeController@settings')->name('settings');
 //END_VIEWS

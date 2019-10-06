@@ -8,6 +8,7 @@ use App\Entities\Group;
 use App\Entities\Speciality;
 use App\Entities\Student;
 use App\Entities\Subject;
+use App\Repositories\FacultyInfoRepo;
 use App\Repositories\GroupRepo;
 use App\Repositories\SpecialityRepo;
 use App\Repositories\StudentRepo;
@@ -74,6 +75,16 @@ class DataController extends Controller
     private $student = "App\Entities\Student";
 
     /**
+     * @var FacultyInfoRepo
+     */
+    private $repoFacultyInfo;
+
+    /**
+     * @var string
+     */
+    private $facultyInfo = "App\Entities\FacultyInfo";
+
+    /**
      * DataController constructor.
      * @param $entityManager
      */
@@ -86,6 +97,7 @@ class DataController extends Controller
         $this->repoSubjects = $this->entityManager->getRepository($this->subject);
         $this->repoGroup = $this->entityManager->getRepository($this->group);
         $this->repoStudent = $this->entityManager->getRepository($this->student);
+        $this->repoFacultyInfo = $this->entityManager->getRepository($this->facultyInfo);
     }
 
     public function getF(Request $request)
@@ -119,6 +131,21 @@ class DataController extends Controller
             }
         }
         return true;
+    }
+
+
+    public function updateFacultyInfo(Request $request)
+    {
+        if($request->session()->all()['isAdmin'])
+        {
+           return $this->repoFacultyInfo->updateFacultyInfo($request->all());
+        }
+        return response()->json(Constants::OPERATION_SUPER_FAILED, 400);
+    }
+
+    public function getFacultyInfo(Request $request)
+    {
+        return $this->repoFacultyInfo->getFacultyInfo();
     }
 
 

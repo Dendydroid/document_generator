@@ -22,13 +22,18 @@ class Constants{
     const OPERATION_FAILED = ["failed" => 1];
     const OPERATION_SUCCESSFUL = ["success" => 1];
 
+    const OPERATION_SUPER_FAILED = ["failed" => 1, "message" => "Выйды отсюда, розбийнык!"];
+
+
     const SESSION_USER_DATA_KEYS = [
+        "id",
         "email",
-        "password",
         "logged",
         "firstName",
         "surname",
         "middleName",
+        "theme",
+        "isAdmin",
     ];
 
     const FACULTY_REQUIRED = [

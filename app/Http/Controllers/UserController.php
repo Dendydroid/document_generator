@@ -49,10 +49,10 @@ class UserController extends Controller {
     {
         $validator = Validator::make($request, [
             "firstName" => "required|alpha|max:255",
-            "surname" => "required|alpha|max:255",
+            "surname" => "required|alpha|max:255|",
             "middleName" => "required|alpha|max:255",
-            "password" => "required|max:255",
-            "email" => "required|email|unique:App\Entities\User,email|max:255"
+            "password" => "required|max:255|min:6",
+            "email" => "required|email|unique:App\Entities\User,email|max:255|min:4"
         ]);
 
         return $validator;
@@ -65,20 +65,24 @@ class UserController extends Controller {
      */
     public function createUser(Request $request)
     {
-        $data = $request->all();
-        $validation = $this->validateUser($data);
-        if(!$validation->fails()){
-            $user = new User();
-            $user->setEmail($data['email'])
-                ->setFirstName($data['firstName'])
-                ->setSurname($data['surname'])
-                ->setMiddleName($data['middleName'])
-                ->setPassword(Hash::make($data['password']));
-            $this->userRepo->create($user);
-        }else{
-            return $validation->errors();
+        if($request->session()->get('isAdmin'))
+        {
+            $data = $request->all();
+            $validation = $this->validateUser($data);
+            if(!$validation->fails()){
+                $user = new User();
+                $user->setEmail($data['email'])
+                    ->setFirstName($data['firstName'])
+                    ->setSurname($data['surname'])
+                    ->setMiddleName($data['middleName'])
+                    ->setPassword(Hash::make($data['password']));
+                $this->userRepo->create($user);
+            }else{
+                return response()->json($validation->errors(), 400);
+            }
+            return Constants::SUCCESSFUL_REGISTRATION;
         }
-        return Constants::SUCCESSFUL_REGISTRATION;
+        return response()->json(Constants::OPERATION_SUPER_FAILED, 400);
     }
 
     /**
@@ -93,7 +97,7 @@ class UserController extends Controller {
             $request->session()->put("logged",true);
             return Constants::SUCCESSFUL_LOGIN;
         }
-        return Constants::OPERATION_FAILED;
+        return response()->json(Constants::OPERATION_FAILED, 400);
     }
 
     public function logout(Request $request)
@@ -123,4 +127,40 @@ class UserController extends Controller {
     {
         return $this->userRepo->removeUser($request);
     }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function getUserSession(Request $request)
+    {
+        $session = $request->session()->all();
+        $result = [];
+        foreach (Constants::SESSION_USER_DATA_KEYS as $key)
+        {
+            $result[$key] = $request->session()->get($key);
+        }
+        return $result;
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function hasNoUsers(Request $request)
+    {
+        if($this->userRepo->noUsers())
+        {
+            return Constants::OPERATION_SUCCESSFUL;
+        }
+        return response()->json(Constants::OPERATION_FAILED, 400);
+    }
+
+    public function updateTheme(Request $request)
+    {
+        $user = $this->userRepo->updateTheme($request->all(), $request->session()->all()['id']);
+        $request->session()->forget(["theme"]);
+        $request->session()->put(["theme" => $user->getTheme()]);
+    }
+
 }

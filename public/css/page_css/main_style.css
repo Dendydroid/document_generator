@@ -83,12 +83,12 @@ html, body {
 .orange-stress-transparent{
     transition-timing-function: ease-out;
     transition: 0.5s;
-    background-color:rgba(249, 127, 81, 0.5);
+    background-color:rgba(0, 0, 0, 0.5);
 }
 .orange-stress-transparent:hover{
     transition-timing-function: ease-in;
     transition: 0.5s;
-    background-color:rgba(249, 127, 81, 1);
+    background-color:rgba(0, 0, 0, 0.2);
 }
 .orange-lighter{
     background-color:#f19066;
@@ -113,7 +113,7 @@ html, body {
     .li-stretch:hover{
         transition-timing-function: ease-in;
         transition: 0.5s;
-        background-color:#f19066;
+        background-color:rgba(0,0,0,0.2);
         /*border-radius: 0.25rem;*/
         height:100%;
     }

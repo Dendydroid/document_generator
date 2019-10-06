@@ -70,7 +70,7 @@ class FacultyInfo {
      * @param string $abbreviation
      * @return FacultyInfo
      */
-    public function setAbbreviation(string $abbreviation): string
+    public function setAbbreviation(string $abbreviation): FacultyInfo
     {
         $this->abbreviation = $abbreviation;
         return $this;

@@ -2,58 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2c251a4-e1cc-4783-b479-dcfda0d73dae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Entities/FacultyInfo.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/FacultyInfoRepo.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Settings.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/manage/departments.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesDepartment.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v8-compile-cache-0/6.2.414.50/zSprojectszSDGzSdocument_generatorzSgeneratorzSnode_moduleszSwebpack-clizSbinzScli.js.BLOB" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v8-compile-cache-0/6.2.414.50/zSprojectszSDGzSdocument_generatorzSgeneratorzSnode_moduleszSwebpack-clizSbinzScli.js.MAP" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Entities/Theme.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Login.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Register.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/login.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/register.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesTheme.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Entities/Faculty.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/Department.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Entities/Group.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/Group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Entities/Speciality.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/Speciality.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Constants.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Entities/FacultyInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/FacultyInfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Entities/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GeneratorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GeneratorController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/FacultyRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/DepartmentRepo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/GroupRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/GroupRepo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/SpecialityRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/SpecialityRepo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/StudentRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/StudentRepo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/SubjectRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/SubjectRepo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodeServer/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/nodeServer/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/FacultyInfoRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/FacultyInfoRepo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/UserRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/UserRepo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/page_css/main_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/page_css/main_style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/MainPage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ManageData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageData.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageFaculties.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageDepartments.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageDepartments.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageDepartments.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ManageGroups.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageGroups.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ManageSpecialities.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageSpecialities.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ManageStudents.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageStudents.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ManageSubjects.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageSubjects.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Navbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Settings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Settings.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Vidomist1Mod.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Vidomist1Mod.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Vidomist2Mod.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Vidomist2Mod.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/VidomistKR.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/VidomistKR.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/VpiskaOzinok.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/VpiskaOzinok.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ZajavaIspit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ZajavaIspit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ZvedenaVidomist.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ZvedenaVidomist.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/generate/vidomist_kr.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/generate/vidomist_kr.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/generate/vidomist_mod_1.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/generate/vidomist_mod_1.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/generate/vidomist_mod_2.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/generate/vidomist_mod_2.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/generate/vpiska_ozinok.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/generate/vpiska_ozinok.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/generate/zajava_ispit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/generate/zajava_ispit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/generate/zvedena_vidomist.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/generate/zvedena_vidomist.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manage/faculties.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/settings.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manage/groups.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manage/groups.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manage/specialities.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manage/specialities.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manage/students.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manage/students.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manage/subjects.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manage/subjects.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesFaculty.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesFaculty.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesGroup.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesGroup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesInstitute.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesInstitute.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesSpeciality.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesSpeciality.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -282,7 +261,9 @@
       <workItem from="1569320731442" duration="3681000" />
       <workItem from="1569783936559" duration="20364000" />
       <workItem from="1569954082928" duration="3038000" />
-      <workItem from="1570219484926" duration="13521000" />
+      <workItem from="1570219484926" duration="13820000" />
+      <workItem from="1570288997473" duration="18498000" />
+      <workItem from="1570308647193" duration="11607000" />
     </task>
     <task id="LOCAL-00001" summary="Added:&#10;-Register&#10;-Login&#10;-Logout&#10;-Profile&#10;-Change Password&#10;-Remove Account">
       <created>1566408908580</created>
@@ -431,7 +412,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569954896900</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Changed Entities according to requirements&#10;added settings vue">
+      <created>1570245500922</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1570245500922</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -471,6 +459,7 @@
     <MESSAGE value="added files333" />
     <MESSAGE value="added files444" />
     <MESSAGE value="THE HOTTEST FIX AFTER RELEASE :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="THE HOTTEST FIX AFTER RELEASE :)" />
+    <MESSAGE value="Changed Entities according to requirements&#10;added settings vue" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed Entities according to requirements&#10;added settings vue" />
   </component>
 </project>

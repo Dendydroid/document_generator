@@ -19,8 +19,23 @@ class UserRepo extends EntityRepository {
      */
     private $class = 'App\Entities\User';
 
+    /**
+     * @return bool
+     */
+    public function noUsers()
+    {
+        $users = $this->findAll();
+
+        return empty($users) ? true : false;
+    }
+
     public function create(User $user)
     {
+        if($this->noUsers())
+        {
+            $user->setIsAdmin(true);
+        }
+
         try {
             $this->_em->persist($user);
         }catch(ORMException $e) {
@@ -98,6 +113,18 @@ class UserRepo extends EntityRepository {
         }
 
         return Constants::OPERATION_FAILED;
+    }
+
+    public function updateTheme($data,$id)
+    {
+        /**
+         * User $user
+         */
+        $user = $this->find($id);
+        $user->setTheme($data);
+        $this->_em->persist($user);
+        $this->_em->flush();
+        return $user;
     }
 
 }
