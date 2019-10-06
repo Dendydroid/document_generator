@@ -2,36 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2c251a4-e1cc-4783-b479-dcfda0d73dae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Entities/Theme.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Login.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Register.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/login.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/register.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesTheme.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Constants.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Entities/FacultyInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/FacultyInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Entities/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/FacultyInfoRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/FacultyInfoRepo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/UserRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/UserRepo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/page_css/main_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/page_css/main_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/MainPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageData.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageDepartments.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageDepartments.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageGroups.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageGroups.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageSpecialities.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageSpecialities.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageStudents.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageStudents.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageSubjects.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageSubjects.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Settings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Settings.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Vidomist1Mod.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Vidomist1Mod.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ZajavaIspit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ZajavaIspit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -263,7 +234,8 @@
       <workItem from="1569954082928" duration="3038000" />
       <workItem from="1570219484926" duration="13820000" />
       <workItem from="1570288997473" duration="18498000" />
-      <workItem from="1570308647193" duration="11607000" />
+      <workItem from="1570308647193" duration="12354000" />
+      <workItem from="1570321840861" duration="260000" />
     </task>
     <task id="LOCAL-00001" summary="Added:&#10;-Register&#10;-Login&#10;-Logout&#10;-Profile&#10;-Change Password&#10;-Remove Account">
       <created>1566408908580</created>
@@ -419,7 +391,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570245500922</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="- Updated `FacultyInfo` fields&#10;- Changed Theme colors&#10;- Created `Theme` Entity and add it to `User`&#10;- Added Login/Logout back&#10;- Changed Faculty to Department&#10;- Added `number` field to Specialities&#10;- Added Faculty Information&#10;- Added `OPP` field to Specialities&#10;- Added `head` field to Department&#10;- Added `headman` to Group&#10;- Added `curator` to Group">
+      <created>1570320823189</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1570320823189</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,6 +439,7 @@
     <MESSAGE value="added files444" />
     <MESSAGE value="THE HOTTEST FIX AFTER RELEASE :)" />
     <MESSAGE value="Changed Entities according to requirements&#10;added settings vue" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed Entities according to requirements&#10;added settings vue" />
+    <MESSAGE value="- Updated `FacultyInfo` fields&#10;- Changed Theme colors&#10;- Created `Theme` Entity and add it to `User`&#10;- Added Login/Logout back&#10;- Changed Faculty to Department&#10;- Added `number` field to Specialities&#10;- Added Faculty Information&#10;- Added `OPP` field to Specialities&#10;- Added `head` field to Department&#10;- Added `headman` to Group&#10;- Added `curator` to Group" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Updated `FacultyInfo` fields&#10;- Changed Theme colors&#10;- Created `Theme` Entity and add it to `User`&#10;- Added Login/Logout back&#10;- Changed Faculty to Department&#10;- Added `number` field to Specialities&#10;- Added Faculty Information&#10;- Added `OPP` field to Specialities&#10;- Added `head` field to Department&#10;- Added `headman` to Group&#10;- Added `curator` to Group" />
   </component>
 </project>
