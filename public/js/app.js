@@ -52748,7 +52748,7 @@ var render = function() {
                                       "span",
                                       {
                                         staticClass:
-                                          "md-helper-text helper-text-custom"
+                                          "md-helper-text helper-text-custom small"
                                       },
                                       [_vm._v("Непрозрачность")]
                                     )
@@ -52859,7 +52859,7 @@ var render = function() {
                                       "span",
                                       {
                                         staticClass:
-                                          "md-helper-text helper-text-custom"
+                                          "md-helper-text helper-text-custom small"
                                       },
                                       [_vm._v("Непрозрачность")]
                                     )
@@ -52970,7 +52970,7 @@ var render = function() {
                                       "span",
                                       {
                                         staticClass:
-                                          "md-helper-text helper-text-custom"
+                                          "md-helper-text helper-text-custom small"
                                       },
                                       [_vm._v("Непрозрачность")]
                                     )
@@ -53081,7 +53081,7 @@ var render = function() {
                                       "span",
                                       {
                                         staticClass:
-                                          "md-helper-text helper-text-custom"
+                                          "md-helper-text helper-text-custom small"
                                       },
                                       [_vm._v("Непрозрачность")]
                                     )

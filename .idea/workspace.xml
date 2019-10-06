@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d2c251a4-e1cc-4783-b479-dcfda0d73dae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Entities/Theme.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/Theme.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Entities/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Settings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Settings.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesTheme.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesTheme.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -242,7 +238,7 @@
       <workItem from="1570288997473" duration="18498000" />
       <workItem from="1570308647193" duration="12354000" />
       <workItem from="1570321840861" duration="282000" />
-      <workItem from="1570365829341" duration="7830000" />
+      <workItem from="1570365829341" duration="9768000" />
     </task>
     <task id="LOCAL-00001" summary="Added:&#10;-Register&#10;-Login&#10;-Logout&#10;-Profile&#10;-Change Password&#10;-Remove Account">
       <created>1566408908580</created>
@@ -419,7 +415,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570370785246</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Added accent color">
+      <created>1570373714166</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1570373714166</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -463,6 +466,7 @@
     <MESSAGE value="- Updated `FacultyInfo` fields&#10;- Changed Theme colors&#10;- Created `Theme` Entity and add it to `User`&#10;- Added Login/Logout back&#10;- Changed Faculty to Department&#10;- Added `number` field to Specialities&#10;- Added Faculty Information&#10;- Added `OPP` field to Specialities&#10;- Added `head` field to Department&#10;- Added `headman` to Group&#10;- Added `curator` to Group" />
     <MESSAGE value="Added back middlewares" />
     <MESSAGE value="Fixed themes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed themes" />
+    <MESSAGE value="Added accent color" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added accent color" />
   </component>
 </project>

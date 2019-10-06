@@ -95,13 +95,13 @@
 
     ?>
     <style>
-        @media only screen and (min-width: 595px)  {
+        @media only screen and (max-width: 991.98px)  {
             .li-stretch{
                 width: 100%;
                 text-align: center;
             }
-            .fb-around-align-center{
-
+            .navbar-collapse{
+            <?=($navbarStyleHover!=='' ? "background-color:$navbarStyleHover;" : "background-color:rgba(0, 0, 0, 0.2);")?>
             }
         }
         .grey-lightest{

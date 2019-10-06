@@ -85,7 +85,7 @@
                                             </div>
                                             <div class="col-md-3 p-custom text-left">
                                                 <input class="input-color-transparency" v-model="secondBGcolorTransparency" step="0.01" type="number" min="0" max="1">
-                                                <span class="md-helper-text helper-text-custom">Непрозрачность</span>
+                                                <span class="md-helper-text helper-text-custom small">Непрозрачность</span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -99,7 +99,7 @@
                                             </div>
                                             <div class="col-md-3 p-custom text-left">
                                                 <input class="input-color-transparency" v-model="navbarBGcolorTransparency" step="0.01" type="number" min="0" max="1">
-                                                <span class="md-helper-text helper-text-custom">Непрозрачность</span>
+                                                <span class="md-helper-text helper-text-custom small">Непрозрачность</span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -113,7 +113,7 @@
                                             </div>
                                             <div class="col-md-3 p-custom text-left">
                                                 <input class="input-color-transparency" v-model="primaryBGcolorTransparency" step="0.01" type="number" min="0" max="1">
-                                                <span class="md-helper-text helper-text-custom">Непрозрачность</span>
+                                                <span class="md-helper-text helper-text-custom small">Непрозрачность</span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -127,7 +127,7 @@
                                             </div>
                                             <div class="col-md-3 p-custom text-left">
                                                 <input class="input-color-transparency" v-model="accentBGcolorTransparency" step="0.01" type="number" min="0.2" max="1">
-                                                <span class="md-helper-text helper-text-custom">Непрозрачность</span>
+                                                <span class="md-helper-text helper-text-custom small">Непрозрачность</span>
                                             </div>
                                         </div>
                                     </md-card-content>
