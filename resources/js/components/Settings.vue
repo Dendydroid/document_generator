@@ -116,6 +116,20 @@
                                                 <span class="md-helper-text helper-text-custom">Непрозрачность</span>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-6 p-custom">
+                                                <label class="color-input-label" for="accentBGcolor">Акцентирующий цвет</label>
+                                            </div>
+                                            <div class="col-md-3 p-custom text-left">
+                                                <div class="input-color-wrapper" :style="'background-color:'+accentBGcolor">
+                                                    <input type="color" id="accentBGcolor" v-model="accentBGcolor">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 p-custom text-left">
+                                                <input class="input-color-transparency" v-model="accentBGcolorTransparency" step="0.01" type="number" min="0.2" max="1">
+                                                <span class="md-helper-text helper-text-custom">Непрозрачность</span>
+                                            </div>
+                                        </div>
                                     </md-card-content>
 
                                     <md-progress-bar md-mode="indeterminate" v-if="sendingTheme" />
@@ -231,6 +245,8 @@
                 navbarBGcolorTransparency:'',
                 primaryBGcolor:'',
                 primaryBGcolorTransparency:'',
+                accentBGcolor:'',
+                accentBGcolorTransparency:'',
                 sendingFacultyInfo:false,
                 savedFacultyInfo:false,
                 sendingTheme:false,
@@ -268,12 +284,8 @@
                         this.navbarBGcolorTransparency = this.user.theme.navbarBG.transparency;
                         this.primaryBGcolor = this.user.theme.primaryBG.color;
                         this.primaryBGcolorTransparency = this.user.theme.primaryBG.transparency;
-
-                        if(this.user.theme!=='')
-                        {
-                            this.primaryStyle="background-color:"+this.convertHex(this.user.theme.primaryBG.color,this.user.theme.primaryBG.transparency)+' !important;';
-                            this.secondStyle="background-color:"+this.convertHex(this.user.theme.secondBG.color,this.user.theme.secondBG.transparency)+' !important;';
-                        }
+                        this.accentBGcolor = this.user.theme.accentBG.color;
+                        this.accentBGcolorTransparency = this.user.theme.accentBG.transparency;
 
                     }).catch(e => {
                         console.log(e);
@@ -288,9 +300,11 @@
                         secondBGcolor: this.secondBGcolor,
                         navbarBGcolor: this.navbarBGcolor,
                         primaryBGcolor: this.primaryBGcolor,
+                        accentBGcolor: this.accentBGcolor,
                         secondBGcolorTransparency: this.secondBGcolorTransparency,
                         navbarBGcolorTransparency: this.navbarBGcolorTransparency,
                         primaryBGcolorTransparency: this.primaryBGcolorTransparency,
+                        accentBGcolorTransparency: this.accentBGcolorTransparency,
                     })
                     .then(response => {
                         this.sendingTheme = false;

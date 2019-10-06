@@ -39,6 +39,11 @@ class Theme {
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $accentBGcolor;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $secondBGcolorTransparency;
 
     /**
@@ -51,18 +56,16 @@ class Theme {
      */
     private $primaryBGcolorTransparency;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $accentBGcolorTransparency;
+
 
     public function __construct($arr)
     {
-        $this->mainBGcolor = $arr['mainBGcolor'];
-        $this->secondBGcolor = $arr['secondBGcolor'];
-        $this->navbarBGcolor = $arr['navbarBGcolor'];
-        $this->primaryBGcolor = $arr['primaryBGcolor'];
-        $this->secondBGcolorTransparency = $arr['secondBGcolorTransparency'];
-        $this->navbarBGcolorTransparency = $arr['navbarBGcolorTransparency'];
-        $this->primaryBGcolorTransparency = $arr['primaryBGcolorTransparency'];
+        $this->setTheme($arr);
     }
-
 
     /**
      * @return mixed
@@ -135,6 +138,42 @@ class Theme {
     }
 
     /**
+     * @return mixed
+     */
+    public function getAccentBGcolor()
+    {
+        return $this->accentBGcolor;
+    }
+
+    /**
+     * @param mixed $accentBGcolor
+     * @return Theme
+     */
+    public function setAccentBGcolor($accentBGcolor)
+    {
+        $this->accentBGcolor = $accentBGcolor;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccentBGcolorTransparency()
+    {
+        return $this->accentBGcolorTransparency;
+    }
+
+    /**
+     * @param mixed $accentBGcolorTransparency
+     * @return Theme
+     */
+    public function setAccentBGcolorTransparency($accentBGcolorTransparency)
+    {
+        $this->accentBGcolorTransparency = $accentBGcolorTransparency;
+        return $this;
+    }
+
+    /**
      * @param mixed $primaryBGcolor
      * @return Theme
      */
@@ -198,6 +237,19 @@ class Theme {
         return $this;
     }
 
+    public function setTheme($arr)
+    {
+        $this->mainBGcolor = $arr['mainBGcolor'];
+        $this->secondBGcolor = $arr['secondBGcolor'];
+        $this->navbarBGcolor = $arr['navbarBGcolor'];
+        $this->primaryBGcolor = $arr['primaryBGcolor'];
+        $this->accentBGcolor = $arr['accentBGcolor'];
+        $this->secondBGcolorTransparency = $arr['secondBGcolorTransparency'];
+        $this->navbarBGcolorTransparency = $arr['navbarBGcolorTransparency'];
+        $this->primaryBGcolorTransparency = $arr['primaryBGcolorTransparency'];
+        $this->accentBGcolorTransparency = $arr['accentBGcolorTransparency'];
+    }
+
     /**
      * @return array
      */
@@ -218,6 +270,10 @@ class Theme {
             "primaryBG" => [
                 "color" => $this->primaryBGcolor,
                 "transparency" => $this->primaryBGcolorTransparency
+            ],
+            "accentBG" => [
+                "color" => $this->accentBGcolor,
+                "transparency" => $this->accentBGcolorTransparency
             ],
         ];
     }

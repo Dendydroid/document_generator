@@ -62,18 +62,24 @@
     $navbarStyleLighter = '';
     $navbarStyleHover = '';
     $primaryStyle = '';
+    $accentStyle = '';
     $primaryColor = '';
     $navbarColor = '';
+    $accentStyleLight = '';
+    $primaryStyleLight = '';
         if(isset(session()->all()['theme']))
         {
             $mainColor = session()->all()['theme']['mainBG']['color'];
             $secondColor = session()->all()['theme']['secondBG']['color'];
             $navbarColor = session()->all()['theme']['navbarBG']['color'];
             $primaryColor = session()->all()['theme']['primaryBG']['color'];
+            $accentColor = session()->all()['theme']['accentBG']['color'];
+
 
             $secondColorTransparency = session()->all()['theme']['secondBG']['transparency'];
             $navbarColorTransparency = session()->all()['theme']['navbarBG']['transparency'];
             $primaryColorTransparency = session()->all()['theme']['primaryBG']['transparency'];
+            $accentColorTransparency = session()->all()['theme']['accentBG']['transparency'];
 
             $mainStyle = hex2rgba($mainColor,1);
             $secondStyle = hex2rgba($secondColor,$secondColorTransparency);
@@ -81,6 +87,9 @@
             $navbarStyleLighter = hex2rgba($navbarColor,floatval($navbarColorTransparency)+0.3);
             $navbarStyleHover = hex2rgba($navbarColor,floatval($navbarColorTransparency)+0.1);
             $primaryStyle = hex2rgba($primaryColor,$primaryColorTransparency);
+            $accentStyle = hex2rgba($accentColor,$accentColorTransparency);
+            $accentStyleLight = hex2rgba($accentColor,0.2);
+            $primaryStyleLight = hex2rgba($primaryColor,0.2);
         }
 
 
@@ -134,6 +143,9 @@
             <?=($navbarStyleLighter!=='' ? "background-color:$navbarStyleLighter;" : "background-color:rgba(0, 0, 0, 0.2);")?>
             height:100%;
         }
+        .dropdown-item.active, .dropdown-item:active{
+            <?=($primaryStyle!=='' ? "background-color:$primaryStyle" : "background-color:rgba(0, 0, 0, 0.2);")?> !important;
+        }
         :root {
             --blue: #3490dc;
             --indigo: #6574cd;
@@ -157,6 +169,9 @@
             --light: #f8f9fa;
             --dark: #343a40;
             --md-theme-default-primary: <?=($primaryStyle!=='' ? $primaryStyle : "#448aff")?>  !important;
+            --md-theme-default-accent: <?=($accentStyle!=='' ? $accentStyle : "#ff5252")?>  !important;
+            --md-theme-default-accent-on-: <?=($accentStyleLight!=='' ? $accentStyleLight : "rgba(255,82,82,0.2)")?>  !important;
+            --md-theme-default-primary-on-background: <?=($primaryColor!=='' ? $primaryColor : "#448aff")?>  !important;
             --breakpoint-xs: 0;
             --breakpoint-sm: 576px;
             --breakpoint-md: 768px;

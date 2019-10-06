@@ -67,6 +67,8 @@ class User {
             'navbarBGcolorTransparency' => 0.5,
             'primaryBGcolor' => "#7e57c2",
             'primaryBGcolorTransparency' => 1,
+            'accentBGcolor' => "#ff5252",
+            'accentBGcolorTransparency' => 1,
         ]);
     }
 
@@ -200,7 +202,7 @@ class User {
      */
     public function setTheme($themeArr)
     {
-        $this->theme = new Theme($themeArr);
+        $this->theme->setTheme($themeArr);
         return $this;
     }
 

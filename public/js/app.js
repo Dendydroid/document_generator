@@ -5161,6 +5161,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -5183,6 +5197,8 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       navbarBGcolorTransparency: '',
       primaryBGcolor: '',
       primaryBGcolorTransparency: '',
+      accentBGcolor: '',
+      accentBGcolorTransparency: '',
       sendingFacultyInfo: false,
       savedFacultyInfo: false,
       sendingTheme: false,
@@ -5218,11 +5234,8 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
         _this.navbarBGcolorTransparency = _this.user.theme.navbarBG.transparency;
         _this.primaryBGcolor = _this.user.theme.primaryBG.color;
         _this.primaryBGcolorTransparency = _this.user.theme.primaryBG.transparency;
-
-        if (_this.user.theme !== '') {
-          _this.primaryStyle = "background-color:" + _this.convertHex(_this.user.theme.primaryBG.color, _this.user.theme.primaryBG.transparency) + ' !important;';
-          _this.secondStyle = "background-color:" + _this.convertHex(_this.user.theme.secondBG.color, _this.user.theme.secondBG.transparency) + ' !important;';
-        }
+        _this.accentBGcolor = _this.user.theme.accentBG.color;
+        _this.accentBGcolorTransparency = _this.user.theme.accentBG.transparency;
       })["catch"](function (e) {
         console.log(e);
 
@@ -5238,9 +5251,11 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
         secondBGcolor: this.secondBGcolor,
         navbarBGcolor: this.navbarBGcolor,
         primaryBGcolor: this.primaryBGcolor,
+        accentBGcolor: this.accentBGcolor,
         secondBGcolorTransparency: this.secondBGcolorTransparency,
         navbarBGcolorTransparency: this.navbarBGcolorTransparency,
-        primaryBGcolorTransparency: this.primaryBGcolorTransparency
+        primaryBGcolorTransparency: this.primaryBGcolorTransparency,
+        accentBGcolorTransparency: this.accentBGcolorTransparency
       }).then(function (response) {
         _this2.sendingTheme = false;
         _this2.savedTheme = true;
@@ -52863,7 +52878,7 @@ var render = function() {
                                         staticClass: "color-input-label",
                                         attrs: { for: "secondBGcolor" }
                                       },
-                                      [_vm._v("Цвет кнопок")]
+                                      [_vm._v("Цвет действий")]
                                     )
                                   ]
                                 ),
@@ -52946,6 +52961,117 @@ var render = function() {
                                             return
                                           }
                                           _vm.primaryBGcolorTransparency =
+                                            $event.target.value
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "md-helper-text helper-text-custom"
+                                      },
+                                      [_vm._v("Непрозрачность")]
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-6 p-custom" },
+                                  [
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "color-input-label",
+                                        attrs: { for: "accentBGcolor" }
+                                      },
+                                      [_vm._v("Акцентирующий цвет")]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "col-md-3 p-custom text-left"
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "input-color-wrapper",
+                                        style:
+                                          "background-color:" +
+                                          _vm.accentBGcolor
+                                      },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.accentBGcolor,
+                                              expression: "accentBGcolor"
+                                            }
+                                          ],
+                                          attrs: {
+                                            type: "color",
+                                            id: "accentBGcolor"
+                                          },
+                                          domProps: {
+                                            value: _vm.accentBGcolor
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.accentBGcolor =
+                                                $event.target.value
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "col-md-3 p-custom text-left"
+                                  },
+                                  [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.accentBGcolorTransparency,
+                                          expression:
+                                            "accentBGcolorTransparency"
+                                        }
+                                      ],
+                                      staticClass: "input-color-transparency",
+                                      attrs: {
+                                        step: "0.01",
+                                        type: "number",
+                                        min: "0.2",
+                                        max: "1"
+                                      },
+                                      domProps: {
+                                        value: _vm.accentBGcolorTransparency
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.accentBGcolorTransparency =
                                             $event.target.value
                                         }
                                       }

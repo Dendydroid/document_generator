@@ -64,10 +64,10 @@ class Theme extends \App\Entities\Theme implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'mainBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'secondBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'navbarBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'primaryBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'secondBGcolorTransparency', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'navbarBGcolorTransparency', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'primaryBGcolorTransparency'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'mainBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'secondBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'navbarBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'primaryBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'accentBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'secondBGcolorTransparency', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'navbarBGcolorTransparency', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'primaryBGcolorTransparency', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'accentBGcolorTransparency'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'mainBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'secondBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'navbarBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'primaryBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'secondBGcolorTransparency', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'navbarBGcolorTransparency', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'primaryBGcolorTransparency'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'mainBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'secondBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'navbarBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'primaryBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'accentBGcolor', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'secondBGcolorTransparency', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'navbarBGcolorTransparency', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'primaryBGcolorTransparency', '' . "\0" . 'App\\Entities\\Theme' . "\0" . 'accentBGcolorTransparency'];
     }
 
     /**
@@ -268,6 +268,50 @@ class Theme extends \App\Entities\Theme implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getAccentBGcolor()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAccentBGcolor', []);
+
+        return parent::getAccentBGcolor();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setAccentBGcolor($accentBGcolor)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAccentBGcolor', [$accentBGcolor]);
+
+        return parent::setAccentBGcolor($accentBGcolor);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAccentBGcolorTransparency()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAccentBGcolorTransparency', []);
+
+        return parent::getAccentBGcolorTransparency();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setAccentBGcolorTransparency($accentBGcolorTransparency)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAccentBGcolorTransparency', [$accentBGcolorTransparency]);
+
+        return parent::setAccentBGcolorTransparency($accentBGcolorTransparency);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setPrimaryBGcolor($primaryBGcolor)
     {
 
@@ -340,6 +384,17 @@ class Theme extends \App\Entities\Theme implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPrimaryBGcolorTransparency', [$primaryBGcolorTransparency]);
 
         return parent::setPrimaryBGcolorTransparency($primaryBGcolorTransparency);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setTheme($arr)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTheme', [$arr]);
+
+        return parent::setTheme($arr);
     }
 
     /**
