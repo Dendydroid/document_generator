@@ -31,6 +31,11 @@ class HomeController extends Controller
         return view('settings');
     }
 
+    public function profile()
+    {
+        return view('profile');
+    }
+
     /**
      * Show the registration page.
      *

@@ -80,16 +80,42 @@ class UserRepo extends EntityRepository {
          */
         $user = $this->getLoggedUser($request);
 
+
         if(!is_null($user) && Hash::check($request->get('oldPassword'), $user->getPassword())){
-            $user->setPassword($request->get("password"));
+            $user->setPassword(Hash::make($request->get("password")));
             $this->_em->persist($user);
             $this->_em->flush();
-            $request->session()->forget(["password"]);
-            $request->session()->put($request->get("password"));
             return Constants::OPERATION_SUCCESSFUL;
         }
+        return response()->json(Constants::WRONG_PASSWORD, 400);
+    }
 
-        return Constants::OPERATION_FAILED;
+    public function updateProfileData(\Illuminate\Http\Request $request)
+    {
+        /**
+         * User $user
+         */
+        $user = $this->getLoggedUser($request);
+
+        $data = $request->all();
+        if(!is_null($user) && Hash::check($data['password'], $user->getPassword())){
+            $user->setEmail($data['email'])
+            ->setFirstName($data['firstName'])
+            ->setSurname($data['surname'])
+            ->setMiddleName($data['middleName']);
+            $request->session()->forget(["email"]);
+            $request->session()->put(["email" => $data['email']]);
+            $request->session()->forget(["firstName"]);
+            $request->session()->put(["firstName" => $data['firstName']]);
+            $request->session()->forget(["surname"]);
+            $request->session()->put(["surname" => $data['surname']]);
+            $request->session()->forget(["middleName"]);
+            $request->session()->put(["middleName" => $data['middleName']]);
+            $this->_em->persist($user);
+            $this->_em->flush();
+            return Constants::OPERATION_SUCCESSFUL;
+        }
+        return response()->json(Constants::WRONG_PASSWORD, 400);
     }
 
     /**

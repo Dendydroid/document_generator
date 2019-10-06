@@ -24,7 +24,7 @@
                         <a class="nav-link larafont-navlink" href="/manage">База данных</a>
                     </li>
                     <li class="nav-item li-stretch" v-if="!noUser && user.logged">
-                        <a class="nav-link larafont-navlink" href="#">Профиль</a>
+                        <a class="nav-link larafont-navlink" href="/profile">Профиль</a>
                     </li>
                     <li class="nav-item dropdown li-stretch" v-if="!noUser && user.logged">
                         <a class="nav-link dropdown-toggle larafont-navlink" href="#" id="settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

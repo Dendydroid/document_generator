@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Constants;
+use Illuminate\Validation\Rule;
 
 /**
  * Class UserController
@@ -53,6 +54,28 @@ class UserController extends Controller {
             "middleName" => "required|alpha|max:255",
             "password" => "required|max:255|min:6",
             "email" => "required|email|unique:App\Entities\User,email|max:255|min:4"
+        ]);
+
+        return $validator;
+    }
+
+    public function validateProfileData(Array $request)
+    {
+        $id = $request['id'];
+        $validator = Validator::make($request, [
+            "firstName" => "required|alpha|max:255",
+            "surname" => "required|alpha|max:255|",
+            "middleName" => "required|alpha|max:255",
+            "email" => "required|email|unique:App\Entities\User,email,$id|max:255|min:4",
+        ]);
+
+        return $validator;
+    }
+
+    public function validatePassword(Array $request)
+    {
+        $validator = Validator::make($request, [
+            "password" => "required|max:255|min:6",
         ]);
 
         return $validator;
@@ -114,7 +137,20 @@ class UserController extends Controller {
      */
     public function updatePassword(Request $request)
     {
-        return $this->userRepo->updatePassword($request);
+        $validation = $this->validatePassword($request->all());
+        if(!$validation->fails())
+            return $this->userRepo->updatePassword($request);
+
+        return response()->json(["failed"=>1,"errors"=>$validation->errors()], 400);
+    }
+
+    public function updateProfileData(Request $request)
+    {
+        $validation = $this->validateProfileData($request->all());
+        if(!$validation->fails())
+            return $this->userRepo->updateProfileData($request);
+
+        return response()->json(["failed"=>1,"errors"=>$validation->errors()], 400);
     }
 
     /**

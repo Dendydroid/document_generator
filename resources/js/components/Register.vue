@@ -69,7 +69,7 @@
                         <span class="md-helper-text">Подтвердите пароль</span>
                     </md-field>
                     <span class="f-s-c">
-                        <md-button :style="primaryStyle" class="md-primary md-raised" @click="registerAttempt()">Сохранить</md-button>
+                        <md-button class="md-primary md-raised" @click="registerAttempt()">Сохранить</md-button>
                     </span>
                 </md-card-content>
             </md-card>

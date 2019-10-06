@@ -24,6 +24,10 @@ class Constants{
 
     const OPERATION_SUPER_FAILED = ["failed" => 1, "message" => "Выйды отсюда, розбийнык!"];
 
+    const WRONG_PASSWORD = [
+        "failed" => 1, "errors" => ["Password" => ["Неправильный пароль!"]]
+    ];
+
 
     const SESSION_USER_DATA_KEYS = [
         "id",

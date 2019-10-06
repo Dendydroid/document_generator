@@ -34,6 +34,7 @@ Route::post('/getFacultyInfo','DataController@getFacultyInfo')->name('getFaculty
 Route::post('/updateTheme','UserController@updateTheme')->name('updateTheme')->middleware('logged');
 
 Route::get('/settings', 'HomeController@settings')->name('settings')->middleware('logged');
+Route::get('/profile', 'HomeController@profile')->name('profile')->middleware('logged');
 //END_VIEWS
 
 //DATA VIEWS
@@ -72,6 +73,7 @@ Route::post('/registerUser', 'UserController@createUser')->name('registerUser');
 Route::post('/loginUser', 'UserController@loginUser')->name('loginUser');
 
 Route::post('/updatePassword', 'UserController@updatePassword')->name('updatePassword')->middleware('logged');
+Route::post('/updateProfileData', 'UserController@updateProfileData')->name('updateProfileData')->middleware('logged');
 
 Route::post('/removeUser', 'UserController@removeUser')->name('removeUser')->middleware('logged');
 
