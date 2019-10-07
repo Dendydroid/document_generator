@@ -26,12 +26,12 @@
                 <div class="pl-2 pr-2 pb-3">
                     <md-field>
                         <label>Наименование</label>
-                        <md-input v-model="add_id_name" maxlength="255" ></md-input>
+                        <md-input v-model="add_id_name" maxlength="255" required></md-input>
                         <span class="md-helper-text">Сокращенное имя группы</span>
                     </md-field>
                     <md-field>
                         <label>Специальность</label>
-                        <md-select v-model="add_speciality" name="add_faculty" id="add_faculty">
+                        <md-select v-model="add_speciality" name="add_faculty" id="add_faculty" required>
                             <md-option v-for="speciality in specialityList" :value="speciality.id">{{speciality.fullName}}</md-option>
                         </md-select>
                         <span class="md-helper-text">Выберите специальность</span>
@@ -41,26 +41,27 @@
                         <md-select v-model="add_default_subjects" multiple>
                             <md-option v-for="subject in subjectList" :value="subject.id">{{subject.name}}</md-option>
                         </md-select>
+                        <span class="md-helper-text">Предметы группы по умоланию</span>
                     </md-field>
                     <md-field>
                         <label>Куратор</label>
                         <md-input v-model="add_curatorFIO" maxlength="255" ></md-input>
-                        <span class="md-helper-text">ФИО куратора группы <small>(не обязательное)</small></span>
+                        <span class="md-helper-text">ФИО куратора группы </span>
                     </md-field>
                     <md-field>
                         <label>Номер куратора</label>
                         <md-input v-model="add_curatorPhone" maxlength="255" ></md-input>
-                        <span class="md-helper-text">Номер телефона куратора группы <small>(не обязательное)</small></span>
+                        <span class="md-helper-text">Номер телефона куратора группы</span>
                     </md-field>
                     <md-field>
                         <label>Командир</label>
                         <md-input v-model="add_headmanFIO" maxlength="255" ></md-input>
-                        <span class="md-helper-text">ФИО командира группы <small>(не обязательное)</small></span>
+                        <span class="md-helper-text">ФИО командира группы</span>
                     </md-field>
                     <md-field>
                         <label>Номер командира</label>
                         <md-input v-model="add_headmanPhone" maxlength="255" ></md-input>
-                        <span class="md-helper-text">Номер телефона командира группы <small>(не обязательное)</small></span>
+                        <span class="md-helper-text">Номер телефона командира группы</span>
                     </md-field>
 
                 </div>
@@ -75,12 +76,12 @@
                 <div class="pl-2 pr-2 pb-3">
                     <md-field>
                         <label>Наименование</label>
-                        <md-input v-model="edit_id_name" maxlength="255" ></md-input>
+                        <md-input v-model="edit_id_name" maxlength="255" required></md-input>
                         <span class="md-helper-text">Сокращенное имя группы</span>
                     </md-field>
                     <md-field>
                         <label>Специальность</label>
-                        <md-select v-model="edit_speciality" name="add_faculty" id="add_faculty">
+                        <md-select v-model="edit_speciality" name="add_faculty" id="add_faculty" required>
                             <md-option v-for="speciality in specialityList" :value="speciality.id">{{speciality.fullName}}</md-option>
                         </md-select>
                         <span class="md-helper-text">Выберите специальность</span>

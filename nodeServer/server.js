@@ -5,7 +5,7 @@ const chromeEval = require('chrome-page-eval')({ puppeteer });
 const express = require('express');
 var path = require('path');
 const PORT = 5000;
-const filePath = "/projects/DG/document_generator/generator/output.xlsx";
+const filePath = "/var/www/nau/document_generator/output.xlsx";
 const conversion = conversionFactory({
     extract: chromeEval
 });

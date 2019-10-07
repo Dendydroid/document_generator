@@ -571,7 +571,7 @@
                         middleName: this.edit_middle_name,
                         studentId: this.edit_student_id,
                         dateOfBirth: this.edit_date_of_birth,
-                        gender: this.edit_family_state,
+                        gender: this.edit_gender,
                         citizenship: this.edit_citizenship,
                         group: this.edit_group,
                         familyState: this.edit_family_state,

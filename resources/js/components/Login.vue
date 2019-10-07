@@ -97,10 +97,7 @@
         font-weight: 600 !important;
         font-size: 1rem;
     }
-    .c-p{
-        color:#7e57c2;
-        font-weight: 600 !important;
-    }
+
     .md-button.md-theme-default.md-primary {
         color: white;
     }

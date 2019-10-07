@@ -88,7 +88,7 @@ class UserController extends Controller {
      */
     public function createUser(Request $request)
     {
-        if($request->session()->get('isAdmin'))
+        if($request->session()->get('isAdmin') || $this->userRepo->noUsers())
         {
             $data = $request->all();
             $validation = $this->validateUser($data);

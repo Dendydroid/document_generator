@@ -125,6 +125,7 @@
             color:#448aff;
         }
         .c-p{
+            font-weight:bold;
             cursor:pointer;
             <?=($primaryColor!=='' ? "color:$primaryColor;" : "color:#448aff;")?>
 

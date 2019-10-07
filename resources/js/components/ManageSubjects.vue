@@ -26,32 +26,32 @@
                 <div class="pl-2 pr-2 pb-3">
                     <md-field>
                         <label>Наименование</label>
-                        <md-input v-model="add_name" maxlength="255" ></md-input>
+                        <md-input v-model="add_name" maxlength="255" required></md-input>
                         <span class="md-helper-text">Имя, Название</span>
                     </md-field>
                     <md-field>
                         <label>Преподователь</label>
-                        <md-input v-model="add_professor" maxlength="255"></md-input>
+                        <md-input v-model="add_professor" maxlength="255" required></md-input>
                         <span class="md-helper-text">Имя преподавателя</span>
                     </md-field>
                     <md-field>
                         <label>Заведующий кафедры</label>
-                        <md-input v-model="add_head_of_department" maxlength="255"></md-input>
+                        <md-input v-model="add_head_of_department" maxlength="255" required></md-input>
                         <span class="md-helper-text">Имя заведующего кафедры</span>
                     </md-field>
                     <md-field>
                         <label>Модули</label>
-                        <md-input v-model="add_module_count" type="number" min="1"></md-input>
+                        <md-input v-model="add_module_count" type="number" min="1" required></md-input>
                         <span class="md-helper-text">Количество модулей</span>
                     </md-field>
                     <md-field>
                         <label>Часы</label>
-                        <md-input v-model="add_hours_count" type="number" min="1"></md-input>
+                        <md-input v-model="add_hours_count" type="number" min="1" required></md-input>
                         <span class="md-helper-text">Количество часов</span>
                     </md-field>
                     <md-field>
                         <label>Кредиты</label>
-                        <md-input v-model="add_credits_count" type="number" min="1"></md-input>
+                        <md-input v-model="add_credits_count" type="number" min="1" required></md-input>
                         <span class="md-helper-text">Количество кредитов</span>
                     </md-field>
 
@@ -71,35 +71,35 @@
                 <div class="pl-2 pr-2 pb-3">
                     <md-field>
                         <label>Наименование</label>
-                        <md-input v-model="edit_name" maxlength="255" ></md-input>
+                        <md-input v-model="edit_name" maxlength="255" required></md-input>
                         <span class="md-helper-text">Имя, Название</span>
                     </md-field>
                     <md-field>
                         <label>Преподователь</label>
-                        <md-input v-model="edit_professor" maxlength="255"></md-input>
+                        <md-input v-model="edit_professor" maxlength="255" required></md-input>
                         <span class="md-helper-text">Имя преподавателя</span>
                     </md-field>
                     <md-field>
                         <label>Заведующий кафедры</label>
-                        <md-input v-model="edit_head_of_department" maxlength="255"></md-input>
+                        <md-input v-model="edit_head_of_department" maxlength="255" required></md-input>
                         <span class="md-helper-text">Имя заведующего кафедры</span>
                     </md-field>
                     <md-field>
                         <label>Модули</label>
-                        <md-input v-model="edit_module_count" type="number" min="1"></md-input>
+                        <md-input v-model="edit_module_count" type="number" min="1" required></md-input>
                         <span class="md-helper-text">Количество модулей</span>
                     </md-field>
                     <md-field>
                         <label>Часы</label>
-                        <md-input v-model="edit_hours_count" type="number" min="1"></md-input>
+                        <md-input v-model="edit_hours_count" type="number" min="1" required></md-input>
                         <span class="md-helper-text">Количество часов</span>
                     </md-field>
                     <md-field>
                         <label>Кредиты</label>
-                        <md-input v-model="edit_credits_count" type="number" min="1"></md-input>
+                        <md-input v-model="edit_credits_count" type="number" min="1" required></md-input>
                         <span class="md-helper-text">Количество кредитов</span>
                     </md-field>
-                    <md-datepicker v-model="edit_begin_date">
+                    <md-datepicker v-model="edit_begin_date" required>
                         <label>От</label>
                         <span class="md-helper-text">Дата начала обучения</span>
                     </md-datepicker>

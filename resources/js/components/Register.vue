@@ -9,7 +9,7 @@
         </md-snackbar>
 
         <div class="pt-5 pb-2 text-center">
-            <md-card class="md-layout-item md-accent md-size-50 md-small-size-100 mc-auto" md-with-hover v-if="noUsers">
+            <md-card class="md-layout-item md-accent md-size-50 md-small-size-100 mc-auto" md-with-hover v-if="noUser">
                 <md-ripple>
                     <md-card-header>
                         <div class="md-title"><b>Внимание!</b></div>

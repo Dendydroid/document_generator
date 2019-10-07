@@ -26,5 +26,11 @@
         "vue-waves-button": "^1.0.4",
         "vuetify": "^2.0.12"
     },
-    "dependencies": {}
+    "dependencies": {
+        "chrome-page-eval": "^1.2.0",
+        "express": "^4.17.1",
+        "html-to-excel": "^1.0.1",
+        "html-to-xlsx": "^1.1.1",
+        "puppeteer": "^1.20.0"
+    }
 }

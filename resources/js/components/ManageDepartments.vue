@@ -27,16 +27,16 @@
                     <md-field>
                         <label>Наименование</label>
                         <md-input v-model="add_fullName" maxlength="255" ></md-input>
-                        <span class="md-helper-text">Имя, Название</span>
+                        <span class="md-helper-text" required>Имя, Название</span>
                     </md-field>
                     <md-field>
                         <label>Аббревиатура</label>
-                        <md-input v-model="add_abbreviation" maxlength="255"></md-input>
+                        <md-input v-model="add_abbreviation" maxlength="255" required></md-input>
                         <span class="md-helper-text">Сокращенное имя</span>
                     </md-field>
                     <md-field>
                         <label>Декан кафедры</label>
-                        <md-input v-model="add_head" maxlength="255"></md-input>
+                        <md-input v-model="add_head" maxlength="255" required></md-input>
                         <span class="md-helper-text">ФИО декана кафедры</span>
                     </md-field>
                 </div>
@@ -51,17 +51,17 @@
                 <div class="pl-2 pr-2 pb-3">
                     <md-field>
                         <label>Наименование</label>
-                        <md-input v-model="edit_fullName" maxlength="255" ></md-input>
+                        <md-input v-model="edit_fullName" maxlength="255" required></md-input>
                         <span class="md-helper-text">Имя, Название</span>
                     </md-field>
                     <md-field>
                         <label>Аббревиатура</label>
-                        <md-input v-model="edit_abbreviation" maxlength="255"></md-input>
+                        <md-input v-model="edit_abbreviation" maxlength="255" required></md-input>
                         <span class="md-helper-text">Сокращенное имя</span>
                     </md-field>
                     <md-field>
                         <label>Декан кафедры</label>
-                        <md-input v-model="edit_head" maxlength="255"></md-input>
+                        <md-input v-model="edit_head" maxlength="255" required></md-input>
                         <span class="md-helper-text">ФИО декана кафедры</span>
                     </md-field>
                 </div>

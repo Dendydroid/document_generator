@@ -37,7 +37,7 @@
                     <li class="nav-item li-stretch" v-if="noUser || user.isAdmin">
                         <a class="nav-link larafont-navlink" href="/register">Регистрация</a>
                     </li>
-                    <li class="nav-item li-stretch" v-if="!user.logged">
+                    <li class="nav-item li-stretch" v-if="!user.logged && !noUser">
                         <a class="nav-link larafont-navlink" href="/login">Вход</a>
                     </li>
                     <li class="nav-item li-stretch" v-if="user.logged">

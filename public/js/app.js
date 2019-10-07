@@ -1821,9 +1821,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -2393,6 +2390,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
 //
 //
 //
@@ -3940,7 +3938,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
         middleName: this.edit_middle_name,
         studentId: this.edit_student_id,
         dateOfBirth: this.edit_date_of_birth,
-        gender: this.edit_family_state,
+        gender: this.edit_gender,
         citizenship: this.edit_citizenship,
         group: this.edit_group,
         familyState: this.edit_family_state,
@@ -14392,7 +14390,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.form-content{\n    padding-top:1rem;\n    padding-bottom:1rem;\n    padding-left:3rem;\n    padding-right:3rem;\n}\n.p-custom{\n    padding:16px;\n}\n.color-input-label{\n    color:rgba(0,0,0,0.54);\n    font-size:1rem;\n}\n.input-color-transparency{\n    border-radius: 0.5rem;\n    border:1px solid grey;\n    max-width:100%;\n}\n.helper-text-custom{\n    color:rgba(0,0,0,0.54);\n}\n.input-color-wrapper{\n    border:1px solid grey;\n    border-radius:0.5rem;\n}\ninput[type=\"color\"] {\n    opacity: 0;\n    display: block;\n    border: none;\n    cursor:pointer;\n    width:100%;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.c-p{\n    color:#7e57c2;\n    font-weight: 600 !important;\n}\n.md-button.md-theme-default.md-primary {\n    color: white;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.f-s-a{\n    display:flex;\n    justify-content: space-around;\n}\n.f-s-c{\n    display:flex;\n    justify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n.form-content{\n    padding-top:1rem;\n    padding-bottom:1rem;\n    padding-left:3rem;\n    padding-right:3rem;\n}\n.p-custom{\n    padding:16px;\n}\n.color-input-label{\n    color:rgba(0,0,0,0.54);\n    font-size:1rem;\n}\n.input-color-transparency{\n    border-radius: 0.5rem;\n    border:1px solid grey;\n    max-width:100%;\n}\n.helper-text-custom{\n    color:rgba(0,0,0,0.54);\n}\n.input-color-wrapper{\n    border:1px solid grey;\n    border-radius:0.5rem;\n}\ninput[type=\"color\"] {\n    opacity: 0;\n    display: block;\n    border: none;\n    cursor:pointer;\n    width:100%;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-button.md-theme-default.md-primary {\n    color: white;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.f-s-a{\n    display:flex;\n    justify-content: space-around;\n}\n.f-s-c{\n    display:flex;\n    justify-content: center;\n}\n", ""]);
 
 // exports
 
@@ -47135,9 +47133,14 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c("span", { staticClass: "md-helper-text" }, [
-                        _vm._v("Имя, Название")
-                      ])
+                      _c(
+                        "span",
+                        {
+                          staticClass: "md-helper-text",
+                          attrs: { required: "" }
+                        },
+                        [_vm._v("Имя, Название")]
+                      )
                     ],
                     1
                   ),
@@ -47148,7 +47151,7 @@ var render = function() {
                       _c("label", [_vm._v("Аббревиатура")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.add_abbreviation,
                           callback: function($$v) {
@@ -47171,7 +47174,7 @@ var render = function() {
                       _c("label", [_vm._v("Декан кафедры")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.add_head,
                           callback: function($$v) {
@@ -47256,7 +47259,7 @@ var render = function() {
                       _c("label", [_vm._v("Наименование")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.edit_fullName,
                           callback: function($$v) {
@@ -47279,7 +47282,7 @@ var render = function() {
                       _c("label", [_vm._v("Аббревиатура")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.edit_abbreviation,
                           callback: function($$v) {
@@ -47302,7 +47305,7 @@ var render = function() {
                       _c("label", [_vm._v("Декан кафедры")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.edit_head,
                           callback: function($$v) {
@@ -47832,7 +47835,7 @@ var render = function() {
                       _c("label", [_vm._v("Наименование")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.add_id_name,
                           callback: function($$v) {
@@ -47857,7 +47860,11 @@ var render = function() {
                       _c(
                         "md-select",
                         {
-                          attrs: { name: "add_faculty", id: "add_faculty" },
+                          attrs: {
+                            name: "add_faculty",
+                            id: "add_faculty",
+                            required: ""
+                          },
                           model: {
                             value: _vm.add_speciality,
                             callback: function($$v) {
@@ -47908,7 +47915,11 @@ var render = function() {
                           )
                         }),
                         1
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Предметы группы по умоланию")
+                      ])
                     ],
                     1
                   ),
@@ -47930,8 +47941,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("span", { staticClass: "md-helper-text" }, [
-                        _vm._v("ФИО куратора группы "),
-                        _c("small", [_vm._v("(не обязательное)")])
+                        _vm._v("ФИО куратора группы ")
                       ])
                     ],
                     1
@@ -47954,8 +47964,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("span", { staticClass: "md-helper-text" }, [
-                        _vm._v("Номер телефона куратора группы "),
-                        _c("small", [_vm._v("(не обязательное)")])
+                        _vm._v("Номер телефона куратора группы")
                       ])
                     ],
                     1
@@ -47978,8 +47987,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("span", { staticClass: "md-helper-text" }, [
-                        _vm._v("ФИО командира группы "),
-                        _c("small", [_vm._v("(не обязательное)")])
+                        _vm._v("ФИО командира группы")
                       ])
                     ],
                     1
@@ -48002,8 +48010,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("span", { staticClass: "md-helper-text" }, [
-                        _vm._v("Номер телефона командира группы "),
-                        _c("small", [_vm._v("(не обязательное)")])
+                        _vm._v("Номер телефона командира группы")
                       ])
                     ],
                     1
@@ -48077,7 +48084,7 @@ var render = function() {
                       _c("label", [_vm._v("Наименование")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.edit_id_name,
                           callback: function($$v) {
@@ -48102,7 +48109,11 @@ var render = function() {
                       _c(
                         "md-select",
                         {
-                          attrs: { name: "add_faculty", id: "add_faculty" },
+                          attrs: {
+                            name: "add_faculty",
+                            id: "add_faculty",
+                            required: ""
+                          },
                           model: {
                             value: _vm.edit_speciality,
                             callback: function($$v) {
@@ -51272,7 +51283,7 @@ var render = function() {
                       _c("label", [_vm._v("Наименование")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.add_name,
                           callback: function($$v) {
@@ -51295,7 +51306,7 @@ var render = function() {
                       _c("label", [_vm._v("Преподователь")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.add_professor,
                           callback: function($$v) {
@@ -51318,7 +51329,7 @@ var render = function() {
                       _c("label", [_vm._v("Заведующий кафедры")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.add_head_of_department,
                           callback: function($$v) {
@@ -51341,7 +51352,7 @@ var render = function() {
                       _c("label", [_vm._v("Модули")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { type: "number", min: "1" },
+                        attrs: { type: "number", min: "1", required: "" },
                         model: {
                           value: _vm.add_module_count,
                           callback: function($$v) {
@@ -51364,7 +51375,7 @@ var render = function() {
                       _c("label", [_vm._v("Часы")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { type: "number", min: "1" },
+                        attrs: { type: "number", min: "1", required: "" },
                         model: {
                           value: _vm.add_hours_count,
                           callback: function($$v) {
@@ -51387,7 +51398,7 @@ var render = function() {
                       _c("label", [_vm._v("Кредиты")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { type: "number", min: "1" },
+                        attrs: { type: "number", min: "1", required: "" },
                         model: {
                           value: _vm.add_credits_count,
                           callback: function($$v) {
@@ -51492,7 +51503,7 @@ var render = function() {
                       _c("label", [_vm._v("Наименование")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.edit_name,
                           callback: function($$v) {
@@ -51515,7 +51526,7 @@ var render = function() {
                       _c("label", [_vm._v("Преподователь")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.edit_professor,
                           callback: function($$v) {
@@ -51538,7 +51549,7 @@ var render = function() {
                       _c("label", [_vm._v("Заведующий кафедры")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { maxlength: "255" },
+                        attrs: { maxlength: "255", required: "" },
                         model: {
                           value: _vm.edit_head_of_department,
                           callback: function($$v) {
@@ -51561,7 +51572,7 @@ var render = function() {
                       _c("label", [_vm._v("Модули")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { type: "number", min: "1" },
+                        attrs: { type: "number", min: "1", required: "" },
                         model: {
                           value: _vm.edit_module_count,
                           callback: function($$v) {
@@ -51584,7 +51595,7 @@ var render = function() {
                       _c("label", [_vm._v("Часы")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { type: "number", min: "1" },
+                        attrs: { type: "number", min: "1", required: "" },
                         model: {
                           value: _vm.edit_hours_count,
                           callback: function($$v) {
@@ -51607,7 +51618,7 @@ var render = function() {
                       _c("label", [_vm._v("Кредиты")]),
                       _vm._v(" "),
                       _c("md-input", {
-                        attrs: { type: "number", min: "1" },
+                        attrs: { type: "number", min: "1", required: "" },
                         model: {
                           value: _vm.edit_credits_count,
                           callback: function($$v) {
@@ -51627,6 +51638,7 @@ var render = function() {
                   _c(
                     "md-datepicker",
                     {
+                      attrs: { required: "" },
                       model: {
                         value: _vm.edit_begin_date,
                         callback: function($$v) {
@@ -52159,7 +52171,7 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              !_vm.user.logged
+              !_vm.user.logged && !_vm.noUser
                 ? _c("li", { staticClass: "nav-item li-stretch" }, [
                     _c(
                       "a",
@@ -52888,7 +52900,7 @@ var render = function() {
         "div",
         { staticClass: "pt-5 pb-2 text-center" },
         [
-          _vm.noUsers
+          _vm.noUser
             ? _c(
                 "md-card",
                 {
@@ -108331,8 +108343,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /projects/DG/document_generator/generator/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /projects/DG/document_generator/generator/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/nau/document_generator/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/nau/document_generator/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

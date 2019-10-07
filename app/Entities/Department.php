@@ -33,8 +33,8 @@ class Department {
     private $head;
 
     /**
-     * One faculty has many specialities. This is the inverse side.
-     * @ORM\OneToMany(targetEntity="Speciality", mappedBy="faculty")
+     * One department has many specialities. This is the inverse side.
+     * @ORM\OneToMany(targetEntity="Speciality", mappedBy="department")
      */
     private $specialities;
 
