@@ -39,6 +39,18 @@
                         <md-input v-model="add_head_of_department" maxlength="255" required></md-input>
                         <span class="md-helper-text">Имя заведующего кафедры</span>
                     </md-field>
+                    <div>
+                        <md-switch v-model="add_hasCourse">Есть курсовая</md-switch>
+                    </div>
+                    <div>
+                        <md-switch v-model="add_hasPass">Есть зачет</md-switch>
+                    </div>
+                    <div>
+                        <md-switch v-model="add_hasExam">Есть экзамен</md-switch>
+                    </div>
+                    <div>
+                        <md-switch v-model="add_hasPractice">Есть практика</md-switch>
+                    </div>
                     <md-field>
                         <label>Модули</label>
                         <md-input v-model="add_module_count" type="number" min="1" required></md-input>
@@ -84,6 +96,18 @@
                         <md-input v-model="edit_head_of_department" maxlength="255" required></md-input>
                         <span class="md-helper-text">Имя заведующего кафедры</span>
                     </md-field>
+                    <div>
+                        <md-switch v-model="edit_hasCourse">Есть курсовая</md-switch>
+                    </div>
+                    <div>
+                        <md-switch v-model="edit_hasPass">Есть зачет</md-switch>
+                    </div>
+                    <div>
+                        <md-switch v-model="edit_hasExam">Есть экзамен</md-switch>
+                    </div>
+                    <div>
+                        <md-switch v-model="edit_hasPractice">Есть практика</md-switch>
+                    </div>
                     <md-field>
                         <label>Модули</label>
                         <md-input v-model="edit_module_count" type="number" min="1" required></md-input>
@@ -273,6 +297,14 @@
                 add_hours_count: '',
                 add_credits_count: '',
                 add_begin_date: '',
+                add_hasCourse: false,
+                add_hasPass: false,
+                add_hasExam: false,
+                add_hasPractice: false,
+                edit_hasCourse: false,
+                edit_hasPass: false,
+                edit_hasExam: false,
+                edit_hasPractice: false,
                 edit_name: '',
                 edit_professor: '',
                 edit_head_of_department: '',
@@ -353,6 +385,10 @@
                         hoursCount: this.add_hours_count,
                         creditsCount: this.add_credits_count,
                         date: this.add_begin_date,
+                        hasCourse: this.add_hasCourse,
+                        hasPass: this.add_hasPass,
+                        hasExam: this.add_hasExam,
+                        hasPractice: this.add_hasPractice,
                     })
                     .then(response => (this.dataSet.push(response.data)))
                     .catch(e => {
@@ -371,6 +407,10 @@
                         hoursCount: this.edit_hours_count,
                         creditsCount: this.edit_credits_count,
                         date: this.edit_begin_date,
+                        hasCourse: this.edit_hasCourse,
+                        hasPass: this.edit_hasPass,
+                        hasExam: this.edit_hasExam,
+                        hasPractice: this.edit_hasPractice,
                     })
                     .then(response => {
                         this.dataSet.forEach(function(el,index,arr){
@@ -383,6 +423,10 @@
                                 arr[index].hoursCount = response.data.hoursCount;
                                 arr[index].creditsCount = response.data.creditsCount;
                                 arr[index].dateBegin = response.data.dateBegin;
+                                arr[index].hasCourse = response.has.course;
+                                arr[index].hasPass = response.has.pass;
+                                arr[index].hasExam = response.has.exam;
+                                arr[index].hasPractice = response.has.practice;
                             }
                         });
                     })
@@ -397,6 +441,10 @@
                 this.edit_hours_count = '';
                 this.edit_credits_count = '';
                 this.edit_begin_date = '';
+                this.edit_hasCourse = '';
+                this.edit_hasPass = '';
+                this.edit_hasExam = '';
+                this.edit_hasPractice = '';
                 this.clearSelected();
                 this.toggleModalEdit=false;
             },
@@ -433,6 +481,10 @@
                     this.edit_hours_count = element.hoursCount;
                     this.edit_credits_count = element.creditsCount;
                     this.edit_begin_date = element.dateBegin;
+                    this.edit_hasCourse = element.has.course;
+                    this.edit_hasPass = element.has.pass;
+                    this.edit_hasExam = element.has.exam;
+                    this.edit_hasPractice = element.has.practice;
                     this.editId = element.id;
                     this.toggleModalEdit = true;
                 }

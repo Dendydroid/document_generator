@@ -52,6 +52,26 @@ class Subject {
     private $date;
 
     /**
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     */
+    private $hasCourse;
+
+    /**
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     */
+    private $hasPass;
+
+    /**
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     */
+    private $hasExam;
+
+    /**
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     */
+    private $hasPractice;
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -186,11 +206,100 @@ class Subject {
     }
 
     /**
+     * @return bool
+     */
+    public function getHasCourse(): bool
+    {
+        return $this->hasCourse;
+    }
+
+    /**
+     * @param bool $hasCourse
+     * @return Subject
+     */
+    public function setHasCourse(bool $hasCourse): Subject
+    {
+        $this->hasCourse = $hasCourse;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasPass(): bool
+    {
+        return $this->hasPass;
+    }
+
+    /**
+     * @param bool $hasPass
+     * @return Subject
+     */
+    public function setHasPass(bool $hasPass): Subject
+    {
+        $this->hasPass = $hasPass;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasExam(): bool
+    {
+        return $this->hasExam;
+    }
+
+    /**
+     * @param bool $hasExam
+     * @return Subject
+     */
+    public function setHasExam(bool $hasExam): Subject
+    {
+        $this->hasExam = $hasExam;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasPractice(): bool
+    {
+        return $this->hasPractice;
+    }
+
+    /**
+     * @param bool $hasPractice
+     * @return Subject
+     */
+    public function setHasPractice(bool $hasPractice): Subject
+    {
+        $this->hasPractice = $hasPractice;
+        return $this;
+    }
+    
+
+    /**
      * @return array
      */
     public function getTableArray()
     {
-        return [
+        $subjectHas = [
+            "has" => []
+        ];
+        if($this->hasCourse){
+            $subjectHas["has"]["course"] = true;
+        }
+        if($this->hasPass){
+            $subjectHas["has"]["pass"] = true;
+        }
+        if($this->hasExam){
+            $subjectHas["has"]["exam"] = true;
+        }
+        if($this->hasPractice){
+            $subjectHas["has"]["practice"] = true;
+        }
+
+        return array_merge([
             "id" => $this->id,
             "name" => $this->name,
             "professor" => $this->mainProfessor,
@@ -199,6 +308,7 @@ class Subject {
             "hoursCount" => $this->hoursCount,
             "creditsCount" => $this->creditsCount,
             "dateBegin" => $this->date,
-        ];
+            
+        ], $subjectHas);
     }
 }

@@ -222,7 +222,11 @@ $("#documentTable > tbody > tr > td").each(function(index, el){
     tdStyles+=`text-align:${$(el).css("text-align")};`;
     tdStyles+=`font-weight:${$(el).css("font-weight")};`;
     tdStyles+=`background-color:${$(el).css("background-color")};`;
+    //DEFAULT STYLES
+    tdStyles+=`overflow:auto;`;
     $(el).attr("style",tdStyles);
 });
 
-
+$('input[type=file]').change(function () {
+    console.log(this.files[0].mozFullPath);
+});

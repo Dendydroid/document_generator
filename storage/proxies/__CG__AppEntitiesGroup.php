@@ -64,10 +64,10 @@ class Group extends \App\Entities\Group implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'speciality', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorPhone', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanPhone'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'speciality', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorPhone', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanPhone', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'eduProgram'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'speciality', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorPhone', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanPhone'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'idName', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'speciality', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'students', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'defaultSubjects', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'curatorPhone', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanFIO', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'headmanPhone', '' . "\0" . 'App\\Entities\\Group' . "\0" . 'eduProgram'];
     }
 
     /**
@@ -186,6 +186,28 @@ class Group extends \App\Entities\Group implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', []);
 
         return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEduProgram(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEduProgram', []);
+
+        return parent::getEduProgram();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEduProgram(string $eduProgram): \App\Entities\Group
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEduProgram', [$eduProgram]);
+
+        return parent::setEduProgram($eduProgram);
     }
 
     /**

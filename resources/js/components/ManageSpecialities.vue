@@ -40,11 +40,6 @@
                         <span class="md-helper-text">Номер специальности</span>
                     </md-field>
                     <md-field>
-                        <label>ОПП</label>
-                        <md-input v-model="add_eduProgram" maxlength="255"></md-input>
-                        <span class="md-helper-text">Образовательная программа</span>
-                    </md-field>
-                    <md-field>
                         <label>Кафедра</label>
                         <md-select v-model="add_department" name="add_department" id="add_department">
                             <md-option v-for="department in departmentList" :value="department.id">{{department.fullName}}</md-option>
@@ -76,11 +71,7 @@
                         <md-input v-model="edit_number" maxlength="255"></md-input>
                         <span class="md-helper-text">Номер специальности</span>
                     </md-field>
-                    <md-field>
-                        <label>ОПП</label>
-                        <md-input v-model="edit_eduProgram" maxlength="255"></md-input>
-                        <span class="md-helper-text">Образовательная программа</span>
-                    </md-field>
+                    
                     <md-field>
                         <label>Кафедра</label>
                         <md-select v-model="edit_department" name="edit_department" id="edit_department">
@@ -253,9 +244,7 @@
                 add_abbreviation: '',
                 add_department: '',
                 add_number: '',
-                add_eduProgram: '',
                 edit_number: '',
-                edit_eduProgram: '',
                 edit_department: '',
                 edit_fullName: '',
                 edit_abbreviation: '',
@@ -337,7 +326,7 @@
                         abbreviation: this.add_abbreviation,
                         department: this.add_department,
                         number: this.add_number,
-                        eduProgram: this.add_eduProgram,
+                        
                     })
                     .then(response => (this.dataSet.push(response.data)))
                     .catch(e => {
@@ -353,7 +342,7 @@
                         abbreviation: this.edit_abbreviation,
                         department: this.edit_department,
                         number: this.edit_number,
-                        eduProgram: this.edit_eduProgram,
+                        
                     })
                     .then(response => {
                         this.dataSet.forEach(function(el,index,arr){
@@ -363,7 +352,7 @@
                                 arr[index].abbreviation = response.data.abbreviation;
                                 arr[index].department = response.data.department;
                                 arr[index].number = response.data.number;
-                                arr[index].eduProgram = response.data.eduProgram;
+                        
                             }
                         });
                     })
@@ -374,7 +363,7 @@
                 this.edit_fullName = '';
                 this.edit_abbreviation = '';
                 this.edit_number = '';
-                this.edit_eduProgram = '';
+                
                 this.clearSelected();
                 this.toggleModalEdit=false;
             },
@@ -408,7 +397,7 @@
                     this.edit_abbreviation = element.abbreviation;
                     this.edit_department = element.department.id;
                     this.edit_number = element.number;
-                    this.edit_eduProgram = element.eduProgram;
+                    
                     this.editId = element.id;
                     this.toggleModalEdit = true;
                 }

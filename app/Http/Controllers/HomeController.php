@@ -31,6 +31,11 @@ class HomeController extends Controller
         return view('settings');
     }
 
+    public function settingsAdmin()
+    {
+        return view('settingsAdmin');
+    }
+
     public function profile()
     {
         return view('profile');

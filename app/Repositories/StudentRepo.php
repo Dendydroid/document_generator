@@ -37,8 +37,8 @@ class StudentRepo extends EntityRepository {
             "firstName" => "required|max:255",
             "surname" => "required|max:255",
             "middleName" => "required|max:255",
-            "studentId" => "required|max:255",
-            "gender" => "required|max:255",
+            "studentId" => "max:255",
+            "gender" => "max:255",
             "familyState" => "max:255",
             "familyAddress" => "max:255",
             "addressBegin" => "max:255",
@@ -49,7 +49,8 @@ class StudentRepo extends EntityRepository {
             "nauContract" => "max:255",
             "nauPrivileges" => "max:255",
             "hostel" => "max:255",
-            "additionalInfo" => "max:255"
+            "additionalInfo" => "max:255",
+            "studyType" => "max:255",
         ]);
 
         return $validator;
@@ -96,54 +97,75 @@ class StudentRepo extends EntityRepository {
             $student->setFirstName($data['firstName']);
             $student->setSurname($data['surname']);
             $student->setMiddleName($data['middleName']);
-            $student->setIdNumber($data['studentId']);
-            $student->setDateOfBirth($data['dateOfBirth']);
-            $student->setGender($data['gender']);
-            $student->setCitizenship($data['citizenship']);
             $student->setCreationDate($today);
             $student->setGroup($group);
 
-            if(isset($data['familyState']) && !empty(isset($data['familyState'])))
+            if(isset($data['studentId']) && !empty($data['studentId']))
+            {
+                $student->setIdNumber($data['studentId']);
+            }
+
+            if(isset($data['studyType']) && !empty($data['studyType']))
+            {
+                $student->setStudyType($data['studyType']);
+            }
+
+            if(isset($data['dateOfBirth']) && !empty($data['dateOfBirth']))
+            {
+                $student->setDateOfBirth($data['dateOfBirth']);
+            }
+
+            if(isset($data['gender']) && !empty(isset($data['gender'])))
+            {
+                $student->setGender($data['gender']);
+            }
+
+            if(isset($data['citizenship']) && !empty($data['citizenship']))
+            {
+                $student->setCitizenship($data['citizenship']);
+            }
+
+            if(isset($data['familyState']) && !empty($data['familyState']))
             {
                 $student->setFamilyState($data['familyState']);
             }
-            if(isset($data['familyAddress']) && !empty(isset($data['familyAddress'])))
+            if(isset($data['familyAddress']) && !empty($data['familyAddress']))
             {
                 $student->setMarriageAddress($data['familyAddress']);
             }
-            if(isset($data['addressBegin']) && !empty(isset($data['addressBegin'])))
+            if(isset($data['addressBegin']) && !empty($data['addressBegin']))
             {
                 $student->setAddressUniversityBegin($data['addressBegin']);
             }
-            if(isset($data['beforeNauEdu']) && !empty(isset($data['beforeNauEdu'])))
+            if(isset($data['beforeNauEdu']) && !empty($data['beforeNauEdu']))
             {
                 $student->setBeforeNauEduInfo($data['beforeNauEdu']);
             }
-            if(isset($data['beforeNauJob']) && !empty(isset($data['beforeNauJob'])))
+            if(isset($data['beforeNauJob']) && !empty($data['beforeNauJob']))
             {
                 $student->setBeforeNauJobInfo($data['beforeNauJob']);
             }
-            if(isset($data['militaryService']) && !empty(isset($data['militaryService'])))
+            if(isset($data['militaryService']) && !empty($data['militaryService']))
             {
                 $student->setMilitaryServiceDates($data['militaryService']);
             }
-            if(isset($data['nauConditions']) && !empty(isset($data['nauConditions'])))
+            if(isset($data['nauConditions']) && !empty($data['nauConditions']))
             {
                 $student->setNauEntryConditionsInfo($data['nauConditions']);
             }
-            if(isset($data['nauContract']) && !empty(isset($data['nauContract'])))
+            if(isset($data['nauContract']) && !empty($data['nauContract']))
             {
                 $student->setNauEduContractInfo($data['nauContract']);
             }
-            if(isset($data['nauPrivileges']) && !empty(isset($data['nauPrivileges'])))
+            if(isset($data['nauPrivileges']) && !empty($data['nauPrivileges']))
             {
                 $student->setPrivilegesInfo($data['nauPrivileges']);
             }
-            if(isset($data['hostel']) && !empty(isset($data['hostel'])))
+            if(isset($data['hostel']) && !empty($data['hostel']))
             {
                 $student->setHostelInfo($data['hostel']);
             }
-            if(isset($data['additionalInfo']) && !empty(isset($data['additionalInfo'])))
+            if(isset($data['additionalInfo']) && !empty($data['additionalInfo']))
             {
                 $student->setAdditionalInfo($data['additionalInfo']);
             }
@@ -181,53 +203,74 @@ class StudentRepo extends EntityRepository {
             $student->setFirstName($data['firstName']);
             $student->setSurname($data['surname']);
             $student->setMiddleName($data['middleName']);
-            $student->setIdNumber($data['studentId']);
-            $student->setDateOfBirth($data['dateOfBirth']);
-            $student->setGender($data['gender']);
-            $student->setCitizenship($data['citizenship']);
             $student->setGroup($group);
 
-            if(isset($data['familyState']) && !empty(isset($data['familyState'])))
+            if(isset($data['studentId']) && !empty($data['studentId']))
+            {
+                $student->setIdNumber($data['studentId']);
+            }
+
+            if(isset($data['studyType']) && !empty($data['studyType']))
+            {
+                $student->setStudyType($data['studyType']);
+            }
+
+            if(isset($data['dateOfBirth']) && !empty($data['dateOfBirth']))
+            {
+                $student->setDateOfBirth($data['dateOfBirth']);
+            }
+
+            if(isset($data['gender']) && !empty(isset($data['gender'])))
+            {
+                $student->setGender($data['gender']);
+            }
+
+            if(isset($data['citizenship']) && !empty($data['citizenship']))
+            {
+                $student->setCitizenship($data['citizenship']);
+            }
+
+            if(isset($data['familyState']) && !empty($data['familyState']))
             {
                 $student->setFamilyState($data['familyState']);
             }
-            if(isset($data['familyAddress']) && !empty(isset($data['familyAddress'])))
+            if(isset($data['familyAddress']) && !empty($data['familyAddress']))
             {
                 $student->setMarriageAddress($data['familyAddress']);
             }
-            if(isset($data['addressBegin']) && !empty(isset($data['addressBegin'])))
+            if(isset($data['addressBegin']) && !empty($data['addressBegin']))
             {
                 $student->setAddressUniversityBegin($data['addressBegin']);
             }
-            if(isset($data['beforeNauEdu']) && !empty(isset($data['beforeNauEdu'])))
+            if(isset($data['beforeNauEdu']) && !empty($data['beforeNauEdu']))
             {
                 $student->setBeforeNauEduInfo($data['beforeNauEdu']);
             }
-            if(isset($data['beforeNauJob']) && !empty(isset($data['beforeNauJob'])))
+            if(isset($data['beforeNauJob']) && !empty($data['beforeNauJob']))
             {
                 $student->setBeforeNauJobInfo($data['beforeNauJob']);
             }
-            if(isset($data['militaryService']) && !empty(isset($data['militaryService'])))
+            if(isset($data['militaryService']) && !empty($data['militaryService']))
             {
                 $student->setMilitaryServiceDates($data['militaryService']);
             }
-            if(isset($data['nauConditions']) && !empty(isset($data['nauConditions'])))
+            if(isset($data['nauConditions']) && !empty($data['nauConditions']))
             {
                 $student->setNauEntryConditionsInfo($data['nauConditions']);
             }
-            if(isset($data['nauContract']) && !empty(isset($data['nauContract'])))
+            if(isset($data['nauContract']) && !empty($data['nauContract']))
             {
                 $student->setNauEduContractInfo($data['nauContract']);
             }
-            if(isset($data['nauPrivileges']) && !empty(isset($data['nauPrivileges'])))
+            if(isset($data['nauPrivileges']) && !empty($data['nauPrivileges']))
             {
                 $student->setPrivilegesInfo($data['nauPrivileges']);
             }
-            if(isset($data['hostel']) && !empty(isset($data['hostel'])))
+            if(isset($data['hostel']) && !empty($data['hostel']))
             {
                 $student->setHostelInfo($data['hostel']);
             }
-            if(isset($data['additionalInfo']) && !empty(isset($data['additionalInfo'])))
+            if(isset($data['additionalInfo']) && !empty($data['additionalInfo']))
             {
                 $student->setAdditionalInfo($data['additionalInfo']);
             }
@@ -275,6 +318,22 @@ class StudentRepo extends EntityRepository {
                 $this->_em->flush();
             }
         }
+    }
+
+    public function clearTable()
+    {
+        $connection = $this->_em->getConnection();
+        $connection->executeQuery('SET FOREIGN_KEY_CHECKS = 0;');
+        $platform   = $connection->getDatabasePlatform();
+
+        $connection->executeUpdate($platform->getTruncateTableSQL('students', true));
+        $connection->executeUpdate($platform->getTruncateTableSQL('students_encouragement_penalty_orders', true));
+        $connection->executeUpdate($platform->getTruncateTableSQL('students_other_orders', true));
+        $connection->executeUpdate($platform->getTruncateTableSQL('students_parents', true));
+        $connection->executeUpdate($platform->getTruncateTableSQL('students_subjects', true));
+        $connection->executeUpdate($platform->getTruncateTableSQL('student_parents', true));
+        $connection->executeUpdate($platform->getTruncateTableSQL('orders', true));
+        $connection->executeQuery('SET FOREIGN_KEY_CHECKS = 1;');
     }
 }
 

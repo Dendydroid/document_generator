@@ -31,11 +31,6 @@ class Speciality {
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $eduProgram;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $abbreviation;
 
     /**
@@ -175,24 +170,6 @@ class Speciality {
     }
 
     /**
-     * @return string
-     */
-    public function getEduProgram(): string
-    {
-        return $this->eduProgram;
-    }
-
-    /**
-     * @param string $eduProgram
-     * @return Speciality
-     */
-    public function setEduProgram(string $eduProgram): Speciality
-    {
-        $this->eduProgram = $eduProgram;
-        return $this;
-    }
-
-    /**
      * @return array
      */
     public function getTableArray()
@@ -202,7 +179,6 @@ class Speciality {
             "fullName" => $this->fullName,
             "abbreviation" => $this->abbreviation,
             "number" => $this->number,
-            "eduProgram" => $this->eduProgram,
             "department" => [
                 "id" => $this->department->getId(),
                 "fullName" => $this->department->getFullName()

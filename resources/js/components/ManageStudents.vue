@@ -40,6 +40,11 @@
                         <span class="md-helper-text">Отчество студента</span>
                     </md-field>
                     <md-field>
+                        <label>Тип образования</label>
+                        <md-input v-model="add_study_type" maxlength="255" ></md-input>
+                        <span class="md-helper-text">Бакалавр, Магистр, ..</span>
+                    </md-field>
+                    <md-field>
                         <label>ИН</label>
                         <md-input v-model="add_student_id" maxlength="255" ></md-input>
                         <span class="md-helper-text">Индивидуальный номер студента</span>
@@ -154,6 +159,11 @@
                         <label>Отчество</label>
                         <md-input v-model="edit_middle_name" maxlength="255" ></md-input>
                         <span class="md-helper-text">Отчество студента</span>
+                    </md-field>
+                    <md-field>
+                        <label>Тип образования</label>
+                        <md-input v-model="edit_study_type" maxlength="255" ></md-input>
+                        <span class="md-helper-text">Бакалавр, Магистр, ..</span>
                     </md-field>
                     <md-field>
                         <label>ИН</label>
@@ -434,6 +444,8 @@
                 add_hostel: '',
                 add_additional_info: '',
                 add_additional_subjects: [],
+                add_study_type:'',
+                edit_study_type:'',
                 edit_first_name: '',
                 edit_surname: '',
                 edit_middle_name: '',
@@ -555,6 +567,7 @@
                         hostel: this.add_hostel,
                         additionalInfo: this.add_additional_info,
                         additionalSubjects: this.add_additional_subjects,
+                        studyType:this.add_study_type
                     })
                     .then(response => (this.dataSet.push(response.data)))
                     .catch(e => {
@@ -586,6 +599,7 @@
                         hostel: this.edit_hostel,
                         additionalInfo: this.edit_additional_info,
                         additionalSubjects: this.edit_additional_subjects,
+                        studyType: this.edit_study_type,
                     })
                     .then(response => {
                         // this.dataSet.forEach(function(el,index,arr){
@@ -622,6 +636,7 @@
                 this.edit_hostel = '';
                 this.edit_additional_info = '';
                 this.edit_additional_subjects = '';
+                this.edit_study_type = '';
                 this.clearSelected();
                 this.toggleModalEdit=false;
             },
@@ -684,6 +699,7 @@
                     this.edit_nau_privileges = element.nauPrivileges;
                     this.edit_hostel = element.hostel;
                     this.edit_additional_info = element.additionalInfo;
+                    this.edit_study_type = element.studyType;
                     this.toggleModalEdit = true;
                 }
             },

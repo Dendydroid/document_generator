@@ -46,24 +46,29 @@ class Group {
     private $defaultSubjects;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $curatorFIO;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $curatorPhone;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $headmanFIO;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $headmanPhone;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $eduProgram;
 
     /**
      * Group constructor.
@@ -80,6 +85,24 @@ class Group {
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEduProgram(): string
+    {
+        return $this->eduProgram;
+    }
+
+    /**
+     * @param string $eduProgram
+     * @return Group
+     */
+    public function setEduProgram(string $eduProgram): Group
+    {
+        $this->eduProgram = $eduProgram;
+        return $this;
     }
 
     /**
@@ -276,6 +299,11 @@ class Group {
             "speciality" => [
                 "id" => $this->speciality->getId(),
                 "fullName" => $this->speciality->getFullName(),
+                "number" => $this->speciality->getNumber(),
+            ],
+            "department" => [
+                "id" => $this->speciality->getDepartment()->getId(),
+                "fullName" => $this->speciality->getDepartment()->getFullName(),
             ],
             "curator" => [
                 "fio" => $this->curatorFIO,
@@ -285,7 +313,8 @@ class Group {
                 "fio" => $this->headmanFIO,
                 "phone" => $this->headmanPhone
             ],
-            "defaultSubjects" => $defaultSubjectArr
+            "defaultSubjects" => $defaultSubjectArr,
+            "eduProgram" => $this->eduProgram
         ];
     }
 }

@@ -4,14 +4,19 @@ const puppeteer = require('puppeteer');
 const chromeEval = require('chrome-page-eval')({ puppeteer });
 const express = require('express');
 var path = require('path');
+const bodyParser = require('body-parser');
+
 const PORT = 5000;
-const filePath = "/var/www/nau/document_generator/output.xlsx";
+const filePath = "/home/dendydroid/Downloads/output.xlsx";
+
 const conversion = conversionFactory({
     extract: chromeEval
 });
+
 const app = express();
-app.use(express.urlencoded());
-//`<table><tr><td rowspan=5 colspan=5 style="text-align:center;border-left-style:solid;border-right-style:solid;border-bottom-style:solid;font-size:18px;border-bottom-color:deeppink;background-color:greenyellow;border-top-style:solid;font-weight:800;font-style:italic;width:auto;color:red">cell ПРИВЕТПРИВЕТПРИВЕТПРИВЕТПРИВ<br>ЕТПРИВЕТПРИВЕТПРИВЕТ</td></tr><tr><td>1</td></tr><tr><td>1</td></tr><tr><td>1</td></tr><tr><td>1</td></tr></table>`
+app.use(bodyParser.json({limit: '500mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '500mb', extended: true}));
+
 async function run (html) {
     const stream = await conversion(html);
     return await new Promise((resolve, reject) => {
@@ -24,6 +29,8 @@ app.post('/html2Excel', (req, res) => {
     let html = req.body.html;
     run(html).then(() => {
         res.download(filePath, path.basename(filePath));
+    }).catch((e) => {
+        console.log(e);
     });
 });
 

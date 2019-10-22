@@ -28,7 +28,7 @@ class Department {
     private $abbreviation;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $head;
 

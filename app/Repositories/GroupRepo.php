@@ -34,6 +34,7 @@ class GroupRepo extends EntityRepository {
     {
         $validator = Validator::make($request, [
             "idName" => "required|max:255",
+            "eduProgram" => "required|max:255",
         ]);
 
         return $validator;
@@ -85,7 +86,8 @@ class GroupRepo extends EntityRepository {
             }
 
             $group->setIdName($data['idName'])
-                ->setSpeciality($speciality);
+                ->setSpeciality($speciality)
+                ->setEduProgram($data['eduProgram']);
 
             if(isset($data['curatorFIO']) && !empty($data['curatorFIO']))
             {
@@ -135,7 +137,8 @@ class GroupRepo extends EntityRepository {
             }
 
             $group->setIdName($data['idName'])
-                 ->setSpeciality($speciality);
+                 ->setSpeciality($speciality)
+                 ->setEduProgram($data['eduProgram']);
 
             if(isset($data['curatorFIO']) && !empty($data['curatorFIO']))
             {
@@ -198,6 +201,17 @@ class GroupRepo extends EntityRepository {
                 $this->_em->flush();
             }
         }
+    }
+
+    public function clearTable()
+    {
+        $connection = $this->_em->getConnection();
+        $connection->executeQuery('SET FOREIGN_KEY_CHECKS = 0;');
+        $platform   = $connection->getDatabasePlatform();
+
+        $connection->executeUpdate($platform->getTruncateTableSQL('groups', true));
+        $connection->executeUpdate($platform->getTruncateTableSQL('groups_subjects', true));
+        $connection->executeQuery('SET FOREIGN_KEY_CHECKS = 1;');
     }
 }
 

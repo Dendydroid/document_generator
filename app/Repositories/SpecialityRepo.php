@@ -34,9 +34,7 @@ class SpecialityRepo extends EntityRepository {
         $validator = Validator::make($request, [
             "fullName" => "required|max:255",
             "abbreviation" => "required|max:255",
-            "department" => "required|numeric",
             "number" => "required|max:255",
-            "eduProgram" => "required|max:255",
         ]);
 
         return $validator;
@@ -84,7 +82,6 @@ class SpecialityRepo extends EntityRepository {
             $speciality->setFullName($data['fullName'])
                 ->setAbbreviation($data['abbreviation'])
                 ->setNumber($data['number'])
-                ->setEduProgram($data['eduProgram'])
                 ->setDepartment($department);
             $this->_em->persist($speciality);
             $this->_em->flush();
@@ -113,7 +110,6 @@ class SpecialityRepo extends EntityRepository {
             $speciality->setFullName($data['fullName'])
                 ->setAbbreviation($data['abbreviation'])
                 ->setNumber($data['number'])
-                ->setEduProgram($data['eduProgram'])
                 ->setDepartment($department);
             $this->_em->persist($speciality);
             $this->_em->flush();
@@ -164,6 +160,16 @@ class SpecialityRepo extends EntityRepository {
                 $this->_em->flush();
             }
         }
+    }
+
+    public function clearTable()
+    {
+        $connection = $this->_em->getConnection();
+        $connection->executeQuery('SET FOREIGN_KEY_CHECKS = 0;');
+        $platform   = $connection->getDatabasePlatform();
+
+        $connection->executeUpdate($platform->getTruncateTableSQL('specialities', true));
+        $connection->executeQuery('SET FOREIGN_KEY_CHECKS = 1;');
     }
 }
 

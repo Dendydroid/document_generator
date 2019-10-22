@@ -11,12 +11,12 @@
                             Генерировать
                         </a>
                         <div class="dropdown-menu" aria-labelledby="generateDropdown">
-                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/zajavaIspit">Заява - іспит</a>
-                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/zvedenaVidomist">Зведена вiдомiсть</a>
-                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vpiskaOzinok">Вписка оцiнок</a>
-                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistMod1">Вiдомiсть (модуль 1)</a>
-                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistMod2">Вiдомiсть (модуль 2)</a>
-                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistKr">Вiдомiсть КР</a>
+                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/zajavaIspit">Заява - Іспит</a>
+                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/zvedenaVidomist">Зведена відомість</a>
+                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vpiskaOzinok">Виписка оцінок</a>
+                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistMod1">Відомість (модуль 1)</a>
+                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistMod2">Відомість (модуль 2)</a>
+                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistKr">Відомість КР</a>
                         </div>
 
                     </li>
@@ -32,6 +32,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="settings">
                             <a class="dropdown-item larafont-navlink-dropdown" href="/settings">Основные</a>
+                            <a class="dropdown-item larafont-navlink-dropdown" href="/settingsAdmin">Дополнительные настройки</a>
                         </div>
                     </li>
                     <li class="nav-item li-stretch" v-if="noUser || user.isAdmin">

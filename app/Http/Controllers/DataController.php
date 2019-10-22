@@ -116,6 +116,235 @@ class DataController extends Controller
         return $ar;
     }
 
+    public function charIsNumber($ch)
+    {
+        return $ch[0] >= "0" && $ch[0] <= "9";
+
+    }
+
+    public function csvGetOtherData($fileText)
+    {
+        $specialityName = trim(str_replace(";","",substr($fileText,strpos($fileText," ")+1, strpos($fileText,";"))));
+        $specialityCode = trim(substr($fileText,0, strpos($fileText," ")));
+
+        $save = false;
+        $opp = "";
+        $lineCount = 0;
+
+        for($i=0;$i<strlen($fileText);$i++)
+        {
+            if($fileText[$i] === "\n")
+            {
+                $lineCount++;
+            }
+            if($lineCount == 1){
+                $save = true;
+            }
+            if($save && $fileText[$i] == ";")
+            {
+                break;
+            }
+            if($save)
+            {
+                $opp.= $fileText[$i];
+            }
+        }
+        $groupName = "";
+        $save = false;
+        for($i=0;$i<strlen($fileText);$i++)
+        {
+            if($fileText[$i] === "\n")
+            {
+                $lineCount++;
+            }
+            if($lineCount == 3){
+                $save = true;
+            }
+            if($save && $fileText[$i] == ";")
+            {
+                break;
+            }
+            if($save)
+            {
+                $groupName.= $fileText[$i];
+            }
+        }
+        $groupName = trim(str_replace("\n","",$groupName));
+        $opp = str_replace("ОПП ", "", $opp);
+        $opp = trim(str_replace("\n", "", $opp));
+        $result = [
+            "specialityName"=>$specialityName,
+            "opp" => $opp,
+            "groupName" => $groupName,
+            "specialityCode" => $specialityCode
+        ];
+        return $result;
+    }
+
+    public function getCSVHeaders($str)
+    {
+        $save = false;
+        $temp = "";
+        $lineCount = 0;
+        for($i=0;$i<strlen($str);$i++)
+        {
+            if($str[$i] === "\n")
+            {
+                $lineCount++;
+            }
+            if($save && $str[$i] == "\n")
+            {
+                $save = false;
+            }
+            if($lineCount == 3){
+                $save = true;
+            }
+            if($save && !($str[$i] >= "0" && $str[$i] <= "9"))
+            {
+                $temp.= $str[$i];
+            }
+        }
+        $temp = str_replace(";;",";", $temp);
+        return $temp;
+    }
+
+
+    function multiExplode ($delimiters,$string) {
+
+        $ready = str_replace($delimiters, $delimiters[0], $string);
+        $launch = explode($delimiters[0], $ready);
+        return  $launch;
+    }
+
+    public function uploadCsv(Request $request)
+    {
+        if($request->get('chosen_department'))
+            $departmentName = $request->get('chosen_department');
+        else
+            return "Пожалуйста, выберите кафедру";
+
+       $depArr = $this->multiExplode([" ","-"], $departmentName);
+
+       $depAbbrev = "";
+
+       $studentsArr = [];
+
+       foreach($depArr as $word)
+       {
+           $depAbbrev.=mb_substr($word,0,1);
+       }
+       
+       $depAbbrev = mb_strtoupper($depAbbrev);
+
+       $department = $this->repoDepartments->findOneBy(["fullName" => $departmentName]);
+
+
+       if(!($department instanceof Department))
+       {
+         $department = $this->repoDepartments->createDepartment([
+            "fullName" => $departmentName,
+            "abbreviation" => $depAbbrev,
+            "head" => ""
+         ]);
+       }
+       $files = $request->all()['upload'];
+        foreach ($files as $file) {
+            $fileText = $file->get();
+            $temp = "";
+            $collect = false;
+            $headers = $this->getCSVHeaders($fileText);
+            for($i=0;$i<strlen($fileText);$i++)
+            {
+                if($collect && $fileText[$i] == "\n")
+                {
+                    $temp.="\n";
+                    $collect = false;
+                }
+                if($fileText[$i] == "\n" && isset($fileText[$i+1]) && $this->charIsNumber($fileText[$i+1]))
+                {
+                    $collect = true;
+                }
+                if($collect)
+                {
+                    $temp.=$fileText[$i];
+                }
+            }
+            $rows = explode("\n\n", $headers . "\n" . $temp);
+            $keys = array_slice($rows,0,1);
+            $keys = preg_split('@;@', str_replace("\n", "", $keys[0]), NULL, PREG_SPLIT_NO_EMPTY);
+
+            
+
+            for($line = 1; $line < count($rows); $line++)
+            {
+                $student = explode(";",$rows[$line]);
+                for($k = 0; $k < count($keys);$k++)
+                {
+                    $studentsArr[$line-1][trim($keys[$k])] = trim($student[$k]);
+                }
+            }
+
+            $numberKey = $keys[0];
+
+            $otherData = $this->csvGetOtherData($fileText);
+
+           $specArr = $this->multiExplode([" ","-"], $otherData['specialityName']);
+
+           $abbrev = "";
+
+           foreach($specArr as $word)
+           {
+               $abbrev.=mb_substr($word,0,1);
+           }
+           
+           $specialityAbbrev = mb_strtoupper($abbrev);
+
+           $speciality = $this->repoSpeciality->findOneBy(["fullName" => $otherData['specialityName']]);
+
+           if(!($speciality instanceof Speciality))
+           {
+                $speciality = $this->repoSpeciality->createSpeciality([
+                    "fullName" => $otherData['specialityName'],
+                    "abbreviation" => $specialityAbbrev,
+                    "number" => $otherData['specialityCode'],
+                ], $department);
+           }
+
+           $group = $this->repoGroup->findOneBy(["idName" => $otherData['groupName']]);
+
+           if(!($group instanceof Group))
+           {
+                $group = $this->repoGroup->createGroup([
+                    "idName" => $otherData['groupName'],
+                    "eduProgram" => $otherData['opp']
+
+                ], $speciality, []);
+           }
+
+           foreach ($studentsArr as $student) {
+
+                try{
+                    $studentName = $this->multiExplode([" "],$student["П.І.Б."]);
+                    $student = $this->repoStudent->createStudent([
+
+                        "surname" => isset($studentName[0]) ? $studentName[0] : " ",
+                        "firstName" => isset($studentName[1]) ? $studentName[1] : " ",
+                        "middleName" => isset($studentName[2]) ? $studentName[2] : " ",
+                        "nauConditions" => $student["Умови навчання"],
+                        "addressBegin" => $student["Місце реєстрації при вступі до НАУ"],
+                        "studyType" => $student["Освітньо-кваліфікаційний рівень"],
+                        "additionalInfo" => $student["Примітки"],
+
+                    ],$group,[]);
+                }catch(Exception $exception)
+                {
+                }
+               
+           }
+        }
+        return redirect()->route('settingsAdmin');
+    }
+
     /**
      * @param array $data
      * @param array $required
@@ -194,6 +423,15 @@ class DataController extends Controller
         }
     }
 
+    public function clearDB()
+    {
+        $this->repoStudent->clearTable();
+        $this->repoGroup->clearTable();
+        $this->repoSpeciality->clearTable();
+        $this->repoDepartments->clearTable();
+        $this->repoSubjects->clearTable();
+    }
+
     /**
      * @param Request $request
      * @return array
@@ -213,14 +451,15 @@ class DataController extends Controller
                 if($department instanceof Department)
                 {
                     $specialities = $department->getSpecialities();
-                    $this->repoSpeciality->removeSpecialityArray($specialities);
                     /**
                      * @var Speciality $speciality
                      */
                     foreach ($specialities as $speciality)
                     {
-                        $this->repoGroup->removeGroupArray($speciality->getGroupsCollection());
+                        $groups = $this->repoGroup->removeGroupArray($speciality->getGroupsCollection());
                     }
+                    $this->repoSpeciality->removeSpecialityArray($specialities);
+
                 }
             }
 
@@ -674,5 +913,50 @@ class DataController extends Controller
             }
         }
         return $arrStudents;
+    }
+
+    public function getOpp(Request $request)
+    {
+        $groups = $this->repoGroup->findAll();
+        $oppList = [];
+        foreach ($groups as $group) {
+            if(!in_array($group->getEduProgram(), $oppList))
+            $oppList[] = $group->getEduProgram();
+        }
+        return $oppList;
+    }
+
+    public function specialitySubjects(Request $request)
+    {
+        $data = $request->all();
+
+        if(isset($data['subjectOpps']) && !empty(isset($data['subjectOpps'])) && isset($data['subjects']) && !empty(isset($data['subjects'])))
+        {
+            $oppList = $data['subjectOpps'];
+            $subjectList = $data['subjects'];
+            $subjects = [];
+            foreach ($subjectList as $subject) {
+                $sub = $this->repoSubjects->findOneBy(["name" => $subject]);
+                if(!empty($subject) && $sub instanceof Subject)
+                {
+                    $subjects[] = $sub;
+                }
+            }
+
+            foreach ($oppList as $opp) {
+                if(!empty($opp))
+                {
+                    $groups = $this->repoGroup->findBy(["eduProgram" => $opp]);
+                    foreach ($groups as $group) {
+                        if(!empty($subjects))
+                        {
+                            $group->setDefaultSubjects($subjects);
+                            $this->repoGroup->updateGroup($group);
+                        }
+                    }
+                }
+            }
+
+        }
     }
 }

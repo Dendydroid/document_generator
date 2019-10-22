@@ -32,9 +32,12 @@ Route::post('/hasNoUsers', 'UserController@hasNoUsers')->name('hasNoUsers');
 Route::post('/updateFacultyInfo','DataController@updateFacultyInfo')->name('updateFacultyInfo')->middleware('logged');
 Route::post('/getFacultyInfo','DataController@getFacultyInfo')->name('getFacultyInfo')->middleware('logged');
 Route::post('/updateTheme','UserController@updateTheme')->name('updateTheme')->middleware('logged');
+Route::post('/uploadCsv', 'DataController@uploadCsv')->name('uploadCsv')->middleware('logged');
 
 Route::get('/settings', 'HomeController@settings')->name('settings')->middleware('logged');
+Route::get('/settingsAdmin', 'HomeController@settingsAdmin')->name('settingsAdmin')->middleware('logged');
 Route::get('/profile', 'HomeController@profile')->name('profile')->middleware('logged');
+Route::post('/clearDB', 'DataController@clearDB')->name('clearDB')->middleware('logged');
 //END_VIEWS
 
 //DATA VIEWS
@@ -63,9 +66,13 @@ Route::get('/manageStudents', function(\Illuminate\Http\Request $request){
     return view('manage.students');
 })->name('manageStudents')->middleware('logged');
 
+Route::post('/specialitySubjects', 'DataController@specialitySubjects')->name('specialitySubjects')->middleware('logged');
+
 //END DATA VIEWS
 
 //API_METHODS
+
+
 
 
 Route::post('/registerUser', 'UserController@createUser')->name('registerUser');
@@ -104,6 +111,7 @@ Route::post('/createStudent', 'DataController@createStudent')->name('createStude
 Route::post('/deleteStudents', 'DataController@deleteStudents')->name('deleteStudents')->middleware('logged');
 Route::post('/editStudent', 'DataController@editStudent')->name('editStudent')->middleware('logged');
 
+Route::get('/getOpp', 'DataController@getOpp')->name('getOpp')->middleware('logged');
 
 
 //END_API_METHODS

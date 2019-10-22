@@ -135,5 +135,14 @@ class DepartmentRepo extends EntityRepository {
         }
         return $removed;
     }
+    public function clearTable()
+    {
+        $connection = $this->_em->getConnection();
+        $connection->executeQuery('SET FOREIGN_KEY_CHECKS = 0;');
+        $platform   = $connection->getDatabasePlatform();
+
+        $connection->executeUpdate($platform->getTruncateTableSQL('departments', true));
+        $connection->executeQuery('SET FOREIGN_KEY_CHECKS = 1;');
+    }
 }
 

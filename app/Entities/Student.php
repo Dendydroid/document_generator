@@ -35,22 +35,22 @@ class Student {
     private $middleName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $idNumber;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $dateOfBirth;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $citizenship;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $gender;
 
@@ -144,7 +144,7 @@ class Student {
      * @ORM\ManyToMany(targetEntity="Order")
      * @ORM\JoinTable(name="students_encouragement_penalty_orders",
      *      joinColumns={@ORM\JoinColumn(name="studentId", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="orderId", referencedColumnName="id", unique=true)}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="orderId", referencedColumnName="id", unique=false)}
      *      )
      */
     private $encouragementPenaltyList;
@@ -161,7 +161,7 @@ class Student {
      * @ORM\ManyToMany(targetEntity="Order")
      * @ORM\JoinTable(name="students_other_orders",
      *      joinColumns={@ORM\JoinColumn(name="studentId", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="orderId", referencedColumnName="id", unique=true)}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="orderId", referencedColumnName="id", unique=false)}
      *      )
      */
     private $otherOrderList;
@@ -172,6 +172,11 @@ class Student {
      * @ORM\JoinColumn(name="groupId", referencedColumnName="id")
      */
     private $group;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $studyType;
 
     /**
      * Student constructor.
@@ -598,6 +603,24 @@ class Student {
     }
 
     /**
+     * @return string
+     */
+    public function getStudyType(): string
+    {
+        return $this->studyType;
+    }
+
+    /**
+     * @param string $studyType
+     * @return Student
+     */
+    public function setStudyType(string $studyType): Student
+    {
+        $this->studyType = $studyType;
+        return $this;
+    }
+
+    /**
      * @param array $encouragementPenaltyList
      * @return Student
      */
@@ -744,7 +767,8 @@ class Student {
                 "id" => $this->group->getId(),
                 "idName" => $this->group->getIdName(),
             ],
-            "additionalSubjects" => $additionalSubjectArr
+            "additionalSubjects" => $additionalSubjectArr,
+            "studyType" => $this->studyType
         ];
     }
 }

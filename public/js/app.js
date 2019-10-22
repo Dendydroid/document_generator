@@ -2627,6 +2627,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -2670,6 +2680,8 @@ var searchByColumn = function searchByColumn(items, term, column) {
       add_headmanFIO: '',
       add_headmanPhone: '',
       add_default_subjects: [],
+      add_eduProgram: '',
+      edit_eduProgram: '',
       edit_id_name: '',
       edit_speciality: '',
       edit_curatorFIO: '',
@@ -2770,7 +2782,8 @@ var searchByColumn = function searchByColumn(items, term, column) {
         curatorFIO: this.add_curatorFIO,
         curatorPhone: this.add_curatorPhone,
         headmanFIO: this.add_headmanFIO,
-        headmanPhone: this.add_headmanPhone
+        headmanPhone: this.add_headmanPhone,
+        eduProgram: this.add_eduProgram
       }).then(function (response) {
         return _this4.dataSet.push(response.data);
       })["catch"](function (e) {
@@ -2789,7 +2802,8 @@ var searchByColumn = function searchByColumn(items, term, column) {
         curatorFIO: this.edit_curatorFIO,
         curatorPhone: this.edit_curatorPhone,
         headmanFIO: this.edit_headmanFIO,
-        headmanPhone: this.edit_headmanPhone
+        headmanPhone: this.edit_headmanPhone,
+        eduProgram: this.edit_eduProgram
       }).then(function (response) {
         _this5.dataSet.forEach(function (el, index, arr) {
           if (el.id === response.data.id) {
@@ -2800,6 +2814,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
             arr[index].headmanPhone = response.data.headman.phone;
             arr[index].curatorFIO = response.data.curator.fio;
             arr[index].curatorPhone = response.data.curator.phone;
+            arr[index].eduProgram = response.data.eduProgram;
           }
         });
       })["catch"](function (e) {
@@ -2813,6 +2828,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.edit_curatorPhone = '';
       this.edit_headmanFIO = '';
       this.edit_headmanPhone = '';
+      this.edit_eduProgram = '';
       this.clearSelected();
       this.toggleModalEdit = false;
     },
@@ -2861,6 +2877,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
         this.edit_headmanPhone = element.headman.phone;
         this.edit_speciality = element.speciality.id;
         this.edit_default_subjects = defSubjArr;
+        this.edit_eduProgram = element.eduProgram;
         this.editId = element.id;
         this.toggleModalEdit = true;
       }
@@ -3112,15 +3129,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -3160,9 +3168,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
       add_abbreviation: '',
       add_department: '',
       add_number: '',
-      add_eduProgram: '',
       edit_number: '',
-      edit_eduProgram: '',
       edit_department: '',
       edit_fullName: '',
       edit_abbreviation: '',
@@ -3248,8 +3254,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
         fullName: this.add_fullName,
         abbreviation: this.add_abbreviation,
         department: this.add_department,
-        number: this.add_number,
-        eduProgram: this.add_eduProgram
+        number: this.add_number
       }).then(function (response) {
         return _this3.dataSet.push(response.data);
       })["catch"](function (e) {
@@ -3265,8 +3270,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
         fullName: this.edit_fullName,
         abbreviation: this.edit_abbreviation,
         department: this.edit_department,
-        number: this.edit_number,
-        eduProgram: this.edit_eduProgram
+        number: this.edit_number
       }).then(function (response) {
         _this4.dataSet.forEach(function (el, index, arr) {
           if (el.id === response.data.id) {
@@ -3274,7 +3278,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
             arr[index].abbreviation = response.data.abbreviation;
             arr[index].department = response.data.department;
             arr[index].number = response.data.number;
-            arr[index].eduProgram = response.data.eduProgram;
           }
         });
       })["catch"](function (e) {
@@ -3284,7 +3287,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.edit_fullName = '';
       this.edit_abbreviation = '';
       this.edit_number = '';
-      this.edit_eduProgram = '';
       this.clearSelected();
       this.toggleModalEdit = false;
     },
@@ -3317,7 +3319,6 @@ var searchByColumn = function searchByColumn(items, term, column) {
         this.edit_abbreviation = element.abbreviation;
         this.edit_department = element.department.id;
         this.edit_number = element.number;
-        this.edit_eduProgram = element.eduProgram;
         this.editId = element.id;
         this.toggleModalEdit = true;
       }
@@ -3358,6 +3359,16 @@ var searchByColumn = function searchByColumn(items, term, column) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3794,6 +3805,8 @@ var searchByColumn = function searchByColumn(items, term, column) {
       add_hostel: '',
       add_additional_info: '',
       add_additional_subjects: [],
+      add_study_type: '',
+      edit_study_type: '',
       edit_first_name: '',
       edit_surname: '',
       edit_middle_name: '',
@@ -3920,7 +3933,8 @@ var searchByColumn = function searchByColumn(items, term, column) {
         nauPrivileges: this.add_nau_privileges,
         hostel: this.add_hostel,
         additionalInfo: this.add_additional_info,
-        additionalSubjects: this.add_additional_subjects
+        additionalSubjects: this.add_additional_subjects,
+        studyType: this.add_study_type
       }).then(function (response) {
         return _this4.dataSet.push(response.data);
       })["catch"](function (e) {
@@ -3952,7 +3966,8 @@ var searchByColumn = function searchByColumn(items, term, column) {
         nauPrivileges: this.edit_nau_privileges,
         hostel: this.edit_hostel,
         additionalInfo: this.edit_additional_info,
-        additionalSubjects: this.edit_additional_subjects
+        additionalSubjects: this.edit_additional_subjects,
+        studyType: this.edit_study_type
       }).then(function (response) {
         // this.dataSet.forEach(function(el,index,arr){
         //     if(el.id === response.data.id)
@@ -3987,6 +4002,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.edit_hostel = '';
       this.edit_additional_info = '';
       this.edit_additional_subjects = '';
+      this.edit_study_type = '';
       this.clearSelected();
       this.toggleModalEdit = false;
     },
@@ -4048,6 +4064,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
         this.edit_nau_privileges = element.nauPrivileges;
         this.edit_hostel = element.hostel;
         this.edit_additional_info = element.additionalInfo;
+        this.edit_study_type = element.studyType;
         this.toggleModalEdit = true;
       }
     },
@@ -4324,6 +4341,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -4366,6 +4407,14 @@ var searchByColumn = function searchByColumn(items, term, column) {
       add_hours_count: '',
       add_credits_count: '',
       add_begin_date: '',
+      add_hasCourse: false,
+      add_hasPass: false,
+      add_hasExam: false,
+      add_hasPractice: false,
+      edit_hasCourse: false,
+      edit_hasPass: false,
+      edit_hasExam: false,
+      edit_hasPractice: false,
       edit_name: '',
       edit_professor: '',
       edit_head_of_department: '',
@@ -4449,7 +4498,11 @@ var searchByColumn = function searchByColumn(items, term, column) {
         moduleCount: this.add_module_count,
         hoursCount: this.add_hours_count,
         creditsCount: this.add_credits_count,
-        date: this.add_begin_date
+        date: this.add_begin_date,
+        hasCourse: this.add_hasCourse,
+        hasPass: this.add_hasPass,
+        hasExam: this.add_hasExam,
+        hasPractice: this.add_hasPractice
       }).then(function (response) {
         return _this2.dataSet.push(response.data);
       })["catch"](function (e) {
@@ -4468,7 +4521,11 @@ var searchByColumn = function searchByColumn(items, term, column) {
         moduleCount: this.edit_module_count,
         hoursCount: this.edit_hours_count,
         creditsCount: this.edit_credits_count,
-        date: this.edit_begin_date
+        date: this.edit_begin_date,
+        hasCourse: this.edit_hasCourse,
+        hasPass: this.edit_hasPass,
+        hasExam: this.edit_hasExam,
+        hasPractice: this.edit_hasPractice
       }).then(function (response) {
         _this3.dataSet.forEach(function (el, index, arr) {
           if (el.id === response.data.id) {
@@ -4479,6 +4536,10 @@ var searchByColumn = function searchByColumn(items, term, column) {
             arr[index].hoursCount = response.data.hoursCount;
             arr[index].creditsCount = response.data.creditsCount;
             arr[index].dateBegin = response.data.dateBegin;
+            arr[index].hasCourse = response.has.course;
+            arr[index].hasPass = response.has.pass;
+            arr[index].hasExam = response.has.exam;
+            arr[index].hasPractice = response.has.practice;
           }
         });
       })["catch"](function (e) {
@@ -4492,6 +4553,10 @@ var searchByColumn = function searchByColumn(items, term, column) {
       this.edit_hours_count = '';
       this.edit_credits_count = '';
       this.edit_begin_date = '';
+      this.edit_hasCourse = '';
+      this.edit_hasPass = '';
+      this.edit_hasExam = '';
+      this.edit_hasPractice = '';
       this.clearSelected();
       this.toggleModalEdit = false;
     },
@@ -4527,6 +4592,10 @@ var searchByColumn = function searchByColumn(items, term, column) {
         this.edit_hours_count = element.hoursCount;
         this.edit_credits_count = element.creditsCount;
         this.edit_begin_date = element.dateBegin;
+        this.edit_hasCourse = element.has.course;
+        this.edit_hasPass = element.has.pass;
+        this.edit_hasExam = element.has.exam;
+        this.edit_hasPractice = element.has.practice;
         this.editId = element.id;
         this.toggleModalEdit = true;
       }
@@ -4566,6 +4635,7 @@ var searchByColumn = function searchByColumn(items, term, column) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
 //
 //
 //
@@ -5611,6 +5681,355 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   created: function created() {
     this.getUserSession();
     this.getFacultyInfo();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SettingsAdmin.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SettingsAdmin.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'SettingsAdmin',
+  data: function data() {
+    return {
+      user: {},
+      csvFiles: null,
+      sendingCsvFiles: false,
+      savedCsvFiles: false,
+      clearingDB: false,
+      clearedDB: false,
+      sendingSubjects: false,
+      savedSubjects: false,
+      token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      snackbar: {
+        showSnackbar: false,
+        position: 'center',
+        duration: 4000,
+        bg: 'background-color:rgba(33, 33, 33, 0.6)'
+      },
+      errorMessage: '',
+      errors: [],
+      departmentList: [],
+      dontClear: true,
+      subjects_opp: '',
+      subjects_list: '',
+      oppList: [],
+      subjectList: []
+    };
+  },
+  methods: {
+    sendSubjects: function sendSubjects() {
+      var _this = this;
+
+      this.sendingSubjects = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/specialitySubjects', {
+        subjectOpps: this.subjects_opp,
+        subjects: this.subjects_list
+      }).then(function (response) {
+        _this.sendingSubjects = false;
+        _this.savedSubjects = true;
+      })["catch"](function (e) {
+        _this.sendingSubjects = false;
+        _this.savedSubjects = false;
+        console.log(e);
+
+        _this.errors.push(e.data);
+      });
+    },
+    loadSpecialities: function loadSpecialities() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSpecialities').then(function (response) {
+        return _this2.specialityList = response.data;
+      })["catch"](function (e) {
+        _this2.errors.push(e);
+      });
+    },
+    loadSubjects: function loadSubjects() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getSubjects').then(function (response) {
+        return _this3.subjectList = response.data;
+      })["catch"](function (e) {
+        _this3.errors.push(e);
+      });
+    },
+    loadOpp: function loadOpp() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getOpp').then(function (response) {
+        return _this4.oppList = response.data;
+      })["catch"](function (e) {
+        _this4.errors.push(e);
+      });
+    },
+    loadDepartments: function loadDepartments() {
+      var _this5 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/getDepartments').then(function (response) {
+        return _this5.departmentList = response.data;
+      })["catch"](function (e) {
+        _this5.errors.push(e);
+      });
+    },
+    getUserSession: function getUserSession() {
+      var _this6 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/getUserSession', {}).then(function (response) {
+        _this6.user = response.data;
+      })["catch"](function (e) {
+        console.log(e);
+
+        _this6.errors.push(e.data);
+      });
+    },
+    clearDB: function clearDB() {
+      var _this7 = this;
+
+      this.clearingDB = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/clearDB', {}).then(function (response) {
+        _this7.clearingDB = false;
+        _this7.clearedDB = true;
+      })["catch"](function (e) {
+        _this7.clearingDB = false;
+        _this7.clearedDB = false;
+        _this7.errors = [];
+
+        _this7.errors.push(e.response.data.errors);
+
+        _this7.errors.push(e.data);
+      });
+    },
+    sendCsvFiles: function sendCsvFiles() {
+      var _this8 = this;
+
+      console.log($("#csvFiles"));
+      this.sendingCsvFiles = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/sendCsvFiles', {
+        csvFiles: this.csvFiles
+      }).then(function (response) {
+        _this8.sendingCsvFiles = false;
+        _this8.savedCsvFiles = true;
+      })["catch"](function (e) {
+        _this8.sendingCsvFiles = false;
+        _this8.savedCsvFiles = false;
+        _this8.errors = [];
+
+        _this8.errors.push(e.response.data.errors);
+      });
+    }
+  },
+  watch: {
+    errors: function errors(val) {
+      if (val) {
+        this.errorMessage = val[0][Object.keys(val[0])[0]][0];
+      }
+
+      this.snackbar.showSnackbar = true;
+    }
+  },
+  created: function created() {
+    this.getUserSession();
+    this.loadDepartments();
+    this.loadSpecialities();
+    this.loadOpp();
+    this.loadSubjects();
   }
 });
 
@@ -8162,398 +8581,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'VpiskaOzinok',
+  name: 'VpiskaOzinok.vue',
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       groupList: [],
       groupSubjects: [],
+      groupStudents: [],
       chosenSubject: '',
       chosenGroup: '',
       groupIsChosen: false,
       subjectIsChosen: false,
       responseXLSX: [],
-      requestTable: ''
+      requestTable: '',
+      termNumber: 1,
+      termYears: new Date().getFullYear() + "/" + (new Date().getFullYear() + 1)
     };
   },
   methods: {
@@ -8566,43 +8614,78 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
         _this.errors.push(e);
       });
     },
-    getSubjectsByGroup: function getSubjectsByGroup() {
+    getStudentsByGroup: function getStudentsByGroup() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getSubjectsByGroup/".concat(this.chosenGroup)).then(function (response) {
-        return _this2.groupSubjects = response.data.defaultSubjects;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getStudentsByGroup/".concat(this.chosenGroup)).then(function (response) {
+        return _this2.groupStudents = response.data;
       })["catch"](function (e) {
         _this2.errors.push(e);
       });
     },
-    sendHtml: function sendHtml() {
+    getSubjectsByGroup: function getSubjectsByGroup() {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/generate/xlsx', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getSubjectsByGroup/".concat(this.chosenGroup)).then(function (response) {
+        return _this3.groupSubjects = response.data.defaultSubjects;
+      })["catch"](function (e) {
+        _this3.errors.push(e);
+      });
+    },
+    getAllData: function getAllData() {
+      this.getStudentsByGroup();
+      this.getSubjectsByGroup();
+    },
+    sendHtml: function sendHtml() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://127.0.0.1:5000/html2Excel', {
         html: $("#tableWrapper").html()
       }).then(function (response) {
-        return _this3.responseXLSX.push(response.data);
+        return _this4.responseXLSX.push(response.data);
       })["catch"](function (e) {
-        _this3.errors.push(e.response.data.errors);
+        _this4.errors.push(e.response.data.errors);
       });
-    }
+    },
+    prepareTable: function prepareTable() {
+      $('.input-auto').each(function (index, elem) {
+        elem.parentElement.innerHTML = elem.value;
+      });
+      $("#termYears").html(this.termYears);
+      $("#termNumber").html(this.termNumber);
+      this.requestTable = $("#tableWrapper").html();
+    },
+    getInlineStyles: function getInlineStyles() {}
   },
   watch: {
     chosenGroup: function chosenGroup(val) {
       if (val != '') {
-        this.getSubjectsByGroup();
+        this.getAllData();
         this.groupIsChosen = true;
+        var groupIdName = this.groupList.filter(function (el) {
+          return el.id == val;
+        })[0].idName;
+        $("#groupName").text(groupIdName);
       }
     },
     chosenSubject: function chosenSubject(val) {
       if (val != '') {
         this.subjectIsChosen = true;
         this.requestTable = $("#tableWrapper").html();
+        var subject = this.groupSubjects.filter(function (el) {
+          return el.id == val;
+        })[0];
+        $("#subjectHeadOfDepartment").text(subject.headOfDepartment);
+        $("#subjectTeacher").text(subject.professor);
+        $("#moduleCount").text(subject.moduleCount);
+        $("#subjectName").text(subject.name);
       }
     }
   },
   created: function created() {
+    console.log("CREATED");
     this.loadGroups();
+    this.getInlineStyles();
   }
 });
 
@@ -9377,489 +9460,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ZajavaIspit',
+  name: 'zvedenaVidomist',
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       groupList: [],
       groupSubjects: [],
+      groupStudents: [],
       chosenSubject: '',
+      courseCount: 0,
+      passCount: 0,
+      examCount: 0,
+      practiceCount: 0,
       chosenGroup: '',
       groupIsChosen: false,
       subjectIsChosen: false,
       responseXLSX: [],
-      requestTable: ''
+      requestTable: '',
+      termNumber: 1,
+      termYears: new Date().getFullYear() + "/" + (new Date().getFullYear() + 1),
+      facultyName: ''
     };
   },
   methods: {
@@ -9872,43 +9498,105 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
         _this.errors.push(e);
       });
     },
-    getSubjectsByGroup: function getSubjectsByGroup() {
+    getStudentsByGroup: function getStudentsByGroup() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getSubjectsByGroup/".concat(this.chosenGroup)).then(function (response) {
-        return _this2.groupSubjects = response.data.defaultSubjects;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getStudentsByGroup/".concat(this.chosenGroup)).then(function (response) {
+        return _this2.groupStudents = response.data;
       })["catch"](function (e) {
         _this2.errors.push(e);
       });
     },
-    sendHtml: function sendHtml() {
+    getSubjectsByGroup: function getSubjectsByGroup() {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/generate/xlsx', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/getSubjectsByGroup/".concat(this.chosenGroup)).then(function (response) {
+        return _this3.groupSubjects = response.data.defaultSubjects;
+      })["catch"](function (e) {
+        _this3.errors.push(e);
+      });
+    },
+    getAllData: function getAllData() {
+      this.getStudentsByGroup();
+      this.getSubjectsByGroup();
+    },
+    sendHtml: function sendHtml() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://127.0.0.1:5000/html2Excel', {
         html: $("#tableWrapper").html()
       }).then(function (response) {
-        return _this3.responseXLSX.push(response.data);
+        return _this4.responseXLSX.push(response.data);
       })["catch"](function (e) {
-        _this3.errors.push(e.response.data.errors);
+        _this4.errors.push(e.response.data.errors);
       });
-    }
+    },
+    prepareTable: function prepareTable() {
+      $('.input-auto').each(function (index, elem) {
+        elem.parentElement.innerHTML = elem.value;
+      });
+      $("#termYears").html(this.termYears);
+      $("#termNumber").html(this.termNumber);
+      this.requestTable = $("#tableWrapper").html();
+    },
+    getInlineStyles: function getInlineStyles() {}
   },
   watch: {
+    groupSubjects: function groupSubjects(val) {
+      for (var subjectKey in val) {
+        for (var type in val[subjectKey].has) {
+          if (type === "course") {
+            this.courseCount++;
+          } else if (type === "pass") {
+            this.passCount++;
+          } else if (type === "exam") {
+            this.examCount++;
+          } else if (type === "practice") {
+            this.practiceCount++;
+          }
+        }
+      }
+    },
     chosenGroup: function chosenGroup(val) {
       if (val != '') {
-        this.getSubjectsByGroup();
+        this.getAllData();
         this.groupIsChosen = true;
+        var groupIdName = this.groupList.filter(function (el) {
+          return el.id == val;
+        })[0].idName;
+        $("#groupName").text("\u0410\u043A\u0430\u0434\u0435\u043C\u0456\u0447\u043D\u0430 \u0433\u0440\u0443\u043F\u043F\u0430 ".concat(groupIdName));
+        var curatorFIO = this.groupList[this.chosenGroup].curator.fio;
+        var curatorPhone = this.groupList[this.chosenGroup].curator.phone;
+        var headmanFIO = this.groupList[this.chosenGroup].headman.fio;
+        var headmanPhone = this.groupList[this.chosenGroup].headman.phone;
+        $("#curator").val("".concat(curatorFIO ? curatorFIO : '', " ").concat(curatorPhone ? curatorPhone : ''));
+        $("#headman").val("".concat(headmanFIO ? headmanFIO : '', " ").concat(headmanPhone ? headmanPhone : ''));
+        this.facultyName = this.groupList[this.chosenGroup].department.fullName;
+        var courseYear = this.groupList[this.chosenGroup].idName.match(/\d+/)[0][0];
+        $("#courseYear").val("".concat(courseYear));
+        $("#termYears").val(this.termYears + " \u043D\u0430\u0432\u0447\u0430\u043B\u044C\u043D\u0438\u0439 \u0440\u0456\u043A (".concat(courseYear, "\u0441\u0435\u043C\u0435\u0441\u0442\u0440)"));
+        $("#specialityName").html("".concat(this.groupList[this.chosenGroup].speciality.number, " ").concat(this.groupList[this.chosenGroup].speciality.fullName));
+        $("#groupOpp").html(this.groupList[this.chosenGroup].eduProgram);
       }
     },
     chosenSubject: function chosenSubject(val) {
       if (val != '') {
         this.subjectIsChosen = true;
         this.requestTable = $("#tableWrapper").html();
+        var subject = this.groupSubjects.filter(function (el) {
+          return el.id == val;
+        })[0];
+        $("#subjectHeadOfDepartment").text(subject.headOfDepartment);
+        $("#subjectTeacher").text(subject.professor);
+        $("#moduleCount").text(subject.moduleCount);
+        $("#subjectName").text(subject.name);
       }
     }
   },
   created: function created() {
+    console.log("CREATED");
     this.loadGroups();
+    this.getInlineStyles();
   }
 });
 
@@ -14549,6 +14237,25 @@ exports.push([module.i, "\n.p-custom{\n    padding:16px;\n}\n.color-input-label{
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SettingsAdmin.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SettingsAdmin.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.p-c-row{\n    padding:16px;\n}\ninput[type=file]\n{\n    width:100%;\n    position:absolute;\n}\n.p-custom{\n    padding:16px;\n}\n.color-input-label{\n    color:rgba(0,0,0,0.54);\n    font-size:1rem;\n}\n.input-color-transparency{\n    border-radius: 0.5rem;\n    border:1px solid grey;\n    max-width:100%;\n}\n.helper-text-custom{\n    color:rgba(0,0,0,0.54);\n}\n.input-color-wrapper{\n    border:1px solid grey;\n    border-radius:0.5rem;\n}\ninput[type=\"color\"] {\n    opacity: 0;\n    display: block;\n    border: none;\n    cursor:pointer;\n    width:100%;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-button.md-theme-default.md-primary {\n    color: white;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.f-s-a{\n    display:flex;\n    justify-content: space-around;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Vidomist1Mod.vue?vue&type=style&index=0&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Vidomist1Mod.vue?vue&type=style&index=0&lang=css& ***!
@@ -14618,7 +14325,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\n.input-auto{\n    width: 100%;\n    padding: 10px;\n    margin: 0px;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.bold{\n    font-weight:800;\n}\n#tableWrapper{\n    min-height:100vh;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n", ""]);
 
 // exports
 
@@ -14656,7 +14363,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#tableWrapper{\n    min-height:100vh;\n}\n.tr-doc>td , .tr-doc>th{\n    border: 1px solid red;\n    min-height:100px;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n", ""]);
+exports.push([module.i, "\ninput{\n    width:4rem !important;\n}\n.not-wrap{\n    overflow: none;\n}\n.input-auto{\n    width: 100%;\n    padding: 10px;\n    margin: 0px;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.lft{\n    text-align:left;\n}\n.bold{\n    font-weight:800;\n}\n#tableWrapper{\n    min-height:100vh;\n    overflow-x: auto;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n.cursive{\n    font-style:italic;\n}\n.tableInp{\n    height:0.5rem !important;\n}\n", ""]);
 
 // exports
 
@@ -45779,6 +45486,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SettingsAdmin.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SettingsAdmin.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./SettingsAdmin.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SettingsAdmin.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Vidomist1Mod.vue?vue&type=style&index=0&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Vidomist1Mod.vue?vue&type=style&index=0&lang=css& ***!
@@ -47893,6 +47630,29 @@ var render = function() {
                   _c(
                     "md-field",
                     [
+                      _c("label", [_vm._v("ОПП")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_eduProgram,
+                          callback: function($$v) {
+                            _vm.add_eduProgram = $$v
+                          },
+                          expression: "add_eduProgram"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Образовательная программа")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
                       _c("label", [_vm._v("Предметы по умолчанию")]),
                       _vm._v(" "),
                       _c(
@@ -48134,6 +47894,29 @@ var render = function() {
                       _vm._v(" "),
                       _c("span", { staticClass: "md-helper-text" }, [
                         _vm._v("Выберите специальность")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("ОПП")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_eduProgram,
+                          callback: function($$v) {
+                            _vm.edit_eduProgram = $$v
+                          },
+                          expression: "edit_eduProgram"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Образовательная программа")
                       ])
                     ],
                     1
@@ -48852,29 +48635,6 @@ var render = function() {
                   _c(
                     "md-field",
                     [
-                      _c("label", [_vm._v("ОПП")]),
-                      _vm._v(" "),
-                      _c("md-input", {
-                        attrs: { maxlength: "255" },
-                        model: {
-                          value: _vm.add_eduProgram,
-                          callback: function($$v) {
-                            _vm.add_eduProgram = $$v
-                          },
-                          expression: "add_eduProgram"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "md-helper-text" }, [
-                        _vm._v("Образовательная программа")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "md-field",
-                    [
                       _c("label", [_vm._v("Кафедра")]),
                       _vm._v(" "),
                       _c(
@@ -49035,29 +48795,6 @@ var render = function() {
                       _vm._v(" "),
                       _c("span", { staticClass: "md-helper-text" }, [
                         _vm._v("Номер специальности")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "md-field",
-                    [
-                      _c("label", [_vm._v("ОПП")]),
-                      _vm._v(" "),
-                      _c("md-input", {
-                        attrs: { maxlength: "255" },
-                        model: {
-                          value: _vm.edit_eduProgram,
-                          callback: function($$v) {
-                            _vm.edit_eduProgram = $$v
-                          },
-                          expression: "edit_eduProgram"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "md-helper-text" }, [
-                        _vm._v("Образовательная программа")
                       ])
                     ],
                     1
@@ -49703,6 +49440,29 @@ var render = function() {
                   _c(
                     "md-field",
                     [
+                      _c("label", [_vm._v("Тип образования")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.add_study_type,
+                          callback: function($$v) {
+                            _vm.add_study_type = $$v
+                          },
+                          expression: "add_study_type"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Бакалавр, Магистр, ..")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
                       _c("label", [_vm._v("ИН")]),
                       _vm._v(" "),
                       _c("md-input", {
@@ -50264,6 +50024,29 @@ var render = function() {
                       _vm._v(" "),
                       _c("span", { staticClass: "md-helper-text" }, [
                         _vm._v("Отчество студента")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    [
+                      _c("label", [_vm._v("Тип образования")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { maxlength: "255" },
+                        model: {
+                          value: _vm.edit_study_type,
+                          callback: function($$v) {
+                            _vm.edit_study_type = $$v
+                          },
+                          expression: "edit_study_type"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-helper-text" }, [
+                        _vm._v("Бакалавр, Магистр, ..")
                       ])
                     ],
                     1
@@ -51347,6 +51130,86 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c(
+                    "div",
+                    [
+                      _c(
+                        "md-switch",
+                        {
+                          model: {
+                            value: _vm.add_hasCourse,
+                            callback: function($$v) {
+                              _vm.add_hasCourse = $$v
+                            },
+                            expression: "add_hasCourse"
+                          }
+                        },
+                        [_vm._v("Есть курсовая")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c(
+                        "md-switch",
+                        {
+                          model: {
+                            value: _vm.add_hasPass,
+                            callback: function($$v) {
+                              _vm.add_hasPass = $$v
+                            },
+                            expression: "add_hasPass"
+                          }
+                        },
+                        [_vm._v("Есть зачет")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c(
+                        "md-switch",
+                        {
+                          model: {
+                            value: _vm.add_hasExam,
+                            callback: function($$v) {
+                              _vm.add_hasExam = $$v
+                            },
+                            expression: "add_hasExam"
+                          }
+                        },
+                        [_vm._v("Есть экзамен")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c(
+                        "md-switch",
+                        {
+                          model: {
+                            value: _vm.add_hasPractice,
+                            callback: function($$v) {
+                              _vm.add_hasPractice = $$v
+                            },
+                            expression: "add_hasPractice"
+                          }
+                        },
+                        [_vm._v("Есть практика")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
                     "md-field",
                     [
                       _c("label", [_vm._v("Модули")]),
@@ -51562,6 +51425,86 @@ var render = function() {
                       _c("span", { staticClass: "md-helper-text" }, [
                         _vm._v("Имя заведующего кафедры")
                       ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c(
+                        "md-switch",
+                        {
+                          model: {
+                            value: _vm.edit_hasCourse,
+                            callback: function($$v) {
+                              _vm.edit_hasCourse = $$v
+                            },
+                            expression: "edit_hasCourse"
+                          }
+                        },
+                        [_vm._v("Есть курсовая")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c(
+                        "md-switch",
+                        {
+                          model: {
+                            value: _vm.edit_hasPass,
+                            callback: function($$v) {
+                              _vm.edit_hasPass = $$v
+                            },
+                            expression: "edit_hasPass"
+                          }
+                        },
+                        [_vm._v("Есть зачет")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c(
+                        "md-switch",
+                        {
+                          model: {
+                            value: _vm.edit_hasExam,
+                            callback: function($$v) {
+                              _vm.edit_hasExam = $$v
+                            },
+                            expression: "edit_hasExam"
+                          }
+                        },
+                        [_vm._v("Есть экзамен")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c(
+                        "md-switch",
+                        {
+                          model: {
+                            value: _vm.edit_hasPractice,
+                            callback: function($$v) {
+                              _vm.edit_hasPractice = $$v
+                            },
+                            expression: "edit_hasPractice"
+                          }
+                        },
+                        [_vm._v("Есть практика")]
+                      )
                     ],
                     1
                   ),
@@ -52241,7 +52184,7 @@ var staticRenderFns = [
             staticClass: "dropdown-item larafont-navlink-dropdown",
             attrs: { href: "/generate/zajavaIspit" }
           },
-          [_vm._v("Заява - іспит")]
+          [_vm._v("Заява - Іспит")]
         ),
         _vm._v(" "),
         _c(
@@ -52250,7 +52193,7 @@ var staticRenderFns = [
             staticClass: "dropdown-item larafont-navlink-dropdown",
             attrs: { href: "/generate/zvedenaVidomist" }
           },
-          [_vm._v("Зведена вiдомiсть")]
+          [_vm._v("Зведена відомість")]
         ),
         _vm._v(" "),
         _c(
@@ -52259,7 +52202,7 @@ var staticRenderFns = [
             staticClass: "dropdown-item larafont-navlink-dropdown",
             attrs: { href: "/generate/vpiskaOzinok" }
           },
-          [_vm._v("Вписка оцiнок")]
+          [_vm._v("Виписка оцінок")]
         ),
         _vm._v(" "),
         _c(
@@ -52268,7 +52211,7 @@ var staticRenderFns = [
             staticClass: "dropdown-item larafont-navlink-dropdown",
             attrs: { href: "/generate/vidomistMod1" }
           },
-          [_vm._v("Вiдомiсть (модуль 1)")]
+          [_vm._v("Відомість (модуль 1)")]
         ),
         _vm._v(" "),
         _c(
@@ -52277,7 +52220,7 @@ var staticRenderFns = [
             staticClass: "dropdown-item larafont-navlink-dropdown",
             attrs: { href: "/generate/vidomistMod2" }
           },
-          [_vm._v("Вiдомiсть (модуль 2)")]
+          [_vm._v("Відомість (модуль 2)")]
         ),
         _vm._v(" "),
         _c(
@@ -52286,7 +52229,7 @@ var staticRenderFns = [
             staticClass: "dropdown-item larafont-navlink-dropdown",
             attrs: { href: "/generate/vidomistKr" }
           },
-          [_vm._v("Вiдомiсть КР")]
+          [_vm._v("Відомість КР")]
         )
       ]
     )
@@ -52309,6 +52252,15 @@ var staticRenderFns = [
             attrs: { href: "/settings" }
           },
           [_vm._v("Основные")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "dropdown-item larafont-navlink-dropdown",
+            attrs: { href: "/settingsAdmin" }
+          },
+          [_vm._v("Дополнительные настройки")]
         )
       ]
     )
@@ -54006,6 +53958,522 @@ var render = function() {
                       1
                     )
                   ])
+                ])
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SettingsAdmin.vue?vue&type=template&id=7b453a91&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SettingsAdmin.vue?vue&type=template&id=7b453a91& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container grey-light page-height-default" },
+    [
+      _c(
+        "md-snackbar",
+        {
+          style: _vm.snackbar.bg,
+          attrs: {
+            "md-position": _vm.snackbar.position,
+            "md-duration": _vm.snackbar.duration,
+            "md-active": _vm.snackbar.showSnackbar,
+            "md-persistent": ""
+          },
+          on: {
+            "update:mdActive": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            },
+            "update:md-active": function($event) {
+              return _vm.$set(_vm.snackbar, "showSnackbar", $event)
+            }
+          }
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass: "c-alert",
+              model: {
+                value: _vm.errorMessage,
+                callback: function($$v) {
+                  _vm.errorMessage = $$v
+                },
+                expression: "errorMessage"
+              }
+            },
+            [_vm._v(_vm._s(_vm.errorMessage))]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-button",
+            {
+              staticClass: "md-icon-button md-accent",
+              attrs: { title: "Закрыть окно" },
+              on: {
+                click: function($event) {
+                  _vm.snackbar.showSnackbar = false
+                }
+              }
+            },
+            [_c("md-icon", [_vm._v("clear")])],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "p-t" },
+        [
+          _c(
+            "md-card",
+            [
+              _c("md-card-header", [
+                _c("div", { staticClass: "md-title" }, [
+                  _vm._v(
+                    "\n                    Дополнительные Настройки\n                "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "md-subhead" }, [
+                  _vm._v(
+                    "\n                    Настройки администратора\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("md-card-content", [
+                _c("div", { staticClass: "md-layout md-gutter" }, [
+                  _vm.user.isAdmin
+                    ? _c("div", { staticClass: "md-layout-item" }, [
+                        _c(
+                          "form",
+                          {
+                            staticClass: "md-layout",
+                            attrs: {
+                              method: "POST",
+                              enctype: "multipart/form-data",
+                              action: "/uploadCsv"
+                            }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.token,
+                                  expression: "token"
+                                }
+                              ],
+                              attrs: {
+                                type: "hidden",
+                                name: "_token",
+                                value:
+                                  "YzXAnwBñC7qPK9kg7MGGIUzznEOCi2dTnG9h9çpB"
+                              },
+                              domProps: { value: _vm.token },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.token = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "md-card",
+                              {
+                                staticClass: "md-layout-item md-small-size-100"
+                              },
+                              [
+                                _c("md-card-header", [
+                                  _c("div", { staticClass: "md-title" }, [
+                                    _vm._v("Заполнить БД")
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "md-card-content",
+                                  [
+                                    _c(
+                                      "md-field",
+                                      [
+                                        _c(
+                                          "label",
+                                          { attrs: { for: "fileDepartment" } },
+                                          [_vm._v("Кафедра")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "md-select",
+                                          {
+                                            attrs: {
+                                              name: "chosen_department",
+                                              id: "chosen_department"
+                                            },
+                                            model: {
+                                              value: _vm.chosen_department,
+                                              callback: function($$v) {
+                                                _vm.chosen_department = $$v
+                                              },
+                                              expression: "chosen_department"
+                                            }
+                                          },
+                                          _vm._l(_vm.departmentList, function(
+                                            department
+                                          ) {
+                                            return _c(
+                                              "md-option",
+                                              {
+                                                attrs: { value: department.id }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(department.fullName)
+                                                )
+                                              ]
+                                            )
+                                          }),
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          { staticClass: "md-helper-text" },
+                                          [
+                                            _vm._v(
+                                              "Кафедра специальности, которая заполняется"
+                                            )
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c("md-field", [
+                                      _c(
+                                        "label",
+                                        { attrs: { for: "csvFiles" } },
+                                        [_vm._v("Файлы для заполнения")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        attrs: {
+                                          name: "upload[]",
+                                          type: "file",
+                                          multiple: "multiple"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "md-helper-text" },
+                                        [
+                                          _vm._v(
+                                            ".csv файлы для заполнения Групп и Студентов"
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _vm.sendingCsvFiles
+                                  ? _c("md-progress-bar", {
+                                      attrs: { "md-mode": "indeterminate" }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c(
+                                  "md-card-actions",
+                                  [
+                                    _c(
+                                      "md-button",
+                                      {
+                                        staticClass: "md-primary",
+                                        attrs: {
+                                          type: "submit",
+                                          disabled: _vm.sendingCsvFiles
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.sendCsvFiles()
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Заполнить базу")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-card",
+                              {
+                                staticClass: "md-layout-item md-small-size-100"
+                              },
+                              [
+                                _c("md-card-header", [
+                                  _c("div", { staticClass: "md-title" }, [
+                                    _vm._v("Очистить БД")
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "md-card-content",
+                                  [
+                                    _c(
+                                      "md-switch",
+                                      {
+                                        model: {
+                                          value: _vm.dontClear,
+                                          callback: function($$v) {
+                                            _vm.dontClear = $$v
+                                          },
+                                          expression: "dontClear"
+                                        }
+                                      },
+                                      [_vm._v("Запретить очистку базы")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "row p-c-row" },
+                                      [
+                                        _c(
+                                          "md-button",
+                                          {
+                                            staticClass: "md-raised md-accent",
+                                            attrs: {
+                                              type: "button",
+                                              disabled:
+                                                _vm.clearingDB || _vm.dontClear
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.clearDB()
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("ОЧИСТИТЬ БАЗУ ДАННЫХ")]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _vm.clearingDB
+                                  ? _c("md-progress-bar", {
+                                      attrs: { "md-mode": "indeterminate" }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c(
+                                  "md-snackbar",
+                                  {
+                                    attrs: { "md-active": _vm.clearedDB },
+                                    on: {
+                                      "update:mdActive": function($event) {
+                                        _vm.clearedDB = $event
+                                      },
+                                      "update:md-active": function($event) {
+                                        _vm.clearedDB = $event
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("База данных успешно очищена!")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "md-card",
+                              {
+                                staticClass: "md-layout-item md-small-size-100"
+                              },
+                              [
+                                _c("md-card-header", [
+                                  _c("div", { staticClass: "md-title" }, [
+                                    _vm._v("Заполнить Предметы")
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "md-card-content",
+                                  [
+                                    _c(
+                                      "md-field",
+                                      [
+                                        _c(
+                                          "label",
+                                          { attrs: { for: "subjects_opp" } },
+                                          [_vm._v("ОПП")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "md-select",
+                                          {
+                                            attrs: {
+                                              name: "subjects_opp",
+                                              id: "subjects_opp",
+                                              multiple: ""
+                                            },
+                                            model: {
+                                              value: _vm.subjects_opp,
+                                              callback: function($$v) {
+                                                _vm.subjects_opp = $$v
+                                              },
+                                              expression: "subjects_opp"
+                                            }
+                                          },
+                                          _vm._l(_vm.oppList, function(opp) {
+                                            return _c(
+                                              "md-option",
+                                              { attrs: { value: opp } },
+                                              [_vm._v(_vm._s(opp))]
+                                            )
+                                          }),
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "md-field",
+                                      [
+                                        _c(
+                                          "label",
+                                          { attrs: { for: "subjects_list" } },
+                                          [_vm._v("Предметы")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "md-select",
+                                          {
+                                            attrs: {
+                                              name: "subjects_list",
+                                              id: "subjects_list",
+                                              multiple: ""
+                                            },
+                                            model: {
+                                              value: _vm.subjects_list,
+                                              callback: function($$v) {
+                                                _vm.subjects_list = $$v
+                                              },
+                                              expression: "subjects_list"
+                                            }
+                                          },
+                                          _vm._l(_vm.subjectList, function(
+                                            subject
+                                          ) {
+                                            return _c(
+                                              "md-option",
+                                              {
+                                                attrs: { value: subject.name }
+                                              },
+                                              [_vm._v(_vm._s(subject.name))]
+                                            )
+                                          }),
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _vm.sendingSubjects
+                                  ? _c("md-progress-bar", {
+                                      attrs: { "md-mode": "indeterminate" }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c(
+                                  "md-snackbar",
+                                  {
+                                    attrs: { "md-active": _vm.savedSubjects },
+                                    on: {
+                                      "update:mdActive": function($event) {
+                                        _vm.savedSubjects = $event
+                                      },
+                                      "update:md-active": function($event) {
+                                        _vm.savedSubjects = $event
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Предметы успешно добавлены!")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "md-card-actions",
+                                  [
+                                    _c(
+                                      "md-button",
+                                      {
+                                        staticClass: "md-primary",
+                                        attrs: {
+                                          type: "button",
+                                          disabled: _vm.sendingSubjects
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.sendSubjects()
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Добавить предметы")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e()
                 ])
               ])
             ],
@@ -57842,7 +58310,7 @@ var render = function() {
         { staticClass: "p-t-b" },
         [
           _c("p", { staticClass: "display-4 text-center" }, [
-            _vm._v("Заява - іспит")
+            _vm._v("Виписки оцiнок")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row pl-3 pr-3 pt-3" }, [
@@ -57928,61 +58396,75 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-4 center-button" }, [
-              _c(
-                "form",
-                { attrs: { action: "/generate/xlsx", method: "POST" } },
-                [
-                  _c("input", {
-                    attrs: { type: "hidden", name: "_token" },
-                    domProps: { value: _vm.csrf }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.requestTable,
-                        expression: "requestTable"
-                      }
-                    ],
-                    staticStyle: { display: "none" },
-                    attrs: { type: "text", name: "html" },
-                    domProps: { value: _vm.requestTable },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.requestTable = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "md-button",
-                    {
-                      staticClass: "md-dense md-raised md-primary",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          _vm.requestTable = _vm.$("#tableWrapper").html()
-                        }
-                      }
-                    },
-                    [_vm._v("Генерировать")]
-                  )
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.subjectIsChosen,
+                    expression: "subjectIsChosen"
+                  }
                 ],
-                1
-              )
-            ])
+                staticClass: "col-4 center-button"
+              },
+              [
+                _c(
+                  "form",
+                  {
+                    attrs: {
+                      action: "http://127.0.0.1:5000/html2Excel",
+                      method: "POST"
+                    }
+                  },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.requestTable,
+                          expression: "requestTable"
+                        }
+                      ],
+                      staticStyle: { display: "none" },
+                      attrs: { type: "text", name: "html" },
+                      domProps: { value: _vm.requestTable },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.requestTable = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "md-button",
+                      {
+                        staticClass: "md-dense md-raised md-primary",
+                        attrs: { type: "submit" },
+                        on: {
+                          click: function($event) {
+                            return _vm.prepareTable()
+                          }
+                        }
+                      },
+                      [_vm._v("Генерировать")]
+                    )
+                  ],
+                  1
+                )
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("md-card", { attrs: { id: "tableWrapper" } }, [
-            _c("table", { attrs: { id: "documentTable", border: "1" } }, [
+            _c("table", { attrs: { lang: "uk-UK", id: "documentTable" } }, [
               _c("thead", [
-                _c("tr", { staticClass: "tr-doc" }, [
+                _c("tr", [
                   _c("th", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("th"),
@@ -58012,100 +58494,170 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("tbody", [
-                _c("tr", { staticClass: "tr-doc" }, [
+                _c("tr", [
                   _c(
                     "td",
                     {
-                      attrs: {
-                        "_excel-styles":
-                          '{"borders":{"outline":{"color":{"argb":"FF0000"},"borderStyle":"PhpSpreadsheet_Style_Border::BORDER_THICK"}}}'
-                      }
+                      staticClass: "cntr bold italic",
+                      staticStyle: { "font-size": "20px" },
+                      attrs: { colspan: "13" }
                     },
-                    [_vm._v("f ")]
+                    [_vm._v("МІНІСТЕРСТВО ОСВІТИ І НАУКИ УКРАЇНИ")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr bold italic",
+                      staticStyle: { "font-size": "18px" },
+                      attrs: { colspan: "13" }
+                    },
+                    [_vm._v("Національний авіайійний університет")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr bold italic",
+                      staticStyle: { "font-size": "18px" },
+                      attrs: { colspan: "13" }
+                    },
+                    [
+                      _vm._v(
+                        "Факультет кібербезпеки, комп'ютерної та програмної інженерії"
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr bold italic",
+                      staticStyle: { "font-size": "18px" },
+                      attrs: { colspan: "13" }
+                    },
+                    [_vm._v("Витяг з навчальної картки")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "bold italic", attrs: { colspan: "6" } },
+                    [
+                      _vm._v("студентки 2-го "),
+                      _vm._v(" курсу 217 "),
+                      _vm._v(" групи")
+                    ]
                   ),
                   _vm._v(" "),
-                  _c("td", [_vm._v("d ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("d ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
+                  _c(
+                    "td",
+                    {
+                      staticClass: "bold cntr italic",
+                      attrs: { colspan: "6" }
+                    },
+                    [_vm._v("Іваненко Івани Іванівни ")]
+                  )
                 ]),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
+                _c("tr", [
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
+                  _c("td", { attrs: { colspan: "6" } }),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
+                  _c(
+                    "td",
+                    { staticClass: "cntr italic", attrs: { colspan: "6" } },
+                    [_vm._v("(П.І.Б)")]
+                  )
                 ]),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
+                _c("tr", [
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
+                  _c(
+                    "td",
+                    { staticClass: "bold italic", attrs: { colspan: "3" } },
+                    [_vm._v("яка навчається за спеціальністю")]
+                  ),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
+                  _c(
+                    "td",
+                    { staticClass: "bold italic", attrs: { colspan: "3" } },
+                    [_vm._v("125 Кібербезпека ")]
+                  ),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
+                  _c(
+                    "td",
+                    {
+                      staticClass: "bold italic cntr italic",
+                      attrs: { colspan: "6" }
+                    },
+                    [
+                      _vm._v(
+                        "Адміністративний менеджмент у сфері захисту інформації "
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
+                _c("tr", [
+                  _c("td", [_vm._v(" ")]),
+                  _vm._v(" "),
+                  _c("td", { attrs: { colspan: "3" } }),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "italic", attrs: { colspan: "3" } }, [
+                    _vm._v("(назва спеціальності)")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "italic cntr italic",
+                      attrs: { colspan: "6" }
+                    },
+                    [_vm._v("(назва спеціальності)")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -58133,7 +58685,962 @@ var render = function() {
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
+                _c("tr", { staticStyle: {} }, [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "italic cntr border-3-black rotate",
+                      attrs: { rotate: "", rowspan: "2", colspan: "1" }
+                    },
+                    [_vm._v("Навчальний рік")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "italic cntr border-3-black rotate",
+                      attrs: { rotate: "", rowspan: "2", colspan: "1" }
+                    },
+                    [_vm._v("Семестр")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "italic cntr border-3-black rotate",
+                      attrs: { rotate: "", rowspan: "2", colspan: "1" }
+                    },
+                    [_vm._v("№ п/п")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { rowspan: "2", colspan: "3" }
+                    },
+                    [_vm._v("Назва навчальної дисципліни, практики")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("обсяг")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "5" }
+                    },
+                    [_vm._v("оцінка")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("Години")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("Кредити ECES")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("Бали")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Національна")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Шкала ECTS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
+                    },
+                    [_vm._v("2018-2019 ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
+                    },
+                    [_vm._v("перший ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Іноземна мова")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("2")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Математика")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("3")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Українська література")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
+                    },
+                    [_vm._v("2018-2019 ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
+                    },
+                    [_vm._v("другий ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Іноземна мова")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("2")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Математика")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("3")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Українська література")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
+                    },
+                    [_vm._v("2019-2020 ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
+                    },
+                    [_vm._v("третій ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Іноземна мова")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("2")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Математика")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("3")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Українська література")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
+                    },
+                    [_vm._v("2019-2020 ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
+                    },
+                    [_vm._v("четвертий ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Іноземна мова")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("2")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Математика")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("3")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "3" }
+                    },
+                    [_vm._v("Українська література")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("60")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("1.5")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "1" }
+                    },
+                    [_vm._v("91")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("Відмін")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "cntr italic border-3-black",
+                      attrs: { colspan: "2" }
+                    },
+                    [_vm._v("А")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -58161,7 +59668,7 @@ var render = function() {
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
+                _c("tr", [
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -58189,7 +59696,23 @@ var render = function() {
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
+                _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "cntr italic", attrs: { colspan: "6" } },
+                    [_vm._v("Заступник декана ФККПІ")]
+                  ),
+                  _vm._v(" "),
+                  _c("td"),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "cntr italic", attrs: { colspan: "6" } },
+                    [_vm._v("В. Лукашенко")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("tr", [
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -58217,1043 +59740,7 @@ var render = function() {
                   _c("td", [_vm._v(" ")])
                 ]),
                 _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
+                _c("tr", [
                   _c("td", [_vm._v(" ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" ")]),
@@ -60221,14 +60708,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container grey-light page-height-default" },
+    { staticClass: "pl-2 pr-2 grey-light page-height-default" },
     [
       _c(
         "div",
         { staticClass: "p-t-b" },
         [
           _c("p", { staticClass: "display-4 text-center" }, [
-            _vm._v("Заява - іспит")
+            _vm._v("Зведена відомість")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row pl-3 pr-3 pt-3" }, [
@@ -60314,1359 +60801,666 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-4 center-button" }, [
-              _c(
-                "form",
-                { attrs: { action: "/generate/xlsx", method: "POST" } },
-                [
-                  _c("input", {
-                    attrs: { type: "hidden", name: "_token" },
-                    domProps: { value: _vm.csrf }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.requestTable,
-                        expression: "requestTable"
-                      }
-                    ],
-                    staticStyle: { display: "none" },
-                    attrs: { type: "text", name: "html" },
-                    domProps: { value: _vm.requestTable },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.requestTable = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "md-button",
-                    {
-                      staticClass: "md-dense md-raised md-primary",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          _vm.requestTable = _vm.$("#tableWrapper").html()
-                        }
-                      }
-                    },
-                    [_vm._v("Генерировать")]
-                  )
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.subjectIsChosen,
+                    expression: "subjectIsChosen"
+                  }
                 ],
-                1
-              )
-            ])
+                staticClass: "col-4 center-button"
+              },
+              [
+                _c(
+                  "form",
+                  {
+                    attrs: {
+                      action: "http://127.0.0.1:5000/html2Excel",
+                      method: "POST"
+                    }
+                  },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.requestTable,
+                          expression: "requestTable"
+                        }
+                      ],
+                      staticStyle: { display: "none" },
+                      attrs: { type: "text", name: "html" },
+                      domProps: { value: _vm.requestTable },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.requestTable = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "md-button",
+                      {
+                        staticClass: "md-dense md-raised md-primary",
+                        attrs: { type: "submit" },
+                        on: {
+                          click: function($event) {
+                            return _vm.prepareTable()
+                          }
+                        }
+                      },
+                      [_vm._v("Генерировать")]
+                    )
+                  ],
+                  1
+                )
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("md-card", { attrs: { id: "tableWrapper" } }, [
-            _c("table", { attrs: { id: "documentTable", border: "1" } }, [
+            _c("table", { attrs: { lang: "uk-UK", id: "documentTable" } }, [
               _c("thead", [
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("th", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th")
+                _c("tr", [
+                  _c("th", { attrs: { colspan: "40" } }, [_vm._v(" ")])
                 ])
               ]),
               _vm._v(" "),
-              _c("tbody", [
-                _c("tr", { staticClass: "tr-doc" }, [
+              _c(
+                "tbody",
+                [
+                  _c("tr", [_c("td", { attrs: { colspan: "40" } })]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      { staticClass: "cntr bold", attrs: { colspan: "40" } },
+                      [
+                        _vm._v(
+                          "\n                        НАЦІОНАЛЬНИЙ АВІАЦІЙНИЙ УНІВЕРСИТЕТ\n                    "
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      { staticClass: "cntr bold", attrs: { colspan: "40" } },
+                      [
+                        _vm._v("\n                        ФАКУЛЬТЕТ "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.facultyName,
+                              expression: "facultyName"
+                            }
+                          ],
+                          staticClass: "input-auto",
+                          attrs: { type: "text", id: "facultyName" },
+                          domProps: { value: _vm.facultyName },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.facultyName = $event.target.value
+                            }
+                          }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      { staticClass: "cntr bold", attrs: { colspan: "40" } },
+                      [
+                        _vm._v(
+                          "\n                        ЗВЕДЕНА ВІДОМІСТЬ УСПІШНОСТІ\n                    "
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      { staticClass: "cntr bold", attrs: { colspan: "40" } },
+                      [
+                        _c("input", {
+                          staticClass: "input-auto",
+                          attrs: { type: "text", id: "termYears" },
+                          domProps: { value: _vm.termYears }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      { staticClass: "cntr bold", attrs: { colspan: "40" } },
+                      [
+                        _c("input", {
+                          staticClass: "input-auto",
+                          attrs: { type: "text", value: "1", id: "courseYear" }
+                        }),
+                        _vm._v(" курс\n                    ")
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "cntr bold",
+                        attrs: { colspan: "40", id: "specialityName" }
+                      },
+                      [
+                        _c("input", {
+                          staticClass: "input-auto",
+                          attrs: { type: "text", value: "" }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", {
+                      staticClass: "cntr bold",
+                      attrs: { colspan: "40", id: "groupOpp" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { staticClass: "lft", attrs: { colspan: "40" } }, [
+                      _vm._v("\n                        Куратор: "),
+                      _c("input", {
+                        staticClass: "tableInp",
+                        attrs: { type: "text", id: "curator" }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { staticClass: "lft", attrs: { colspan: "40" } }, [
+                      _vm._v("\n                        Командир: "),
+                      _c("input", {
+                        staticClass: "tableInp",
+                        attrs: { type: "text", id: "headman" }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "lft",
+                        attrs: { colspan: "40", id: "groupName" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Академічна група: КС-323Б\n                    "
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "cntr border-3-black",
+                        attrs: { rowspan: "3" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        №51\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "cntr border-3-black",
+                        attrs: { rowspan: "3" }
+                      },
+                      [
+                        _vm._v(
+                          " \n                        Прізвище та ініціали студентів\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "cntr border-3-black",
+                        attrs: { rowspan: "3" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        № зал. кн.\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "cntr bold rotate border-3-black",
+                        attrs: { rotate: "", rowspan: "3" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Форма навчання\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "cntr rotate border-3-black",
+                        attrs: { rotate: "", rowspan: "3" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Середній бал\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "cntr rotate border-3-black",
+                        attrs: { rotate: "", rowspan: "3" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Індивідуальний рейтинг студента\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "cntr bold rotate border-3-black",
+                        attrs: { rotate: "", rowspan: "3" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Військове положення\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "cntr border-3-black",
+                        attrs: {
+                          colspan:
+                            (_vm.courseCount +
+                              _vm.passCount +
+                              _vm.examCount +
+                              _vm.practiceCount) *
+                            3
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Назва навчальної дисципліни\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "cntr bold border-3-black",
+                        attrs: { colspan: "4", rowspan: "2" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Примітки\n                    "
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _vm.courseCount
+                      ? _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold border-3-black",
+                            attrs: { colspan: _vm.courseCount * 3 }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Курсові роботи\n                    "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.passCount
+                      ? _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold border-3-black",
+                            attrs: { colspan: _vm.passCount * 3 }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Заліки\n                    "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.examCount
+                      ? _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold border-3-black",
+                            attrs: { colspan: _vm.examCount * 3 }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Екзамени\n                    "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.practiceCount
+                      ? _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold border-3-black",
+                            attrs: { colspan: _vm.practiceCount * 3 }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Практика\n                    "
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
                   _c(
-                    "td",
-                    {
-                      attrs: {
-                        "_excel-styles":
-                          '{"borders":{"outline":{"color":{"argb":"FF0000"},"borderStyle":"PhpSpreadsheet_Style_Border::BORDER_THICK"}}}'
-                      }
-                    },
-                    [_vm._v("f ")]
+                    "tr",
+                    [
+                      _vm._l(_vm.groupSubjects, function(subject, key) {
+                        return _vm._l(subject.has, function(hasValue, hasType) {
+                          return _c(
+                            "td",
+                            {
+                              staticClass: "cntr border-3-black",
+                              attrs: { colspan: "3" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(subject.name) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "cntr border-3-black cursive rotate",
+                          attrs: { rotate: "" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Бали\n                    "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "cntr border-3-black cursive rotate",
+                          attrs: { rotate: "" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Інд. графік, академ відпустка\n                    "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "cntr border-3-black cursive rotate",
+                          attrs: { rotate: "" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        ІЗДН\n                    "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "cntr border-3-black cursive rotate",
+                          attrs: { rotate: "" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Відрахування\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    2
                   ),
                   _vm._v(" "),
-                  _c("td", [_vm._v("d ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("d ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticClass: "tr-doc" }, [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ])
-              ])
+                  _vm._l(_vm.groupStudents, function(student, key) {
+                    return _c(
+                      "tr",
+                      [
+                        _c("td", { staticClass: "lft border-3-black cntr" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(key + 1) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "lft border-3-black" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                student.surname +
+                                  " " +
+                                  student.firstName +
+                                  " " +
+                                  student.middleName
+                              ) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "lft border-3-black" }, [
+                          _c("input", {
+                            staticClass: "input-auto",
+                            attrs: { type: "text" },
+                            domProps: { value: student.studentId }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "cntr border-3-black " }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(student.nauConditions) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr border-3-black bold averageMark"
+                          },
+                          [
+                            _vm._v(
+                              "\n                        0\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "cntr border-3-black bold rating" },
+                          [
+                            _vm._v(
+                              "\n                        0\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr border-3-black militaryService"
+                          },
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(
+                                  student.militaryService !== null ? "+" : "-"
+                                ) +
+                                "\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.groupSubjects, function(subject, key) {
+                          return [
+                            _vm._l(subject.has, function(val, type) {
+                              return [
+                                _c(
+                                  "td",
+                                  { staticClass: "lft border-3-black cntr " },
+                                  [
+                                    _c("input", {
+                                      staticClass: "input-auto",
+                                      attrs: { type: "text", value: "0" }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "lft border-3-black cntr" },
+                                  [
+                                    _c("input", {
+                                      staticClass: "input-auto",
+                                      attrs: { type: "text", value: "" }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "lft border-3-black cntr" },
+                                  [
+                                    _c("input", {
+                                      staticClass: "input-auto",
+                                      attrs: { type: "text", value: "" }
+                                    })
+                                  ]
+                                )
+                              ]
+                            })
+                          ]
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "lft border-3-black cntr bold depts" },
+                          [
+                            _c("input", {
+                              staticClass: "input-auto",
+                              attrs: { type: "text", value: "" }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass:
+                              "lft border-3-black cntr bold personalTimetable"
+                          },
+                          [
+                            _c("input", {
+                              staticClass: "input-auto",
+                              attrs: { type: "text", value: "" }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "lft border-3-black cntr bold IZDN" },
+                          [
+                            _c("input", {
+                              staticClass: "input-auto",
+                              attrs: { type: "text", value: "" }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "lft border-3-black cntr bold kickOut"
+                          },
+                          [
+                            _c("input", {
+                              staticClass: "input-auto",
+                              attrs: { type: "text", value: "" }
+                            })
+                          ]
+                        )
+                      ],
+                      2
+                    )
+                  })
+                ],
+                2
+              )
             ])
           ])
         ],
@@ -106686,21 +106480,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_MainPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/MainPage */ "./resources/js/components/MainPage.vue");
 /* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Navbar */ "./resources/js/components/Navbar.vue");
 /* harmony import */ var _components_Settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Settings */ "./resources/js/components/Settings.vue");
-/* harmony import */ var _components_Register__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Register */ "./resources/js/components/Register.vue");
-/* harmony import */ var _components_Login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Login */ "./resources/js/components/Login.vue");
-/* harmony import */ var _components_Profile__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Profile */ "./resources/js/components/Profile.vue");
-/* harmony import */ var _components_ManageData__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ManageData */ "./resources/js/components/ManageData.vue");
-/* harmony import */ var _components_ManageDepartments__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/ManageDepartments */ "./resources/js/components/ManageDepartments.vue");
-/* harmony import */ var _components_ManageSpecialities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/ManageSpecialities */ "./resources/js/components/ManageSpecialities.vue");
-/* harmony import */ var _components_ManageGroups__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/ManageGroups */ "./resources/js/components/ManageGroups.vue");
-/* harmony import */ var _components_ManageSubjects__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/ManageSubjects */ "./resources/js/components/ManageSubjects.vue");
-/* harmony import */ var _components_ManageStudents__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/ManageStudents */ "./resources/js/components/ManageStudents.vue");
-/* harmony import */ var _components_ZajavaIspit__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/ZajavaIspit */ "./resources/js/components/ZajavaIspit.vue");
-/* harmony import */ var _components_ZvedenaVidomist__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/ZvedenaVidomist */ "./resources/js/components/ZvedenaVidomist.vue");
-/* harmony import */ var _components_VpiskaOzinok__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/VpiskaOzinok */ "./resources/js/components/VpiskaOzinok.vue");
-/* harmony import */ var _components_Vidomist1Mod__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Vidomist1Mod */ "./resources/js/components/Vidomist1Mod.vue");
-/* harmony import */ var _components_Vidomist2Mod__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/Vidomist2Mod */ "./resources/js/components/Vidomist2Mod.vue");
-/* harmony import */ var _components_VidomistKR__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/VidomistKR */ "./resources/js/components/VidomistKR.vue");
+/* harmony import */ var _components_SettingsAdmin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/SettingsAdmin */ "./resources/js/components/SettingsAdmin.vue");
+/* harmony import */ var _components_Register__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Register */ "./resources/js/components/Register.vue");
+/* harmony import */ var _components_Login__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Login */ "./resources/js/components/Login.vue");
+/* harmony import */ var _components_Profile__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Profile */ "./resources/js/components/Profile.vue");
+/* harmony import */ var _components_ManageData__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/ManageData */ "./resources/js/components/ManageData.vue");
+/* harmony import */ var _components_ManageDepartments__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/ManageDepartments */ "./resources/js/components/ManageDepartments.vue");
+/* harmony import */ var _components_ManageSpecialities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/ManageSpecialities */ "./resources/js/components/ManageSpecialities.vue");
+/* harmony import */ var _components_ManageGroups__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/ManageGroups */ "./resources/js/components/ManageGroups.vue");
+/* harmony import */ var _components_ManageSubjects__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/ManageSubjects */ "./resources/js/components/ManageSubjects.vue");
+/* harmony import */ var _components_ManageStudents__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/ManageStudents */ "./resources/js/components/ManageStudents.vue");
+/* harmony import */ var _components_ZajavaIspit__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/ZajavaIspit */ "./resources/js/components/ZajavaIspit.vue");
+/* harmony import */ var _components_ZvedenaVidomist__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/ZvedenaVidomist */ "./resources/js/components/ZvedenaVidomist.vue");
+/* harmony import */ var _components_VpiskaOzinok__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/VpiskaOzinok */ "./resources/js/components/VpiskaOzinok.vue");
+/* harmony import */ var _components_Vidomist1Mod__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/Vidomist1Mod */ "./resources/js/components/Vidomist1Mod.vue");
+/* harmony import */ var _components_Vidomist2Mod__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/Vidomist2Mod */ "./resources/js/components/Vidomist2Mod.vue");
+/* harmony import */ var _components_VidomistKR__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/VidomistKR */ "./resources/js/components/VidomistKR.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -106725,24 +106520,26 @@ Vue.use(vue_material__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 
 
+
 Vue.component('main-page', _components_MainPage__WEBPACK_IMPORTED_MODULE_2__["default"]);
 Vue.component('navbar', _components_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"]);
 Vue.component('settings', _components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"]);
-Vue.component('register', _components_Register__WEBPACK_IMPORTED_MODULE_5__["default"]);
-Vue.component('login', _components_Login__WEBPACK_IMPORTED_MODULE_6__["default"]);
-Vue.component('profile', _components_Profile__WEBPACK_IMPORTED_MODULE_7__["default"]);
-Vue.component('manage-data', _components_ManageData__WEBPACK_IMPORTED_MODULE_8__["default"]);
-Vue.component('manage-departments', _components_ManageDepartments__WEBPACK_IMPORTED_MODULE_9__["default"]);
-Vue.component('manage-specialities', _components_ManageSpecialities__WEBPACK_IMPORTED_MODULE_10__["default"]);
-Vue.component('manage-groups', _components_ManageGroups__WEBPACK_IMPORTED_MODULE_11__["default"]);
-Vue.component('manage-subjects', _components_ManageSubjects__WEBPACK_IMPORTED_MODULE_12__["default"]);
-Vue.component('manage-students', _components_ManageStudents__WEBPACK_IMPORTED_MODULE_13__["default"]);
-Vue.component('zajava-ispit', _components_ZajavaIspit__WEBPACK_IMPORTED_MODULE_14__["default"]);
-Vue.component('zvedena-vidomist', _components_ZvedenaVidomist__WEBPACK_IMPORTED_MODULE_15__["default"]);
-Vue.component('vpiska-ozinok', _components_VpiskaOzinok__WEBPACK_IMPORTED_MODULE_16__["default"]);
-Vue.component('vidomist-mod-1', _components_Vidomist1Mod__WEBPACK_IMPORTED_MODULE_17__["default"]);
-Vue.component('vidomist-mod-2', _components_Vidomist2Mod__WEBPACK_IMPORTED_MODULE_18__["default"]);
-Vue.component('vidomist-kr', _components_VidomistKR__WEBPACK_IMPORTED_MODULE_19__["default"]);
+Vue.component('settings-admin', _components_SettingsAdmin__WEBPACK_IMPORTED_MODULE_5__["default"]);
+Vue.component('register', _components_Register__WEBPACK_IMPORTED_MODULE_6__["default"]);
+Vue.component('login', _components_Login__WEBPACK_IMPORTED_MODULE_7__["default"]);
+Vue.component('profile', _components_Profile__WEBPACK_IMPORTED_MODULE_8__["default"]);
+Vue.component('manage-data', _components_ManageData__WEBPACK_IMPORTED_MODULE_9__["default"]);
+Vue.component('manage-departments', _components_ManageDepartments__WEBPACK_IMPORTED_MODULE_10__["default"]);
+Vue.component('manage-specialities', _components_ManageSpecialities__WEBPACK_IMPORTED_MODULE_11__["default"]);
+Vue.component('manage-groups', _components_ManageGroups__WEBPACK_IMPORTED_MODULE_12__["default"]);
+Vue.component('manage-subjects', _components_ManageSubjects__WEBPACK_IMPORTED_MODULE_13__["default"]);
+Vue.component('manage-students', _components_ManageStudents__WEBPACK_IMPORTED_MODULE_14__["default"]);
+Vue.component('zajava-ispit', _components_ZajavaIspit__WEBPACK_IMPORTED_MODULE_15__["default"]);
+Vue.component('zvedena-vidomist', _components_ZvedenaVidomist__WEBPACK_IMPORTED_MODULE_16__["default"]);
+Vue.component('vpiska-ozinok', _components_VpiskaOzinok__WEBPACK_IMPORTED_MODULE_17__["default"]);
+Vue.component('vidomist-mod-1', _components_Vidomist1Mod__WEBPACK_IMPORTED_MODULE_18__["default"]);
+Vue.component('vidomist-mod-2', _components_Vidomist2Mod__WEBPACK_IMPORTED_MODULE_19__["default"]);
+Vue.component('vidomist-kr', _components_VidomistKR__WEBPACK_IMPORTED_MODULE_20__["default"]);
 var app = new Vue({
   el: '#app'
 });
@@ -107803,6 +107600,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/SettingsAdmin.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/SettingsAdmin.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SettingsAdmin_vue_vue_type_template_id_7b453a91___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SettingsAdmin.vue?vue&type=template&id=7b453a91& */ "./resources/js/components/SettingsAdmin.vue?vue&type=template&id=7b453a91&");
+/* harmony import */ var _SettingsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SettingsAdmin.vue?vue&type=script&lang=js& */ "./resources/js/components/SettingsAdmin.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _SettingsAdmin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SettingsAdmin.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/SettingsAdmin.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _SettingsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SettingsAdmin_vue_vue_type_template_id_7b453a91___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SettingsAdmin_vue_vue_type_template_id_7b453a91___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SettingsAdmin.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/SettingsAdmin.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/SettingsAdmin.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SettingsAdmin.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SettingsAdmin.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SettingsAdmin.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/SettingsAdmin.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsAdmin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./SettingsAdmin.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SettingsAdmin.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsAdmin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsAdmin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsAdmin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsAdmin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsAdmin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SettingsAdmin.vue?vue&type=template&id=7b453a91&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/SettingsAdmin.vue?vue&type=template&id=7b453a91& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsAdmin_vue_vue_type_template_id_7b453a91___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SettingsAdmin.vue?vue&type=template&id=7b453a91& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SettingsAdmin.vue?vue&type=template&id=7b453a91&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsAdmin_vue_vue_type_template_id_7b453a91___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsAdmin_vue_vue_type_template_id_7b453a91___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Vidomist1Mod.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/Vidomist1Mod.vue ***!
@@ -108343,8 +108227,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/nau/document_generator/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/nau/document_generator/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /projects/DG/document_generator/generator/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /projects/DG/document_generator/generator/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

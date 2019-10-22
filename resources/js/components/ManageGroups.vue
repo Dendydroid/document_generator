@@ -37,6 +37,11 @@
                         <span class="md-helper-text">Выберите специальность</span>
                     </md-field>
                     <md-field>
+                        <label>ОПП</label>
+                        <md-input v-model="add_eduProgram" maxlength="255"></md-input>
+                        <span class="md-helper-text">Образовательная программа</span>
+                    </md-field>
+                    <md-field>
                         <label>Предметы по умолчанию</label>
                         <md-select v-model="add_default_subjects" multiple>
                             <md-option v-for="subject in subjectList" :value="subject.id">{{subject.name}}</md-option>
@@ -85,6 +90,11 @@
                             <md-option v-for="speciality in specialityList" :value="speciality.id">{{speciality.fullName}}</md-option>
                         </md-select>
                         <span class="md-helper-text">Выберите специальность</span>
+                    </md-field>
+                    <md-field>
+                        <label>ОПП</label>
+                        <md-input v-model="edit_eduProgram" maxlength="255"></md-input>
+                        <span class="md-helper-text">Образовательная программа</span>
                     </md-field>
                     <md-field>
                         <label>Предметы по умолчанию</label>
@@ -278,6 +288,8 @@
                 add_headmanFIO: '',
                 add_headmanPhone: '',
                 add_default_subjects: [],
+                add_eduProgram: '',
+                edit_eduProgram: '',
                 edit_id_name: '',
                 edit_speciality: '',
                 edit_curatorFIO: '',
@@ -373,6 +385,7 @@
                         curatorPhone: this.add_curatorPhone,
                         headmanFIO: this.add_headmanFIO,
                         headmanPhone: this.add_headmanPhone,
+                        eduProgram: this.add_eduProgram,
                     })
                     .then(response => (this.dataSet.push(response.data)))
                     .catch(e => {
@@ -391,6 +404,7 @@
                         curatorPhone: this.edit_curatorPhone,
                         headmanFIO: this.edit_headmanFIO,
                         headmanPhone: this.edit_headmanPhone,
+                        eduProgram: this.edit_eduProgram,
                     })
                     .then(response => {
                         this.dataSet.forEach(function(el,index,arr){
@@ -403,6 +417,7 @@
                                 arr[index].headmanPhone = response.data.headman.phone;
                                 arr[index].curatorFIO = response.data.curator.fio;
                                 arr[index].curatorPhone = response.data.curator.phone;
+                                arr[index].eduProgram = response.data.eduProgram;
                             }
                         });
                     })
@@ -417,6 +432,7 @@
                 this.edit_curatorPhone = '';
                 this.edit_headmanFIO = '';
                 this.edit_headmanPhone = '';
+                this.edit_eduProgram = '';
                 this.clearSelected();
                 this.toggleModalEdit=false;
             },
@@ -466,6 +482,7 @@
                     this.edit_headmanPhone = element.headman.phone;
                     this.edit_speciality = element.speciality.id;
                     this.edit_default_subjects = defSubjArr;
+                    this.edit_eduProgram = element.eduProgram;
                     this.editId = element.id;
                     this.toggleModalEdit = true;
                 }

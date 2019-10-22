@@ -39,7 +39,11 @@ class SubjectRepo extends EntityRepository {
             "moduleCount" => "required|numeric",
             "hoursCount" => "required|numeric",
             "creditsCount" => "required|numeric",
-            "date" => "required|max:255"
+            "date" => "required|max:255",
+            "hasCourse" => "max:1",
+            "hasPass" => "max:1",
+            "hasExam" => "max:1",
+            "hasPractice" => "max:1",
         ]);
 
         return $validator;
@@ -84,6 +88,25 @@ class SubjectRepo extends EntityRepository {
                 ->setHoursCount($data['hoursCount'])
                 ->setCreditsCount($data['creditsCount'])
                 ->setDate($data['date']);
+
+            if(isset($data['hasCourse']) && !empty($data['hasCourse']))
+            {
+                $subject->setHasCourse($data['hasCourse']);
+            }
+            if(isset($data['hasPass']) && !empty($data['hasPass']))
+            {
+                $subject->setHasPass($data['hasPass']);
+            }
+            if(isset($data['hasExam']) && !empty($data['hasExam']))
+            {
+                $subject->setHasExam($data['hasExam']);
+            }
+            if(isset($data['hasPractice']) && !empty($data['hasPractice']))
+            {
+                $subject->setHasPractice($data['hasPractice']);
+            }
+
+
             $this->_em->persist($subject);
             $this->_em->flush();
 
@@ -113,6 +136,25 @@ class SubjectRepo extends EntityRepository {
                 ->setHoursCount($data['hoursCount'])
                 ->setCreditsCount($data['creditsCount'])
                 ->setDate($data['date']);
+
+            if(isset($data['hasCourse']) && !empty($data['hasCourse']))
+            {
+                $subject->setHasCourse($data['hasCourse']);
+            }
+            if(isset($data['hasPass']) && !empty($data['hasPass']))
+            {
+                $subject->setHasPass($data['hasPass']);
+            }
+            if(isset($data['hasExam']) && !empty($data['hasExam']))
+            {
+                $subject->setHasExam($data['hasExam']);
+            }
+            if(isset($data['hasPractice']) && !empty($data['hasPractice']))
+            {
+                $subject->setHasPractice($data['hasPractice']);
+            }
+
+
             $this->_em->persist($subject);
             $this->_em->flush();
 
@@ -140,6 +182,16 @@ class SubjectRepo extends EntityRepository {
             }
         }
         return $removed;
+    }
+
+    public function clearTable()
+    {
+        $connection = $this->_em->getConnection();
+        $connection->executeQuery('SET FOREIGN_KEY_CHECKS = 0;');
+        $platform   = $connection->getDatabasePlatform();
+
+        $connection->executeUpdate($platform->getTruncateTableSQL('subjects', true));
+        $connection->executeQuery('SET FOREIGN_KEY_CHECKS = 1;');
     }
 
 }
