@@ -153,5 +153,23 @@ class UserRepo extends EntityRepository {
         return $user;
     }
 
+    public function deleteUsers(array $objects)
+    {
+        $removed = [];
+        foreach ($objects as $object){
+            $user = $this->find($object['id']);
+
+            if($user instanceof User)
+            {
+                $this->_em->remove($user);
+                $this->_em->flush();
+                $removed[] = $object;
+            }else{
+                $removed[] = null;
+            }
+        }
+        return $removed;
+    }
+
 }
 

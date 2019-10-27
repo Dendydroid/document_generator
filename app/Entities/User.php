@@ -206,6 +206,16 @@ class User {
         return $this;
     }
 
+    public function getUserTableArray()
+    {
+        return [
+            "id" => $this->id,
+            "FIO" => "$this->surname $this->firstName $this->middleName",
+            "email" => $this->email,
+            "isAdmin" => $this->isAdmin
+        ];
+    }
+
     public function getUserArray(): array
     {
         return [

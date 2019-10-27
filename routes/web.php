@@ -32,12 +32,13 @@ Route::post('/hasNoUsers', 'UserController@hasNoUsers')->name('hasNoUsers');
 Route::post('/updateFacultyInfo','DataController@updateFacultyInfo')->name('updateFacultyInfo')->middleware('logged');
 Route::post('/getFacultyInfo','DataController@getFacultyInfo')->name('getFacultyInfo')->middleware('logged');
 Route::post('/updateTheme','UserController@updateTheme')->name('updateTheme')->middleware('logged');
-Route::post('/uploadCsv', 'DataController@uploadCsv')->name('uploadCsv')->middleware('logged');
+Route::post('/uploadCsv', 'DataController@uploadCsv')->name('uploadCsv')->middleware('logged')->middleware('isAdmin');
 
 Route::get('/settings', 'HomeController@settings')->name('settings')->middleware('logged');
-Route::get('/settingsAdmin', 'HomeController@settingsAdmin')->name('settingsAdmin')->middleware('logged');
+Route::get('/settingsAdmin', 'HomeController@settingsAdmin')->name('settingsAdmin')->middleware('logged')->middleware('isAdmin');
+Route::get('/settingsUsers', 'HomeController@settingsUsers')->name('settingsUsers')->middleware('logged')->middleware('isAdmin');
 Route::get('/profile', 'HomeController@profile')->name('profile')->middleware('logged');
-Route::post('/clearDB', 'DataController@clearDB')->name('clearDB')->middleware('logged');
+Route::post('/clearDB', 'DataController@clearDB')->name('clearDB')->middleware('logged')->middleware('isAdmin');
 //END_VIEWS
 
 //DATA VIEWS
@@ -124,6 +125,10 @@ Route::get('/generate/vidomistKr', 'GeneratorController@getVidomistKr')->name('g
 Route::post('/generate/xlsx', 'GeneratorController@generateXLSX')->name('generateXLSX')->middleware('logged');
 Route::get('/getSubjectsByGroup/{id}', 'DataController@getSubjectsByGroup')->name('getSubjectsByGroup')->middleware('logged');
 Route::get('/getStudentsByGroup/{id}', 'DataController@getStudentsByGroup')->name('getStudentsByGroup')->middleware('logged');
+
+
+Route::get('/getUsers', 'UserController@getUsers')->name('getUsers')->middleware('logged')->middleware('isAdmin');
+Route::post('/deleteUsers', 'UserController@deleteUsers')->name('deleteUsers')->middleware('logged')->middleware('isAdmin');
 
 
 //TEST ROUTES

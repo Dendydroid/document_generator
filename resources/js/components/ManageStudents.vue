@@ -263,9 +263,6 @@
                 </div>
             </md-dialog>
 
-
-
-
             <md-card>
                 <md-card-header>
                     <div class="md-title">
@@ -282,21 +279,16 @@
                             <md-button  class="md-raised md-primary" v-on:click="toggleModalAdd=true">
                                 Добавить
                             </md-button>
+                            <md-field>
+                                <md-select v-model="chosenGroup" @md-selected="getStudentsByGroup()">
+                                    <md-option v-for="(group,key) in groupList" :value="group.id">{{group.idName}}</md-option>
+                                </md-select>
+                            </md-field>
                         </span>
-                        <md-button  class="md-icon-button md-dense md-raised md-primary upd-icon" @click="getGroups()">
+                        <md-button  class="md-icon-button md-dense md-raised md-primary upd-icon" @click="getStudentsByGroup()">
                             <md-icon>cached</md-icon>
                         </md-button>
                     </div>
-                    <!--                    <div class="f-e">-->
-                    <!--                        <md-field class="ml-2">-->
-                    <!--                            <label for="movie">Искать по</label>-->
-                    <!--                            <md-select v-model="searchColumn" class="select-material" @change="searchOnTable()">-->
-                    <!--                                <md-option value="id">ID</md-option>-->
-                    <!--                                <md-option value="fullName">Наименование</md-option>-->
-                    <!--                                <md-option value="abbreviation">Аббревиатура</md-option>-->
-                    <!--                            </md-select>-->
-                    <!--                        </md-field>-->
-                    <!--                    </div>-->
                 </md-card-content>
 
 
@@ -485,7 +477,11 @@
             loadGroups() {
                 axios
                     .get('/getGroups')
-                    .then(response => (this.groupList = response.data))
+                    .then(response => {
+                        this.groupList = response.data
+                        this.chosenGroup = response.data[0].id;
+                        this.getStudentsByGroup();
+                    })
                     .catch(e => {
                         this.errors.push(e)
                     });
@@ -536,9 +532,9 @@
                 }
                 this.showEditButton = false;
             },
-            getStudents: function() {
+            getStudentsByGroup: function() {
                 axios
-                    .get('/getStudents')
+                    .get(`/getStudentsByGroup/${this.chosenGroup}`)
                     .then(response => (this.dataSet = response.data))
                     .catch(e => {
                         this.errors.push(e)
@@ -602,15 +598,7 @@
                         studyType: this.edit_study_type,
                     })
                     .then(response => {
-                        // this.dataSet.forEach(function(el,index,arr){
-                        //     if(el.id === response.data.id)
-                        //     {
-                        //         arr[index].idName = response.data.idName;
-                        //         arr[index].speciality = response.data.speciality;
-                        //         arr[index].defaultSubjects = response.data.defaultSubjects;
-                        //     }
-                        // });
-                        this.getStudents();
+                        this.getStudentsByGroup();
                     })
                     .catch(e => {
                         this.errors.push(e.response.data.errors);
@@ -663,7 +651,7 @@
                         //         }
                         //     }
                         // });
-                        this.getStudents();
+                        this.getStudentsByGroup();
                     })
                     .catch(e => {
                         this.errors.push(e)
@@ -712,6 +700,8 @@
             }
         },
         watch : {
+            chosenGroup: function(val) {
+            },
             errors: function(val) {
                 if(val){
                     this.errorMessage = val[0][Object.keys(val[0])[0]][0];
@@ -723,7 +713,6 @@
             }
         },
         created () {
-            this.getStudents();
             this.loadGroups();
             this.loadSubjects();
         }

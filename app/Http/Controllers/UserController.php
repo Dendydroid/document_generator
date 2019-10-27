@@ -199,4 +199,29 @@ class UserController extends Controller {
         $request->session()->put(["theme" => $user->getTheme()]);
     }
 
+    public function getUsers(Request $request)
+    {
+        $users = $this->userRepo->findAll();
+        $data = [];
+
+        if(!empty($users))
+        {
+            foreach ($users as $user) {
+                $data[] = $user->getUserTableArray();
+            }
+        }
+
+        return $data;
+    }
+
+    public function deleteUsers(Request $request)
+    {
+        $data = $request->all();
+        if(isset($data['objects']) && !empty($data['objects']))
+        {
+            return $this->userRepo->deleteUsers($data['objects']);
+        }
+        return Constants::OPERATION_FAILED;
+    }
+
 }

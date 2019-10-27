@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2c251a4-e1cc-4783-b479-dcfda0d73dae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/generator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/generator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/laravel-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
@@ -76,7 +76,6 @@
       <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodeServer/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/nodeServer/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml" afterDir="false" />
@@ -96,11 +95,11 @@
       <change beforePath="$PROJECT_DIR$/resources/js/components/ManageData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageData.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ManageFaculties.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/VpiskaOzinok.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/VpiskaOzinok.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ZvedenaVidomist.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ZvedenaVidomist.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/SettingsAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/SettingsAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/mainPage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mainPage.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/manage/faculties.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/settingsAdmin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/settingsAdmin.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/channels.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/channels.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/console.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/console.php" afterDir="false" />
@@ -255,6 +254,7 @@
       <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
       <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
       <path value="$PROJECT_DIR$/vendor/ticketpark/htmlphpexcel" />
+      <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
     </include_path>
   </component>
   <component name="ProjectId" id="1PjMQw3bw5MpldAG9qWIqBYZ03T" />
@@ -352,6 +352,7 @@
       <workItem from="1570466532552" duration="710000" />
       <workItem from="1570730744804" duration="2870000" />
       <workItem from="1570998433186" duration="2087000" />
+      <workItem from="1572193777484" duration="111000" />
     </task>
     <task id="LOCAL-00001" summary="Added:&#10;-Register&#10;-Login&#10;-Logout&#10;-Profile&#10;-Change Password&#10;-Remove Account">
       <created>1566408908580</created>

@@ -95,6 +95,18 @@
 
     ?>
     <style>
+        .bg-theme-primary{
+            <?=($primaryStyle!=='' ? "background-color:$primaryStyle !important;" : "background-color:#7e57c2")?>
+        }
+        .bg-theme-accent{
+            background-color:<?=($accentStyleLight!=='' ? $accentStyleLight : "rgba(255,82,82,0.2)")?>;
+        }
+        .cr-theme-primary{
+            <?=($primaryStyle!=='' ? "color:$primaryStyle !important" : "color:#7e57c2 !important")?>;
+        }
+        .cr-theme-accent{
+            color:<?=($accentStyle!=='' ? $accentStyle." !important" : "rgba(255,82,82,0.2) !important")?>;
+        }
         @media only screen and (max-width: 991.98px)  {
             .li-stretch{
                 width: 100%;

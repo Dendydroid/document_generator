@@ -2,5 +2,5 @@
 
 @section('content')
     <navbar></navbar>
-    <settings-admin></settings-admin>
+    <settings-users></settings-users>
 @endsection

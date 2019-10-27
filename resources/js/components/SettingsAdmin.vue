@@ -10,6 +10,7 @@
 
         <div class="p-t">
 
+
             <md-card>
                 <md-card-header>
                     <div class="md-title">
@@ -50,20 +51,8 @@
                                         <md-button type="submit" class="md-primary" :disabled="sendingCsvFiles" @click="sendCsvFiles()">Заполнить базу</md-button>
                                     </md-card-actions>
                                 </md-card>
-                                <md-card class="md-layout-item md-small-size-100">
-                                    <md-card-header>
-                                        <div class="md-title">Очистить БД</div>
-                                    </md-card-header>
+                            </form>
 
-                                    <md-card-content>
-                                        <md-switch v-model="dontClear">Запретить очистку базы</md-switch>
-                                        <div class="row p-c-row">
-                                            <md-button type="button" class="md-raised md-accent" :disabled="clearingDB || dontClear" @click="clearDB()">ОЧИСТИТЬ БАЗУ ДАННЫХ</md-button>
-                                        </div>
-                                    </md-card-content>
-                                    <md-progress-bar md-mode="indeterminate" v-if="clearingDB" />
-                                    <md-snackbar :md-active.sync="clearedDB">База данных успешно очищена!</md-snackbar>
-                                </md-card>
                                 <md-card class="md-layout-item md-small-size-100">
                                     <md-card-header>
                                         <div class="md-title">Заполнить Предметы</div>
@@ -91,9 +80,24 @@
                                         <md-button type="button" class="md-primary" :disabled="sendingSubjects" @click="sendSubjects()">Добавить предметы</md-button>
                                     </md-card-actions>
                                 </md-card>
-                            </form>
+
+                                <md-card class="md-layout-item md-small-size-100">
+                                    <md-card-header>
+                                        <div class="md-title">Очистить БД</div>
+                                    </md-card-header>
+
+                                    <md-card-content>
+                                        <md-switch v-model="dontClear">Запретить очистку базы</md-switch>
+                                        <md-switch v-model="clearSubjects">Удалить предметы</md-switch>
+                                        <md-switch v-model="clearDepartments">Удалить кафедры</md-switch>
+                                        <div class="row p-c-row">
+                                            <md-button type="button" class="md-raised md-accent" :disabled="clearingDB || dontClear" @click="clearDB()">ОЧИСТИТЬ БАЗУ ДАННЫХ</md-button>
+                                        </div>
+                                    </md-card-content>
+                                    <md-progress-bar md-mode="indeterminate" v-if="clearingDB" />
+                                    <md-snackbar :md-active.sync="clearedDB">База данных успешно очищена!</md-snackbar>
+                                </md-card>
                         </div>
-                        
                     </div>
                 </md-card-content>
             </md-card>
@@ -102,6 +106,10 @@
 </template>
 
 <style>
+    .md-menu-content.md-select-menu {
+  width: auto;
+  max-width: none;
+}
     .p-c-row{
         padding:16px;
     }
@@ -202,6 +210,10 @@
                 clearedDB:false,
                 sendingSubjects:false,
                 savedSubjects:false,
+                sendingClearSessions:false,
+                clearedSessions:false,
+                clearSubjects:false,
+                clearDepartments:false,
                 token:document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 snackbar: {
                     showSnackbar: false,
@@ -287,6 +299,8 @@
                 this.clearingDB = true;
                 axios
                     .post('/clearDB', {
+                        departments:this.clearDepartments,
+                        subjects:this.clearSubjects,
                     })
                     .then(response => {
                         this.clearingDB = false;

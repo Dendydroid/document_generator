@@ -11,18 +11,11 @@
                         </md-select>
                     </md-field>
                 </div>
-                <div class="col-4" v-show="groupIsChosen">
-                    <md-field>
-                        <label>Выберите&nbsp;предмет</label>
-                        <md-select v-model="chosenSubject" name="chosenSubject" id="chosenSubject">
-                            <md-option v-for="subject in groupSubjects" :value="subject.id">{{subject.name}}</md-option>
-                        </md-select>
-                    </md-field>
-                </div>
-                <div class="col-4 center-button" v-show="subjectIsChosen">
-                    <form action="http://127.0.0.1:5000/html2Excel" method="POST"><!-- "<style>"+$("style:last").html()+"</style>"+" "+$("#tableWrapper").html() -->
-                        <input type="text" name="html" v-model="requestTable" style="display:none">
-                        <md-button type="submit" class="md-dense md-raised md-primary" @click='prepareTable()'>Генерировать</md-button>
+                <div class="col-4 center-button" v-show="groupIsChosen">
+                    <form id="sendTableForm" action="http://127.0.0.1:5000/html2Excel" method="POST">
+
+                        <input type="hidden" name="html" v-model="requestTable">
+                        <md-button type="button" class="md-dense md-raised md-primary" @click='prepareTable()'>Генерировать</md-button>
                     </form>
 
                 </div>
@@ -32,61 +25,60 @@
                 <table lang="uk-UK" id="documentTable">
                     <thead>
                     <tr>
-                        <th colspan="40">&nbsp;</th>
+                        <th :colspan="maxColSpan">&nbsp;</th>
                         
                     </tr>
                     </thead>
                     <tbody>
                     
                     <tr>
-                        <td colspan="40"></td>
+                        <td :colspan="maxColSpan"></td>
                     </tr>
                     <tr>
-                        <td colspan="40" class='cntr bold'>
+                        <td :colspan="maxColSpan" class='cntr bold'>
                             НАЦІОНАЛЬНИЙ АВІАЦІЙНИЙ УНІВЕРСИТЕТ
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="40" class='cntr bold'>
-                            ФАКУЛЬТЕТ <input type="text" id="facultyName" v-model="facultyName" class="input-auto">
+                        <td :colspan="maxColSpan" class='cntr bold'>
+                            ФАКУЛЬТЕТ <input type="text" id="facultyName" v-model="facultyName" class="input-auto input-top-fac">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="40" class='cntr bold'>
+                        <td :colspan="maxColSpan" class='cntr bold'>
                             ЗВЕДЕНА ВІДОМІСТЬ УСПІШНОСТІ
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="40" class='cntr bold'>
-                            <input type="text" :value="termYears" id="termYears" class="input-auto">
+                        <td :colspan="maxColSpan" class='cntr bold'>
+                            <input type="text" :value="termYears" id="termYears" class="input-auto input-top-date">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="40" class='cntr bold'>
-                            <input type="text" value="1" id="courseYear" class="input-auto">&nbsp;курс
+                        <td :colspan="maxColSpan" class='cntr bold'>
+                            <input type="text" value="1" id="courseYear" class="input-auto input-top-course">&nbsp;курс
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="40" class='cntr bold' id="specialityName">
-                            <input type="text" value=""  class="input-auto">
+                        <td :colspan="maxColSpan" class='cntr bold' id="specialityName">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="40" class='cntr bold' id="groupOpp">
+                        <td :colspan="maxColSpan" class='cntr bold' id="groupOpp">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="40" class='lft'>
-                            Куратор:&nbsp;<input type="text" id="curator" class='tableInp'>
+                        <td :colspan="maxColSpan" class='lft'>
+                            Куратор:&nbsp;<input type="text" id="curator" class='tableInp input-auto'>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="40" class='lft'>
-                            Командир:&nbsp;<input type="text" id="headman" class='tableInp'>
+                        <td :colspan="maxColSpan" class='lft'>
+                            Командир:&nbsp;<input type="text" id="headman" class='tableInp input-auto'>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="40" class='lft' id="groupName">
+                        <td :colspan="maxColSpan" class='lft' id="groupName">
                             Академічна група: КС-323Б
                         </td>
                     </tr>
@@ -153,7 +145,7 @@
                             Відрахування
                         </td>
                     </tr>
-                    <tr v-for="(student, key) in groupStudents">
+                    <tr v-for="(student, key) in groupStudents" class='studentRow'>
                         <td class='lft border-3-black cntr'>
                             {{key+1}}
                         </td>
@@ -161,7 +153,7 @@
                             {{`${student.surname}&nbsp;${student.firstName}&nbsp;${student.middleName}`}}
                         </td>
                         <td class='lft border-3-black'>
-                            <input type="text" :value="student.studentId" class="input-auto">
+                            <input type="text" :value="student.studentId" class="input-auto fill" @input="colorChange">
                         </td>
                         <td class='cntr border-3-black '>
                             {{student.nauConditions}}
@@ -179,28 +171,32 @@
                         <template v-for="(subject,key) in groupSubjects">
                                <template v-for="(val,type) in subject.has">
                                    <td class='lft border-3-black cntr '>
-                                        <input type="text" value="0" class="input-auto">
+                                        <input type="text" value="0" class="input-auto subj-1-mark fill" @input="calcRating">
                                     </td>
-                                    <td class='lft border-3-black cntr' >
-                                        <input type="text" value="" class="input-auto">
+                                    <td class='lft border-3-black cntr subj-2-mark'>
+                                        <span>
+                                            0
+                                        </span>
                                     </td>
-                                    <td class='lft border-3-black cntr'>
-                                        <input type="text" value="" class="input-auto">
+                                    <td class='lft border-3-black cntr subj-3-mark'>
+                                        <span>
+                                            0
+                                        </span>
                                     </td>
                                </template>
                         </template>
                         
                         <td class='lft border-3-black cntr bold depts'>
-                            <input type="text" value="" class="input-auto">
+                            <input type="text" value="" class="input-auto fill" @input="colorChange">
                         </td>
                         <td class='lft border-3-black cntr bold personalTimetable'>
-                             <input type="text" value="" class="input-auto">
+                             <input type="text" value="" class="input-auto fill" @input="colorChange">
                         </td>
                         <td class='lft border-3-black cntr bold IZDN'>
-                             <input type="text" value="" class="input-auto">
+                             <input type="text" value="" class="input-auto fill" @input="colorChange">
                         </td>
                         <td class='lft border-3-black cntr bold kickOut'>
-                             <input type="text" value="" class="input-auto">
+                             <input type="text" value="" class="input-auto fill" @input="colorChange">
                         </td>
                     </tr>
                     
@@ -211,19 +207,47 @@
     </div>
 </template>
 <style>
+    .input-top-course{
+        height:1rem !important;
+        width:2rem !important;
+    }
+    .input-top-spec{
+        height:1rem !important;
+        width:10rem !important;
+    }
+    .input-top-fac{
+        height:1rem !important;
+        width:12rem !important;
+    }
+    .input-top-date{
+        height:1rem !important;
+        width:6rem !important;
+    }
+    .subj-2-mark{
+        padding: 10px;
+    }
+    .subj-3-mark{
+        padding: 10px;
+    }
     input{
         width:4rem !important;
     }
     .not-wrap{
         overflow: none;
     }
-    .input-auto{
-        width: 100%;
+    .input-auto.fill{
         padding: 10px;
         margin: 0px;
+        display: flex;
+        flex-flow: row wrap;
+        width: 100% !important;
+        outline:1px solid #e3342f;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
+    }
+    .input-auto.fill:focus{
+        outline-color:#3490dc;
     }
     .input-sm{
         width:2rem;
@@ -313,7 +337,8 @@
         font-style:italic;
     }
     .tableInp{
-        height:0.5rem !important;
+        height:1rem !important;
+        width:15rem !important;
     }
 </style>
 <script>
@@ -325,11 +350,13 @@
         'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
 
+
     export default {
         name: 'zvedenaVidomist',
         data () {
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                maxColSpan:0,
                 groupList:[],
                 groupSubjects:[],
                 groupStudents: [],
@@ -340,7 +367,6 @@
                 practiceCount:0,
                 chosenGroup:'',
                 groupIsChosen:false,
-                subjectIsChosen:false,
                 responseXLSX:[],
                 requestTable:'',
                 termNumber:1,
@@ -349,6 +375,63 @@
             }
         },
         methods: {
+            getRealWidth (tr) {
+                return 11 + ((this.courseCount+this.passCount+this.examCount+this.practiceCount)*3);
+            },
+            colorChange: function(event) {
+                let tg = event.target;
+                if(tg.value!=="" && tg.value !== '0')
+                {
+                    tg.style.outlineColor = "#38c172";
+                }else{
+                    tg.style.outlineColor = "#e3342f";
+                }
+            },
+            calcRating : function(event) {
+                let tg = event.target;
+                let currTR = $(tg.parentElement.parentElement).children('td').children('.subj-1-mark');
+                let mrk = 0;
+
+                if(tg.value!=="" && tg.value !== '0')
+                {
+                    tg.style.outlineColor = "#38c172";
+                }else{
+                    tg.style.outlineColor = "#e3342f";
+                }
+
+                $(tg.parentElement.nextElementSibling).find('span').text(this.ratingToLetters(parseFloat(tg.value)));
+                $(tg.parentElement.nextElementSibling.nextElementSibling).find('span').text(this.ratingToFive(parseFloat(tg.value),false));
+                for(let i=0; i<currTR.length;i++)
+                {
+                    mrk+=parseFloat(currTR[i].value);
+                }
+                mrk/=currTR.length;
+                $(tg.parentElement).siblings(".rating").text(parseFloat(mrk.toFixed(2)));
+                $(tg.parentElement).siblings(".averageMark").text(this.ratingToFive(mrk));
+            },
+            ratingToFive(r, full = true) {
+                if(full){
+                    return parseFloat((parseFloat(r)*5/100).toFixed(2));
+                }
+                return parseFloat((parseFloat(r)*5/100).toFixed(0));
+            },
+            ratingToLetters(r) {
+                if(r >= 90){
+                    return 'A';
+                }else if(r <= 89 && r>=82){
+                    return 'B';
+                }else if(r <= 81 && r>=75){
+                    return 'C';
+                }else if(r <= 74 && r>=67){
+                    return 'D';
+                }else if(r <= 66 && r>=60){
+                    return 'E';
+                }else if(r <= 59 && r>=35){
+                    return 'FX';
+                }else if(r <= 34){
+                    return 'F';
+                }
+            },
             loadGroups() {
                 axios
                     .get('/getGroups')
@@ -395,11 +478,37 @@
                 });
                 $("#termYears").html(this.termYears);
                 $("#termNumber").html(this.termNumber);
+                this.getInlineStyles();
                 this.requestTable=$("#tableWrapper").html();
+                $("#sendTableForm").submit();
             },
             getInlineStyles()
             {
+                let tdStyles = "";
+                $("#documentTable > tbody > tr > td").each(function(index, el){
+                    tdStyles="";
+                    tdStyles+=`border-top-style:${$(el).css("border-top-style")};`;
+                    tdStyles+=`border-bottom-style:${$(el).css("border-bottom-style")};`;
+                    tdStyles+=`border-left-style:${$(el).css("border-left-style")};`;
+                    tdStyles+=`border-right-style:${$(el).css("border-right-style")};`;
 
+                    tdStyles+=`border-top-width:${$(el).css("border-top-width")};`;
+                    tdStyles+=`border-bottom-width:${$(el).css("border-bottom-width")};`;
+                    tdStyles+=`border-left-width:${$(el).css("border-left-width")};`;
+                    tdStyles+=`border-right-width:${$(el).css("border-right-width")};`;
+
+                    tdStyles+=`border-top-color:${$(el).css("border-top-color")};`;
+                    tdStyles+=`border-bottom-color:${$(el).css("border-bottom-color")};`;
+                    tdStyles+=`border-left-color:${$(el).css("border-left-color")};`;
+                    tdStyles+=`border-right-color:${$(el).css("border-right-color")};`;
+
+                    tdStyles+=`text-align:${$(el).css("text-align")};`;
+                    tdStyles+=`font-weight:${$(el).css("font-weight")};`;
+                    tdStyles+=`background-color:${$(el).css("background-color")};`;
+                    //DEFAULT STYLES
+                    tdStyles+=`overflow:auto;`;
+                    $(el).attr("style",tdStyles);
+                });
             }
         },
         watch: {
@@ -424,6 +533,7 @@
                         }
                     }
                 }
+                this.maxColSpan = parseInt(this.getRealWidth());
             },
             chosenGroup: function(val)
             {
@@ -452,7 +562,6 @@
             {
                 if(val!='')
                 {
-                    this.subjectIsChosen = true;
                     this.requestTable = $("#tableWrapper").html();
                     let subject = this.groupSubjects.filter(el => el.id == val)[0];
                     $("#subjectHeadOfDepartment").text(subject.headOfDepartment);
@@ -463,10 +572,8 @@
             }
         },
         created () {
-
             console.log("CREATED");
             this.loadGroups();
-            this.getInlineStyles();
         }
     }
 

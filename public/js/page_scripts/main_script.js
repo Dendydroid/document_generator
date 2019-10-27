@@ -201,31 +201,7 @@ window.onscroll = function() {
 
 //NAVBAR HIDE SHOW END
 
-var tdStyles = "";
-$("#documentTable > tbody > tr > td").each(function(index, el){
-    tdStyles="";
-    tdStyles+=`border-top-style:${$(el).css("border-top-style")};`;
-    tdStyles+=`border-bottom-style:${$(el).css("border-bottom-style")};`;
-    tdStyles+=`border-left-style:${$(el).css("border-left-style")};`;
-    tdStyles+=`border-right-style:${$(el).css("border-right-style")};`;
 
-    tdStyles+=`border-top-width:${$(el).css("border-top-width")};`;
-    tdStyles+=`border-bottom-width:${$(el).css("border-bottom-width")};`;
-    tdStyles+=`border-left-width:${$(el).css("border-left-width")};`;
-    tdStyles+=`border-right-width:${$(el).css("border-right-width")};`;
-
-    tdStyles+=`border-top-color:${$(el).css("border-top-color")};`;
-    tdStyles+=`border-bottom-color:${$(el).css("border-bottom-color")};`;
-    tdStyles+=`border-left-color:${$(el).css("border-left-color")};`;
-    tdStyles+=`border-right-color:${$(el).css("border-right-color")};`;
-
-    tdStyles+=`text-align:${$(el).css("text-align")};`;
-    tdStyles+=`font-weight:${$(el).css("font-weight")};`;
-    tdStyles+=`background-color:${$(el).css("background-color")};`;
-    //DEFAULT STYLES
-    tdStyles+=`overflow:auto;`;
-    $(el).attr("style",tdStyles);
-});
 
 $('input[type=file]').change(function () {
     console.log(this.files[0].mozFullPath);

@@ -32,7 +32,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="settings">
                             <a class="dropdown-item larafont-navlink-dropdown" href="/settings">Основные</a>
-                            <a class="dropdown-item larafont-navlink-dropdown" href="/settingsAdmin">Дополнительные настройки</a>
+                            <a v-if="user.isAdmin" class="dropdown-item larafont-navlink-dropdown" href="/settingsAdmin">Дополнительные настройки</a>
+                            <a v-if="user.isAdmin" class="dropdown-item larafont-navlink-dropdown" href="/settingsUsers">Учетные записи</a>
                         </div>
                     </li>
                     <li class="nav-item li-stretch" v-if="noUser || user.isAdmin">

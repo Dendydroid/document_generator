@@ -100,6 +100,8 @@ class DataController extends Controller
         $this->repoFacultyInfo = $this->entityManager->getRepository($this->facultyInfo);
     }
 
+
+
     public function getF(Request $request)
     {
         $fs = $this->repoDepartments->findAll();
@@ -233,7 +235,7 @@ class DataController extends Controller
        {
            $depAbbrev.=mb_substr($word,0,1);
        }
-       
+
        $depAbbrev = mb_strtoupper($depAbbrev);
 
        $department = $this->repoDepartments->findOneBy(["fullName" => $departmentName]);
@@ -273,7 +275,7 @@ class DataController extends Controller
             $keys = array_slice($rows,0,1);
             $keys = preg_split('@;@', str_replace("\n", "", $keys[0]), NULL, PREG_SPLIT_NO_EMPTY);
 
-            
+
 
             for($line = 1; $line < count($rows); $line++)
             {
@@ -296,7 +298,7 @@ class DataController extends Controller
            {
                $abbrev.=mb_substr($word,0,1);
            }
-           
+
            $specialityAbbrev = mb_strtoupper($abbrev);
 
            $speciality = $this->repoSpeciality->findOneBy(["fullName" => $otherData['specialityName']]);
@@ -339,7 +341,7 @@ class DataController extends Controller
                 }catch(Exception $exception)
                 {
                 }
-               
+
            }
         }
         return redirect()->route('settingsAdmin');
@@ -423,13 +425,20 @@ class DataController extends Controller
         }
     }
 
-    public function clearDB()
+    public function clearDB(Request $request)
     {
+        $data = $request->all();
+        if(isset($data['subjects']) && $data['subjects'] === true)
+        {
+            $this->repoSubjects->clearTable();
+        }
+        if(isset($data['departments']) && $data['departments'] === true)
+        {
+            $this->repoDepartments->clearTable();
+        }
         $this->repoStudent->clearTable();
         $this->repoGroup->clearTable();
         $this->repoSpeciality->clearTable();
-        $this->repoDepartments->clearTable();
-        $this->repoSubjects->clearTable();
     }
 
     /**
