@@ -17,7 +17,6 @@
                         <input type="hidden" name="html" v-model="requestTable">
                         <md-button type="button" class="md-dense md-raised md-primary" @click='prepareTable()'>Генерировать</md-button>
                     </form>
-
                 </div>
             </div>
 
