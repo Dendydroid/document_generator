@@ -487,11 +487,13 @@
                 let currTR = $(tg.parentElement.parentElement).children('td').children('.subj-1-mark');
                 let mrk = 0;
 
-                if(tg.value>100){
-                    tg.value=100;
-                }
+                
 
-                if(!isNaN(tg.value) && tg.value<=100){
+                if(!isNaN(tg.value)){
+
+                    if(tg.value>100){
+                        tg.value=100;
+                    }
 
                     if(tg.value!=="" && tg.value !== '0')
                     {
