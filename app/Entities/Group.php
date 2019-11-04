@@ -304,6 +304,7 @@ class Group {
             "department" => [
                 "id" => $this->speciality->getDepartment()->getId(),
                 "fullName" => $this->speciality->getDepartment()->getFullName(),
+                "head" => $this->speciality->getDepartment()->getHead(),
             ],
             "curator" => [
                 "fio" => $this->curatorFIO,

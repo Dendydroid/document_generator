@@ -6581,30 +6581,206 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ZajavaIspit',
+  name: 'Vidomist1Mod',
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      maxColSpan: 0,
       groupList: [],
       groupSubjects: [],
       groupStudents: [],
       chosenSubject: '',
+      courseCount: 0,
+      passCount: 0,
+      examCount: 0,
+      practiceCount: 0,
       chosenGroup: '',
       groupIsChosen: false,
-      subjectIsChosen: false,
+      loadingDoc: false,
       responseXLSX: [],
       requestTable: '',
       termNumber: 1,
-      termYears: new Date().getFullYear() + "/" + (new Date().getFullYear() + 1)
+      termYears: new Date().getFullYear() + "/" + (new Date().getFullYear() + 1),
+      facultyName: '',
+      chosenGroupName: '',
+      subjectHasArr: [[], [], [], []]
     };
   },
   methods: {
+    getRealWidth: function getRealWidth(tr) {
+      return 11 + (this.courseCount + this.passCount + this.examCount + this.practiceCount) * 3;
+    },
+    colorChange: function colorChange(event) {
+      var tg = event.target;
+
+      if (tg.value !== "" && tg.value !== '0') {
+        tg.style.outlineColor = "#38c172";
+      } else {
+        tg.style.outlineColor = "#e3342f";
+      }
+    },
+    calcRating: function calcRating(event) {
+      var tg = event.target;
+      var currTR = $(tg.parentElement.parentElement).children('td').children('.subj-1-mark');
+      var mrk = 0;
+
+      if (!isNaN(tg.value)) {
+        if (tg.value !== "" && tg.value !== '0') {
+          tg.style.borderColor = "#38c172";
+        } else {
+          tg.style.borderColor = "#e3342f";
+        }
+
+        $(tg.parentElement.nextElementSibling).find('span').text(this.ratingToLetters(parseFloat(tg.value)));
+        $(tg.parentElement.nextElementSibling.nextElementSibling).find('span').text(this.ratingToFive(parseFloat(tg.value), false));
+
+        for (var i = 0; i < currTR.length; i++) {
+          mrk += parseFloat(currTR[i].value);
+        }
+
+        mrk /= currTR.length;
+
+        if (mrk !== "") {
+          $(tg.parentElement).siblings(".rating").text(parseFloat(mrk.toFixed(2)));
+          $(tg.parentElement).siblings(".averageMark").text(this.ratingToFive(mrk));
+        }
+      } else {
+        tg.value = tg.value.slice(0, -1);
+      }
+    },
+    ratingToFive: function ratingToFive(r) {
+      var full = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+      if (full) {
+        return parseFloat((parseFloat(r) * 5 / 100).toFixed(2));
+      }
+
+      return parseFloat((parseFloat(r) * 5 / 100).toFixed(0));
+    },
+    ratingToLetters: function ratingToLetters(r) {
+      if (r >= 90) {
+        return 'A';
+      } else if (r <= 89 && r >= 82) {
+        return 'B';
+      } else if (r <= 81 && r >= 75) {
+        return 'C';
+      } else if (r <= 74 && r >= 67) {
+        return 'D';
+      } else if (r <= 66 && r >= 60) {
+        return 'E';
+      } else if (r <= 59 && r >= 35) {
+        return 'FX';
+      } else if (r <= 34) {
+        return 'F';
+      }
+    },
     loadGroups: function loadGroups() {
       var _this = this;
 
@@ -6636,28 +6812,72 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       this.getStudentsByGroup();
       this.getSubjectsByGroup();
     },
-    sendHtml: function sendHtml() {
-      var _this4 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://127.0.0.1:5000/html2Excel', {
-        html: $("#tableWrapper").html()
-      }).then(function (response) {
-        return _this4.responseXLSX.push(response.data);
-      })["catch"](function (e) {
-        _this4.errors.push(e.response.data.errors);
-      });
+    sendDoc: function sendDoc() {
+      console.log(this.requestTable);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://127.0.0.1:5000/html2Excel", {
+        html: this.requestTable
+      }).then(function (response) {})["catch"](function (e) {});
     },
     prepareTable: function prepareTable() {
+      this.loadingDoc = true;
       $('.input-auto').each(function (index, elem) {
         elem.parentElement.innerHTML = elem.value;
       });
       $("#termYears").html(this.termYears);
       $("#termNumber").html(this.termNumber);
-      this.requestTable = $("#tableWrapper").html();
+      this.getInlineStyles();
+      this.requestTable = document.getElementById("tableWrapper").innerHTML;
+      setTimeout(function () {
+        $("#sendTableForm").submit();
+      }, 1500);
     },
-    getInlineStyles: function getInlineStyles() {}
+    getInlineStyles: function getInlineStyles() {
+      var tdStyles = "";
+      $("#documentTable > tbody > tr > td").each(function (index, el) {
+        tdStyles = "";
+        tdStyles += "border-top-style:".concat($(el).css("border-top-style"), ";");
+        tdStyles += "border-bottom-style:".concat($(el).css("border-bottom-style"), ";");
+        tdStyles += "border-left-style:".concat($(el).css("border-left-style"), ";");
+        tdStyles += "border-right-style:".concat($(el).css("border-right-style"), ";");
+        tdStyles += "border-top-width:".concat($(el).css("border-top-width"), ";");
+        tdStyles += "border-bottom-width:".concat($(el).css("border-bottom-width"), ";");
+        tdStyles += "border-left-width:".concat($(el).css("border-left-width"), ";");
+        tdStyles += "border-right-width:".concat($(el).css("border-right-width"), ";");
+        tdStyles += "border-top-color:".concat($(el).css("border-top-color"), ";");
+        tdStyles += "border-bottom-color:".concat($(el).css("border-bottom-color"), ";");
+        tdStyles += "border-left-color:".concat($(el).css("border-left-color"), ";");
+        tdStyles += "border-right-color:".concat($(el).css("border-right-color"), ";");
+        tdStyles += "text-align:".concat($(el).css("text-align"), ";");
+        tdStyles += "font-weight:".concat($(el).css("font-weight"), ";");
+        tdStyles += "background-color:".concat($(el).css("background-color"), ";"); //DEFAULT STYLES
+
+        tdStyles += "overflow:auto;";
+        $(el).attr("style", tdStyles);
+      });
+    }
   },
   watch: {
+    groupSubjects: function groupSubjects(val) {
+      for (var subjectKey in val) {
+        for (var type in val[subjectKey].has) {
+          if (type === "course") {
+            this.courseCount++;
+            this.subjectHasArr[0].push(val[subjectKey].name);
+          } else if (type === "pass") {
+            this.passCount++;
+            this.subjectHasArr[1].push(val[subjectKey].name);
+          } else if (type === "exam") {
+            this.examCount++;
+            this.subjectHasArr[2].push(val[subjectKey].name);
+          } else if (type === "practice") {
+            this.practiceCount++;
+            this.subjectHasArr[3].push(val[subjectKey].name);
+          }
+        }
+      }
+
+      this.maxColSpan = parseInt(this.getRealWidth());
+    },
     chosenGroup: function chosenGroup(val) {
       if (val != '') {
         this.getAllData();
@@ -6665,12 +6885,23 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
         var groupIdName = this.groupList.filter(function (el) {
           return el.id == val;
         })[0].idName;
-        $("#groupName").text(groupIdName);
+        var curatorFIO = this.groupList[this.chosenGroup].curator.fio;
+        var curatorPhone = this.groupList[this.chosenGroup].curator.phone;
+        var headmanFIO = this.groupList[this.chosenGroup].headman.fio;
+        var headmanPhone = this.groupList[this.chosenGroup].headman.phone;
+        var courseYear = this.groupList[this.chosenGroup].idName.match(/\d+/)[0][0];
+        $("#curator").val("\u041A\u0443\u0440\u0430\u0442\u043E\u0440: ".concat(curatorFIO ? curatorFIO : '', " ").concat(curatorPhone ? curatorPhone : ''));
+        $("#headman").val("\u041A\u043E\u043C\u0430\u043D\u0434\u0438\u0440: ".concat(headmanFIO ? headmanFIO : '', " ").concat(headmanPhone ? headmanPhone : ''));
+        this.facultyName = this.groupList[this.chosenGroup].department.fullName;
+        $("#courseYear").val("".concat(courseYear));
+        this.chosenGroupName = "\u0410\u043A\u0430\u0434\u0435\u043C\u0456\u0447\u043D\u0430 \u0433\u0440\u0443\u043F\u043F\u0430 ".concat(groupIdName);
+        $("#termYears").val(this.termYears + " \u043D\u0430\u0432\u0447\u0430\u043B\u044C\u043D\u0438\u0439 \u0440\u0456\u043A (".concat(courseYear, "\u0441\u0435\u043C\u0435\u0441\u0442\u0440)"));
+        $("#specialityName").html("".concat(this.groupList[this.chosenGroup].speciality.number, " ").concat(this.groupList[this.chosenGroup].speciality.fullName));
+        $("#groupOpp").html(this.groupList[this.chosenGroup].eduProgram);
       }
     },
     chosenSubject: function chosenSubject(val) {
       if (val != '') {
-        this.subjectIsChosen = true;
         this.requestTable = $("#tableWrapper").html();
         var subject = this.groupSubjects.filter(function (el) {
           return el.id == val;
@@ -6685,7 +6916,9 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   created: function created() {
     console.log("CREATED");
     this.loadGroups();
-    this.getInlineStyles();
+    $("#sendTableForm").bind('ajax:complete', function () {
+      this.loadingDoc = false;
+    });
   }
 });
 
@@ -8843,30 +9076,121 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'VpiskaOzinok.vue',
+  name: 'VpiskaOzinok',
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      maxColSpan: 0,
       groupList: [],
       groupSubjects: [],
       groupStudents: [],
       chosenSubject: '',
+      courseCount: 0,
+      passCount: 0,
+      examCount: 0,
+      practiceCount: 0,
       chosenGroup: '',
       groupIsChosen: false,
-      subjectIsChosen: false,
+      loadingDoc: false,
       responseXLSX: [],
       requestTable: '',
       termNumber: 1,
-      termYears: new Date().getFullYear() + "/" + (new Date().getFullYear() + 1)
+      termYears: new Date().getFullYear() + "/" + (new Date().getFullYear() + 1),
+      facultyName: '',
+      chosenGroupName: '',
+      departmentHead: '',
+      termCount: 1,
+      termArr: [0]
     };
   },
   methods: {
+    getRealWidth: function getRealWidth(tr) {
+      return 11 + (this.courseCount + this.passCount + this.examCount + this.practiceCount) * 3;
+    },
+    colorChange: function colorChange(event) {
+      var tg = event.target;
+
+      if (tg.value !== "" && tg.value !== '0') {
+        tg.style.outlineColor = "#38c172";
+      } else {
+        tg.style.outlineColor = "#e3342f";
+      }
+    },
+    ratingToWord: function ratingToWord(r) {
+      if (r >= 90) {
+        return 'Відмінно';
+      } else if (r <= 89 && r >= 82) {
+        return 'Дуже добре';
+      } else if (r <= 81 && r >= 75) {
+        return 'Добре';
+      } else if (r <= 74 && r >= 67) {
+        return 'Задовільно';
+      } else if (r <= 66 && r >= 60) {
+        return 'Достатньо';
+      } else if (r <= 59 && r >= 35) {
+        return 'Незадовільно';
+      } else if (r <= 34) {
+        return 'Незадовільно';
+      }
+    },
+    calcRating: function calcRating(event) {
+      var tg = event.target;
+      var currTR = $(tg.parentElement.parentElement).children('td').children('.subj-1-mark');
+      var mrk = 0;
+
+      if (!isNaN(tg.value) && tg.value <= 100) {
+        if (tg.value !== "" && tg.value !== '0') {
+          tg.style.borderColor = "#38c172";
+        } else {
+          tg.style.borderColor = "#e3342f";
+        }
+
+        $(tg.parentElement).siblings('.subj-2-mark').text(this.ratingToWord(parseFloat(tg.value)));
+        $(tg.parentElement).siblings('.subj-3-mark').text(this.ratingToLetters(parseFloat(tg.value), false));
+      } else if (tg.value > 100) {
+        tg.value = 100;
+      } else {
+        tg.value = tg.value.slice(0, -1);
+      }
+    },
+    ratingToFive: function ratingToFive(r) {
+      var full = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+      if (full) {
+        return parseFloat((parseFloat(r) * 5 / 100).toFixed(2));
+      }
+
+      return parseFloat((parseFloat(r) * 5 / 100).toFixed(0));
+    },
+    ratingToLetters: function ratingToLetters(r) {
+      if (r >= 90) {
+        return 'A';
+      } else if (r <= 89 && r >= 82) {
+        return 'B';
+      } else if (r <= 81 && r >= 75) {
+        return 'C';
+      } else if (r <= 74 && r >= 67) {
+        return 'D';
+      } else if (r <= 66 && r >= 60) {
+        return 'E';
+      } else if (r <= 59 && r >= 35) {
+        return 'FX';
+      } else if (r <= 34) {
+        return 'F';
+      }
+    },
     loadGroups: function loadGroups() {
       var _this = this;
 
@@ -8898,28 +9222,68 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       this.getStudentsByGroup();
       this.getSubjectsByGroup();
     },
-    sendHtml: function sendHtml() {
-      var _this4 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://127.0.0.1:5000/html2Excel', {
-        html: $("#tableWrapper").html()
-      }).then(function (response) {
-        return _this4.responseXLSX.push(response.data);
-      })["catch"](function (e) {
-        _this4.errors.push(e.response.data.errors);
-      });
+    sendDoc: function sendDoc() {
+      console.log(this.requestTable);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://127.0.0.1:5000/html2Excel", {
+        html: this.requestTable
+      }).then(function (response) {})["catch"](function (e) {});
     },
     prepareTable: function prepareTable() {
+      this.loadingDoc = true;
       $('.input-auto').each(function (index, elem) {
         elem.parentElement.innerHTML = elem.value;
       });
       $("#termYears").html(this.termYears);
       $("#termNumber").html(this.termNumber);
-      this.requestTable = $("#tableWrapper").html();
+      this.getInlineStyles();
+      this.requestTable = document.getElementById("tableWrapper").innerHTML;
+      setTimeout(function () {
+        $("#sendTableForm").submit();
+      }, 1500);
     },
-    getInlineStyles: function getInlineStyles() {}
+    getInlineStyles: function getInlineStyles() {
+      var tdStyles = "";
+      $("#documentTable > tbody > tr > td").each(function (index, el) {
+        tdStyles = "";
+        tdStyles += "border-top-style:".concat($(el).css("border-top-style"), ";");
+        tdStyles += "border-bottom-style:".concat($(el).css("border-bottom-style"), ";");
+        tdStyles += "border-left-style:".concat($(el).css("border-left-style"), ";");
+        tdStyles += "border-right-style:".concat($(el).css("border-right-style"), ";");
+        tdStyles += "border-top-width:".concat($(el).css("border-top-width"), ";");
+        tdStyles += "border-bottom-width:".concat($(el).css("border-bottom-width"), ";");
+        tdStyles += "border-left-width:".concat($(el).css("border-left-width"), ";");
+        tdStyles += "border-right-width:".concat($(el).css("border-right-width"), ";");
+        tdStyles += "border-top-color:".concat($(el).css("border-top-color"), ";");
+        tdStyles += "border-bottom-color:".concat($(el).css("border-bottom-color"), ";");
+        tdStyles += "border-left-color:".concat($(el).css("border-left-color"), ";");
+        tdStyles += "border-right-color:".concat($(el).css("border-right-color"), ";");
+        tdStyles += "text-align:".concat($(el).css("text-align"), ";");
+        tdStyles += "font-weight:".concat($(el).css("font-weight"), ";");
+        tdStyles += "background-color:".concat($(el).css("background-color"), ";"); //DEFAULT STYLES
+
+        tdStyles += "overflow:auto;";
+        $(el).attr("style", tdStyles);
+      });
+    }
   },
   watch: {
+    groupSubjects: function groupSubjects(val) {
+      for (var subjectKey in val) {
+        for (var type in val[subjectKey].has) {
+          if (type === "course") {
+            this.courseCount++;
+          } else if (type === "pass") {
+            this.passCount++;
+          } else if (type === "exam") {
+            this.examCount++;
+          } else if (type === "practice") {
+            this.practiceCount++;
+          }
+        }
+      }
+
+      this.maxColSpan = parseInt(this.getRealWidth());
+    },
     chosenGroup: function chosenGroup(val) {
       if (val != '') {
         this.getAllData();
@@ -8927,12 +9291,25 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
         var groupIdName = this.groupList.filter(function (el) {
           return el.id == val;
         })[0].idName;
-        $("#groupName").text(groupIdName);
+        var curatorFIO = this.groupList[this.chosenGroup].curator.fio;
+        var curatorPhone = this.groupList[this.chosenGroup].curator.phone;
+        var headmanFIO = this.groupList[this.chosenGroup].headman.fio;
+        var headmanPhone = this.groupList[this.chosenGroup].headman.phone;
+        $("#curator").val("".concat(curatorFIO ? curatorFIO : '', " ").concat(curatorPhone ? curatorPhone : ''));
+        $("#headman").val("".concat(headmanFIO ? headmanFIO : '', " ").concat(headmanPhone ? headmanPhone : ''));
+        this.facultyName = this.groupList[this.chosenGroup].department.fullName;
+        var courseYear = this.groupList[this.chosenGroup].idName.match(/\d+/)[0][0];
+        $("#courseYear").val("".concat(courseYear));
+        this.chosenGroupName = "".concat(groupIdName);
+        $("#termYears").val(this.termYears + " \u043D\u0430\u0432\u0447\u0430\u043B\u044C\u043D\u0438\u0439 \u0440\u0456\u043A (".concat(courseYear, "\u0441\u0435\u043C\u0435\u0441\u0442\u0440)"));
+        $("#specialityName").html("".concat(this.groupList[this.chosenGroup].speciality.number, " ").concat(this.groupList[this.chosenGroup].speciality.fullName));
+        $("#groupOpp").html(this.groupList[this.chosenGroup].eduProgram);
+        this.departmentHead = this.groupList[this.chosenGroup].department.head;
+        this.groupInput = "\u0441\u0442\u0443\u0434\u0435\u043D\u0442\u0438 ".concat(courseYear, " \u043A\u0443\u0440\u0441\u0443 ").concat(this.chosenGroupName, " \u0433\u0440\u0443\u043F\u0438");
       }
     },
     chosenSubject: function chosenSubject(val) {
       if (val != '') {
-        this.subjectIsChosen = true;
         this.requestTable = $("#tableWrapper").html();
         var subject = this.groupSubjects.filter(function (el) {
           return el.id == val;
@@ -8942,12 +9319,17 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
         $("#moduleCount").text(subject.moduleCount);
         $("#subjectName").text(subject.name);
       }
+    },
+    termCount: function termCount(val) {
+      this.termArr = new Array(parseInt(val));
     }
   },
   created: function created() {
     console.log("CREATED");
     this.loadGroups();
-    this.getInlineStyles();
+    $("#sendTableForm").bind('ajax:complete', function () {
+      this.loadingDoc = false;
+    });
   }
 });
 
@@ -8964,6 +9346,33 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9355,9 +9764,33 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       });
       $("#termYears").html(this.termYears);
       $("#termNumber").html(this.termNumber);
+      this.getInlineStyles();
       this.requestTable = $("#tableWrapper").html();
     },
-    getInlineStyles: function getInlineStyles() {}
+    getInlineStyles: function getInlineStyles() {
+      var tdStyles = "";
+      $("#documentTable > tbody > tr > td").each(function (index, el) {
+        tdStyles = "";
+        tdStyles += "border-top-style:".concat($(el).css("border-top-style"), ";");
+        tdStyles += "border-bottom-style:".concat($(el).css("border-bottom-style"), ";");
+        tdStyles += "border-left-style:".concat($(el).css("border-left-style"), ";");
+        tdStyles += "border-right-style:".concat($(el).css("border-right-style"), ";");
+        tdStyles += "border-top-width:".concat($(el).css("border-top-width"), ";");
+        tdStyles += "border-bottom-width:".concat($(el).css("border-bottom-width"), ";");
+        tdStyles += "border-left-width:".concat($(el).css("border-left-width"), ";");
+        tdStyles += "border-right-width:".concat($(el).css("border-right-width"), ";");
+        tdStyles += "border-top-color:".concat($(el).css("border-top-color"), ";");
+        tdStyles += "border-bottom-color:".concat($(el).css("border-bottom-color"), ";");
+        tdStyles += "border-left-color:".concat($(el).css("border-left-color"), ";");
+        tdStyles += "border-right-color:".concat($(el).css("border-right-color"), ";");
+        tdStyles += "text-align:".concat($(el).css("text-align"), ";");
+        tdStyles += "font-weight:".concat($(el).css("font-weight"), ";");
+        tdStyles += "background-color:".concat($(el).css("background-color"), ";"); //DEFAULT STYLES
+
+        tdStyles += "overflow:auto;";
+        $(el).attr("style", tdStyles);
+      });
+    }
   },
   watch: {
     chosenGroup: function chosenGroup(val) {
@@ -9747,13 +10180,163 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'zvedenaVidomist',
+  name: 'ZvedenaVidomist',
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -9768,11 +10351,20 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       practiceCount: 0,
       chosenGroup: '',
       groupIsChosen: false,
+      loadingDoc: false,
       responseXLSX: [],
       requestTable: '',
       termNumber: 1,
       termYears: new Date().getFullYear() + "/" + (new Date().getFullYear() + 1),
-      facultyName: ''
+      facultyName: '',
+      chosenGroupName: '',
+      subjectHasArr: [[], [], [], []],
+      courseYear: '',
+      curator: '',
+      headman: '',
+      specialityName: '',
+      groupOpp: '',
+      footer: ''
     };
   },
   methods: {
@@ -9793,22 +10385,31 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       var currTR = $(tg.parentElement.parentElement).children('td').children('.subj-1-mark');
       var mrk = 0;
 
-      if (tg.value !== "" && tg.value !== '0') {
-        tg.style.outlineColor = "#38c172";
+      if (!isNaN(tg.value) && tg.value <= 100) {
+        if (tg.value !== "" && tg.value !== '0') {
+          tg.style.borderColor = "#38c172";
+        } else {
+          tg.style.borderColor = "#e3342f";
+        }
+
+        $(tg.parentElement.nextElementSibling).text(this.ratingToLetters(parseFloat(tg.value)));
+        $(tg.parentElement.nextElementSibling.nextElementSibling).text(this.ratingToFive(parseFloat(tg.value), false));
+
+        for (var i = 0; i < currTR.length; i++) {
+          mrk += parseFloat(currTR[i].value);
+        }
+
+        mrk /= currTR.length;
+
+        if (mrk !== "") {
+          $(tg.parentElement).siblings(".rating").text(parseFloat(mrk.toFixed(2)));
+          $(tg.parentElement).siblings(".averageMark").text(this.ratingToFive(mrk));
+        }
+      } else if (tg.value > 100) {
+        tg.value = 100;
       } else {
-        tg.style.outlineColor = "#e3342f";
+        tg.value = tg.value.slice(0, -1);
       }
-
-      $(tg.parentElement.nextElementSibling).find('span').text(this.ratingToLetters(parseFloat(tg.value)));
-      $(tg.parentElement.nextElementSibling.nextElementSibling).find('span').text(this.ratingToFive(parseFloat(tg.value), false));
-
-      for (var i = 0; i < currTR.length; i++) {
-        mrk += parseFloat(currTR[i].value);
-      }
-
-      mrk /= currTR.length;
-      $(tg.parentElement).siblings(".rating").text(parseFloat(mrk.toFixed(2)));
-      $(tg.parentElement).siblings(".averageMark").text(this.ratingToFive(mrk));
     },
     ratingToFive: function ratingToFive(r) {
       var full = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -9867,26 +10468,20 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
       this.getStudentsByGroup();
       this.getSubjectsByGroup();
     },
-    sendHtml: function sendHtml() {
-      var _this4 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://127.0.0.1:5000/html2Excel', {
-        html: $("#tableWrapper").html()
-      }).then(function (response) {
-        return _this4.responseXLSX.push(response.data);
-      })["catch"](function (e) {
-        _this4.errors.push(e.response.data.errors);
-      });
+    sendDoc: function sendDoc() {
+      console.log(this.requestTable);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://127.0.0.1:5000/html2Excel", {
+        html: this.requestTable
+      }).then(function (response) {})["catch"](function (e) {});
     },
     prepareTable: function prepareTable() {
+      this.loadingDoc = true;
       $('.input-auto').each(function (index, elem) {
         elem.parentElement.innerHTML = elem.value;
       });
       $("#termYears").html(this.termYears);
       $("#termNumber").html(this.termNumber);
       this.getInlineStyles();
-      this.requestTable = $("#tableWrapper").html();
-      $("#sendTableForm").submit();
     },
     getInlineStyles: function getInlineStyles() {
       var tdStyles = "";
@@ -9896,7 +10491,7 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
         tdStyles += "border-bottom-style:".concat($(el).css("border-bottom-style"), ";");
         tdStyles += "border-left-style:".concat($(el).css("border-left-style"), ";");
         tdStyles += "border-right-style:".concat($(el).css("border-right-style"), ";");
-        tdStyles += "border-top-width:".concat($(el).css("border-top-width"), ";");
+        tdStyles += "border-top-width:".concat($(el).css("border-top-width"), " !important;");
         tdStyles += "border-bottom-width:".concat($(el).css("border-bottom-width"), ";");
         tdStyles += "border-left-width:".concat($(el).css("border-left-width"), ";");
         tdStyles += "border-right-width:".concat($(el).css("border-right-width"), ";");
@@ -9906,25 +10501,46 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
         tdStyles += "border-right-color:".concat($(el).css("border-right-color"), ";");
         tdStyles += "text-align:".concat($(el).css("text-align"), ";");
         tdStyles += "font-weight:".concat($(el).css("font-weight"), ";");
-        tdStyles += "background-color:".concat($(el).css("background-color"), ";"); //DEFAULT STYLES
+        tdStyles += "background-color:".concat($(el).css("background-color"), ";");
+        tdStyles += "padding-top:".concat($(el).css("padding-top"), ";");
+        tdStyles += "padding-bottom:".concat($(el).css("padding-bottom"), ";");
+        tdStyles += "padding-left:".concat($(el).css("padding-left"), ";");
+        tdStyles += "padding-right:".concat($(el).css("padding-right"), ";"); //DEFAULT STYLES
 
         tdStyles += "overflow:auto;";
+        tdStyles += "width:auto;";
         $(el).attr("style", tdStyles);
+
+        if ($("#documentTable > tbody > tr > td").length - 1 === index) {
+          $("#requestTable").val(document.getElementById("tableWrapper").innerHTML);
+          $("#sendTableForm").submit();
+        }
       });
-    }
+    },
+    sendTable: function sendTable(evt) {}
   },
   watch: {
     groupSubjects: function groupSubjects(val) {
+      this.courseCount = 0;
+      this.passCount = 0;
+      this.examCount = 0;
+      this.practiceCount = 0;
+      this.subjectHasArr = [[], [], [], []];
+
       for (var subjectKey in val) {
         for (var type in val[subjectKey].has) {
           if (type === "course") {
             this.courseCount++;
+            this.subjectHasArr[0].push(val[subjectKey]);
           } else if (type === "pass") {
             this.passCount++;
+            this.subjectHasArr[1].push(val[subjectKey]);
           } else if (type === "exam") {
             this.examCount++;
+            this.subjectHasArr[2].push(val[subjectKey]);
           } else if (type === "practice") {
             this.practiceCount++;
+            this.subjectHasArr[3].push(val[subjectKey]);
           }
         }
       }
@@ -9938,19 +10554,23 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common = {
         var groupIdName = this.groupList.filter(function (el) {
           return el.id == val;
         })[0].idName;
-        $("#groupName").text("\u0410\u043A\u0430\u0434\u0435\u043C\u0456\u0447\u043D\u0430 \u0433\u0440\u0443\u043F\u043F\u0430 ".concat(groupIdName));
         var curatorFIO = this.groupList[this.chosenGroup].curator.fio;
         var curatorPhone = this.groupList[this.chosenGroup].curator.phone;
         var headmanFIO = this.groupList[this.chosenGroup].headman.fio;
         var headmanPhone = this.groupList[this.chosenGroup].headman.phone;
-        $("#curator").val("".concat(curatorFIO ? curatorFIO : '', " ").concat(curatorPhone ? curatorPhone : ''));
-        $("#headman").val("".concat(headmanFIO ? headmanFIO : '', " ").concat(headmanPhone ? headmanPhone : ''));
-        this.facultyName = this.groupList[this.chosenGroup].department.fullName;
         var courseYear = this.groupList[this.chosenGroup].idName.match(/\d+/)[0][0];
-        $("#courseYear").val("".concat(courseYear));
+        var departmentHead = this.groupList.filter(function (el) {
+          return el.id == val;
+        })[0].department.head;
+        this.facultyName = this.groupList[this.chosenGroup].department.fullName;
+        this.chosenGroupName = "\u0410\u043A\u0430\u0434\u0435\u043C\u0456\u0447\u043D\u0430 \u0433\u0440\u0443\u043F\u043F\u0430 ".concat(groupIdName);
+        this.courseYear = "".concat(courseYear);
+        this.curator = "".concat(curatorFIO ? curatorFIO : '', " ").concat(curatorPhone ? curatorPhone : '');
+        this.headman = "".concat(headmanFIO ? headmanFIO : '', " ").concat(headmanPhone ? headmanPhone : '');
         $("#termYears").val(this.termYears + " \u043D\u0430\u0432\u0447\u0430\u043B\u044C\u043D\u0438\u0439 \u0440\u0456\u043A (".concat(courseYear, "\u0441\u0435\u043C\u0435\u0441\u0442\u0440)"));
-        $("#specialityName").html("".concat(this.groupList[this.chosenGroup].speciality.number, " ").concat(this.groupList[this.chosenGroup].speciality.fullName));
-        $("#groupOpp").html(this.groupList[this.chosenGroup].eduProgram);
+        this.specialityName = "".concat(this.groupList[this.chosenGroup].speciality.number, " ").concat(this.groupList[this.chosenGroup].speciality.fullName);
+        this.groupOpp = this.groupList[this.chosenGroup].eduProgram;
+        this.footer = "\u0414\u0435\u043A\u0430\u043D _______________ ".concat(departmentHead);
       }
     },
     chosenSubject: function chosenSubject(val) {
@@ -14659,7 +15279,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-auto{\n    width: 100%;\n    padding: 10px;\n    margin: 0px;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.bold{\n    font-weight:800;\n}\n.italic{\n    font-style: italic;\n}\n.fa-m{\n    font-size:18px;\n}\n#tableWrapper{\n    min-height:100vh;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n", ""]);
+exports.push([module.i, "\n.text-input{\n    transition-timing-function: ease-out;\n    transition: 0.5s;\n    background:transparent;\n    border:0;\n    border-bottom: 1px solid lightgrey;\n}\n.text-input:focus{\n    transition-timing-function: ease-in;\n    transition: 0.5s;\n    background:transparent;\n    border:0;\n    border-bottom: 1px solid black;\n}\n.input-top-course{\n    height:1rem !important;\n    width:2rem !important;\n}\n.input-top-spec{\n    height:1rem !important;\n    width:10rem !important;\n}\n.input-top-fac{\n    height:1rem !important;\n    width:12rem !important;\n}\n.input-top-date{\n    height:1rem !important;\n    width:6rem !important;\n}\n.subj-2-mark{\n    padding: 10px;\n}\n.subj-3-mark{\n    padding: 10px;\n}\ninput{\n    width:4rem !important;\n}\n.not-wrap{\n    overflow: none;\n}\n.input-auto.fill{\n    padding: 10px;\n    margin: 0px;\n    display: flex;\n    flex-flow: row wrap;\n    width: 100% !important;\n    border:3px solid #e3342f;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n    transition-timing-function: ease-out;\n    transition: 0.2s;\n}\n.input-auto.fill:focus{\n    border-color:#3490dc;\n    transition-timing-function: ease-in;\n    transition: 0.2s;\n}\n.input-auto.fill-secondary{\n    padding: 10px;\n    margin: 0px;\n    display: flex;\n    flex-flow: row wrap;\n    width: 100% !important;\n    border:3px solid lightgrey;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n    transition-timing-function: ease-out;\n    transition: 0.2s;\n}\n.input-auto.fill-secondary:focus{\n    border-color:#3490dc;\n    transition-timing-function: ease-in;\n    transition: 0.2s;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.lft{\n    text-align:left;\n}\n.bold{\n    font-weight:800;\n}\n#tableWrapper{\n    min-height:100vh;\n    overflow-x: auto;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n.cursive{\n    font-style:italic;\n}\n.tableInp{\n    height:1rem !important;\n    width:15rem !important;\n}\n#loading{\n    position:absolute;\n    width:100%;\n    height:100%;\n    top:25%;\n    margin:0 auto;\n    background-color: rgba(0,0,0,0.2);\n}\n.fa-m{\n    font-size: 20px;\n}\n", ""]);
 
 // exports
 
@@ -14716,7 +15336,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-auto{\n    width: 100%;\n    padding: 10px;\n    margin: 0px;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.bold{\n    font-weight:800;\n}\n#tableWrapper{\n    min-height:100vh;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n", ""]);
+exports.push([module.i, "\n.text-input{\n    transition-timing-function: ease-out;\n    transition: 0.5s;\n    background:transparent;\n    border:0;\n    border-bottom: 1px solid lightgrey;\n}\n.text-input:focus{\n    transition-timing-function: ease-in;\n    transition: 0.5s;\n    background:transparent;\n    border:0;\n    border-bottom: 1px solid black;\n}\n.input-top-course{\n    height:1rem !important;\n    width:2rem !important;\n}\n.input-top-spec{\n    height:1rem !important;\n    width:10rem !important;\n}\n.input-top-fac{\n    height:1rem !important;\n    width:12rem !important;\n}\n.input-top-date{\n    height:1rem !important;\n    width:6rem !important;\n}\n.subj-2-mark{\n    padding: 10px;\n}\n.subj-3-mark{\n    padding: 10px;\n}\ninput{\n    width:4rem !important;\n}\n.not-wrap{\n    overflow: none;\n}\n.input-auto.fill{\n    padding: 10px;\n    margin: 0px;\n    display: flex;\n    flex-flow: row wrap;\n    width: 100% !important;\n    border:3px solid #e3342f;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n    transition-timing-function: ease-out;\n    transition: 0.2s;\n}\n.input-auto.fill:focus{\n    border-color:#3490dc;\n    transition-timing-function: ease-in;\n    transition: 0.2s;\n}\n.input-auto.fill-secondary{\n    padding: 10px;\n    margin: 0px;\n    display: flex;\n    flex-flow: row wrap;\n    width: 100% !important;\n    border:3px solid lightgrey;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n    transition-timing-function: ease-out;\n    transition: 0.2s;\n}\n.input-auto.fill-secondary:focus{\n    border-color:#3490dc;\n    transition-timing-function: ease-in;\n    transition: 0.2s;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.lft{\n    text-align:left;\n}\n.bold{\n    font-weight:800;\n}\n#tableWrapper{\n    min-height:100vh;\n    overflow-x: auto;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n.cursive{\n    font-style:italic;\n}\n.tableInp{\n    height:1rem !important;\n    width:15rem !important;\n}\n#loading{\n    position:absolute;\n    width:100%;\n    height:100%;\n    top:25%;\n    margin:0 auto;\n    background-color: rgba(0,0,0,0.2);\n}\n.input-top-group-name{\n    height:1rem !important;\n    width:6rem !important;\n}\n.input-term{\n    height:1rem !important;\n    width:8rem !important;\n}\n.input-group-line{\n    height:1rem !important;\n    width:15rem !important;\n}\n", ""]);
 
 // exports
 
@@ -14735,7 +15355,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-auto{\n    width: 100%;\n    padding: 10px;\n    margin: 0px;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.bold{\n    font-weight:800;\n}\n#tableWrapper{\n    min-height:100vh;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n", ""]);
+exports.push([module.i, "\n.input-auto.fill{\n    padding: 10px;\n    margin: 0px;\n    display: flex;\n    flex-flow: row wrap;\n    width: 100% !important;\n    border:3px solid #e3342f;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n    transition-timing-function: ease-out;\n    transition: 0.2s;\n}\n.input-auto.fill:focus{\n    border-color:#3490dc;\n    transition-timing-function: ease-in;\n    transition: 0.2s;\n}\n.input-auto.fill-secondary{\n    padding: 10px;\n    margin: 0px;\n    display: flex;\n    flex-flow: row wrap;\n    width: 100% !important;\n    border:3px solid lightgrey;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n    transition-timing-function: ease-out;\n    transition: 0.2s;\n}\n.input-auto.fill-secondary:focus{\n    border-color:#3490dc;\n    transition-timing-function: ease-in;\n    transition: 0.2s;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.bold{\n    font-weight:800;\n}\n#tableWrapper{\n    min-height:100vh;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n", ""]);
 
 // exports
 
@@ -14754,7 +15374,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-top-course{\n    height:1rem !important;\n    width:2rem !important;\n}\n.input-top-spec{\n    height:1rem !important;\n    width:10rem !important;\n}\n.input-top-fac{\n    height:1rem !important;\n    width:12rem !important;\n}\n.input-top-date{\n    height:1rem !important;\n    width:6rem !important;\n}\n.subj-2-mark{\n    padding: 10px;\n}\n.subj-3-mark{\n    padding: 10px;\n}\ninput{\n    width:4rem !important;\n}\n.not-wrap{\n    overflow: none;\n}\n.input-auto.fill{\n    padding: 10px;\n    margin: 0px;\n    display: flex;\n    flex-flow: row wrap;\n    width: 100% !important;\n    outline:1px solid #e3342f;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n}\n.input-auto.fill:focus{\n    outline-color:#3490dc;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.lft{\n    text-align:left;\n}\n.bold{\n    font-weight:800;\n}\n#tableWrapper{\n    min-height:100vh;\n    overflow-x: auto;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n.cursive{\n    font-style:italic;\n}\n.tableInp{\n    height:1rem !important;\n    width:15rem !important;\n}\n", ""]);
+exports.push([module.i, "\n.bg-mark-0{\n    background-color: rgba(126, 214, 223, 0.3);\n}\n.bg-mark-1{\n    background-color: rgba(255, 190, 118, 0.3);\n}\n.bg-mark-2{\n    background-color: rgba(255, 121, 121, 0.3);\n}\n.bg-mark-3{\n    background-color: rgba(123, 237, 159, 0.3);\n}\n.text-input{\n    transition-timing-function: ease-out;\n    transition: 0.5s;\n    background:transparent;\n    border:0;\n    border-bottom: 1px solid lightgrey;\n}\n.text-input:focus{\n    transition-timing-function: ease-in;\n    transition: 0.5s;\n    background:transparent;\n    border:0;\n    border-bottom: 1px solid black;\n}\n.input-top-course{\n    height:1rem !important;\n    width:2rem !important;\n}\n.input-top-spec{\n    height:1rem !important;\n    width:10rem !important;\n}\n.input-top-fac{\n    height:1rem !important;\n    width:12rem !important;\n}\n.input-top-date{\n    height:1rem !important;\n    width:6rem !important;\n}\n.subj-1-mark{\n    padding: 10px;\n}\n.subj-2-mark{\n    padding: 10px;\n}\n.subj-3-mark{\n    padding: 10px;\n}\ninput{\n}\n.not-wrap{\n    overflow: none;\n}\n.input-auto.fill{\n    padding: 10px;\n    margin: 0px;\n    display: flex;\n    flex-flow: row wrap;\n    width: 100% !important;\n    border:3px solid #e3342f;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n    transition-timing-function: ease-out;\n    transition: 0.2s;\n}\n.input-auto.fill:focus{\n    border-color:#3490dc;\n    transition-timing-function: ease-in;\n    transition: 0.2s;\n}\n.input-auto.fill-secondary{\n    padding: 10px;\n    margin: 0px;\n    display: flex;\n    flex-flow: row wrap;\n    width: 100% !important;\n    border:3px solid lightgrey;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n    transition-timing-function: ease-out;\n    transition: 0.2s;\n}\n.input-auto.fill-secondary:focus{\n    border-color:#3490dc;\n    transition-timing-function: ease-in;\n    transition: 0.2s;\n}\n.input-sm{\n    width:2rem;\n}\n.input-md{\n    width:5.5rem;\n}\n.border-3-black{\n    border-left-color:black;\n    border-right-color:black;\n    border-top-color:black;\n    border-bottom-color:black;\n\n    border-left-style:solid;\n    border-right-style:solid;\n    border-top-style:solid;\n    border-bottom-style:solid;\n\n    border-left-width:3px;\n    border-right-width:3px;\n    border-top-width:3px;\n    border-bottom-width:3px;\n}\n.cntr{\n    text-align:center;\n}\n.rght{\n    text-align:right;\n}\n.lft{\n    text-align:left;\n}\n.bold{\n    font-weight:800;\n}\n#tableWrapper{\n    min-height:100vh;\n    overflow-x: auto;\n}\n#documentTable{\n    width:100%;\n}\n.center-button{\n    display:flex;\n    align-items: center;\n}\n.f-e{\n    display: flex;\n    justify-content: flex-end;\n}\n.of-auto{\n    overflow-y:auto;\n}\n.buttons{\n    display:flex;\n    justify-content:space-between;\n}\n.upd-icon{\n    margin-top:0.5rem;\n}\n.c-r{\n    color:#ff5252;\n    font-weight: 600 !important;\n}\n.c-alert{\n    font-family: 'Nunito', sans-serif !important;\n    color:white;\n    font-weight: 600 !important;\n    font-size: 1rem;\n}\n.md-numeric{\n    text-align: center !important;\n}\nbutton.btn-warn{\n    background-color:#feca57 !important;\n}\n.md-field.md-select{\n    max-width:30%;\n}\n.rotate {\n    -webkit-writing-mode: vertical-lr;\n    -ms-writing-mode: tb-lr;\n    writing-mode: sideways-lr;\n}\n.cursive{\n    font-style:italic;\n}\n.tableInp{\n    height:1rem !important;\n    width:15rem !important;\n}\n#loading{\n    position:absolute;\n    width:100%;\n    height:100%;\n    top:25%;\n    margin:0 auto;\n    background-color: rgba(0,0,0,0.2);\n}\n.bt{\n    border-top-width: 1px;\n}\n.input-opp{\n    height:1rem !important;\n    width:25rem !important;\n}\n", ""]);
 
 // exports
 
@@ -55432,14 +56052,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container grey-light page-height-default" },
+    { staticClass: "pl-2 pr-2 grey-light page-height-default" },
     [
       _c(
         "div",
         { staticClass: "p-t-b" },
         [
           _c("p", { staticClass: "display-4 text-center" }, [
-            _vm._v("Вiдомiсть (модуль 1)")
+            _vm._v("Відомість")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row pl-3 pr-3 pt-3" }, [
@@ -55455,7 +56075,11 @@ var render = function() {
                     _c(
                       "md-select",
                       {
-                        attrs: { name: "chosenGroup", id: "chosenGroup" },
+                        attrs: {
+                          name: "chosenGroup",
+                          id: "chosenGroup",
+                          disabled: _vm.loadingDoc
+                        },
                         model: {
                           value: _vm.chosenGroup,
                           callback: function($$v) {
@@ -55489,53 +56113,6 @@ var render = function() {
                     expression: "groupIsChosen"
                   }
                 ],
-                staticClass: "col-4"
-              },
-              [
-                _c(
-                  "md-field",
-                  [
-                    _c("label", [_vm._v("Выберите предмет")]),
-                    _vm._v(" "),
-                    _c(
-                      "md-select",
-                      {
-                        attrs: { name: "chosenSubject", id: "chosenSubject" },
-                        model: {
-                          value: _vm.chosenSubject,
-                          callback: function($$v) {
-                            _vm.chosenSubject = $$v
-                          },
-                          expression: "chosenSubject"
-                        }
-                      },
-                      _vm._l(_vm.groupSubjects, function(subject) {
-                        return _c(
-                          "md-option",
-                          { attrs: { value: subject.id } },
-                          [_vm._v(_vm._s(subject.name))]
-                        )
-                      }),
-                      1
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.subjectIsChosen,
-                    expression: "subjectIsChosen"
-                  }
-                ],
                 staticClass: "col-4 center-button"
               },
               [
@@ -55543,6 +56120,7 @@ var render = function() {
                   "form",
                   {
                     attrs: {
+                      id: "sendTableForm",
                       action: "http://127.0.0.1:5000/html2Excel",
                       method: "POST"
                     }
@@ -55557,8 +56135,7 @@ var render = function() {
                           expression: "requestTable"
                         }
                       ],
-                      staticStyle: { display: "none" },
-                      attrs: { type: "text", name: "html" },
+                      attrs: { type: "hidden", name: "html" },
                       domProps: { value: _vm.requestTable },
                       on: {
                         input: function($event) {
@@ -55574,12 +56151,8 @@ var render = function() {
                       "md-button",
                       {
                         staticClass: "md-dense md-raised md-primary",
-                        attrs: { type: "submit" },
-                        on: {
-                          click: function($event) {
-                            return _vm.prepareTable()
-                          }
-                        }
+                        attrs: { type: "button", disabled: _vm.loadingDoc },
+                        on: { click: _vm.prepareTable }
                       },
                       [_vm._v("Генерировать")]
                     )
@@ -55589,6 +56162,10 @@ var render = function() {
               ]
             )
           ]),
+          _vm._v(" "),
+          _vm.loadingDoc
+            ? _c("md-progress-bar", { attrs: { "md-mode": "indeterminate" } })
+            : _vm._e(),
           _vm._v(" "),
           _c("md-card", { attrs: { id: "tableWrapper" } }, [
             _c("table", { attrs: { lang: "uk-UK", id: "documentTable" } }, [
@@ -55629,7 +56206,7 @@ var render = function() {
                     _c(
                       "td",
                       {
-                        staticClass: "bold cntr fa-m",
+                        staticClass: "bold cntr fa-m ",
                         attrs: { colspan: "12" }
                       },
                       [_vm._v("Нацiональний авiацiйний унiверситет")]
@@ -55637,38 +56214,45 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass: "bold italic fa-m",
-                        attrs: { colspan: "2" }
-                      },
-                      [_vm._v("Навчально-науковий")]
-                    ),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "bold", attrs: { colspan: "4" } }, [
-                      _vm._v("Кафедра")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { attrs: { colspan: "5" } }, [
-                      _vm._v("Институт . . .")
-                    ])
+                    _c("td", { attrs: { colspan: "12" } }, [_vm._v(" ")])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
                     _c(
                       "td",
-                      { staticClass: "bold italic", attrs: { colspan: "2" } },
-                      [
-                        _vm._v("Спецiальнiсть "),
-                        _c("br"),
-                        _vm._v("Спецiалiзацiя")
-                      ]
+                      {
+                        staticClass: "bold italic border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v("Навчально-науковий інститут")]
                     ),
                     _vm._v(" "),
                     _c(
                       "td",
-                      { staticClass: "bold", attrs: { colspan: "10" } },
+                      {
+                        staticClass: "border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v("еуеууеуе")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold italic border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v("Факультет")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold border-3-black",
+                        attrs: { colspan: "1" }
+                      },
                       [_vm._v(".......")]
                     )
                   ]),
@@ -55676,40 +56260,160 @@ var render = function() {
                   _c("tr", [
                     _c(
                       "td",
-                      { staticClass: "bold italic", attrs: { colspan: "2" } },
+                      {
+                        staticClass: "bold italic border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v("Кафедра")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v(".......")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold italic border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v("Спеціальність")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v(".......")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold italic border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v("Спеціалізація")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v(".......")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold italic border-3-black",
+                        attrs: { colspan: "1" }
+                      },
                       [_vm._v("Навчальний рiк")]
                     ),
                     _vm._v(" "),
-                    _c("td", { attrs: { colspan: "4" } }, [
-                      _vm._v("2018/2019")
-                    ]),
-                    _vm._v(" "),
                     _c(
                       "td",
-                      { staticClass: "bold italic", attrs: { colspan: "1" } },
+                      {
+                        staticClass: "border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v("2018/2019")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold italic border-3-black",
+                        attrs: { colspan: "1" }
+                      },
                       [_vm._v("Семестр")]
                     ),
                     _vm._v(" "),
-                    _c("td", { attrs: { colspan: "1" } }, [_vm._v("9")]),
-                    _vm._v(" "),
                     _c(
                       "td",
-                      { staticClass: "bold italic", attrs: { colspan: "1" } },
+                      {
+                        staticClass: "border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v("9")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold italic border-3-black",
+                        attrs: { colspan: "1" }
+                      },
                       [_vm._v("Курс")]
                     ),
                     _vm._v(" "),
-                    _c("td", { attrs: { colspan: "1" } }, [_vm._v("5")]),
-                    _vm._v(" "),
                     _c(
                       "td",
-                      { staticClass: "bold italic", attrs: { colspan: "1" } },
+                      {
+                        staticClass: "border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v("5")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold italic border-3-black",
+                        attrs: { colspan: "1" }
+                      },
                       [_vm._v("Група")]
                     ),
                     _vm._v(" "),
                     _c(
                       "td",
-                      { staticClass: "bold italic", attrs: { colspan: "1" } },
+                      {
+                        staticClass: "bold italic border-3-black",
+                        attrs: { colspan: "1" }
+                      },
                       [_vm._v("117-а")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold italic border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v("З дисциплiни")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "bold border-3-black",
+                        attrs: { colspan: "1" }
+                      },
+                      [_vm._v("........")]
                     )
                   ]),
                   _vm._v(" "),
@@ -55733,16 +56437,6 @@ var render = function() {
                       },
                       [_vm._v("модульного контролю")]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      { staticClass: "italic bold", attrs: { colspan: "2" } },
-                      [_vm._v("з дисциплiни")]
-                    ),
-                    _vm._v(" "),
-                    _c("td", { attrs: { colspan: "1" } }, [_vm._v("........")])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
@@ -59225,14 +59919,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container grey-light page-height-default" },
+    { staticClass: "pl-2 pr-2 grey-light page-height-default" },
     [
       _c(
         "div",
         { staticClass: "p-t-b" },
         [
           _c("p", { staticClass: "display-4 text-center" }, [
-            _vm._v("Виписки оцiнок")
+            _vm._v("Виписка оцінок")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row pl-3 pr-3 pt-3" }, [
@@ -59243,12 +59937,39 @@ var render = function() {
                 _c(
                   "md-field",
                   [
+                    _c("label", [_vm._v("Количество семестров")]),
+                    _vm._v(" "),
+                    _c("md-input", {
+                      attrs: { type: "number", min: "1" },
+                      model: {
+                        value: _vm.termCount,
+                        callback: function($$v) {
+                          _vm.termCount = $$v
+                        },
+                        expression: "termCount"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "md-helper-text" }, [
+                      _vm._v("Количество семестров в группе")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "md-field",
+                  [
                     _c("label", [_vm._v("Выберите группу")]),
                     _vm._v(" "),
                     _c(
                       "md-select",
                       {
-                        attrs: { name: "chosenGroup", id: "chosenGroup" },
+                        attrs: {
+                          name: "chosenGroup",
+                          id: "chosenGroup",
+                          disabled: _vm.loadingDoc
+                        },
                         model: {
                           value: _vm.chosenGroup,
                           callback: function($$v) {
@@ -59282,53 +60003,6 @@ var render = function() {
                     expression: "groupIsChosen"
                   }
                 ],
-                staticClass: "col-4"
-              },
-              [
-                _c(
-                  "md-field",
-                  [
-                    _c("label", [_vm._v("Выберите предмет")]),
-                    _vm._v(" "),
-                    _c(
-                      "md-select",
-                      {
-                        attrs: { name: "chosenSubject", id: "chosenSubject" },
-                        model: {
-                          value: _vm.chosenSubject,
-                          callback: function($$v) {
-                            _vm.chosenSubject = $$v
-                          },
-                          expression: "chosenSubject"
-                        }
-                      },
-                      _vm._l(_vm.groupSubjects, function(subject) {
-                        return _c(
-                          "md-option",
-                          { attrs: { value: subject.id } },
-                          [_vm._v(_vm._s(subject.name))]
-                        )
-                      }),
-                      1
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.subjectIsChosen,
-                    expression: "subjectIsChosen"
-                  }
-                ],
                 staticClass: "col-4 center-button"
               },
               [
@@ -59336,6 +60010,7 @@ var render = function() {
                   "form",
                   {
                     attrs: {
+                      id: "sendTableForm",
                       action: "http://127.0.0.1:5000/html2Excel",
                       method: "POST"
                     }
@@ -59350,8 +60025,7 @@ var render = function() {
                           expression: "requestTable"
                         }
                       ],
-                      staticStyle: { display: "none" },
-                      attrs: { type: "text", name: "html" },
+                      attrs: { type: "hidden", name: "html" },
                       domProps: { value: _vm.requestTable },
                       on: {
                         input: function($event) {
@@ -59367,12 +60041,8 @@ var render = function() {
                       "md-button",
                       {
                         staticClass: "md-dense md-raised md-primary",
-                        attrs: { type: "submit" },
-                        on: {
-                          click: function($event) {
-                            return _vm.prepareTable()
-                          }
-                        }
+                        attrs: { type: "button", disabled: _vm.loadingDoc },
+                        on: { click: _vm.prepareTable }
                       },
                       [_vm._v("Генерировать")]
                     )
@@ -59383,1314 +60053,693 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
+          _vm.loadingDoc
+            ? _c("md-progress-bar", { attrs: { "md-mode": "indeterminate" } })
+            : _vm._e(),
+          _vm._v(" "),
           _c("md-card", { attrs: { id: "tableWrapper" } }, [
-            _c("table", { attrs: { lang: "uk-UK", id: "documentTable" } }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th"),
-                  _vm._v(" "),
-                  _c("th")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr bold italic",
-                      staticStyle: { "font-size": "20px" },
-                      attrs: { colspan: "13" }
-                    },
-                    [_vm._v("МІНІСТЕРСТВО ОСВІТИ І НАУКИ УКРАЇНИ")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr bold italic",
-                      staticStyle: { "font-size": "18px" },
-                      attrs: { colspan: "13" }
-                    },
-                    [_vm._v("Національний авіайійний університет")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr bold italic",
-                      staticStyle: { "font-size": "18px" },
-                      attrs: { colspan: "13" }
-                    },
-                    [
-                      _vm._v(
-                        "Факультет кібербезпеки, комп'ютерної та програмної інженерії"
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr bold italic",
-                      staticStyle: { "font-size": "18px" },
-                      attrs: { colspan: "13" }
-                    },
-                    [_vm._v("Витяг з навчальної картки")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "bold italic", attrs: { colspan: "6" } },
-                    [
-                      _vm._v("студентки 2-го "),
-                      _vm._v(" курсу 217 "),
-                      _vm._v(" групи")
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "bold cntr italic",
-                      attrs: { colspan: "6" }
-                    },
-                    [_vm._v("Іваненко Івани Іванівни ")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", { attrs: { colspan: "6" } }),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "cntr italic", attrs: { colspan: "6" } },
-                    [_vm._v("(П.І.Б)")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "bold italic", attrs: { colspan: "3" } },
-                    [_vm._v("яка навчається за спеціальністю")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "bold italic", attrs: { colspan: "3" } },
-                    [_vm._v("125 Кібербезпека ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "bold italic cntr italic",
-                      attrs: { colspan: "6" }
-                    },
-                    [
-                      _vm._v(
-                        "Адміністративний менеджмент у сфері захисту інформації "
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", { attrs: { colspan: "3" } }),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "italic", attrs: { colspan: "3" } }, [
-                    _vm._v("(назва спеціальності)")
+            _vm.chosenGroup
+              ? _c("table", { attrs: { lang: "uk-UK", id: "documentTable" } }, [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", [_vm._v(" ")]),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th")
+                    ])
                   ]),
                   _vm._v(" "),
                   _c(
-                    "td",
-                    {
-                      staticClass: "italic cntr italic",
-                      attrs: { colspan: "6" }
-                    },
-                    [_vm._v("(назва спеціальності)")]
+                    "tbody",
+                    [
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold italic",
+                            staticStyle: { "font-size": "20px" },
+                            attrs: { colspan: "13" }
+                          },
+                          [_vm._v("МІНІСТЕРСТВО ОСВІТИ І НАУКИ УКРАЇНИ")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold italic",
+                            staticStyle: { "font-size": "18px" },
+                            attrs: { colspan: "13" }
+                          },
+                          [_vm._v("Національний авіайійний університет")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold italic",
+                            staticStyle: { "font-size": "18px" },
+                            attrs: { colspan: "13" }
+                          },
+                          [
+                            _vm._v("Факультет "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.facultyName,
+                                  expression: "facultyName"
+                                }
+                              ],
+                              staticClass:
+                                "input-auto input-top-fac text-input",
+                              attrs: { type: "text", id: "facultyName" },
+                              domProps: { value: _vm.facultyName },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.facultyName = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold italic",
+                            staticStyle: { "font-size": "18px" },
+                            attrs: { colspan: "13" }
+                          },
+                          [_vm._v("Витяг з навчальної картки")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "bold italic",
+                            attrs: { colspan: "6" }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.groupInput,
+                                  expression: "groupInput"
+                                }
+                              ],
+                              staticClass:
+                                "input-group-line input-auto text-input",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.groupInput },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.groupInput = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "bold cntr italic",
+                            attrs: { colspan: "6" }
+                          },
+                          [
+                            _c("input", {
+                              staticClass: "tableInp input-auto text-input",
+                              attrs: {
+                                placeholder: "Куратор",
+                                type: "text",
+                                id: "curator"
+                              }
+                            })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", { attrs: { colspan: "6" } }),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr italic",
+                            attrs: { colspan: "6" }
+                          },
+                          [_vm._v("(П.І.Б)")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "bold italic",
+                            attrs: { colspan: "3" }
+                          },
+                          [_vm._v("яка навчається за спеціальністю")]
+                        ),
+                        _vm._v(" "),
+                        _c("td", {
+                          staticClass: "cntr bold",
+                          attrs: { colspan: "3", id: "specialityName" }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          staticClass: "bold italic cntr italic",
+                          attrs: { colspan: "6", id: "groupOpp" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", { attrs: { colspan: "3" } }),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "italic cntr",
+                            attrs: { colspan: "3" }
+                          },
+                          [_vm._v("(назва спеціальності)")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "italic cntr italic",
+                            attrs: { colspan: "6" }
+                          },
+                          [_vm._v("(назва ОПП)")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", { staticStyle: {} }, [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr border-3-black rotate",
+                            attrs: { rotate: "", rowspan: "2", colspan: "1" }
+                          },
+                          [_vm._v("Навчальний рік")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "italic cntr border-3-black rotate",
+                            attrs: { rotate: "", rowspan: "2", colspan: "1" }
+                          },
+                          [_vm._v("Семестр")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "italic cntr border-3-black rotate",
+                            attrs: { rotate: "", rowspan: "2", colspan: "1" }
+                          },
+                          [_vm._v("№ п/п")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr italic border-3-black",
+                            attrs: { rowspan: "2", colspan: "3" }
+                          },
+                          [_vm._v("Назва навчальної дисципліни, практики")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr italic border-3-black",
+                            attrs: { colspan: "2" }
+                          },
+                          [_vm._v("обсяг")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr italic border-3-black",
+                            attrs: { colspan: "5" }
+                          },
+                          [_vm._v("оцінка")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr italic border-3-black",
+                            attrs: { colspan: "1" }
+                          },
+                          [_vm._v("Години")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr italic border-3-black",
+                            attrs: { colspan: "1" }
+                          },
+                          [_vm._v("Кредити ECES")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr italic border-3-black",
+                            attrs: { colspan: "1" }
+                          },
+                          [_vm._v("Бали")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr italic border-3-black",
+                            attrs: { colspan: "2" }
+                          },
+                          [_vm._v("Національна")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr italic border-3-black",
+                            attrs: { colspan: "2" }
+                          },
+                          [_vm._v("Шкала ECTS")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.termArr, function(item) {
+                        return [
+                          _c("tr", [
+                            _c(
+                              "td",
+                              {
+                                staticClass: "cntr italic border-3-black",
+                                attrs: {
+                                  rotate: "",
+                                  rowspan: _vm.groupSubjects.length + 1,
+                                  colspan: "1"
+                                }
+                              },
+                              [
+                                _c("input", {
+                                  staticClass: "input-auto fill-secondary",
+                                  attrs: { type: "text" },
+                                  domProps: { value: _vm.termYears },
+                                  on: { input: _vm.colorChange }
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass: "cntr italic border-3-black",
+                                attrs: {
+                                  rotate: "",
+                                  rowspan: _vm.groupSubjects.length + 1,
+                                  colspan: "1"
+                                }
+                              },
+                              [
+                                _c("input", {
+                                  staticClass: "input-auto fill-secondary",
+                                  attrs: { type: "text", value: "перший" },
+                                  on: { input: _vm.colorChange }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.groupSubjects, function(subject, key) {
+                            return [
+                              _c("tr", [
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "cntr italic border-3-black",
+                                    attrs: { colspan: "1" }
+                                  },
+                                  [_vm._v(_vm._s(key + 1))]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "cntr italic border-3-black",
+                                    attrs: { colspan: "3" }
+                                  },
+                                  [_vm._v(_vm._s(subject.name))]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "cntr italic border-3-black",
+                                    attrs: { colspan: "1" }
+                                  },
+                                  [_vm._v(_vm._s(subject.hoursCount))]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "cntr italic border-3-black",
+                                    attrs: { colspan: "1" }
+                                  },
+                                  [_vm._v(_vm._s(subject.creditsCount))]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "cntr italic border-3-black",
+                                    attrs: { colspan: "1" }
+                                  },
+                                  [
+                                    _c("input", {
+                                      staticClass:
+                                        "input-auto subj-1-mark fill",
+                                      attrs: { type: "text", value: "0" },
+                                      on: { input: _vm.calcRating }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("td", {
+                                  staticClass:
+                                    "cntr italic border-3-black subj-2-mark",
+                                  attrs: { colspan: "2" }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  staticClass:
+                                    "cntr italic border-3-black subj-3-mark",
+                                  attrs: { colspan: "2" }
+                                })
+                              ])
+                            ]
+                          })
+                        ]
+                      }),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr italic",
+                            attrs: { colspan: "6" }
+                          },
+                          [
+                            _vm._v("Заступник декана "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.facultyName,
+                                  expression: "facultyName"
+                                }
+                              ],
+                              staticClass:
+                                "input-auto input-top-fac text-input",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.facultyName },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.facultyName = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("td"),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr italic",
+                            attrs: { colspan: "6" }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.departmentHead,
+                                  expression: "departmentHead"
+                                }
+                              ],
+                              staticClass:
+                                "input-auto input-top-fac text-input",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.departmentHead },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.departmentHead = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ")])
+                      ])
+                    ],
+                    2
                   )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", { staticStyle: {} }, [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "italic cntr border-3-black rotate",
-                      attrs: { rotate: "", rowspan: "2", colspan: "1" }
-                    },
-                    [_vm._v("Навчальний рік")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "italic cntr border-3-black rotate",
-                      attrs: { rotate: "", rowspan: "2", colspan: "1" }
-                    },
-                    [_vm._v("Семестр")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "italic cntr border-3-black rotate",
-                      attrs: { rotate: "", rowspan: "2", colspan: "1" }
-                    },
-                    [_vm._v("№ п/п")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { rowspan: "2", colspan: "3" }
-                    },
-                    [_vm._v("Назва навчальної дисципліни, практики")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("обсяг")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "5" }
-                    },
-                    [_vm._v("оцінка")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("Години")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("Кредити ECES")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("Бали")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Національна")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Шкала ECTS")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
-                    },
-                    [_vm._v("2018-2019 ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
-                    },
-                    [_vm._v("перший ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Іноземна мова")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("2")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Математика")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("3")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Українська література")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
-                    },
-                    [_vm._v("2018-2019 ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
-                    },
-                    [_vm._v("другий ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Іноземна мова")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("2")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Математика")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("3")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Українська література")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
-                    },
-                    [_vm._v("2019-2020 ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
-                    },
-                    [_vm._v("третій ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Іноземна мова")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("2")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Математика")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("3")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Українська література")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
-                    },
-                    [_vm._v("2019-2020 ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { rotate: "", rowspan: "3", colspan: "1" }
-                    },
-                    [_vm._v("четвертий ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Іноземна мова")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("2")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Математика")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("3")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "3" }
-                    },
-                    [_vm._v("Українська література")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("60")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("1.5")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "1" }
-                    },
-                    [_vm._v("91")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("Відмін")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticClass: "cntr italic border-3-black",
-                      attrs: { colspan: "2" }
-                    },
-                    [_vm._v("А")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    { staticClass: "cntr italic", attrs: { colspan: "6" } },
-                    [_vm._v("Заступник декана ФККПІ")]
-                  ),
-                  _vm._v(" "),
-                  _c("td"),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "cntr italic", attrs: { colspan: "6" } },
-                    [_vm._v("В. Лукашенко")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" ")])
                 ])
-              ])
-            ])
+              : _vm._e()
           ])
         ],
         1
@@ -61265,7 +61314,7 @@ var render = function() {
                       "td",
                       {
                         staticClass: "border-3-black cntr",
-                        attrs: { colspan: "2" }
+                        attrs: { colspan: "3" }
                       },
                       [
                         _vm._v("\n                        Підсумкова "),
@@ -61274,12 +61323,7 @@ var render = function() {
                         _c("br"),
                         _vm._v("рейтингова оцінка\n                    ")
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "border-3-black" }, [
-                      _c("br"),
-                      _vm._v(" ")
-                    ])
+                    )
                   ]),
                   _vm._v(" "),
                   _c("tr", [
@@ -61398,7 +61442,7 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            staticClass: "input-auto",
+                            staticClass: "input-auto fill",
                             attrs: { type: "text" }
                           })
                         ]
@@ -61417,7 +61461,7 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            staticClass: "input-auto",
+                            staticClass: "input-auto fill",
                             attrs: { type: "text" }
                           })
                         ]
@@ -61436,7 +61480,7 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            staticClass: "input-auto",
+                            staticClass: "input-auto fill",
                             attrs: { type: "text" }
                           })
                         ]
@@ -61455,7 +61499,7 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            staticClass: "input-auto",
+                            staticClass: "input-auto fill",
                             attrs: { type: "text" }
                           })
                         ]
@@ -61474,7 +61518,7 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            staticClass: "input-auto",
+                            staticClass: "input-auto fill",
                             attrs: { type: "text" }
                           })
                         ]
@@ -61493,7 +61537,7 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            staticClass: "input-auto",
+                            staticClass: "input-auto fill",
                             attrs: { type: "text" }
                           })
                         ]
@@ -61512,7 +61556,7 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            staticClass: "input-auto",
+                            staticClass: "input-auto fill",
                             attrs: { type: "text" }
                           })
                         ]
@@ -61531,7 +61575,7 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            staticClass: "input-auto",
+                            staticClass: "input-auto fill",
                             attrs: { type: "text" }
                           })
                         ]
@@ -61550,7 +61594,7 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            staticClass: "input-auto",
+                            staticClass: "input-auto fill",
                             attrs: { type: "text" }
                           })
                         ]
@@ -61569,7 +61613,7 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            staticClass: "input-auto",
+                            staticClass: "input-auto fill",
                             attrs: { type: "text" }
                           })
                         ]
@@ -61588,7 +61632,7 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            staticClass: "input-auto",
+                            staticClass: "input-auto fill",
                             attrs: { type: "text" }
                           })
                         ]
@@ -61696,7 +61740,8 @@ var render = function() {
                     attrs: {
                       id: "sendTableForm",
                       action: "http://127.0.0.1:5000/html2Excel",
-                      method: "POST"
+                      method: "POST",
+                      target: "_blank"
                     }
                   },
                   [
@@ -61709,9 +61754,14 @@ var render = function() {
                           expression: "requestTable"
                         }
                       ],
-                      attrs: { type: "hidden", name: "html" },
+                      attrs: {
+                        type: "hidden",
+                        name: "html",
+                        id: "requestTable"
+                      },
                       domProps: { value: _vm.requestTable },
                       on: {
+                        change: _vm.sendTable,
                         input: function($event) {
                           if ($event.target.composing) {
                             return
@@ -61726,11 +61776,7 @@ var render = function() {
                       {
                         staticClass: "md-dense md-raised md-primary",
                         attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.prepareTable()
-                          }
-                        }
+                        on: { click: _vm.prepareTable }
                       },
                       [_vm._v("Генерировать")]
                     )
@@ -61742,639 +61788,1150 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("md-card", { attrs: { id: "tableWrapper" } }, [
-            _c("table", { attrs: { lang: "uk-UK", id: "documentTable" } }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", { attrs: { colspan: _vm.maxColSpan } }, [
-                    _vm._v(" ")
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                [
-                  _c("tr", [_c("td", { attrs: { colspan: _vm.maxColSpan } })]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr bold",
-                        attrs: { colspan: _vm.maxColSpan }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        НАЦІОНАЛЬНИЙ АВІАЦІЙНИЙ УНІВЕРСИТЕТ\n                    "
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr bold",
-                        attrs: { colspan: _vm.maxColSpan }
-                      },
-                      [
-                        _vm._v("\n                        ФАКУЛЬТЕТ "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.facultyName,
-                              expression: "facultyName"
-                            }
-                          ],
-                          staticClass: "input-auto input-top-fac",
-                          attrs: { type: "text", id: "facultyName" },
-                          domProps: { value: _vm.facultyName },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.facultyName = $event.target.value
-                            }
-                          }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr bold",
-                        attrs: { colspan: _vm.maxColSpan }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        ЗВЕДЕНА ВІДОМІСТЬ УСПІШНОСТІ\n                    "
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr bold",
-                        attrs: { colspan: _vm.maxColSpan }
-                      },
-                      [
-                        _c("input", {
-                          staticClass: "input-auto input-top-date",
-                          attrs: { type: "text", id: "termYears" },
-                          domProps: { value: _vm.termYears }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr bold",
-                        attrs: { colspan: _vm.maxColSpan }
-                      },
-                      [
-                        _c("input", {
-                          staticClass: "input-auto input-top-course",
-                          attrs: { type: "text", value: "1", id: "courseYear" }
-                        }),
-                        _vm._v(" курс\n                    ")
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", {
-                      staticClass: "cntr bold",
-                      attrs: { colspan: _vm.maxColSpan, id: "specialityName" }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", {
-                      staticClass: "cntr bold",
-                      attrs: { colspan: _vm.maxColSpan, id: "groupOpp" }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass: "lft",
-                        attrs: { colspan: _vm.maxColSpan }
-                      },
-                      [
-                        _vm._v("\n                        Куратор: "),
-                        _c("input", {
-                          staticClass: "tableInp input-auto",
-                          attrs: { type: "text", id: "curator" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass: "lft",
-                        attrs: { colspan: _vm.maxColSpan }
-                      },
-                      [
-                        _vm._v("\n                        Командир: "),
-                        _c("input", {
-                          staticClass: "tableInp input-auto",
-                          attrs: { type: "text", id: "headman" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass: "lft",
-                        attrs: { colspan: _vm.maxColSpan, id: "groupName" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        Академічна група: КС-323Б\n                    "
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr border-3-black",
-                        attrs: { rowspan: "3" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        №51\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr border-3-black",
-                        attrs: { rowspan: "3" }
-                      },
-                      [
-                        _vm._v(
-                          " \n                        Прізвище та ініціали студентів\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr border-3-black",
-                        attrs: { rowspan: "3" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        № зал. кн.\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr bold rotate border-3-black",
-                        attrs: { rotate: "", rowspan: "3" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        Форма навчання\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr rotate border-3-black",
-                        attrs: { rotate: "", rowspan: "3" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        Середній бал\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr rotate border-3-black",
-                        attrs: { rotate: "", rowspan: "3" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        Індивідуальний рейтинг студента\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr bold rotate border-3-black",
-                        attrs: { rotate: "", rowspan: "3" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        Військове положення\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr border-3-black",
-                        attrs: {
-                          colspan:
-                            (_vm.courseCount +
-                              _vm.passCount +
-                              _vm.examCount +
-                              _vm.practiceCount) *
-                            3
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        Назва навчальної дисципліни\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass: "cntr bold border-3-black",
-                        attrs: { colspan: "4", rowspan: "2" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        Примітки\n                    "
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _vm.courseCount
-                      ? _c(
-                          "td",
-                          {
-                            staticClass: "cntr bold border-3-black",
-                            attrs: { colspan: _vm.courseCount * 3 }
-                          },
-                          [
-                            _vm._v(
-                              "\n                        Курсові роботи\n                    "
-                            )
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.passCount
-                      ? _c(
-                          "td",
-                          {
-                            staticClass: "cntr bold border-3-black",
-                            attrs: { colspan: _vm.passCount * 3 }
-                          },
-                          [
-                            _vm._v(
-                              "\n                        Заліки\n                    "
-                            )
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.examCount
-                      ? _c(
-                          "td",
-                          {
-                            staticClass: "cntr bold border-3-black",
-                            attrs: { colspan: _vm.examCount * 3 }
-                          },
-                          [
-                            _vm._v(
-                              "\n                        Екзамени\n                    "
-                            )
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.practiceCount
-                      ? _c(
-                          "td",
-                          {
-                            staticClass: "cntr bold border-3-black",
-                            attrs: { colspan: _vm.practiceCount * 3 }
-                          },
-                          [
-                            _vm._v(
-                              "\n                        Практика\n                    "
-                            )
-                          ]
-                        )
-                      : _vm._e()
+            _vm.chosenGroup
+              ? _c("table", { attrs: { lang: "uk-UK", id: "documentTable" } }, [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", { attrs: { colspan: _vm.maxColSpan } }, [
+                        _vm._v(" ")
+                      ])
+                    ])
                   ]),
                   _vm._v(" "),
                   _c(
-                    "tr",
+                    "tbody",
                     [
-                      _vm._l(_vm.groupSubjects, function(subject, key) {
-                        return _vm._l(subject.has, function(hasValue, hasType) {
-                          return _c(
-                            "td",
-                            {
-                              staticClass: "cntr border-3-black",
-                              attrs: { colspan: "3" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(subject.name) +
-                                  "\n                        "
-                              )
-                            ]
-                          )
-                        })
-                      }),
+                      _c("tr", [
+                        _c("td", { attrs: { colspan: _vm.maxColSpan } })
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass: "cntr border-3-black cursive rotate",
-                          attrs: { rotate: "" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        Бали\n                    "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass: "cntr border-3-black cursive rotate",
-                          attrs: { rotate: "" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        Інд. графік, академ відпустка\n                    "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass: "cntr border-3-black cursive rotate",
-                          attrs: { rotate: "" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        ІЗДН\n                    "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass: "cntr border-3-black cursive rotate",
-                          attrs: { rotate: "" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        Відрахування\n                    "
-                          )
-                        ]
-                      )
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _vm._l(_vm.groupStudents, function(student, key) {
-                    return _c(
-                      "tr",
-                      { staticClass: "studentRow" },
-                      [
-                        _c("td", { staticClass: "lft border-3-black cntr" }, [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(key + 1) +
-                              "\n                    "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "lft border-3-black" }, [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                student.surname +
-                                  " " +
-                                  student.firstName +
-                                  " " +
-                                  student.middleName
-                              ) +
-                              "\n                    "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "lft border-3-black" }, [
-                          _c("input", {
-                            staticClass: "input-auto fill",
-                            attrs: { type: "text" },
-                            domProps: { value: student.studentId },
-                            on: { input: _vm.colorChange }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "cntr border-3-black " }, [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(student.nauConditions) +
-                              "\n                    "
-                          )
-                        ]),
-                        _vm._v(" "),
+                      _c("tr", [
                         _c(
                           "td",
                           {
-                            staticClass: "cntr border-3-black bold averageMark"
+                            staticClass: "cntr bold",
+                            attrs: { colspan: _vm.maxColSpan }
                           },
                           [
                             _vm._v(
-                              "\n                        0\n                    "
+                              "\n                        НАЦІОНАЛЬНИЙ АВІАЦІЙНИЙ УНІВЕРСИТЕТ\n                    "
                             )
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "cntr border-3-black bold rating" },
-                          [
-                            _vm._v(
-                              "\n                        0\n                    "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
                         _c(
                           "td",
                           {
-                            staticClass: "cntr border-3-black militaryService"
+                            staticClass: "cntr bold",
+                            attrs: { colspan: _vm.maxColSpan }
                           },
                           [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(
-                                  student.militaryService !== null ? "+" : "-"
-                                ) +
-                                "\n                    "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.groupSubjects, function(subject, key) {
-                          return [
-                            _vm._l(subject.has, function(val, type) {
-                              return [
-                                _c(
-                                  "td",
-                                  { staticClass: "lft border-3-black cntr " },
-                                  [
-                                    _c("input", {
-                                      staticClass:
-                                        "input-auto subj-1-mark fill",
-                                      attrs: { type: "text", value: "0" },
-                                      on: { input: _vm.calcRating }
-                                    })
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "td",
-                                  {
-                                    staticClass:
-                                      "lft border-3-black cntr subj-2-mark"
-                                  },
-                                  [
-                                    _c("span", [
-                                      _vm._v(
-                                        "\n                                        0\n                                    "
-                                      )
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "td",
-                                  {
-                                    staticClass:
-                                      "lft border-3-black cntr subj-3-mark"
-                                  },
-                                  [
-                                    _c("span", [
-                                      _vm._v(
-                                        "\n                                        0\n                                    "
-                                      )
-                                    ])
-                                  ]
-                                )
-                              ]
-                            })
-                          ]
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "lft border-3-black cntr bold depts" },
-                          [
+                            _vm._v("\n                        ФАКУЛЬТЕТ "),
                             _c("input", {
-                              staticClass: "input-auto fill",
-                              attrs: { type: "text", value: "" },
-                              on: { input: _vm.colorChange }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "lft border-3-black cntr bold personalTimetable"
-                          },
-                          [
-                            _c("input", {
-                              staticClass: "input-auto fill",
-                              attrs: { type: "text", value: "" },
-                              on: { input: _vm.colorChange }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "lft border-3-black cntr bold IZDN" },
-                          [
-                            _c("input", {
-                              staticClass: "input-auto fill",
-                              attrs: { type: "text", value: "" },
-                              on: { input: _vm.colorChange }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass: "lft border-3-black cntr bold kickOut"
-                          },
-                          [
-                            _c("input", {
-                              staticClass: "input-auto fill",
-                              attrs: { type: "text", value: "" },
-                              on: { input: _vm.colorChange }
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.facultyName,
+                                  expression: "facultyName"
+                                }
+                              ],
+                              staticClass:
+                                "input-auto input-top-fac text-input",
+                              attrs: { type: "text", id: "facultyName" },
+                              domProps: { value: _vm.facultyName },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.facultyName = $event.target.value
+                                }
+                              }
                             })
                           ]
                         )
-                      ],
-                      2
-                    )
-                  })
-                ],
-                2
-              )
-            ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold",
+                            attrs: { colspan: _vm.maxColSpan }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        ЗВЕДЕНА ВІДОМІСТЬ УСПІШНОСТІ\n                    "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold",
+                            attrs: { colspan: _vm.maxColSpan }
+                          },
+                          [
+                            _c("input", {
+                              staticClass:
+                                "input-auto input-top-date text-input",
+                              attrs: { type: "text", id: "termYears" },
+                              domProps: { value: _vm.termYears }
+                            })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold",
+                            attrs: { colspan: _vm.maxColSpan }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.courseYear,
+                                  expression: "courseYear"
+                                }
+                              ],
+                              staticClass:
+                                "input-auto input-top-course text-input",
+                              attrs: {
+                                type: "text",
+                                value: "1",
+                                id: "courseYear"
+                              },
+                              domProps: { value: _vm.courseYear },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.courseYear = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" курс\n                    ")
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold",
+                            attrs: { colspan: _vm.maxColSpan }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.specialityName,
+                                  expression: "specialityName"
+                                }
+                              ],
+                              staticClass: "tableInp input-auto text-input",
+                              attrs: { type: "text", id: "specialityName" },
+                              domProps: { value: _vm.specialityName },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.specialityName = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold",
+                            attrs: { colspan: _vm.maxColSpan }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.groupOpp,
+                                  expression: "groupOpp"
+                                }
+                              ],
+                              staticClass: "input-opp input-auto text-input",
+                              attrs: { type: "text", id: "groupOpp" },
+                              domProps: { value: _vm.groupOpp },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.groupOpp = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          { staticClass: "lft bold", attrs: { noAuto: "" } },
+                          [
+                            _vm._v(
+                              "\n                        Куратор:\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "lft",
+                            attrs: { colspan: _vm.maxColSpan - 1 }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.curator,
+                                  expression: "curator"
+                                }
+                              ],
+                              staticClass: "tableInp input-auto text-input",
+                              attrs: { type: "text", id: "curator" },
+                              domProps: { value: _vm.curator },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.curator = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          { staticClass: "lft bold", attrs: { noAuto: "" } },
+                          [
+                            _vm._v(
+                              "\n                        Командир:\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "lft",
+                            attrs: { colspan: _vm.maxColSpan - 1 }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.headman,
+                                  expression: "headman"
+                                }
+                              ],
+                              staticClass: "tableInp input-auto text-input",
+                              attrs: { type: "text", id: "headman" },
+                              domProps: { value: _vm.headman },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.headman = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "lft",
+                            attrs: { colspan: _vm.maxColSpan }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.chosenGroupName,
+                                  expression: "chosenGroupName"
+                                }
+                              ],
+                              staticClass: "tableInp input-auto text-input",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.chosenGroupName },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.chosenGroupName = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr border-3-black bt",
+                            attrs: { rowspan: "3" }
+                          },
+                          [
+                            _c("input", {
+                              staticClass: "input-auto fill-secondary",
+                              attrs: { type: "text", value: "№" }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr border-3-black bt",
+                            attrs: { rowspan: "3" }
+                          },
+                          [
+                            _vm._v(
+                              " \n                        Прізвище та ініціали студентів\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr border-3-black bt",
+                            attrs: { rowspan: "3" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        № зал. кн.\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold rotate border-3-black bt",
+                            attrs: { rotate: "", rowspan: "3" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Форма навчання\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr rotate border-3-black bt",
+                            attrs: { rotate: "", rowspan: "3" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Середній бал\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr rotate border-3-black bt",
+                            attrs: { rotate: "", rowspan: "3" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Індивідуальний рейтинг студента\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold rotate border-3-black bt",
+                            attrs: { rotate: "", rowspan: "3" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Військове положення\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr border-3-black bt",
+                            attrs: {
+                              colspan:
+                                (_vm.courseCount +
+                                  _vm.passCount +
+                                  _vm.examCount +
+                                  _vm.practiceCount) *
+                                3
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Назва навчальної дисципліни\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold border-3-black bt",
+                            attrs: { colspan: "4", rowspan: "2" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Примітки\n                    "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _vm.courseCount
+                          ? _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "cntr bold border-3-black bg-mark-0",
+                                attrs: { colspan: _vm.courseCount * 3 }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Курсові роботи\n                    "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.passCount
+                          ? _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "cntr bold border-3-black bg-mark-1",
+                                attrs: { colspan: _vm.passCount * 3 }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Заліки\n                    "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.examCount
+                          ? _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "cntr bold border-3-black bg-mark-2",
+                                attrs: { colspan: _vm.examCount * 3 }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Екзамени\n                    "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.practiceCount
+                          ? _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "cntr bold border-3-black bg-mark-3",
+                                attrs: { colspan: _vm.practiceCount * 3 }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Практика\n                    "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tr",
+                        [
+                          _vm._l(_vm.subjectHasArr, function(
+                            subjectList,
+                            sector
+                          ) {
+                            return [
+                              _vm._l(subjectList, function(subject, ind) {
+                                return [
+                                  _c(
+                                    "td",
+                                    {
+                                      class:
+                                        "cntr border-3-black bg-mark-" + sector,
+                                      attrs: { colspan: "3" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(subject.name) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              })
+                            ]
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass: "cntr border-3-black cursive rotate",
+                              attrs: { rotate: "" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        Борги\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass: "cntr border-3-black cursive rotate",
+                              attrs: { rotate: "" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        Інд. графік, академ відпустка\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass: "cntr border-3-black cursive rotate",
+                              attrs: { rotate: "" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        ІЗДН\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass: "cntr border-3-black cursive rotate",
+                              attrs: { rotate: "" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        Відрахування\n                    "
+                              )
+                            ]
+                          )
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.groupStudents, function(student, key) {
+                        return _c(
+                          "tr",
+                          { staticClass: "studentRow" },
+                          [
+                            _c("td", { staticClass: "border-3-black cntr" }, [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(key + 1) +
+                                  "\n                    "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass: "lft border-3-black pl-2",
+                                attrs: { noAuto: "" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        " +
+                                    _vm._s(
+                                      student.surname +
+                                        " " +
+                                        student.firstName +
+                                        " " +
+                                        student.middleName
+                                    ) +
+                                    "\n                    "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "cntr border-3-black" }, [
+                              _c("input", {
+                                staticClass: "input-auto fill-secondary",
+                                attrs: { type: "text" },
+                                domProps: { value: student.studentId },
+                                on: { input: _vm.colorChange }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "cntr border-3-black " }, [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(student.nauConditions) +
+                                  "\n                    "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "cntr border-3-black bold averageMark"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        0\n                    "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass: "cntr border-3-black bold rating"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        0\n                    "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "cntr border-3-black militaryService"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        " +
+                                    _vm._s(
+                                      student.militaryService !== null
+                                        ? "+"
+                                        : ""
+                                    ) +
+                                    "\n                    "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.subjectHasArr, function(
+                              subjectList,
+                              sector
+                            ) {
+                              return [
+                                _vm._l(subjectList, function(subject, ind) {
+                                  return [
+                                    _c(
+                                      "td",
+                                      {
+                                        class:
+                                          "border-3-black cntr bg-mark-" +
+                                          sector
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass:
+                                            "input-auto subj-1-mark fill",
+                                          attrs: { type: "text", value: "0" },
+                                          on: { input: _vm.calcRating }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "td",
+                                      {
+                                        class:
+                                          "border-3-black cntr subj-2-mark bg-mark-" +
+                                          sector
+                                      },
+                                      [_vm._v("0")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "td",
+                                      {
+                                        class:
+                                          "border-3-black cntr subj-3-mark bg-mark-" +
+                                          sector
+                                      },
+                                      [_vm._v("0")]
+                                    )
+                                  ]
+                                })
+                              ]
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "lft border-3-black cntr bold depts"
+                              },
+                              [
+                                _c("input", {
+                                  staticClass: "input-auto fill-secondary",
+                                  attrs: { type: "text", value: "" },
+                                  on: { input: _vm.colorChange }
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "lft border-3-black cntr bold personalTimetable"
+                              },
+                              [
+                                _c("input", {
+                                  staticClass: "input-auto fill-secondary",
+                                  attrs: { type: "text", value: "" },
+                                  on: { input: _vm.colorChange }
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass: "lft border-3-black cntr bold IZDN"
+                              },
+                              [
+                                _c("input", {
+                                  staticClass: "input-auto fill-secondary",
+                                  attrs: { type: "text", value: "" },
+                                  on: { input: _vm.colorChange }
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "lft border-3-black cntr bold kickOut"
+                              },
+                              [
+                                _c("input", {
+                                  staticClass: "input-auto fill-secondary",
+                                  attrs: { type: "text", value: "" },
+                                  on: { input: _vm.colorChange }
+                                })
+                              ]
+                            )
+                          ],
+                          2
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "tr",
+                        [
+                          _c(
+                            "td",
+                            {
+                              staticClass: "lft border-3-black",
+                              attrs: { colspan: "7" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        Провідний викладач\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.subjectHasArr, function(
+                            subjectList,
+                            sector
+                          ) {
+                            return [
+                              _vm._l(subjectList, function(subject, ind) {
+                                return [
+                                  _c(
+                                    "td",
+                                    {
+                                      class:
+                                        "cntr border-3-black bg-mark-" + sector,
+                                      attrs: { colspan: "3" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(subject.professor) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              })
+                            ]
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "tr",
+                        [
+                          _c(
+                            "td",
+                            {
+                              staticClass: "lft border-3-black",
+                              attrs: { colspan: "7" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        Завідувач кафедри\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.subjectHasArr, function(
+                            subjectList,
+                            sector
+                          ) {
+                            return [
+                              _vm._l(subjectList, function(subject, ind) {
+                                return [
+                                  _c(
+                                    "td",
+                                    {
+                                      class:
+                                        "cntr border-3-black bg-mark-" + sector,
+                                      attrs: { colspan: "3" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(subject.headOfDepartment) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              })
+                            ]
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "tr",
+                        [
+                          _c(
+                            "td",
+                            {
+                              staticClass: "lft border-3-black",
+                              attrs: { colspan: "7" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        Кількість модулів\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.subjectHasArr, function(
+                            subjectList,
+                            sector
+                          ) {
+                            return [
+                              _vm._l(subjectList, function(subject, ind) {
+                                return [
+                                  _c(
+                                    "td",
+                                    {
+                                      class:
+                                        "cntr border-3-black bg-mark-" + sector,
+                                      attrs: { colspan: "3" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(subject.moduleCount) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              })
+                            ]
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "tr",
+                        [
+                          _c(
+                            "td",
+                            {
+                              staticClass: "lft border-3-black",
+                              attrs: { colspan: "7" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        Кількість годин, кредитів\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.subjectHasArr, function(
+                            subjectList,
+                            sector
+                          ) {
+                            return [
+                              _vm._l(subjectList, function(subject, ind) {
+                                return [
+                                  _c(
+                                    "td",
+                                    {
+                                      class:
+                                        "border-3-black cntr bg-mark-" + sector,
+                                      attrs: { colspan: "2" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(subject.hoursCount) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    {
+                                      class:
+                                        "border-3-black cntr bg-mark-" + sector,
+                                      attrs: { colspan: "1" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(subject.creditsCount) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              })
+                            ]
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "tr",
+                        [
+                          _c(
+                            "td",
+                            {
+                              staticClass: "lft border-3-black bold",
+                              attrs: { colspan: "7" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        ДАТА\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.subjectHasArr, function(
+                            subjectList,
+                            sector
+                          ) {
+                            return [
+                              _vm._l(subjectList, function(subject, ind) {
+                                return [
+                                  _c(
+                                    "td",
+                                    {
+                                      class:
+                                        "cntr border-3-black bg-mark-" + sector,
+                                      attrs: { colspan: "3" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(subject.dateBegin) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              })
+                            ]
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "tr",
+                        [
+                          _c(
+                            "td",
+                            {
+                              staticClass: "lft border-3-black bold",
+                              attrs: { colspan: "7" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        НОМЕР ВІДОМОСТІ\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.subjectHasArr, function(
+                            subjectList,
+                            sector
+                          ) {
+                            return [
+                              _vm._l(subjectList, function(subject, ind) {
+                                return [
+                                  _c(
+                                    "td",
+                                    {
+                                      class:
+                                        "border-3-black cntr bg-mark-" + sector,
+                                      attrs: { colspan: "3" }
+                                    },
+                                    [
+                                      _c("input", {
+                                        staticClass:
+                                          "input-auto input-top-fac text-input",
+                                        attrs: { type: "text", value: "№" }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              })
+                            ]
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", {
+                          staticClass: "cntr bold",
+                          attrs: { colspan: _vm.maxColSpan }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "cntr bold",
+                            attrs: { colspan: _vm.maxColSpan }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.footer,
+                                  expression: "footer"
+                                }
+                              ],
+                              staticClass: "tableInp input-auto text-input",
+                              attrs: { type: "text", id: "footer" },
+                              domProps: { value: _vm.footer },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.footer = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        )
+                      ])
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e()
           ])
         ],
         1

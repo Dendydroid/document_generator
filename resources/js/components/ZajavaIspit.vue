@@ -169,10 +169,9 @@
                         <td colspan="2" class="border-3-black cntr">
                             Екзаменаційна
                         </td>
-                        <td colspan="2" class="border-3-black cntr">
+                        <td colspan="3" class="border-3-black cntr">
                             Підсумкова <br>семестрова <br>рейтингова оцінка
                         </td>
-                        <td class="border-3-black"><br>&nbsp;</td>
                     </tr>
                     <tr >
                         <td class="border-3-black cntr">
@@ -209,17 +208,17 @@
                     <tr v-for="(student, index) in groupStudents"><!-- groupStudents -->
                         <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;">{{index+1}}</td>
                         <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;">{{`${student.surname} ${student.firstName[0]}. ${student.middleName[0]}.`}}</td>
-                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto" type="text"></td>
-                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto" type="text"></td>
-                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto" type="text"></td>
-                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto" type="text"></td>
-                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto" type="text"></td>
-                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto" type="text"></td>
-                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto" type="text"></td>
-                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto" type="text"></td>
-                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto" type="text"></td>
-                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto" type="text"></td>
-                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto" type="text"></td>
+                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto fill" type="text"></td>
+                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto fill" type="text"></td>
+                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto fill" type="text"></td>
+                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto fill" type="text"></td>
+                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto fill" type="text"></td>
+                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto fill" type="text"></td>
+                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto fill" type="text"></td>
+                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto fill" type="text"></td>
+                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto fill" type="text"></td>
+                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto fill" type="text"></td>
+                        <td style="border-bottom:3px solid black;border-top:3px solid black;border-left:3px solid black;border-right:3px solid black;text-align: center;"><input class="input-auto fill" type="text"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -228,13 +227,41 @@
     </div>
 </template>
 <style>
-    .input-auto{
-        width: 100%;
+    .input-auto.fill{
         padding: 10px;
         margin: 0px;
+        display: flex;
+        flex-flow: row wrap;
+        width: 100% !important;
+        border:3px solid #e3342f;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
+        transition-timing-function: ease-out;
+        transition: 0.2s;
+    }
+    .input-auto.fill:focus{
+        border-color:#3490dc;
+        transition-timing-function: ease-in;
+        transition: 0.2s;
+    }
+    .input-auto.fill-secondary{
+        padding: 10px;
+        margin: 0px;
+        display: flex;
+        flex-flow: row wrap;
+        width: 100% !important;
+        border:3px solid lightgrey;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        transition-timing-function: ease-out;
+        transition: 0.2s;
+    }
+    .input-auto.fill-secondary:focus{
+        border-color:#3490dc;
+        transition-timing-function: ease-in;
+        transition: 0.2s;
     }
     .input-sm{
         width:2rem;
@@ -391,11 +418,38 @@
                 });
                 $("#termYears").html(this.termYears);
                 $("#termNumber").html(this.termNumber);
+                this.getInlineStyles();
                 this.requestTable=$("#tableWrapper").html();
             },
             getInlineStyles()
             {
+                let tdStyles = "";
+                $("#documentTable > tbody > tr > td").each(function(index, el){
+                    tdStyles="";
+                    tdStyles+=`border-top-style:${$(el).css("border-top-style")};`;
+                    tdStyles+=`border-bottom-style:${$(el).css("border-bottom-style")};`;
+                    tdStyles+=`border-left-style:${$(el).css("border-left-style")};`;
+                    tdStyles+=`border-right-style:${$(el).css("border-right-style")};`;
 
+                    tdStyles+=`border-top-width:${$(el).css("border-top-width")};`;
+                    tdStyles+=`border-bottom-width:${$(el).css("border-bottom-width")};`;
+                    tdStyles+=`border-left-width:${$(el).css("border-left-width")};`;
+                    tdStyles+=`border-right-width:${$(el).css("border-right-width")};`;
+
+                    tdStyles+=`border-top-color:${$(el).css("border-top-color")};`;
+                    tdStyles+=`border-bottom-color:${$(el).css("border-bottom-color")};`;
+                    tdStyles+=`border-left-color:${$(el).css("border-left-color")};`;
+                    tdStyles+=`border-right-color:${$(el).css("border-right-color")};`;
+
+                    tdStyles+=`text-align:${$(el).css("text-align")};`;
+                    tdStyles+=`font-weight:${$(el).css("font-weight")};`;
+                    tdStyles+=`background-color:${$(el).css("background-color")};`;
+                    //DEFAULT STYLES
+                    tdStyles+=`overflow:auto;`;
+                    $(el).attr("style",tdStyles);
+                });
+
+                
             }
         },
         watch: {

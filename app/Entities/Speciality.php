@@ -181,7 +181,8 @@ class Speciality {
             "number" => $this->number,
             "department" => [
                 "id" => $this->department->getId(),
-                "fullName" => $this->department->getFullName()
+                "fullName" => $this->department->getFullName(),
+                "head" => $this->department->getHead()
             ],
         ];
     }
