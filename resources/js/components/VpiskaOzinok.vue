@@ -487,6 +487,10 @@
                 let currTR = $(tg.parentElement.parentElement).children('td').children('.subj-1-mark');
                 let mrk = 0;
 
+                if(tg.value>100){
+                    tg.value=100;
+                }
+
                 if(!isNaN(tg.value) && tg.value<=100){
 
                     if(tg.value!=="" && tg.value !== '0')
@@ -498,8 +502,6 @@
 
                     $(tg.parentElement).siblings('.subj-2-mark').text(this.ratingToWord(parseFloat(tg.value)));
                     $(tg.parentElement).siblings('.subj-3-mark').text(this.ratingToLetters(parseFloat(tg.value),false));
-                }else if(tg.value>100){
-                    tg.value=100;
                 }else{
                     tg.value = tg.value.slice(0, -1);
                 }

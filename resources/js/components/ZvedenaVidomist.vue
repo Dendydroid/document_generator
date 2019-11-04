@@ -553,6 +553,10 @@
 
                 if(!isNaN(tg.value) && tg.value<=100){
 
+                    if(tg.value>100){
+                        tg.value=100;
+                    }
+
                     if(tg.value!=="" && tg.value !== '0')
                     {
                         tg.style.borderColor = "#38c172";
@@ -571,8 +575,6 @@
                         $(tg.parentElement).siblings(".rating").text(parseFloat(mrk.toFixed(2)));
                         $(tg.parentElement).siblings(".averageMark").text(this.ratingToFive(mrk));
                     }
-                }else if(tg.value>100){
-                    tg.value=100;
                 }else{
                     tg.value = tg.value.slice(0, -1);
                 }
