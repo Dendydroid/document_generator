@@ -28,6 +28,7 @@ import VpiskaOzinok from './components/VpiskaOzinok';
 import Vidomist1Mod from './components/Vidomist1Mod';
 import Vidomist2Mod from './components/Vidomist2Mod';
 import VidomistKR from './components/VidomistKR';
+import TeacherVidomist from './components/TeacherVidomist';
 
 Vue.component('main-page', MainPage);
 Vue.component('navbar', Navbar);
@@ -49,6 +50,7 @@ Vue.component('vpiska-ozinok', VpiskaOzinok);
 Vue.component('vidomist-mod-1', Vidomist1Mod); 
 Vue.component('vidomist-mod-2', Vidomist2Mod);
 Vue.component('vidomist-kr', VidomistKR);
+Vue.component('teacher-vidomist', TeacherVidomist);
 
 const app = new Vue({
     el: '#app'

@@ -31,6 +31,11 @@ class GeneratorController extends Controller
     {
         return view('generate.vidomist_mod_2');
     }
+    public function getTeacherVidomist(Request $request)
+    {
+        return view('generate.teacher_vidomist');
+    }
+
 
     public function generateXLSX(Request $request)
     {

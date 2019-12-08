@@ -49,6 +49,39 @@ class SubjectRepo extends EntityRepository {
         return $validator;
     }
 
+    public function removeGroupFromSubjects($id){
+        $subjects = $this->findAll();
+        foreach ($subjects as $subject) {
+            dd($subject);
+            $newGroups = $subject->getGroupValues();
+            $groups = $subject->getGroupValues();
+            foreach ($groups as $group) {
+                // if($group->getId() === $id)
+                // {
+
+                // }
+            }
+            $subject->setGroups([]);
+            $this->_em->persist($subject);
+            $this->_em->flush();
+        }
+    }
+
+    public function clearGroups(){
+        $subjects = $this->findAll();
+
+        foreach ($subjects as $subject) {
+            $subject->setGroups([]);
+            $this->_em->persist($subject);
+            $this->_em->flush();
+        }
+    }
+
+    public function updateSubject(Subject $subject){
+        $this->_em->persist($subject);
+        $this->_em->flush();
+    }
+
     /**
      * @param Request $request
      * @return array

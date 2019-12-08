@@ -436,6 +436,7 @@ class DataController extends Controller
         {
             $this->repoDepartments->clearTable();
         }
+        $this->repoSubjects->clearGroups();
         $this->repoStudent->clearTable();
         $this->repoGroup->clearTable();
         $this->repoSpeciality->clearTable();
@@ -638,6 +639,16 @@ class DataController extends Controller
         $data = $request->all();
         if(isset($data['objects']) && !empty($data['objects']))
         {
+            $groups = $this->repoGroup->findAll();
+            /**
+             * @var Group $group
+             */
+            foreach ($groups as $group){
+                $subjects = $group->getDefaultSubjects();
+                foreach ($subjects as $subject){
+                   // if($subject->getId() )
+                }
+            }
             return $this->repoSubjects->deleteSubjects($data['objects']);
         }
         return Constants::OPERATION_FAILED;
@@ -694,7 +705,7 @@ class DataController extends Controller
 
         if($speciality instanceof Speciality)
         {
-            $group = $this->repoGroup->createGroup($data, $speciality,$subjects);
+            $group = $this->repoGroup->createGroup($data, $speciality, $subjects);
             if($group instanceof Group){
                 $speciality->addGroup($group);
                 $this->repoSpeciality->updateSpeciality($speciality);
@@ -724,6 +735,7 @@ class DataController extends Controller
                     $speciality->getGroupsCollection()->removeElement($g);
                     $this->repoSpeciality->updateSpeciality($speciality);
                 }
+                $this->repoSubjects->removeGroupFromSubjects($group["id"]);
             }
 
             return $this->repoGroup->deleteGroups($data['objects']);
@@ -938,15 +950,14 @@ class DataController extends Controller
     public function specialitySubjects(Request $request)
     {
         $data = $request->all();
-
         if(isset($data['subjectOpps']) && !empty(isset($data['subjectOpps'])) && isset($data['subjects']) && !empty(isset($data['subjects'])))
         {
             $oppList = $data['subjectOpps'];
             $subjectList = $data['subjects'];
             $subjects = [];
             foreach ($subjectList as $subject) {
-                $sub = $this->repoSubjects->findOneBy(["name" => $subject]);
-                if(!empty($subject) && $sub instanceof Subject)
+                $sub = $this->repoSubjects->findOneBy(["id" => $subject]);
+                if(!empty($subject) && $sub instanceof Subject && !is_null($subject))
                 {
                     $subjects[] = $sub;
                 }
@@ -961,6 +972,10 @@ class DataController extends Controller
                         {
                             $group->setDefaultSubjects($subjects);
                             $this->repoGroup->updateGroup($group);
+                            foreach ($subjects as $subject) {
+                                $subject->addGroup($group);
+                                $this->repoSubjects->updateSubject($subject);
+                            }
                         }
                     }
                 }

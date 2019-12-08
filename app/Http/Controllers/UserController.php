@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 use App\Entities\User;
+use App\Entities\Subject;
 use App\Repositories\UserRepo as repo;
+use App\Repositories\SubjectRepo;
 use Doctrine\ORM\EntityManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Constants;
 use Illuminate\Validation\Rule;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class UserController
@@ -27,6 +30,16 @@ class UserController extends Controller {
     private $userRepo;
 
     /**
+     * @var string
+     */
+    private $subjectClass;
+
+    /**
+     * @var \App\Repositories\SubjectRepo
+     */
+    private $subjectRepo;
+
+    /**
      * @var EntityManager
      */
     private $entityManager;
@@ -38,8 +51,30 @@ class UserController extends Controller {
     public function __construct(EntityManager $entityManager)
     {
         $this->userClass = "App\Entities\User";
+        $this->subjectClass = "App\Entities\Subject";
         $this->entityManager = $entityManager;
         $this->userRepo = $this->entityManager->getRepository($this->userClass);
+        $this->subjectRepo = $this->entityManager->getRepository($this->subjectClass);
+    }
+
+    public function getTeacherSubjects(Request $request)
+    {
+        $user = $this->userRepo->find($request->session()->get('id'));
+        $subjectList = [];
+        if($user instanceof User){
+            $subjects = $user->getSubjectsCollection();
+            /**
+             * @var Subject $subject
+             */
+            foreach ($subjects as $subject){
+                $subjectList[] = [
+                    "subject" => $subject->getTableArray(),
+                    "groups" => $subject->getGroups()
+                ];
+            }
+            return $subjectList;
+        }
+        return [];
     }
 
     /**
@@ -67,6 +102,7 @@ class UserController extends Controller {
             "surname" => "required|alpha|max:255|",
             "middleName" => "required|alpha|max:255",
             "email" => "required|email|unique:App\Entities\User,email,$id|max:255|min:4",
+            "isTeacher" => "required|boolean|max:255",
         ]);
 
         return $validator;
@@ -98,7 +134,17 @@ class UserController extends Controller {
                     ->setFirstName($data['firstName'])
                     ->setSurname($data['surname'])
                     ->setMiddleName($data['middleName'])
-                    ->setPassword(Hash::make($data['password']));
+                    ->setPassword(Hash::make($data['password']))
+                    ->setIsTeacher($data['isTeacher']);
+
+                if(isset($data['subjects']) && !empty($data['subjects'])){
+                    $subjects = $this->subjectRepo->findById($data['subjects']);
+                    if(!empty($subjects)){
+                        $user->setSubjects($subjects);
+                    }
+                }
+
+
                 $this->userRepo->create($user);
             }else{
                 return response()->json($validation->errors(), 400);

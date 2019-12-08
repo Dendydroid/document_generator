@@ -38,6 +38,7 @@ class Constants{
         "middleName",
         "theme",
         "isAdmin",
+        "isTeacher",
     ];
 
     const FACULTY_REQUIRED = [

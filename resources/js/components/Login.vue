@@ -30,7 +30,7 @@
                         <span class="md-helper-text">Введите пароль</span>
                     </md-field>
                     <span class="f-s-c">
-                        <md-button  class="md-primary md-raised" @click="loginAttempt()">Сохранить</md-button>
+                        <md-button  class="md-primary md-raised" @click="loginAttempt()">Войти</md-button>
                     </span>
                 </md-card-content>
             </md-card>

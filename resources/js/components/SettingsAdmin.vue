@@ -68,10 +68,10 @@
                                         <md-field>
                                             <label for="subjects_list">Предметы</label>
                                             <md-select v-model="subjects_list" name="subjects_list" id="subjects_list" multiple>
-                                                <md-option v-for="subject in subjectList" :value="subject.name">{{subject.name}}</md-option>
+                                                <md-option v-for="subject in subjectList" :value="subject.id">{{subject.name}}</md-option>
                                             </md-select>
                                         </md-field>
-                                        
+
                                     </md-card-content>
 
                                     <md-progress-bar md-mode="indeterminate" v-if="sendingSubjects" />

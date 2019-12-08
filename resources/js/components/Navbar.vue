@@ -10,7 +10,7 @@
                         <a class="nav-link dropdown-toggle larafont-navlink" href="#" id="generateDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Генерировать
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="generateDropdown">
+                        <div class="dropdown-menu" aria-labelledby="generateDropdown" v-if="!user.isTeacher">
                             <a class="dropdown-item larafont-navlink-dropdown" href="/generate/zajavaIspit">Заява - Іспит</a>
                             <a class="dropdown-item larafont-navlink-dropdown" href="/generate/zvedenaVidomist">Зведена відомість</a>
                             <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vpiskaOzinok">Виписка оцінок</a>
@@ -18,9 +18,12 @@
                             <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistMod2">Відомість (модуль 2)</a>
                             <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistKr">Відомість КР</a>
                         </div>
+                        <div class="dropdown-menu" aria-labelledby="generateDropdown" v-if="user.isTeacher">
+                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/teacherVidomist">Відомість з дисципліни</a>
+                        </div>
 
                     </li>
-                    <li class="nav-item li-stretch" v-if="!noUser && user.logged">
+                    <li class="nav-item li-stretch" v-if="!noUser && user.logged && !user.isTeacher">
                         <a class="nav-link larafont-navlink" href="/manage">База данных</a>
                     </li>
                     <li class="nav-item li-stretch" v-if="!noUser && user.logged">
@@ -70,6 +73,7 @@
                     theme:'',
                     logged:false,
                     isAdmin:false,
+                    isTeacher:false,
                 },
                 snackbar: {
                     showSnackbar: false,

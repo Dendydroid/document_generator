@@ -68,6 +68,17 @@
                         <md-input v-model="userPasswordConfirm" maxlength="255" type="password"></md-input>
                         <span class="md-helper-text">Подтвердите пароль</span>
                     </md-field>
+                    <div class="row ml-1 mr-1" v-if="!noUser">
+                        <md-checkbox v-model="userIsTeacher">Преподавательская учетная запись</md-checkbox>
+<!--                        <md-switch v-model="userIsTeacher">Преподавательская учетная запись</md-switch>-->
+                    </div>
+                    <md-field v-if="userIsTeacher">
+                        <label>Предметы преподавателя</label>
+                        <md-select v-model="teacherSubjects" multiple>
+                            <md-option v-for="subject in subjectList" :value="subject.id">{{subject.name}}</md-option>
+                        </md-select>
+                    </md-field>
+
                     <span class="f-s-c">
                         <md-button class="md-primary md-raised" @click="registerAttempt()">Сохранить</md-button>
                     </span>
@@ -180,8 +191,11 @@
                 userFirstName:'',
                 userSurname:'',
                 userMiddleName:'',
+                userIsTeacher:false,
                 noUser:false,
                 errors:[],
+                subjectList:[],
+                teacherSubjects:[],
                 snackbar: {
                     showSnackbar: false,
                     position: 'center',
@@ -192,6 +206,14 @@
             }
         },
         methods:{
+            loadSubjects() {
+                axios
+                    .get('/getSubjects')
+                    .then(response => (this.subjectList = response.data))
+                    .catch(e => {
+                        this.errors.push(e)
+                    });
+            },
             getUserSession(){
                 axios
                     .post('/getUserSession', {
@@ -222,6 +244,8 @@
                         surname: this.userSurname,
                         middleName: this.userMiddleName,
                         password: this.userPassword,
+                        isTeacher: this.userIsTeacher,
+                        subjects: this.teacherSubjects 
                     })
                     .then(response => (window.location='/'))
                     .catch(e => {
@@ -248,6 +272,7 @@
         },
         created() {
             this.getUserSession();
+            this.loadSubjects();
             this.hasNoUsers();
             if(!this.noUser && !this.user.isAdmin){
                 window.location='/';

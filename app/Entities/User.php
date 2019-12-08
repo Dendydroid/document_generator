@@ -1,6 +1,7 @@
 <?php
 namespace App\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,11 +54,26 @@ class User {
     private $isAdmin;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isTeacher;
+
+    /**
+     * Many teacher users have many subjects.
+     * @ORM\ManyToMany(targetEntity="Subject")
+     * @ORM\JoinTable(name="users_subjects",
+     *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="subjectId", referencedColumnName="id", unique=true, onDelete="CASCADE")}
+     *      )
+     */
+    private $subjects;
+
+    /**
      * User constructor.
-     * @param $id
      */
     public function __construct()
     {
+        $this->subjects = new ArrayCollection();
         $this->isAdmin = false;
         $this->theme = new Theme([
             'mainBGcolor' => "#f1f2f6",
@@ -78,6 +94,42 @@ class User {
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSubjects(): array
+    {
+        $subjects = [];
+        foreach ($this->subjects as $subject) {
+            $subjects[] = $subject->getTableArray();
+        }
+        return $subjects;
+    }
+
+    public function getSubjectsCollection()
+    {
+        return $this->subjects;
+    }
+
+    /**
+     * @param array $subjects
+     * @return User
+     */
+    public function setSubjects(array $subjects): User
+    {
+        $this->subjects->clear();
+        foreach ($subjects as $subject)
+        {
+            $this->subjects->add($subject);
+        }
+        return $this;
+    }
+
+    public function addSubject($subject)
+    {
+        $this->subjects->add($subject);
     }
 
     /**
@@ -216,8 +268,35 @@ class User {
         ];
     }
 
+    /**
+     * @return bool
+     */
+    public function getIsTeacher(): bool
+    {
+        return $this->isTeacher;
+    }
+
+    /**
+     * @param bool $isTeacher
+     * @return User
+     */
+    public function setIsTeacher(bool $isTeacher): User
+    {
+        $this->isTeacher = $isTeacher;
+        return $this;
+    }
+
     public function getUserArray(): array
     {
+        $subjects = $this->subjects->toArray();
+        $subjectsArr = [];
+        /**
+         * @var Subject $subject
+         */
+        foreach ($subjects as $subject)
+        {
+            $subjectsArr[] = $subject->getTableArray();
+        }
         return [
             "id" => $this->id,
             "firstName" => $this->firstName,
@@ -225,7 +304,9 @@ class User {
             "middleName" => $this->middleName,
             "email" => $this->email,
             "theme" => $this->theme->getArrayData(),
-            "isAdmin" => $this->isAdmin
+            "isAdmin" => $this->isAdmin,
+            "isTeacher" => $this->isTeacher,
+            "subjects" => $subjectsArr
         ];
     }
 

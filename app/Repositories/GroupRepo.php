@@ -4,6 +4,7 @@ use App\Constants;
 use App\Entities\Department;
 use App\Entities\Group;
 use App\Entities\Speciality;
+use App\Entities\Subject;
 use App\Entities\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -79,9 +80,14 @@ class GroupRepo extends EntityRepository {
 
             if(!empty($subjectArr))
             {
+                /**
+                 * @var Subject $subject
+                 */
                 foreach ($subjectArr as $subject)
                 {
                     $group->addDefaultSubject($subject);
+                    $subject->addGroup($group);
+                    $this->_em->persist($subject);
                 }
             }
 

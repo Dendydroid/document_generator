@@ -40,7 +40,7 @@ class Group {
      * @ORM\ManyToMany(targetEntity="Subject")
      * @ORM\JoinTable(name="groups_subjects",
      *      joinColumns={@ORM\JoinColumn(name="groupId", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="subjectId", referencedColumnName="id", unique=false)}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="subjectId", referencedColumnName="id", unique=false, onDelete="CASCADE")}
      *      )
      */
     private $defaultSubjects;

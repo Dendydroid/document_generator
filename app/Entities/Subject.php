@@ -1,6 +1,7 @@
 <?php
 namespace App\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -72,11 +73,65 @@ class Subject {
     private $hasPractice;
 
     /**
+     * Many subjects have many groups.
+     * @ORM\ManyToMany(targetEntity="Group")
+     * @ORM\JoinTable(name="subject_groups",
+     *      joinColumns={@ORM\JoinColumn(name="subjectId", referencedColumnName="id", unique=false)},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="groupId", referencedColumnName="id", unique=false, onDelete="CASCADE")}
+     *      )
+     */
+    private $groups;
+
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+    }
+
+    /**
      * @return int
      */
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return array
+     */
+    public function getGroupValues(): array
+    {
+        return $this->groups->getValues();
+    }
+
+    public function getGroups()
+    {
+        $groups = [];
+        /**
+         * @var Group $group
+         */
+        foreach ($this->groups as $group){
+            $groups[] = $group->getTableArray();
+        }
+        return $groups;
+    }
+
+    /**
+     * @param array $groups
+     * @return Subject
+     */
+    public function setGroups(array $groups): Subject
+    {
+        $this->groups->clear();
+        foreach ($groups as $group)
+        {
+            $this->groups->add($group);
+        }
+        return $this;
+    }
+
+    public function addGroup($group)
+    {
+        $this->groups->add($group);
     }
 
     /**
@@ -276,7 +331,7 @@ class Subject {
         $this->hasPractice = $hasPractice;
         return $this;
     }
-    
+
 
     /**
      * @return array
@@ -308,7 +363,7 @@ class Subject {
             "hoursCount" => $this->hoursCount,
             "creditsCount" => $this->creditsCount,
             "dateBegin" => $this->date,
-            
+
         ], $subjectHas);
     }
 }
