@@ -8,11 +8,15 @@ use App\Entities\Group;
 use App\Entities\Speciality;
 use App\Entities\Student;
 use App\Entities\Subject;
+use App\Entities\User;
 use App\Repositories\FacultyInfoRepo;
+use App\Repositories\GroupDisciplineMarksRepo;
 use App\Repositories\GroupRepo;
 use App\Repositories\SpecialityRepo;
 use App\Repositories\StudentRepo;
 use App\Repositories\SubjectRepo;
+use App\Repositories\TeacherTokenRepo;
+use App\Repositories\UserRepo;
 use Doctrine\ORM\EntityManager;
 use Illuminate\Http\Request;
 use \App\Repositories\DepartmentRepo;
@@ -85,6 +89,36 @@ class DataController extends Controller
     private $facultyInfo = "App\Entities\FacultyInfo";
 
     /**
+     * @var GroupDisciplineMarksRepo
+     */
+    private $repoGroupDiscipline;
+
+    /**
+     * @var string
+     */
+    private $groupDiscipline = "App\Entities\GroupDisciplineMarks";
+
+    /**
+     * @var UserRepo
+     */
+    private $repoUser;
+
+    /**
+     * @var string
+     */
+    private $user = "App\Entities\User";
+
+    /**
+     * @var TeacherTokenRepo
+     */
+    private $repoTeacherToken;
+
+    /**
+     * @var string
+     */
+    private $teacherToken = "App\Entities\TeacherToken";
+
+    /**
      * DataController constructor.
      * @param $entityManager
      */
@@ -98,6 +132,9 @@ class DataController extends Controller
         $this->repoGroup = $this->entityManager->getRepository($this->group);
         $this->repoStudent = $this->entityManager->getRepository($this->student);
         $this->repoFacultyInfo = $this->entityManager->getRepository($this->facultyInfo);
+        $this->repoGroupDiscipline = $this->entityManager->getRepository($this->groupDiscipline);
+        $this->repoUser = $this->entityManager->getRepository($this->user);
+        $this->repoTeacherToken = $this->entityManager->getRepository($this->teacherToken);
     }
 
 
@@ -639,14 +676,19 @@ class DataController extends Controller
         $data = $request->all();
         if(isset($data['objects']) && !empty($data['objects']))
         {
-            $groups = $this->repoGroup->findAll();
-            /**
-             * @var Group $group
-             */
-            foreach ($groups as $group){
-                $subjects = $group->getDefaultSubjects();
-                foreach ($subjects as $subject){
-                   // if($subject->getId() )
+            foreach ($data["objects"] as $subjectArr){
+                $subject = $this->repoSubjects->find($subjectArr["id"]);
+                if($subject instanceof Subject){
+                    $groups = $subject->getGroupValues();
+                    /**
+                     * @var Group $group
+                     */
+                    foreach ($groups as $group){
+                        $group->getDefaultSubjectsCollection()->removeElement($subject);
+                        $this->repoGroup->updateGroup($group);
+                    }
+                    $subject->setGroups([]);
+                    $this->repoSubjects->updateSubject($subject);
                 }
             }
             return $this->repoSubjects->deleteSubjects($data['objects']);
@@ -696,6 +738,9 @@ class DataController extends Controller
             {
                 if(!is_null($subj))
                 {
+                    /**
+                     * @var Subject $newSubject
+                     */
                     $subjects[] = $this->repoSubjects->find($subj);
                 }
             }
@@ -707,6 +752,10 @@ class DataController extends Controller
         {
             $group = $this->repoGroup->createGroup($data, $speciality, $subjects);
             if($group instanceof Group){
+                foreach ($subjects as $subject){
+                    $subject->addGroup($group);
+                    $this->repoSubjects->updateSubject($subject);
+                }
                 $speciality->addGroup($group);
                 $this->repoSpeciality->updateSpeciality($speciality);
                 return $group->getTableArray();
@@ -719,6 +768,8 @@ class DataController extends Controller
     /**
      * @param Request $request
      * @return array
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function deleteGroups(Request $request)
     {
@@ -729,15 +780,19 @@ class DataController extends Controller
             foreach ($data['objects'] as $group)
             {
                 $speciality = $this->repoSpeciality->find($group['speciality']);
+                /**
+                 * @var Group $g
+                 */
                 $g = $this->repoGroup->find($group['id']);
+                $students = $g->getStudents();
+                $this->repoStudent->removeStudentArray($students);
                 if($speciality instanceof Speciality && $g instanceof Group)
                 {
                     $speciality->getGroupsCollection()->removeElement($g);
                     $this->repoSpeciality->updateSpeciality($speciality);
+                    //$this->repoSubjects->removeGroupFromSubjects($g);
                 }
-                $this->repoSubjects->removeGroupFromSubjects($group["id"]);
             }
-
             return $this->repoGroup->deleteGroups($data['objects']);
         }
         return Constants::OPERATION_FAILED;
@@ -911,6 +966,15 @@ class DataController extends Controller
         return response()->json(array_merge(Constants::OPERATION_FAILED,$student), 400);
     }
 
+    public function getDisciplineMarksByGroup($id)
+    {
+        $disciplineMarks = [];
+        $group = $this->repoGroup->find($id);
+        if($group instanceof Group){
+            $disciplineMarks = $this->repoGroupDiscipline->getGroupDisciplineMarks($group);
+        }
+        return $disciplineMarks;
+    }
     public function getSubjectsByGroup($id)
     {
         $group = $this->repoGroup->find($id);
@@ -967,6 +1031,9 @@ class DataController extends Controller
                 if(!empty($opp))
                 {
                     $groups = $this->repoGroup->findBy(["eduProgram" => $opp]);
+                    /**
+                     * @var Group $group
+                     */
                     foreach ($groups as $group) {
                         if(!empty($subjects))
                         {
@@ -981,6 +1048,64 @@ class DataController extends Controller
                 }
             }
 
+        }
+    }
+
+    public function saveGroupDisciplineMarks(Request $request)
+    {
+        $data = $request->all();
+        if(isset($data['studentData']) && !empty($data['studentData'])){
+            if(is_int($data["group"]) && is_int($data["subject"])){
+                $userId = $request->session()->get("id");
+                $group = $this->repoGroup->find($data["group"]);
+                $subject = $this->repoSubjects->find($data["subject"]);
+                $user = $this->repoUser->find($userId);
+                if($user instanceof User && $group instanceof Group && $subject instanceof Subject){
+                    $groupDiscipline = $this->repoGroupDiscipline->saveGroupDisciplineMarks($data["studentData"], $user, $group, $subject, $data['number']);
+                    return $groupDiscipline->getId();
+                }
+            }
+        }
+    }
+
+    public function createTeacherToken(Request $request)
+    {
+        $data = $request->all();
+        if(isset($data["particular"]) && is_bool($data["particular"])) {
+            if (isset($data['id']) && is_int($data["id"]) && isset($data["subjects"])) {
+                $user = $this->repoUser->find($data["id"]);
+                if ($user instanceof User) {
+                    if($data["particular"]){
+                        $allowedSubjects = $user->getSubjects();
+                        $allowedArray = [];
+                        foreach($allowedSubjects as $subject){
+                            $allowedArray[] = [
+                                "used" => false,
+                                "subject" => $subject["id"]
+                            ];
+                        }
+                        return $this->repoTeacherToken->createTeacherToken($user, $allowedArray);
+                    }
+                    $allowedArray = [];
+                    foreach($data["subjects"] as $subject){
+                        $allowedArray[] = [
+                            "used" => false,
+                            "subject" => $subject["id"]
+                        ];
+                    }
+                    return $this->repoTeacherToken->createTeacherToken($user, $allowedArray);
+                }
+            }
+        }
+    }
+    public function removeAllTokens(Request $request)
+    {
+        $data = $request->all();
+        if(isset($data['id']) && is_int($data["id"])){
+            $user = $this->repoUser->find($data["id"]);
+            if($user instanceof User){
+                return $this->repoTeacherToken->removeAllTokens();
+            }
         }
     }
 }

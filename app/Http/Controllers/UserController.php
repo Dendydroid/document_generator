@@ -57,6 +57,12 @@ class UserController extends Controller {
         $this->subjectRepo = $this->entityManager->getRepository($this->subjectClass);
     }
 
+    public function getTeacherSubjectsList(Request $request)
+    {
+        $user = $this->userRepo->find($request->get('id'));
+        return $user instanceof User ? $user->getSubjects() : [];
+    }
+
     public function getTeacherSubjects(Request $request)
     {
         $user = $this->userRepo->find($request->session()->get('id'));

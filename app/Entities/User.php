@@ -264,7 +264,8 @@ class User {
             "id" => $this->id,
             "FIO" => "$this->surname $this->firstName $this->middleName",
             "email" => $this->email,
-            "isAdmin" => $this->isAdmin
+            "isAdmin" => $this->isAdmin,
+            "isTeacher" => $this->isTeacher,
         ];
     }
 

@@ -12,14 +12,14 @@ class User extends \App\Entities\User implements \Doctrine\ORM\Proxy\Proxy
      *      three parameters, being respectively the proxy object to be initialized, the method that triggered the
      *      initialization process and an array of ordered parameters that were passed to that method.
      *
-     * @see \Doctrine\Common\Persistence\Proxy::__setInitializer
+     * @see \Doctrine\Common\Proxy\Proxy::__setInitializer
      */
     public $__initializer__;
 
     /**
      * @var \Closure the callback responsible of loading properties that need to be copied in the cloned object
      *
-     * @see \Doctrine\Common\Persistence\Proxy::__setCloner
+     * @see \Doctrine\Common\Proxy\Proxy::__setCloner
      */
     public $__cloner__;
 
@@ -34,7 +34,7 @@ class User extends \App\Entities\User implements \Doctrine\ORM\Proxy\Proxy
      * @var array properties to be lazy loaded, with keys being the property
      *            names and values being their default values
      *
-     * @see \Doctrine\Common\Persistence\Proxy::__getLazyProperties
+     * @see \Doctrine\Common\Proxy\Proxy::__getLazyProperties
      */
     public static $lazyPropertiesDefaults = [];
 
@@ -64,10 +64,10 @@ class User extends \App\Entities\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\User' . "\0" . 'id', '' . "\0" . 'App\\Entities\\User' . "\0" . 'firstName', '' . "\0" . 'App\\Entities\\User' . "\0" . 'surname', '' . "\0" . 'App\\Entities\\User' . "\0" . 'middleName', '' . "\0" . 'App\\Entities\\User' . "\0" . 'email', '' . "\0" . 'App\\Entities\\User' . "\0" . 'password'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\User' . "\0" . 'id', '' . "\0" . 'App\\Entities\\User' . "\0" . 'firstName', '' . "\0" . 'App\\Entities\\User' . "\0" . 'surname', '' . "\0" . 'App\\Entities\\User' . "\0" . 'middleName', '' . "\0" . 'App\\Entities\\User' . "\0" . 'email', '' . "\0" . 'App\\Entities\\User' . "\0" . 'password', '' . "\0" . 'App\\Entities\\User' . "\0" . 'theme', '' . "\0" . 'App\\Entities\\User' . "\0" . 'isAdmin', '' . "\0" . 'App\\Entities\\User' . "\0" . 'isTeacher', '' . "\0" . 'App\\Entities\\User' . "\0" . 'subjects'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\User' . "\0" . 'id', '' . "\0" . 'App\\Entities\\User' . "\0" . 'firstName', '' . "\0" . 'App\\Entities\\User' . "\0" . 'surname', '' . "\0" . 'App\\Entities\\User' . "\0" . 'middleName', '' . "\0" . 'App\\Entities\\User' . "\0" . 'email', '' . "\0" . 'App\\Entities\\User' . "\0" . 'password'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\User' . "\0" . 'id', '' . "\0" . 'App\\Entities\\User' . "\0" . 'firstName', '' . "\0" . 'App\\Entities\\User' . "\0" . 'surname', '' . "\0" . 'App\\Entities\\User' . "\0" . 'middleName', '' . "\0" . 'App\\Entities\\User' . "\0" . 'email', '' . "\0" . 'App\\Entities\\User' . "\0" . 'password', '' . "\0" . 'App\\Entities\\User' . "\0" . 'theme', '' . "\0" . 'App\\Entities\\User' . "\0" . 'isAdmin', '' . "\0" . 'App\\Entities\\User' . "\0" . 'isTeacher', '' . "\0" . 'App\\Entities\\User' . "\0" . 'subjects'];
     }
 
     /**
@@ -191,6 +191,50 @@ class User extends \App\Entities\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getSubjects(): array
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSubjects', []);
+
+        return parent::getSubjects();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSubjectsCollection()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSubjectsCollection', []);
+
+        return parent::getSubjectsCollection();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSubjects(array $subjects): \App\Entities\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSubjects', [$subjects]);
+
+        return parent::setSubjects($subjects);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addSubject($subject)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addSubject', [$subject]);
+
+        return parent::addSubject($subject);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getFirstName(): string
     {
 
@@ -296,6 +340,83 @@ class User extends \App\Entities\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPassword', [$password]);
 
         return parent::setPassword($password);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isAdmin(): bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isAdmin', []);
+
+        return parent::isAdmin();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIsAdmin(bool $isAdmin): \App\Entities\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIsAdmin', [$isAdmin]);
+
+        return parent::setIsAdmin($isAdmin);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTheme()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTheme', []);
+
+        return parent::getTheme();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setTheme($themeArr)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTheme', [$themeArr]);
+
+        return parent::setTheme($themeArr);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUserTableArray()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUserTableArray', []);
+
+        return parent::getUserTableArray();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIsTeacher(): bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIsTeacher', []);
+
+        return parent::getIsTeacher();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIsTeacher(bool $isTeacher): \App\Entities\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIsTeacher', [$isTeacher]);
+
+        return parent::setIsTeacher($isTeacher);
     }
 
     /**

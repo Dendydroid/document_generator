@@ -1,5 +1,5 @@
 <template>
-    <div class="container grey-light page-height-default">
+    <div class="pl-2 pr-2 grey-light page-height-default">
         <div class="p-t-b">
             <p class="display-4 text-center">Відомість з дисципліни</p>
             <div class="row pl-3 pr-3 pt-3">
@@ -32,34 +32,34 @@
                 <table lang="uk-UK" id="documentTable">
                     <thead>
                     <tr>
-                        <th :colspan="6">&nbsp;</th>
+                        <th :colspan="maxColSpan">&nbsp;</th>
 
                     </tr>
                     </thead>
                     <tbody>
 
                     <tr>
-                        <td :colspan="6"></td>
+                        <td :colspan="maxColSpan"></td>
                     </tr>
                     <tr>
-                        <td :colspan="6" class='cntr bold'>
+                        <td :colspan="maxColSpan" class='cntr bold'>
                             НАЦІОНАЛЬНИЙ АВІАЦІЙНИЙ УНІВЕРСИТЕТ
                         </td>
                     </tr>
                     <tr>
-                        <td :colspan="6" class='cntr bold'>
+                        <td :colspan="maxColSpan" class='cntr bold'>
                             Факультет <input type="text" v-model="tableData.facultyName" class="input-auto input-top-fac text-input">
                         </td>
                     </tr>
                     <tr>
-                        <td :colspan="2" class='lft bold'>
-                            <img class='nau1' src="../../res/nau1.jpg" alt="">
+                        <td  class='lft bold'>
+<!--                            <img class='nau1' src="../../res/nau1.jpg" alt="">-->
                         </td>
-                        <td :colspan="2" class='cntr bold'>
+                        <td :colspan="maxColSpan-2" class='cntr bold'>
                             Кафедра {{tableData.departmentName}}
                         </td>
-                        <td :colspan="2" class='rght bold'>
-                            <img class='nau2' src="../../res/nau2.jpg" alt="">
+                        <td  class='rght bold'>
+<!--                            <img class='nau2' src="../../res/nau2.jpg" alt="">-->
                         </td>
                     </tr>
                     <tr>
@@ -95,6 +95,7 @@
                             Дата контролю
                         </td>
                     </tr>
+                    <tr>
                         <td :colspan="2" class='cntr bold border-3-black'>
                             {{tableData.termYears}}
                         </td>
@@ -112,25 +113,29 @@
                         </td>
                     </tr>
                     <tr>
-                        <td :colspan="6" class='cntr bold'>
-                            ЗАЛІКОВА-ЕКЗЕМЕНАЦІЙНА ВІДОМІСТЬ №<input type="text" class="input-auto input-sm text-input">
+                        <td :colspan="maxColSpan">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td :colspan="maxColSpan" class='cntr bold value-with-number'>
+                            ЗАЛІКОВА-ЕКЗЕМЕНАЦІЙНА ВІДОМІСТЬ №<input v-model="vidomistNumber" type="text" class="input-auto input-sm text-input">
                         </td>
                     </tr>
                     <tr>
-                        <td :colspan="6" class='cntr'>
+                        <td :colspan="maxColSpan" class='cntr'>
                             семестрового контролю (диференційований залік, екзамен)
                         </td>
                     </tr>
                     <tr>
-                        <td :colspan="6" class='cntr'>
+                        <td :colspan="maxColSpan" class='cntr'>
                             (потрібно підкреслити)
                         </td>
                     </tr>
                     <tr>
-                        <td :colspan="6" class='lft bold'>
-                            З навчальної дисципліни '{{activeSubject.name}}'
+                        <td :colspan="maxColSpan" class='lft bold'>
+                            З навчальної дисципліни '{{tableData.subjectName[0].name}}'
                         </td>
                     </tr>
+
                     <tr>
                         <td rowspan="2" class='cntr bold border-3-black'>
                             № п/п
@@ -141,11 +146,22 @@
                         <td rowspan="2" class='cntr bold border-3-black'>
                             № залікової книжки, ІНПС
                         </td>
+                        <td :colspan="3*marksSpan" class='cntr border-3-black bt extraMarksPart'>
+                            Окремі Бали
+                        </td>
                         <td colspan="3" class='cntr bold border-3-black'>
                             Підсумкова семестрова рейтингова оцінка
                         </td>
                     </tr>
+
+
+
                     <tr>
+                        <template v-for="(subject,sector) in subjectHasTranslation" class="extraMarksPart">
+                            <td colspan='3' :class='`cntr border-3-black bg-mark-${sector} extraMarksPart`'>
+                                {{subject.name}}
+                            </td>
+                        </template>
                         <td class='cntr bold border-3-black'>
                             Бали
                         </td>
@@ -156,8 +172,8 @@
                             За шкалою ECTS
                         </td>
                     </tr>
-                    <tr v-for="(student,key) in tableData.groupStudents">
-                     
+                    <tr v-for="(student,key) in tableData.groupStudents" :class="`student-data`">
+
                         <td class='cntr bold border-3-black'>
                             {{key+1}}
                         </td>
@@ -165,15 +181,20 @@
                             {{student.surname}} {{student.firstName}}
                         </td>
                         <td class='cntr bold border-3-black'>
-                            {{student.studentId}}
+                            <input type="text" :value="student.studentId" class="input-auto fill-secondary student-id" @input="colorChange">
                         </td>
-                        <td class='cntr bold border-3-black'>
-                            <input type="text" value="0" class="input-auto subj-1-mark fill" @input="calcRating">
-                        </td>
-                        <td class='cntr bold border-3-black subj-2-mark'>
+                        <template v-for="(el,sector) in tableData.subjectHas" :class="` sideMarks st-${key}`">
+                            <td :class='`border-3-black cntr bg-mark-${sector} extraMarksPart ${el.name}-mark`' ><input type="text" value="0" class="input-auto subj-1-mark fill" @input="calcRating"></td>
+                            <td :class='`border-3-black cntr subj-2-mark bg-mark-${sector} extraMarksPart`' class=''>0</td>
+                            <td :class='`border-3-black cntr subj-3-mark bg-mark-${sector} extraMarksPart`' class=''>0</td>
+                        </template>
+                        <td class='cntr bold border-3-black rating main-rating'>
                             0
                         </td>
-                        <td class='cntr bold border-3-black subj-3-mark'>
+                        <td class='cntr bold border-3-black nationalRating'>
+                            0
+                        </td>
+                        <td class='cntr bold border-3-black ectsRating'>
                             0
                         </td>
                     </tr>
@@ -406,16 +427,19 @@
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 maxColSpan:0,
+                vidomistNumber:0,
                 allSubjectGroups:[],
                 subjectList:[],
                 groupList:[],
                 activeSubject:{},
                 activeGroup:-1,
                 facultyInfo:{},
+                subjectHasTranslation:[],
                 tableData:{
                     facultyName:'',
                     specialityName:'',
                     departmentName:'',
+                    subjectName:'',
                     opp:'',
                     termYears:new Date().getFullYear()+"/"+(new Date().getFullYear()+1),
                     course:'',
@@ -426,9 +450,11 @@
                     examCount:0,
                     practiceCount:0,
                     groupStudents: [],
-                    subjectHasArr:[[],[],[],[]],
-                    semester:''
+                    subjectHas:[{name:"course"},{name:"exam"},{name:"pass"},{name:"practice"}],
+                    semester:'',
+                    marksSpan:1,
                 },
+                studentData:[],
                 groupIsChosen:false,
                 loadingDoc:false,
                 responseXLSX:[],
@@ -462,8 +488,8 @@
             calcRating : function(event) {
                 let tg = event.target;
                 let currTR = $(tg.parentElement.parentElement).children('td').children('.subj-1-mark');
-                let mrk = 0;
 
+                let mrk = 0;
                 if(!isNaN(tg.value)){
 
                     if(tg.value>100){
@@ -479,14 +505,16 @@
 
                     $(tg.parentElement.nextElementSibling).text(this.ratingToWord(parseFloat(tg.value)));
                     $(tg.parentElement.nextElementSibling.nextElementSibling).text(this.ratingToLetters(parseFloat(tg.value),false));
+
                     for(let i=0; i<currTR.length;i++)
                     {
                         mrk+=parseFloat(currTR[i].value);
                     }
                     mrk/=currTR.length;
                     if(mrk!==""){
-                        $(tg.parentElement).siblings(".rating").text(parseFloat(mrk.toFixed(2)));
-                        $(tg.parentElement).siblings(".averageMark").text(this.ratingToFive(mrk));
+                        $(tg.parentElement.parentElement).find(".rating").text(parseFloat(mrk.toFixed(2)));
+                        $(tg.parentElement.parentElement).find(".nationalRating").text(this.ratingToWord(mrk));
+                        $(tg.parentElement.parentElement).find(".ectsRating").text(this.ratingToLetters(mrk));
                     }
                 }else{
                     tg.value = tg.value.slice(0, -1);
@@ -572,9 +600,41 @@
             },
             prepareTable()
             {
+                let allRatings = [];
+                let allStudentIds = document.body.getElementsByClassName("student-id");
+
+                $("tr.student-data").each((index, el) => {
+                    allRatings[index] = {};
+                    for(let num in this.tableData.subjectHas){
+                        allRatings[index][this.tableData.subjectHas[num].name] = parseInt($(el).find(`.${this.tableData.subjectHas[num].name}-mark input`).val());
+                    }
+                });
+                $(".extraMarksPart").remove();
+
+                for(let i=0; i < this.tableData.groupStudents.length;i++){
+                    this.studentData.push({
+                        id : this.tableData.groupStudents[i].id,
+                        studentId : allStudentIds[i]!==undefined ? allStudentIds[i].value : "",
+                        rating : allRatings[i]
+                    });
+                }
+                axios
+                    .post(`/saveGroupDisciplineMarks`, {
+                        group:this.activeGroup,
+                        subject:this.activeSubject,
+                        studentData:this.studentData,
+                        number:this.vidomistNumber
+                    })
+                    .then(response => {})
+                    .catch(e => {
+                    });
                 this.loadingDoc = true;
                 $('.input-auto').each(function(index, elem){
-                    elem.parentElement.innerHTML = elem.value;
+                    if($(elem.parentElement).hasClass('value-with-number')){
+                        elem.parentElement.innerHTML = elem.parentElement.innerText + elem.value;
+                    }else{
+                        elem.parentElement.innerHTML = elem.value;
+                    }
                 });
                 $("#termYears").html(this.termYears);
                 $("#termNumber").html(this.termNumber);
@@ -624,6 +684,37 @@
             },
             getSubjects: function(){
                 this.subjectList = this.allSubjectGroups.map(el => el.subject);
+            },
+            getSubjectHas(subject){
+                this.subjectHasTranslation = [];
+                this.tableData.subjectHas = [];
+                this.marksSpan = 0;
+                for(let property in subject.has){
+                    this.marksSpan++;
+                    let translation = "";
+                    if(property === "course"){
+                         translation = "Курсова";
+                    }
+                    if(property === "pass"){
+                         translation = "Залік";
+                    }
+                    if(property === "exam"){
+                         translation = "Екзамен";
+                    }
+                    if(property === "practice"){
+                         translation = "Практика";
+                    }
+
+                    this.tableData.subjectHas.push({
+                        name:`${property}`,
+                    });
+
+                    this.subjectHasTranslation.push({
+                        name:`${translation}`,
+                    });
+                }
+                this.maxColSpan = 6+this.marksSpan*3;
+                console.log(`span is ${this.marksSpan}`);
             }
         },
         watch: {
@@ -635,11 +726,12 @@
             activeSubject: function(val){
                 if(val !== 0){
                     for(let num in this.allSubjectGroups){
-                        console.log(this.allSubjectGroups[num]);
                         if(this.allSubjectGroups[num].subject.id === this.activeSubject){
                             this.groupList = this.allSubjectGroups[num].groups;
+                            this.getSubjectHas(this.allSubjectGroups[num].subject);
                         }
                     }
+                    this.tableData.subjectName = this.subjectList.filter(el => el.id === this.activeSubject);
                 }
             },
             groupSubjects: function(val)
@@ -687,7 +779,7 @@
                     this.tableData.controlDate = `${now.getDate()}.${now.getMonth()}.${now.getFullYear()}`;
                     this.tableData.course = group.idName.match(/\d+/)[0][0];
                     this.tableData.departmentName = group.department.fullName;
-                    this.tableData.specialityName = group.speciality.fullName;
+                    this.tableData.specialityName = `${group.speciality.number} ${group.speciality.fullName}`;
                     this.tableData.opp = group.eduProgram;
                 }
 

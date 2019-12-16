@@ -48,7 +48,7 @@
                                     <md-progress-bar md-mode="indeterminate" v-if="sendingCsvFiles" />
 
                                     <md-card-actions>
-                                        <md-button type="submit" class="md-primary" :disabled="sendingCsvFiles" @click="sendCsvFiles()">Заполнить базу</md-button>
+                                        <md-button type="submit" class="md-primary" :disabled="sendingCsvFiles" >Заполнить базу</md-button>
                                     </md-card-actions>
                                 </md-card>
                             </form>
@@ -318,7 +318,7 @@
                 console.log($("#csvFiles"));
                 this.sendingCsvFiles = true;
                 axios
-                    .post('/sendCsvFiles', {
+                    .post('/uploadCsv', {
                         csvFiles: this.csvFiles,
                     })
                     .then(response => {

@@ -21,6 +21,25 @@
                 </div>
             </md-dialog>
 
+            <md-dialog :md-active.sync="toggleModalAllow" class="pl-5 pr-5 of-auto" md-scrollbar>
+                <md-dialog-title class="fb-center">Разрешить/Запретить заполнение ведомости</md-dialog-title>
+
+                <div class="pl-2 pr-2 pb-3">
+                    <md-checkbox v-model="allowParticular">Разрешить выборочно</md-checkbox>
+                    <md-field>
+                        <label>Дисциплины</label>
+                        <md-select v-model="allowedSubjectsList"  multiple :disabled="!allowParticular">
+                            <md-option v-for="subject in selectedTeacherSubjects" :value="subject.id">{{subject.name}}</md-option>
+                        </md-select>
+                    </md-field>
+                </div>
+                <div class="buttons pb-3">
+                    <md-button  class="md-primary md-raised" @click="saveTeacherToken()">Разрешить</md-button>
+                    <md-button  class="md-raised md-accent" @click="removeAllTokens()">Отменить разрешения</md-button>
+                    <md-button  class="md-accent" @click="toggleModalAllow=false">Отмена</md-button>
+                </div>
+            </md-dialog>
+
             <md-card>
                 <md-card-header>
                     <div class="md-title">
@@ -53,6 +72,9 @@
 
                         <div class="md-toolbar-section-end">
                             <md-button class="md-icon-button md-raised md-accent" title="Удалить выделенное" @click="toggleModalSure=true"><md-icon>delete</md-icon></md-button>
+                            <md-button v-if="showAllowButton" class="md-icon-button md-raised btn-warn" @click="allowSelected()" title="Разрешить/Отменить разрешения на заполнение ведомостей преподавателю">
+                                <md-icon>build</md-icon>
+                            </md-button>
                             <md-button class="md-icon-button md-raised" @click="clearSelected()" title="Сбросить выделение">
                                 <md-icon>clear</md-icon>
                             </md-button>
@@ -60,16 +82,19 @@
                     </md-table-toolbar>
 
                     <md-table-empty-state
-                        md-label="Предметы не найдены"
-                        :md-description="'Не было найдено ни одного предмета. Измените запрос или создайте новый предмет.'">
-                        <md-button  class="md-primary md-raised" v-on:click="toggleModalAdd=true">Добавить</md-button>
+                        md-label="Пользователи не найдены"
+                        :md-description="'Не было найдено ни одного пользователя'">
                     </md-table-empty-state>
 
                     <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="multiple" md-auto-select>
                         <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
                         <md-table-cell md-label="ФИО" md-sort-by="FIO">{{ item.FIO }}</md-table-cell>
                         <md-table-cell md-label="E-mail" md-sort-by="email">{{ item.email }}</md-table-cell>
-                        <md-table-cell md-label="Администратор" md-sort-by="isAdmin"><md-icon class='cr-theme-primary' v-if="item.isAdmin">check_circle</md-icon> <md-icon class='cr-theme-accent' v-if="!item.isAdmin">not_interested</md-icon></md-table-cell>
+                        <md-table-cell md-label="Тип" md-sort-by="type">
+                            <md-icon class='cr-theme-primary' v-if="item.isAdmin">stars</md-icon>
+                            <md-icon class='cr-theme-accent' v-if="!item.isAdmin && !item.isTeacher">contact_mail</md-icon>
+                            <md-icon class='cr-theme-accent' v-if="item.isTeacher">school</md-icon>
+                        </md-table-cell>
                     </md-table-row>
 
                 </md-table>
@@ -150,23 +175,67 @@
                     duration: 4000,
                     bg: 'background-color:rgba(33, 33, 33, 0.6)'
                 },
+                showAllowButton:false,
                 searchColumn: 'name',
                 errorMessage: '',
                 facultyList:'',
                 editId: '',
                 removeConfirm: false,
                 toggleModalSure: false,
+                toggleModalAllow: false,
+                selectedTeacher:null,
+                selectedTeacherSubjects: [],
+                allowedSubjectsList:[],
                 selected: [],
                 search: null,
                 searched: [],
                 errors: [],
-                dataSet: []
+                dataSet: [],
+                allowParticular:true
             }
         },
         methods: {
             onSelect (items) {
                 this.selected = items;
-                this.toggleShowEditButton(items);
+                this.toggleShowAllowButton(items);
+            },
+            toggleShowAllowButton : function (items){
+                if(items.length === 1 && items[0].isTeacher){
+                    this.showAllowButton = true;
+                    return;
+                }
+                this.showAllowButton = false;
+            },
+            allowSelected(){
+                this.toggleModalAllow = true;
+                this.selectedTeacher = this.selected[0];
+                this.getTeacherSubjects();
+            },
+            saveTeacherToken(){
+                axios
+                    .post('/saveTeacherToken', {
+                        id:this.selectedTeacher.id,
+                        particular: this.allowParticular,
+                        subjects: this.selectedTeacherSubjects,
+                    })
+                    .then(response => {
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    });
+                this.toggleModalAllow = false;
+            },
+            removeAllTokens(){
+                axios
+                    .post('/removeAllTokens', {
+                        id:this.selectedTeacher.id,
+                    })
+                    .then(response => {
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    });
+                this.toggleModalAllow = false;
             },
             getAlternateLabel (count) {
                 let plural = 'ь';
@@ -195,6 +264,18 @@
                 if(this.searchColumn){
                     this.searched = searchByColumn(this.dataSet, this.search, this.searchColumn)
                 }
+            },
+            getTeacherSubjects(){
+                axios
+                    .post('/getTeacherSubjectsList', {
+                        id: this.selectedTeacher.id
+                    })
+                    .then(response => {
+                        this.selectedTeacherSubjects = response.data;
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    });
             },
             clearSelected() {
                 this.selected = [];

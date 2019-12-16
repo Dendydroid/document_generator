@@ -27,8 +27,6 @@ async function run (html) {
 
 app.post('/html2Excel', (req, res) => {
     let html = req.body.html;
-    res.setHeader("Content-Type","text/html;charset=utf-8");
-    res.end(html);
     run(html).then(() => {
         res.download(filePath, path.basename(filePath));
     }).catch((e) => {

@@ -130,11 +130,16 @@ Route::get('/getStudentsByGroup/{id}', 'DataController@getStudentsByGroup')->nam
 Route::get('/generate/teacherVidomist', 'GeneratorController@getTeacherVidomist')->name('getTeacherVidomist')->middleware('logged');
 
 Route::post('/getTeacherSubjects', "UserController@getTeacherSubjects")->middleware('logged');
+Route::post('/getTeacherSubjectsList', "UserController@getTeacherSubjectsList")->middleware('logged');
 
 
 Route::get('/getUsers', 'UserController@getUsers')->name('getUsers')->middleware('logged')->middleware('isAdmin');
 Route::post('/deleteUsers', 'UserController@deleteUsers')->name('deleteUsers')->middleware('logged')->middleware('isAdmin');
 
+Route::post('/saveGroupDisciplineMarks', 'DataController@saveGroupDisciplineMarks')->middleware('logged')->middleware("isAllowed");
+Route::post('/saveTeacherToken', 'DataController@createTeacherToken')->middleware('logged');
+Route::post('/removeAllTokens', 'DataController@removeAllTokens')->middleware('logged');
+Route::get('/getDisciplineMarksByGroup/{id}', 'DataController@getDisciplineMarksByGroup')->middleware('logged')->middleware('notTeacher');
 
 //TEST ROUTES
 //Route::get('/checkSession', function(\Illuminate\Http\Request $request){

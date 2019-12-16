@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\IsAllowed;
 use App\Http\Middleware\LoginCheck;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\NotTeacher;
@@ -67,6 +68,7 @@ class Kernel extends HttpKernel
         "logged" => LoginCheck::class,
         "isAdmin" => IsAdmin::class,
         "notTeacher" => NotTeacher::class,
+        "isAllowed" => IsAllowed::class,
     ];
 
     /**

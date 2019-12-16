@@ -12,14 +12,14 @@ class Subject extends \App\Entities\Subject implements \Doctrine\ORM\Proxy\Proxy
      *      three parameters, being respectively the proxy object to be initialized, the method that triggered the
      *      initialization process and an array of ordered parameters that were passed to that method.
      *
-     * @see \Doctrine\Common\Persistence\Proxy::__setInitializer
+     * @see \Doctrine\Common\Proxy\Proxy::__setInitializer
      */
     public $__initializer__;
 
     /**
      * @var \Closure the callback responsible of loading properties that need to be copied in the cloned object
      *
-     * @see \Doctrine\Common\Persistence\Proxy::__setCloner
+     * @see \Doctrine\Common\Proxy\Proxy::__setCloner
      */
     public $__cloner__;
 
@@ -34,7 +34,7 @@ class Subject extends \App\Entities\Subject implements \Doctrine\ORM\Proxy\Proxy
      * @var array properties to be lazy loaded, with keys being the property
      *            names and values being their default values
      *
-     * @see \Doctrine\Common\Persistence\Proxy::__getLazyProperties
+     * @see \Doctrine\Common\Proxy\Proxy::__getLazyProperties
      */
     public static $lazyPropertiesDefaults = [];
 
@@ -64,10 +64,10 @@ class Subject extends \App\Entities\Subject implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'mainProfessor', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'headOfDepartment', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'moduleCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hoursCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'creditsCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'date'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'mainProfessor', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'headOfDepartment', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'moduleCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hoursCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'creditsCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'date', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hasCourse', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hasPass', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hasExam', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hasPractice', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'groups'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'mainProfessor', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'headOfDepartment', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'moduleCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hoursCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'creditsCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'date'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'mainProfessor', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'headOfDepartment', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'moduleCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hoursCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'creditsCount', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'date', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hasCourse', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hasPass', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hasExam', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'hasPractice', '' . "\0" . 'App\\Entities\\Subject' . "\0" . 'groups'];
     }
 
     /**
@@ -186,6 +186,72 @@ class Subject extends \App\Entities\Subject implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', []);
 
         return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getGroupValues(): array
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getGroupValues', []);
+
+        return parent::getGroupValues();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeGroup(\App\Entities\Group $group)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeGroup', [$group]);
+
+        return parent::removeGroup($group);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getGroupsCollection()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getGroupsCollection', []);
+
+        return parent::getGroupsCollection();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getGroups()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getGroups', []);
+
+        return parent::getGroups();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setGroups(array $groups): \App\Entities\Subject
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setGroups', [$groups]);
+
+        return parent::setGroups($groups);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addGroup($group)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addGroup', [$group]);
+
+        return parent::addGroup($group);
     }
 
     /**
@@ -340,6 +406,105 @@ class Subject extends \App\Entities\Subject implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDate', [$date]);
 
         return parent::setDate($date);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHasCourse(): bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHasCourse', []);
+
+        return parent::getHasCourse();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHasCourse(bool $hasCourse): \App\Entities\Subject
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setHasCourse', [$hasCourse]);
+
+        return parent::setHasCourse($hasCourse);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHasPass(): bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHasPass', []);
+
+        return parent::getHasPass();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHasPass(bool $hasPass): \App\Entities\Subject
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setHasPass', [$hasPass]);
+
+        return parent::setHasPass($hasPass);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHasExam(): bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHasExam', []);
+
+        return parent::getHasExam();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHasExam(bool $hasExam): \App\Entities\Subject
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setHasExam', [$hasExam]);
+
+        return parent::setHasExam($hasExam);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHasPractice(): bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHasPractice', []);
+
+        return parent::getHasPractice();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHasPractice(bool $hasPractice): \App\Entities\Subject
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setHasPractice', [$hasPractice]);
+
+        return parent::setHasPractice($hasPractice);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTableArray()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTableArray', []);
+
+        return parent::getTableArray();
     }
 
 }

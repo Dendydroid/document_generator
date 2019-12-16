@@ -478,7 +478,7 @@
                 axios
                     .get('/getGroups')
                     .then(response => {
-                        this.groupList = response.data
+                        this.groupList = response.data;
                         this.chosenGroup = response.data[0].id;
                         this.getStudentsByGroup();
                     })

@@ -27,11 +27,11 @@
                     <thead>
                     <tr>
                         <th :colspan="maxColSpan">&nbsp;</th>
-                        
+
                     </tr>
                     </thead>
                     <tbody>
-                    
+
                     <tr>
                         <td :colspan="maxColSpan"></td>
                     </tr>
@@ -95,12 +95,12 @@
                         <td rowspan="3" class='cntr border-3-black bt'>
                             <input type="text" value="№" class="input-auto fill-secondary" >
                         </td>
-                        <td rowspan="3" class='cntr border-3-black bt'> 
+                        <td rowspan="3" class='cntr border-3-black bt'>
                             Прізвище та ініціали студентів
                         </td>
                         <td rowspan="3" class='cntr border-3-black bt'>
                             № зал. кн.
-                        </td> 
+                        </td>
                         <td rotate rowspan="3" class='cntr bold rotate border-3-black bt'>
                             Форма навчання
                         </td>
@@ -121,7 +121,7 @@
                         </td>
                     </tr>
                     <tr>
-                        
+
                         <td v-if="courseCount" :colspan='courseCount*3' class='cntr bold border-3-black bg-mark-0'>
                             Курсові роботи
                         </td>
@@ -156,7 +156,7 @@
                             Відрахування
                         </td>
                     </tr>
-                    <tr v-for="(student, key) in groupStudents" class='studentRow'>
+                    <tr v-for="(student, key) in groupStudents" :class='`student-id-${student.id} studentRow`'>
                         <td class='border-3-black cntr'>
                             {{key+1}}
                         </td>
@@ -164,7 +164,7 @@
                             {{`${student.surname}&nbsp;${student.firstName}&nbsp;${student.middleName}`}}
                         </td>
                         <td class='cntr border-3-black'>
-                            <input type="text" :value="student.studentId" class="input-auto fill-secondary" @input="colorChange">
+                            <input type="text" :value="`${student.studentId!=null ? student.studentId : ''}`" class="input-auto fill-secondary" @input="colorChange">
                         </td>
                         <td class='cntr border-3-black '>
                             {{student.nauConditions}}
@@ -178,15 +178,15 @@
                         <td class='cntr border-3-black militaryService'>
                             {{(student.militaryService!==null ? "+" : "")}}
                         </td>
-                        
-                        <template v-for="(subjectList,sector) in subjectHasArr">
-                               <template v-for="(subject,ind) in subjectList">
-                                   <td :class='`border-3-black cntr bg-mark-${sector}`' ><input type="text" value="0" class="input-auto subj-1-mark fill" @input="calcRating"></td>
+                        <template v-for="(subjectList,sector) in subjectHasArr" >
+                               <template v-for="(subject,ind) in subjectList" >
+                                <td :class='`border-3-black cntr bg-mark-${sector}`' ><input type="text" :class="`input-auto subj-1-mark fill mark-${subject.id}-${markTypes[sector]}`" @input="calcRating"></td>
                                     <td :class='`border-3-black cntr subj-2-mark bg-mark-${sector}`' class=''>0</td>
                                     <td :class='`border-3-black cntr subj-3-mark bg-mark-${sector}`' class=''>0</td>
+                                    
                                </template>
                         </template>
-                        
+
                         <td class='lft border-3-black cntr bold depts'>
                             <input type="text" value="" class="input-auto fill-secondary" @input="colorChange">
                         </td>
@@ -270,7 +270,7 @@
                         <template v-for="(subjectList,sector) in subjectHasArr">
                                <template v-for="(subject,ind) in subjectList">
                                    <td :class='`border-3-black cntr bg-mark-${sector}`' colspan="3">
-                                        <input type="text" class="input-auto input-top-fac text-input" value="№">
+                                        <input type="text" class="input-auto input-top-fac text-input" :value="`№${(groupDisciplineMarks.filter(el => el.subjectId === subject.id).length!==0 ? groupDisciplineMarks.filter(el => el.subjectId === subject.id)[0].number : '')}`">
                                     </td>
                                </template>
                         </template>
@@ -343,7 +343,7 @@
         padding: 10px;
     }
     input{
-      
+
     }
     .not-wrap{
         overflow: none;
@@ -510,6 +510,8 @@
                 groupList:[],
                 groupSubjects:[],
                 groupStudents: [],
+                groupStudentsCopy: {},
+                groupDisciplineMarks: [],
                 chosenSubject:'',
                 courseCount:0,
                 passCount:0,
@@ -530,7 +532,16 @@
                 headman:'',
                 specialityName:'',
                 groupOpp:'',
-                footer:''
+                footer:'',
+                studentMarksArray:[],
+                markTypes:{
+                    0:"course",
+                    1:"pass",
+                    2:"exam",
+                    3:"practice",
+                },
+                studentIdList:[],
+                recordNumberList:[]
             }
         },
         methods: {
@@ -546,12 +557,58 @@
                     tg.style.outlineColor = "#e3342f";
                 }
             },
+            calcRatingManual: function() {
+                let inputs = document.querySelectorAll('.subj-1-mark');
+                for(let n in inputs){
+                    let tg = inputs[n];
+                    let currTR = $(tg.parentElement.parentElement).children('td').children('.subj-1-mark');
+                    let mrk = 0;
+                    let deptsCount = 0;
+
+                    if(!isNaN(tg.value)){
+
+                        tg.value = parseFloat(tg.value, 10);
+
+                        if(tg.value>100){
+                            tg.value=100;
+                        }
+
+                        if(tg.value!=="" && tg.value !== '0')
+                        {
+                            tg.style.borderColor = "#38c172";
+                        }else{
+                            tg.style.borderColor = "#e3342f";
+                        }
+
+                        $(tg.parentElement.nextElementSibling).text(this.ratingToLetters(parseFloat(tg.value)));
+                        $(tg.parentElement.nextElementSibling.nextElementSibling).text(this.ratingToFive(parseFloat(tg.value),false));
+                        for(let i=0; i<currTR.length;i++)
+                        {
+                            mrk+=parseFloat(currTR[i].value);
+                            if(parseFloat(currTR[i].value) === 0){
+                                deptsCount++;
+                            }
+                        }
+                        $(tg.parentElement.parentElement).find(".depts").text(deptsCount);
+                        mrk/=currTR.length;
+                        if(mrk!==""){
+                            $(tg.parentElement).siblings(".rating").text(parseFloat(mrk.toFixed(2)));
+                            $(tg.parentElement).siblings(".averageMark").text(this.ratingToFive(mrk));
+                        }
+                    }else{
+                        tg.value = tg.value.slice(0, -1);
+                    }
+                }
+            },
             calcRating : function(event) {
                 let tg = event.target;
                 let currTR = $(tg.parentElement.parentElement).children('td').children('.subj-1-mark');
                 let mrk = 0;
+                let deptsCount = 0;
 
                 if(!isNaN(tg.value)){
+
+                    tg.value = parseFloat(tg.value, 10);
 
                     if(tg.value>100){
                         tg.value=100;
@@ -569,7 +626,11 @@
                     for(let i=0; i<currTR.length;i++)
                     {
                         mrk+=parseFloat(currTR[i].value);
+                        if(parseFloat(currTR[i].value) === 0){
+                            deptsCount++;
+                        }
                     }
+                    $(tg.parentElement.parentElement).find(".depts").text(deptsCount);
                     mrk/=currTR.length;
                     if(mrk!==""){
                         $(tg.parentElement).siblings(".rating").text(parseFloat(mrk.toFixed(2)));
@@ -613,22 +674,34 @@
             getStudentsByGroup() {
                 axios
                     .get(`/getStudentsByGroup/${this.chosenGroup}`)
-                    .then(response => (this.groupStudents = response.data))
+                    .then(response => {
+                        this.groupStudents = response.data;this.getSubjectsByGroup();
+                    })
                     .catch(e => {
                         this.errors.push(e)
                     });
             },
+            getGroupDisciplineMarks() {
+                axios
+                    .get(`/getDisciplineMarksByGroup/${this.chosenGroup}`)
+                    .then(response => {
+                        this.groupDisciplineMarks = response.data;
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    });
+
+            },
             getSubjectsByGroup() {
                 axios
                     .get(`/getSubjectsByGroup/${this.chosenGroup}`)
-                    .then(response => (this.groupSubjects = response.data.defaultSubjects))
+                    .then(response => {this.groupSubjects = response.data.defaultSubjects;this.getGroupDisciplineMarks();})
                     .catch(e => {
                         this.errors.push(e)
                     });
             },
             getAllData(){
                 this.getStudentsByGroup();
-                this.getSubjectsByGroup();
             },
             sendDoc() {
                 console.log(this.requestTable);
@@ -649,6 +722,11 @@
                 $("#termYears").html(this.termYears);
                 $("#termNumber").html(this.termNumber);
                 this.getInlineStyles();
+            },
+            popStudentId(key)
+            {
+                let student = this.groupStudentsCopy[key].pop();
+                return student.id;
             },
             getInlineStyles()
             {
@@ -688,12 +766,72 @@
                     }
                 });
 
-                
+
             },
             sendTable: function(evt){
+            },
+            processData(){
+                this.groupIsChosen = true;
+                let groupIdName = this.groupList.filter(el => el.id == this.chosenGroup)[0].idName;
+                let curatorFIO = this.groupList[this.chosenGroup].curator.fio;
+                let curatorPhone = this.groupList[this.chosenGroup].curator.phone;
+                let headmanFIO = this.groupList[this.chosenGroup].headman.fio;
+                let headmanPhone = this.groupList[this.chosenGroup].headman.phone;
+                let courseYear = this.groupList[this.chosenGroup].idName.match(/\d+/)[0][0];
+                let departmentHead = this.groupList.filter(el => el.id == this.chosenGroup)[0].department.head;
+                this.facultyName = this.groupList[this.chosenGroup].department.fullName;
+                this.chosenGroupName = `Академічна группа ${groupIdName}`;
+
+                this.courseYear = `${courseYear}`;
+                this.curator = `${curatorFIO ? curatorFIO : ''} ${curatorPhone ? curatorPhone : ''}`;
+                this.headman = `${headmanFIO ? headmanFIO : ''} ${headmanPhone ? headmanPhone : ''}`;
+                $("#termYears").val(this.termYears + ` навчальний рік (${courseYear}семестр)`);
+                this.specialityName = `${this.groupList[this.chosenGroup].speciality.number} ${this.groupList[this.chosenGroup].speciality.fullName}`;
+                this.groupOpp = this.groupList[this.chosenGroup].eduProgram;
+                this.footer = `Декан _______________ ${departmentHead}`;
+                let studentRow = null;
+                let studentMark = 0;
+                for(let studentNumber in this.studentMarksArray){
+                    studentRow = document.querySelector(`.student-id-${studentNumber}`);
+                    for(let subjectNumber in this.studentMarksArray[studentNumber]){
+                        if(Object.keys(this.studentMarksArray[studentNumber][subjectNumber]).length !== 0){
+                            for(let has in this.studentMarksArray[studentNumber][subjectNumber]){
+                                studentMark = this.studentMarksArray[studentNumber][subjectNumber][has];
+                                $(studentRow).find(`.mark-${subjectNumber}-${has}`).val(studentMark);
+                            }
+                        }else{
+                            let currentSubjHas = this.groupSubjects.filter(el => el.id === parseInt(subjectNumber))[0];
+                            for(let key in currentSubjHas.has){
+                                $(studentRow).find(`.mark-${subjectNumber}-${key}`).val(0);
+                            }
+                        }
+                    }
+                }
+                this.calcRatingManual();
+
             }
         },
         watch: {
+            groupDisciplineMarks: function(val){
+                let subjectMarks = [];
+                let recordNumber = 0;
+                for(let stId in this.groupStudents){
+                    this.studentMarksArray[this.groupStudents[stId].id] = [];
+                    for(let i in this.groupSubjects){
+                        this.recordNumberList.push({id:this.groupSubjects[i].id, number:this.groupSubjects[i].number});
+                        this.studentMarksArray[this.groupStudents[stId].id][this.groupSubjects[i].id] = [];
+                        subjectMarks = this.groupDisciplineMarks.filter(el => el.subjectId === this.groupSubjects[i].id);
+                        if(subjectMarks.length){
+                            this.studentIdList.push({id:this.groupStudents[stId].id, studentId:this.groupStudents[stId].studentId});
+                            subjectMarks = JSON.parse(subjectMarks[0]["studentData"]);
+                            for(let has in this.groupSubjects[i].has){
+                                this.studentMarksArray[this.groupStudents[stId].id][this.groupSubjects[i].id][has] = subjectMarks.filter(st => st.id === this.groupStudents[stId].id)[0].rating[has];
+                            }
+                        }
+                    }
+                }
+                this.processData();
+            },
             groupSubjects: function(val)
             {
                 this.courseCount=0;
@@ -731,24 +869,6 @@
                 if(val!='')
                 {
                     this.getAllData();
-                    this.groupIsChosen = true;
-                    let groupIdName = this.groupList.filter(el => el.id == val)[0].idName;
-                    let curatorFIO = this.groupList[this.chosenGroup].curator.fio;
-                    let curatorPhone = this.groupList[this.chosenGroup].curator.phone;
-                    let headmanFIO = this.groupList[this.chosenGroup].headman.fio;
-                    let headmanPhone = this.groupList[this.chosenGroup].headman.phone;
-                    let courseYear = this.groupList[this.chosenGroup].idName.match(/\d+/)[0][0];
-                    let departmentHead = this.groupList.filter(el => el.id == val)[0].department.head;
-                    this.facultyName = this.groupList[this.chosenGroup].department.fullName;
-                    this.chosenGroupName = `Академічна группа ${groupIdName}`;
-
-                    this.courseYear = `${courseYear}`;
-                    this.curator = `${curatorFIO ? curatorFIO : ''} ${curatorPhone ? curatorPhone : ''}`;
-                    this.headman = `${headmanFIO ? headmanFIO : ''} ${headmanPhone ? headmanPhone : ''}`;
-                    $("#termYears").val(this.termYears + ` навчальний рік (${courseYear}семестр)`);
-                    this.specialityName = `${this.groupList[this.chosenGroup].speciality.number} ${this.groupList[this.chosenGroup].speciality.fullName}`;
-                    this.groupOpp = this.groupList[this.chosenGroup].eduProgram;
-                    this.footer = `Декан _______________ ${departmentHead}`
                 }
 
             },

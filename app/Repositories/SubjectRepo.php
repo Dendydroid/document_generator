@@ -2,6 +2,7 @@
 namespace App\Repositories;
 use App\Constants;
 use App\Entities\Department;
+use App\Entities\Group;
 use App\Entities\Speciality;
 use App\Entities\Subject;
 use App\Entities\User;
@@ -49,19 +50,15 @@ class SubjectRepo extends EntityRepository {
         return $validator;
     }
 
-    public function removeGroupFromSubjects($id){
+    public function removeGroupFromSubjects(Group $group){
         $subjects = $this->findAll();
+        /**
+         * @var Subject $subject
+         */
         foreach ($subjects as $subject) {
-            dd($subject);
-            $newGroups = $subject->getGroupValues();
-            $groups = $subject->getGroupValues();
-            foreach ($groups as $group) {
-                // if($group->getId() === $id)
-                // {
-
-                // }
-            }
-            $subject->setGroups([]);
+           if($subject->getGroupsCollection()->contains($group)){
+               $subject->getGroupsCollection()->removeElement($group);
+           }
             $this->_em->persist($subject);
             $this->_em->flush();
         }

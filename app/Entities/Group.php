@@ -40,7 +40,7 @@ class Group {
      * @ORM\ManyToMany(targetEntity="Subject")
      * @ORM\JoinTable(name="groups_subjects",
      *      joinColumns={@ORM\JoinColumn(name="groupId", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="subjectId", referencedColumnName="id", unique=false, onDelete="CASCADE")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="subjectId", referencedColumnName="id", unique=false)}
      *      )
      */
     private $defaultSubjects;
@@ -142,9 +142,9 @@ class Group {
     }
 
     /**
-     * @return ArrayCollection
+     * @return array
      */
-    public function getStudents(): ArrayCollection
+    public function getStudents(): array
     {
         return $this->students->getValues();
     }
@@ -193,7 +193,9 @@ class Group {
 
     public function addDefaultSubject(Subject $subject): Group
     {
-        $this->defaultSubjects->add($subject);
+        if(!$this->defaultSubjects->contains($subject)){
+            $this->defaultSubjects->add($subject);
+        }
         return $this;
     }
 

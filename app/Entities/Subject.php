@@ -77,7 +77,8 @@ class Subject {
      * @ORM\ManyToMany(targetEntity="Group")
      * @ORM\JoinTable(name="subject_groups",
      *      joinColumns={@ORM\JoinColumn(name="subjectId", referencedColumnName="id", unique=false)},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="groupId", referencedColumnName="id", unique=false, onDelete="CASCADE")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="groupId", referencedColumnName="id", unique=false)},
+     *
      *      )
      */
     private $groups;
@@ -101,6 +102,20 @@ class Subject {
     public function getGroupValues(): array
     {
         return $this->groups->getValues();
+    }
+
+    public function removeGroup(Group $group){
+        $groups = $this->groups->getValues();
+        foreach ($this->groups->getValues() as $number => $group){
+            if($group->getId() === $group->getId()){
+                unset($groups[$number]);
+            }
+        }
+    }
+
+    public function getGroupsCollection()
+    {
+        return $this->groups;
     }
 
     public function getGroups()
@@ -131,7 +146,10 @@ class Subject {
 
     public function addGroup($group)
     {
-        $this->groups->add($group);
+        if(!$this->groups->contains($group)){
+            $this->groups->add($group);
+        }
+        return $this;
     }
 
     /**

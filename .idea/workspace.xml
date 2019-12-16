@@ -2,46 +2,180 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2c251a4-e1cc-4783-b479-dcfda0d73dae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/NotTeacher.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/nau1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/nau2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/res/nau1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/res/nau2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/TeacherVidomist.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/res/nau1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/res/nau2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/generate/teacher_vidomist.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v8-compile-cache-0/6.2.414.50/zSprojectszSdocument_generatorzSnode_moduleszSwebpack-clizSbinzScli.js.BLOB" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v8-compile-cache-0/6.2.414.50/zSprojectszSdocument_generatorzSnode_moduleszSwebpack-clizSbinzScli.js.MAP" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/generator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/generator.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Entities/GroupDisciplineMarks.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Entities/TeacherToken.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/IsAllowed.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Repositories/GroupDisciplineMarksRepo.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Repositories/TeacherTokenRepo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Constants.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Entities/Group.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/Group.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Entities/Subject.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/Subject.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Entities/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Entities/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GeneratorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GeneratorController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/isAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/IsAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/GroupRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/GroupRepo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Repositories/SubjectRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/SubjectRepo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodeServer/conversionScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/nodeServer/conversionScript.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nodeServer/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/nodeServer/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodeServer/stylesMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/nodeServer/stylesMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageStudents.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageStudents.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/SettingsAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/SettingsAdmin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/SettingsUsers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/SettingsUsers.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/TeacherVidomist.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/TeacherVidomist.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ZvedenaVidomist.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ZvedenaVidomist.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesGroup.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesGroup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesSubject.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesSubject.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/proxies/__CG__AppEntitiesUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.idea/generator.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.idea/laravel-plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.idea/php.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/.styleci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Console/Kernel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Constants.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Entities/Faculty.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Entities/Group.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Entities/Order.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Entities/Speciality.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Entities/Student.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Entities/StudentParent.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Entities/Subject.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Entities/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Exceptions/Handler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Controllers/Auth/VerificationController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Controllers/Controller.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Controllers/DataController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Controllers/HomeController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Controllers/SinglePageController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Controllers/UserController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Kernel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Middleware/Authenticate.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Middleware/CheckForMaintenanceMode.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Middleware/EncryptCookies.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Middleware/LoginCheck.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Middleware/TrimStrings.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Middleware/TrustProxies.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Providers/AppServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Providers/AuthServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Providers/BroadcastServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Providers/EventServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Providers/RouteServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Repositories/FacultyRepo.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Repositories/SpecialityRepo.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/Repositories/UserRepo.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/app/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/artisan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/bootstrap/app.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/bootstrap/cache/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/composer.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/app.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/auth.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/broadcasting.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/database.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/debug-server.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/doctrine.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/filesystems.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/hashing.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/logging.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/mail.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/queue.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/services.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/session.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/config/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/database/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/database/factories/UserFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/database/migrations/2014_10_12_100000_create_password_resets_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/database/seeds/DatabaseSeeder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/phpunit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/public/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/public/css/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/public/css/page_css/main_style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/public/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/public/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/public/js/page_scripts/main_script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/public/mix-manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/public/web.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/js/components/MainPage.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/js/components/ManageData.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/js/components/ManageFaculties.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/js/components/Navbar.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/lang/en/auth.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/lang/en/pagination.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/lang/en/passwords.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/lang/en/validation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/sass/_variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/sass/app.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/auth/login.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/auth/loginUser.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/auth/passwords/email.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/auth/passwords/reset.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/auth/register.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/auth/registerUser.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/auth/verify.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/data/facultyData.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/data/groupData.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/data/instituteData.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/data/studentData.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/home.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/layouts/app.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/mainPage.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/manage/faculties.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/resources/views/manageData.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/routes/api.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/routes/channels.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/routes/console.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/routes/web.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/server.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/app/public/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/framework/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/framework/cache/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/framework/cache/data/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/framework/sessions/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/framework/testing/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/framework/views/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/logs/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/proxies/__CG__AppEntitiesFaculty.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/proxies/__CG__AppEntitiesGroup.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/proxies/__CG__AppEntitiesInstitute.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/proxies/__CG__AppEntitiesOrder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/proxies/__CG__AppEntitiesStudent.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/proxies/__CG__AppEntitiesStudentParent.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/proxies/__CG__AppEntitiesSubject.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/storage/proxies/__CG__AppEntitiesUser.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/tests/CreatesApplication.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/tests/Feature/ExampleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/tests/TestCase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/tests/Unit/ExampleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generator/webpack.mix.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -193,7 +327,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected" value="true" />
-    <property name="javascript.nodejs.core.library.configured.version" value="8.10.0" />
+    <property name="javascript.nodejs.core.library.configured.version" value="8.16.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -289,6 +423,11 @@
       <workItem from="1575453421503" duration="122000" />
       <workItem from="1575496726176" duration="229000" />
       <workItem from="1575829100664" duration="3368000" />
+      <workItem from="1575838485031" duration="28906000" />
+      <workItem from="1576176060476" duration="1001000" />
+      <workItem from="1576354962639" duration="13605000" />
+      <workItem from="1576391258898" duration="6668000" />
+      <workItem from="1576423926709" duration="3099000" />
     </task>
     <task id="LOCAL-00001" summary="Added:&#10;-Register&#10;-Login&#10;-Logout&#10;-Profile&#10;-Change Password&#10;-Remove Account">
       <created>1566408908580</created>

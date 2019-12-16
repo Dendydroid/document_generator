@@ -257,7 +257,7 @@ class Group extends \App\Entities\Group implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getStudents(): \Doctrine\Common\Collections\ArrayCollection
+    public function getStudents(): array
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getStudents', []);
