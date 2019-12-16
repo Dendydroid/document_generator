@@ -492,6 +492,8 @@
                 let mrk = 0;
                 if(!isNaN(tg.value)){
 
+                    tg.value=parseFloat(tg.value, 10);
+
                     if(tg.value>100){
                         tg.value=100;
                     }

@@ -137,8 +137,8 @@ Route::get('/getUsers', 'UserController@getUsers')->name('getUsers')->middleware
 Route::post('/deleteUsers', 'UserController@deleteUsers')->name('deleteUsers')->middleware('logged')->middleware('isAdmin');
 
 Route::post('/saveGroupDisciplineMarks', 'DataController@saveGroupDisciplineMarks')->middleware('logged')->middleware("isAllowed");
-Route::post('/saveTeacherToken', 'DataController@createTeacherToken')->middleware('logged');
-Route::post('/removeAllTokens', 'DataController@removeAllTokens')->middleware('logged');
+Route::post('/saveTeacherToken', 'DataController@createTeacherToken')->middleware('logged')->middleware('isAdmin');
+Route::post('/removeAllTokens', 'DataController@removeAllTokens')->middleware('logged')->middleware('isAdmin');
 Route::get('/getDisciplineMarksByGroup/{id}', 'DataController@getDisciplineMarksByGroup')->middleware('logged')->middleware('notTeacher');
 
 //TEST ROUTES

@@ -38,7 +38,9 @@ class TeacherTokenRepo extends EntityRepository {
 
     public function createTeacherToken(User $user, array $allowedSubjects)
     {
-        $this->removeAllTokens();
+        $this->removeAllTokens($user->getId());
+
+        //Removing this user tokens
 
         $teacherToken = new TeacherToken();
         $teacherToken->setUser($user);
@@ -53,13 +55,18 @@ class TeacherTokenRepo extends EntityRepository {
         $this->_em->flush();
     }
 
-    public function removeAllTokens()
+    public function removeAllTokens(int $id)
     {
-        $tokens = $this->findAll();
-        foreach ($tokens as $token){
+        $qb = $this->createQueryBuilder('t');
+        $qb->join('t.user', 'u')
+            ->where($qb->expr()->eq('u.id', $id));
+
+        $tokens = $qb->getQuery()->getResult();
+
+        foreach ($tokens as $key => $token) {
             $this->_em->remove($token);
-            $this->_em->flush();
         }
+            $this->_em->flush();
     }
 
     public function clearTable()

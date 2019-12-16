@@ -1104,7 +1104,7 @@ class DataController extends Controller
         if(isset($data['id']) && is_int($data["id"])){
             $user = $this->repoUser->find($data["id"]);
             if($user instanceof User){
-                return $this->repoTeacherToken->removeAllTokens();
+                return $this->repoTeacherToken->removeAllTokens($user->getId());
             }
         }
     }

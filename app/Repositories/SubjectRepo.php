@@ -170,18 +170,26 @@ class SubjectRepo extends EntityRepository {
             if(isset($data['hasCourse']) && !empty($data['hasCourse']))
             {
                 $subject->setHasCourse($data['hasCourse']);
+            }else{
+                $subject->setHasCourse(0);
             }
             if(isset($data['hasPass']) && !empty($data['hasPass']))
             {
                 $subject->setHasPass($data['hasPass']);
+            }else{
+                $subject->setHasPass(0);
             }
             if(isset($data['hasExam']) && !empty($data['hasExam']))
             {
                 $subject->setHasExam($data['hasExam']);
+            }else{
+                $subject->setHasExam(0);
             }
             if(isset($data['hasPractice']) && !empty($data['hasPractice']))
             {
                 $subject->setHasPractice($data['hasPractice']);
+            }else{
+                $subject->setHasPractice(0);
             }
 
 
