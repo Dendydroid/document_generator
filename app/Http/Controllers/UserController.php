@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Entities\TeacherToken;
 use App\Entities\User;
 use App\Entities\Subject;
 use App\Repositories\UserRepo as repo;
@@ -40,6 +41,26 @@ class UserController extends Controller {
     private $subjectRepo;
 
     /**
+     * @var string
+     */
+    private $teacherTokenClass;
+
+    /**
+     * @var \App\Repositories\TeacherTokenRepo
+     */
+    private $teacherTokenRepo;
+
+    /**
+     * @var string
+     */
+    private $groupDisciplineMarksClass;
+
+    /**
+     * @var \App\Repositories\GroupDisciplineMarksRepo
+     */
+    private $groupDisciplineMarksRepo;
+
+    /**
      * @var EntityManager
      */
     private $entityManager;
@@ -52,9 +73,13 @@ class UserController extends Controller {
     {
         $this->userClass = "App\Entities\User";
         $this->subjectClass = "App\Entities\Subject";
+        $this->teacherTokenClass = "App\Entities\TeacherToken";
+        $this->groupDisciplineMarksClass = "App\Entities\GroupDisciplineMarks";
         $this->entityManager = $entityManager;
         $this->userRepo = $this->entityManager->getRepository($this->userClass);
         $this->subjectRepo = $this->entityManager->getRepository($this->subjectClass);
+        $this->teacherTokenRepo = $this->entityManager->getRepository($this->teacherTokenClass);
+        $this->groupDisciplineMarksRepo = $this->entityManager->getRepository($this->groupDisciplineMarksClass);
     }
 
     public function getTeacherSubjectsList(Request $request)
@@ -271,9 +296,71 @@ class UserController extends Controller {
         $data = $request->all();
         if(isset($data['objects']) && !empty($data['objects']))
         {
+            foreach ($data['objects'] as $user)
+            {
+                $groupDisciplineMarks = $this->groupDisciplineMarksRepo->findBy(["user" => $user['id']]);
+
+                $this->teacherTokenRepo->removeAllTokens($user['id']);
+
+                foreach ($groupDisciplineMarks as $groupDisciplineMark)
+                {
+                    $this->groupDisciplineMarksRepo->deleteGroupDisciplineMark($groupDisciplineMark);
+                }
+            }
+
             return $this->userRepo->deleteUsers($data['objects']);
         }
         return Constants::OPERATION_FAILED;
     }
 
+    public function getAllowedSubjects(Request $request)
+    {
+        $userId = session()->all()['id'] ?? [];
+
+        $teacherTokens = $this->teacherTokenRepo->findBy(["user" => $userId]);
+
+        $allowedSubjects = [];
+
+        /**
+         * @var TeacherToken $teacherToken
+         */
+        foreach ($teacherTokens as $teacherToken)
+        {
+            $subjects = json_decode($teacherToken->getAllowedSubjects(), true);
+            foreach ($subjects as $subject)
+            {
+                if(!$subject['used'] && !isset($allowedSubjects[$subject['subject']])){
+                    $allowedSubjects[] = $subject['subject'];
+                }
+            }
+        }
+
+        return $allowedSubjects;
+    }
+
+    public function getAllowedSubjectsAdmin(Request $request)
+    {
+        $userId = $request->get('id');
+
+        $teacherTokens = $this->teacherTokenRepo->findBy(["user" => $userId]);
+
+        $allowedSubjects = [];
+
+        /**
+         * @var TeacherToken $teacherToken
+         */
+        foreach ($teacherTokens as $teacherToken)
+        {
+            $subjects = json_decode($teacherToken->getAllowedSubjects(), true);
+            foreach ($subjects as $subject)
+            {
+                if(!$subject['used'] && !isset($allowedSubjects[$subject['subject']])){
+                    $subj = $this->subjectRepo->find($subject['subject']);
+                    $allowedSubjects[] = ["id" => $subject['subject'], "name" => $subj->getName()];
+                }
+            }
+        }
+
+        return $allowedSubjects;
+    }
 }

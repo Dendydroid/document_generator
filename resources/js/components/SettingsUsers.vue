@@ -10,6 +10,24 @@
 
         <div class="p-t">
 
+            <md-dialog :md-active.sync="toggleModalInfo" class=" of-auto" md-scrollbar>
+                <md-dialog-title class="fb-center"><p>Информация <md-icon class="mb-1 md-accent">info</md-icon></p></md-dialog-title>
+                <div class="pl-3 pr-3 pb-3 larafont" v-if="activeAllowed.length!==0">
+                   Список разрешенных предметов:
+                </div>
+                <div class="pl-3 pr-3 pb-3 larafont" v-if="activeAllowed.length===0">
+                    Список разрешенных предметов пуст!
+                </div>
+                <ul>
+                    <li v-for="item in activeAllowed">
+                        {{item.name}}
+                    </li>
+                </ul>
+                <div class="buttons pb-3 pl-2 pr-2">
+                    <md-button class="md-accent md-raised" @click="closeInfo()">Закрыть</md-button>
+                </div>
+            </md-dialog>
+
             <md-dialog :md-active.sync="toggleModalSure" class=" of-auto" md-scrollbar>
                 <md-dialog-title class="fb-center"><p>Вы уверены? <md-icon class="mb-1 md-accent">warning</md-icon></p></md-dialog-title>
                 <div class="pl-3 pr-3 pb-3 larafont">
@@ -72,8 +90,11 @@
 
                         <div class="md-toolbar-section-end">
                             <md-button class="md-icon-button md-raised md-accent" title="Удалить выделенное" @click="toggleModalSure=true"><md-icon>delete</md-icon></md-button>
-                            <md-button v-if="showAllowButton" class="md-icon-button md-raised btn-warn" @click="allowSelected()" title="Разрешить/Отменить разрешения на заполнение ведомостей преподавателю">
-                                <md-icon>build</md-icon>
+                            <md-button v-if="showAllowButton" class="md-icon-button md-raised btn-warn c-w" @click="allowSelected()" title="Разрешить/Отменить разрешения на заполнение ведомостей преподавателю">
+                                <md-icon class="c-w">build</md-icon>
+                            </md-button>
+                            <md-button v-if="showAllowButton" class="md-icon-button md-raised c-w" @click="showInfo()" title="Посмотреть информацию" style="background-color: #6cb2eb">
+                               <span style="font-size:1.5rem">&#8505;</span>
                             </md-button>
                             <md-button class="md-icon-button md-raised" @click="clearSelected()" title="Сбросить выделение">
                                 <md-icon>clear</md-icon>
@@ -106,6 +127,9 @@
 </template>
 
 <style>
+    .c-w{
+        color:#fff !important;
+    }
     .icon-table{
 
     }
@@ -176,6 +200,8 @@
                     bg: 'background-color:rgba(33, 33, 33, 0.6)'
                 },
                 showAllowButton:false,
+                toggleModalInfo:false,
+                activeAllowed:[],
                 searchColumn: 'name',
                 errorMessage: '',
                 facultyList:'',
@@ -195,6 +221,24 @@
             }
         },
         methods: {
+            getAllowedSubjects(){
+                axios
+                    .post('/getAllowedSubjectsAdmin', {
+                        id:this.selected[0].id
+                    })
+                    .then(response => {
+                        this.activeAllowed = response.data;
+                    }).catch(e => {
+                    this.errors.push(e.response.data.errors);
+                });
+            },
+            showInfo () {
+                this.getAllowedSubjects();
+                this.toggleModalInfo = true;
+            },
+            closeInfo () {
+                this.toggleModalInfo = false;
+            },
             onSelect (items) {
                 this.selected = items;
                 this.toggleShowAllowButton(items);
@@ -212,11 +256,14 @@
                 this.getTeacherSubjects();
             },
             saveTeacherToken(){
+
+                let allowedSubjects = this.selectedTeacherSubjects.filter(el => this.allowedSubjectsList.includes(el.id));
+
                 axios
                     .post('/saveTeacherToken', {
                         id:this.selectedTeacher.id,
                         particular: this.allowParticular,
-                        subjects: this.selectedTeacherSubjects,
+                        subjects: allowedSubjects,
                     })
                     .then(response => {
                     })

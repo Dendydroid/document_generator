@@ -71,7 +71,7 @@
                         <md-input v-model="edit_number" maxlength="255"></md-input>
                         <span class="md-helper-text">Номер специальности</span>
                     </md-field>
-                    
+
                     <md-field>
                         <label>Кафедра</label>
                         <md-select v-model="edit_department" name="edit_department" id="edit_department">
@@ -155,7 +155,6 @@
                         <md-table-cell md-label="Аббревиатура" md-sort-by="abbreviation">{{ item.abbreviation }}</md-table-cell>
                         <md-table-cell md-label="Кафедра" md-sort-by="department.fullName">{{ item.department.fullName }}</md-table-cell>
                         <md-table-cell md-label="Номер" md-sort-by="department.number">{{ item.number }}</md-table-cell>
-                        <md-table-cell md-label="ОПП" md-sort-by="department.eduProgram">{{ item.eduProgram }}</md-table-cell>
                     </md-table-row>
 
                 </md-table>
@@ -326,7 +325,7 @@
                         abbreviation: this.add_abbreviation,
                         department: this.add_department,
                         number: this.add_number,
-                        
+
                     })
                     .then(response => (this.dataSet.push(response.data)))
                     .catch(e => {
@@ -342,7 +341,7 @@
                         abbreviation: this.edit_abbreviation,
                         department: this.edit_department,
                         number: this.edit_number,
-                        
+
                     })
                     .then(response => {
                         this.dataSet.forEach(function(el,index,arr){
@@ -352,7 +351,7 @@
                                 arr[index].abbreviation = response.data.abbreviation;
                                 arr[index].department = response.data.department;
                                 arr[index].number = response.data.number;
-                        
+
                             }
                         });
                     })
@@ -363,7 +362,7 @@
                 this.edit_fullName = '';
                 this.edit_abbreviation = '';
                 this.edit_number = '';
-                
+
                 this.clearSelected();
                 this.toggleModalEdit=false;
             },
@@ -397,7 +396,7 @@
                     this.edit_abbreviation = element.abbreviation;
                     this.edit_department = element.department.id;
                     this.edit_number = element.number;
-                    
+
                     this.editId = element.id;
                     this.toggleModalEdit = true;
                 }

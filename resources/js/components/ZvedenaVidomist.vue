@@ -183,7 +183,7 @@
                                 <td :class='`border-3-black cntr bg-mark-${sector}`' ><input type="text" :class="`input-auto subj-1-mark fill mark-${subject.id}-${markTypes[sector]}`" @input="calcRating"></td>
                                     <td :class='`border-3-black cntr subj-2-mark bg-mark-${sector}`' class=''>0</td>
                                     <td :class='`border-3-black cntr subj-3-mark bg-mark-${sector}`' class=''>0</td>
-                                    
+
                                </template>
                         </template>
 
@@ -559,6 +559,7 @@
             },
             calcRatingManual: function() {
                 let inputs = document.querySelectorAll('.subj-1-mark');
+                // inputs = Array.from(inputs);
                 for(let n in inputs){
                     let tg = inputs[n];
                     let currTR = $(tg.parentElement.parentElement).children('td').children('.subj-1-mark');
@@ -772,22 +773,23 @@
             },
             processData(){
                 this.groupIsChosen = true;
-                let groupIdName = this.groupList.filter(el => el.id == this.chosenGroup)[0].idName;
-                let curatorFIO = this.groupList[this.chosenGroup].curator.fio;
-                let curatorPhone = this.groupList[this.chosenGroup].curator.phone;
-                let headmanFIO = this.groupList[this.chosenGroup].headman.fio;
-                let headmanPhone = this.groupList[this.chosenGroup].headman.phone;
-                let courseYear = this.groupList[this.chosenGroup].idName.match(/\d+/)[0][0];
-                let departmentHead = this.groupList.filter(el => el.id == this.chosenGroup)[0].department.head;
-                this.facultyName = this.groupList[this.chosenGroup].department.fullName;
+                let theChosenGroup = this.groupList.filter(el => el.id == this.chosenGroup)[0];
+                let groupIdName = theChosenGroup.idName;
+                let curatorFIO = theChosenGroup.curator.fio;
+                let curatorPhone = theChosenGroup.curator.phone;
+                let headmanFIO = theChosenGroup.headman.fio;
+                let headmanPhone = theChosenGroup.headman.phone;
+                let courseYear = theChosenGroup.idName.match(/\d+/)[0][0];
+                let departmentHead = theChosenGroup.department.head;
+                this.facultyName = theChosenGroup.department.fullName;
                 this.chosenGroupName = `Академічна группа ${groupIdName}`;
 
                 this.courseYear = `${courseYear}`;
                 this.curator = `${curatorFIO ? curatorFIO : ''} ${curatorPhone ? curatorPhone : ''}`;
                 this.headman = `${headmanFIO ? headmanFIO : ''} ${headmanPhone ? headmanPhone : ''}`;
                 $("#termYears").val(this.termYears + ` навчальний рік (${courseYear}семестр)`);
-                this.specialityName = `${this.groupList[this.chosenGroup].speciality.number} ${this.groupList[this.chosenGroup].speciality.fullName}`;
-                this.groupOpp = this.groupList[this.chosenGroup].eduProgram;
+                this.specialityName = `${theChosenGroup.speciality.number} ${theChosenGroup.speciality.fullName}`;
+                this.groupOpp = theChosenGroup.eduProgram;
                 this.footer = `Декан _______________ ${departmentHead}`;
                 let studentRow = null;
                 let studentMark = 0;

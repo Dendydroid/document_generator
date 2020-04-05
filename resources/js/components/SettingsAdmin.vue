@@ -39,7 +39,7 @@
                                             <span class="md-helper-text">Кафедра специальности, которая заполняется</span>
                                         </md-field>
                                         <md-field>
-                                            <label for="csvFiles">Файлы для заполнения</label>
+<!--                                            <label for="csvFiles">Файлы для заполнения</label>-->
                                              <input name="upload[]" type="file" multiple="multiple" />
                                             <span class="md-helper-text">.csv файлы для заполнения Групп и Студентов</span>
                                         </md-field>

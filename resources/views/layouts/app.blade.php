@@ -193,7 +193,10 @@
             --font-family-sans-serif: "Nunito", sans-serif;
             --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         }
-
+        input[type='file']{
+            width:100% !important;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>

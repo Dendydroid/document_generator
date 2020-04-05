@@ -416,6 +416,8 @@
                         this.dataSet.forEach(function(el,index,arr){
                             if(el.id === response.data.id)
                             {
+                                console.log(arr[index]);
+                                console.log(response);
                                 arr[index].name = response.data.name;
                                 arr[index].professor = response.data.professor;
                                 arr[index].headOfDepartment = response.data.headOfDepartment;
@@ -423,10 +425,10 @@
                                 arr[index].hoursCount = response.data.hoursCount;
                                 arr[index].creditsCount = response.data.creditsCount;
                                 arr[index].dateBegin = response.data.dateBegin;
-                                arr[index].hasCourse = response.has.course;
-                                arr[index].hasPass = response.has.pass;
-                                arr[index].hasExam = response.has.exam;
-                                arr[index].hasPractice = response.has.practice;
+                                arr[index].has.course = !!response.data.has.course;
+                                arr[index].has.pass = !!response.data.has.pass;
+                                arr[index].has.exam = !!response.data.has.exam;
+                                arr[index].has.practice = !!response.data.has.practice;
                             }
                         });
                     })

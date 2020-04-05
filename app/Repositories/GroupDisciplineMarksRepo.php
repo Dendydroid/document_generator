@@ -68,6 +68,12 @@ class GroupDisciplineMarksRepo extends EntityRepository {
         return $result;
     }
 
+    public function deleteGroupDisciplineMark(GroupDisciplineMarks $groupDisciplineMarks)
+    {
+        $this->_em->remove($groupDisciplineMarks);
+        $this->_em->flush();
+    }
+
     public function clearTable()
     {
         $connection = $this->_em->getConnection();

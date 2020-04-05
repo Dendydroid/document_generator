@@ -161,6 +161,8 @@ class UserRepo extends EntityRepository {
 
             if($user instanceof User)
             {
+                $user->setSubjects([]);
+                $this->_em->persist($user);
                 $this->_em->remove($user);
                 $this->_em->flush();
                 $removed[] = $object;

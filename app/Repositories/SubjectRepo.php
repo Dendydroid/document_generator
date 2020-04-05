@@ -158,6 +158,11 @@ class SubjectRepo extends EntityRepository {
         $validation = $this->validateSubject($data);
         if(!$validation->fails())
         {
+            $hasCourse = isset($data['hasCourse']) && $data['hasCourse'] === TRUE ? 1 : 0;
+            $hasPass = isset($data['hasPass']) && $data['hasPass'] === TRUE ? 1 : 0;
+            $hasExam = isset($data['hasExam']) && $data['hasExam'] === TRUE ? 1 : 0;
+            $hasPractice = isset($data['hasPractice']) && $data['hasPractice'] === TRUE ? 1 : 0;
+
             $subject = $this->find($data['id']);
             $subject->setName($data['name'])
                 ->setMainProfessor($data['professor'])
@@ -165,6 +170,10 @@ class SubjectRepo extends EntityRepository {
                 ->setModuleCount($data['moduleCount'])
                 ->setHoursCount($data['hoursCount'])
                 ->setCreditsCount($data['creditsCount'])
+                ->setHasCourse($hasCourse)
+                ->setHasPass($hasPass)
+                ->setHasExam($hasExam)
+                ->setHasPractice($hasPractice)
                 ->setDate($data['date']);
 
             if(isset($data['hasCourse']) && !empty($data['hasCourse']))

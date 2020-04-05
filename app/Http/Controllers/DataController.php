@@ -18,6 +18,7 @@ use App\Repositories\SubjectRepo;
 use App\Repositories\TeacherTokenRepo;
 use App\Repositories\UserRepo;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\PersistentCollection;
 use Illuminate\Http\Request;
 use \App\Repositories\DepartmentRepo;
 
@@ -592,7 +593,7 @@ class DataController extends Controller
                     $this->repoDepartments->updateDepartment($department);
                 }
 
-                $groups = $speciality->getGroupsCollection();
+                $groups = $s->getGroupsCollection();
                 $this->repoGroup->removeGroupArray($groups);
             }
 
@@ -836,6 +837,31 @@ class DataController extends Controller
 
             $group = $this->repoGroup->editGroup($data, $speciality, $subjects);
 
+            // Also assigning the groups to subject
+            $subjects = $this->repoSubjects->findAll();
+
+            foreach ($subjects as $subject)
+            {
+                /**
+                 * @var PersistentCollection $subjectGroups
+                 */
+                $subjectGroups = $subject->getGroupsCollection();
+
+                if(!in_array($subject->getId(), $data['defaultSubjects']))
+                {
+                    if($subjectGroups->contains($group)) {
+                        $subjectGroups->removeElement($group);
+                        $subject->setGroups($subjectGroups->toArray());
+                        $this->repoSubjects->updateSubject($subject);
+                    }
+
+                }else if(!$subjectGroups->contains($group)){
+                    $subject->add($group);
+                    $this->repoSubjects->updateSubject($subject);
+                }
+            }
+
+
             if($group instanceof Group)
             {
                 return $group->getTableArray();
@@ -1075,7 +1101,7 @@ class DataController extends Controller
             if (isset($data['id']) && is_int($data["id"]) && isset($data["subjects"])) {
                 $user = $this->repoUser->find($data["id"]);
                 if ($user instanceof User) {
-                    if($data["particular"]){
+                    if(!$data["particular"]){
                         $allowedSubjects = $user->getSubjects();
                         $allowedArray = [];
                         foreach($allowedSubjects as $subject){
@@ -1097,6 +1123,7 @@ class DataController extends Controller
                 }
             }
         }
+        return abort(400);
     }
     public function removeAllTokens(Request $request)
     {

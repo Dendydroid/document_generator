@@ -16,6 +16,12 @@
                             <md-option v-for="group in groupList" :value="group.id">{{group.idName}}</md-option>
                         </md-select>
                     </md-field>
+                    <div v-if="willSave && subjectIsChosen" class="col-12 cr-theme-good teacher-notify" style="font-family: sans-serif;">
+                        Запис&nbsp;буде&nbsp;збережено&nbsp;для&nbsp;<b>Зведеної Відомості</b><md-icon style="margin-left: 0.2rem;" class="cr-theme-primary">save</md-icon>
+                    </div>
+                    <div v-if="!willSave && subjectIsChosen" class="col-12 cr-theme-accent teacher-notify" style="font-family: sans-serif;">
+                        Запис&nbsp;<b>не</b>&nbsp;буде&nbsp;збережено&nbsp;для&nbsp;<b>Зведеної Відомості</b><md-icon style="margin-left: 0.2rem;" class="cr-theme-accent">report</md-icon>
+                    </div>
                 </div>
                 <div class="col-4 center-button" v-show="groupIsChosen">
                     <form id="sendTableForm" action="http://127.0.0.1:5000/html2Excel" method="POST" target="_blank">
@@ -205,6 +211,14 @@
     </div>
 </template>
 <style>
+    .teacher-notify{
+        padding-left:0 !important;
+        padding-right:0 !important;;
+        padding-bottom:1rem;
+        font-family: sans-serif;
+        display: flex;
+        align-items: center;
+    }
     .nau1{
         width:100px;
     }
@@ -222,6 +236,9 @@
     }
     .bg-mark-3{
         background-color: rgba(123, 237, 159, 0.3);
+    }
+    .cr-theme-good{
+        color:mediumseagreen;
     }
     .text-input{
         transition-timing-function: ease-out;
@@ -429,6 +446,9 @@
                 maxColSpan:0,
                 vidomistNumber:0,
                 allSubjectGroups:[],
+                willSave:false,
+                subjectIsChosen:false,
+                allowedSubjects:[],
                 subjectList:[],
                 groupList:[],
                 activeSubject:{},
@@ -463,6 +483,16 @@
             }
         },
         methods: {
+            getAllowedSubjects(){
+                axios
+                    .post('/getAllowedSubjects', {
+                    })
+                    .then(response => {
+                        this.allowedSubjects = response.data;
+                    }).catch(e => {
+                    this.errors.push(e.response.data.errors);
+                });
+            },
             getTeacherSubjects(){
                 axios
                     .post('/getTeacherSubjects', {
@@ -727,6 +757,13 @@
             },
             activeSubject: function(val){
                 if(val !== 0){
+                    this.subjectIsChosen = true;
+                    if(this.allowedSubjects.includes(parseInt(val)))
+                    {
+                        this.willSave = true;
+                    }else{
+                        this.willSave = false;
+                    }
                     for(let num in this.allSubjectGroups){
                         if(this.allSubjectGroups[num].subject.id === this.activeSubject){
                             this.groupList = this.allSubjectGroups[num].groups;
@@ -801,6 +838,7 @@
         },
         created () {
             console.log("CREATED");
+            this.getAllowedSubjects();
             this.getTeacherSubjects();
             this.getFacultyInfo();
         }

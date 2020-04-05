@@ -131,7 +131,8 @@ Route::get('/generate/teacherVidomist', 'GeneratorController@getTeacherVidomist'
 
 Route::post('/getTeacherSubjects', "UserController@getTeacherSubjects")->middleware('logged');
 Route::post('/getTeacherSubjectsList', "UserController@getTeacherSubjectsList")->middleware('logged');
-
+Route::post('/getAllowedSubjects', "UserController@getAllowedSubjects")->middleware('logged')->name('allowedSubjects');
+Route::post('/getAllowedSubjectsAdmin', "UserController@getAllowedSubjectsAdmin")->middleware('logged')->name('allowedSubjectsAdmin')->middleware('isAdmin');
 
 Route::get('/getUsers', 'UserController@getUsers')->name('getUsers')->middleware('logged')->middleware('isAdmin');
 Route::post('/deleteUsers', 'UserController@deleteUsers')->name('deleteUsers')->middleware('logged')->middleware('isAdmin');
@@ -148,5 +149,5 @@ Route::get('/getDisciplineMarksByGroup/{id}', 'DataController@getDisciplineMarks
 //Route::get('/test', function(){
 //    dd(Carbon::now()->format('d/m/Y H:i:s'));
 //});
-Route::get('/t', 'DataController@getF');
+//Route::get('/t', 'UserController@getSession');
 //END TEST ROUTES

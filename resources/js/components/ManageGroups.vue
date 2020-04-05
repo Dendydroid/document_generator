@@ -197,6 +197,7 @@
                         <md-table-cell md-label="Предметы" md-sort-by="defaultSubjects">{{ item.defaultSubjects.map(function(elem){return elem.name;}).join(',') }}</md-table-cell>
                         <md-table-cell md-label="Наименование" md-sort-by="idName">{{ item.idName }}</md-table-cell>
                         <md-table-cell md-label="Специальность" md-sort-by="speciality.fullName">{{ item.speciality.fullName }}</md-table-cell>
+                        <md-table-cell md-label="ОПП" md-sort-by="department.eduProgram">{{ item.eduProgram }}</md-table-cell>
                     </md-table-row>
 
                 </md-table>
