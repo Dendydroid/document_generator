@@ -14,9 +14,9 @@
                             <a class="dropdown-item larafont-navlink-dropdown" href="/generate/zajavaIspit">Заява - Іспит</a>
                             <a class="dropdown-item larafont-navlink-dropdown" href="/generate/zvedenaVidomist">Зведена відомість</a>
                             <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vpiskaOzinok">Виписка оцінок</a>
-                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistMod1">Відомість (модуль 1)</a>
-                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistMod2">Відомість (модуль 2)</a>
-                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistKr">Відомість КР</a>
+<!--                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistMod1">Відомість (модуль 1)</a>-->
+<!--                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistMod2">Відомість (модуль 2)</a>-->
+<!--                            <a class="dropdown-item larafont-navlink-dropdown" href="/generate/vidomistKr">Відомість КР</a>-->
                         </div>
                         <div class="dropdown-menu" aria-labelledby="generateDropdown" v-if="user.isTeacher">
                             <a class="dropdown-item larafont-navlink-dropdown" href="/generate/teacherVidomist">Відомість з дисципліни</a>
