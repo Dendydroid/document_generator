@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2c251a4-e1cc-4783-b479-dcfda0d73dae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageDepartments.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageDepartments.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageGroups.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageGroups.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ManageSpecialities.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageSpecialities.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageStudents.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageStudents.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ManageSubjects.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ManageSubjects.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Settings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Settings.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +253,7 @@
       <workItem from="1585864543397" duration="2690000" />
       <workItem from="1585959478798" duration="2241000" />
       <workItem from="1586030300824" duration="14353000" />
-      <workItem from="1614897543092" duration="325000" />
+      <workItem from="1614897543092" duration="1035000" />
     </task>
     <task id="LOCAL-00001" summary="Added:&#10;-Register&#10;-Login&#10;-Logout&#10;-Profile&#10;-Change Password&#10;-Remove Account">
       <created>1566408908580</created>

@@ -267,7 +267,7 @@
                 axios
                     .post('/updatePassword', {
                         oldPassword:this.userPassword,
-                        password:this.user.newPassword
+                        password:this.newPassword
                     })
                     .then(response => {
                         this.sendingProfilePassword = false;

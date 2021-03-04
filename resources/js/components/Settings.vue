@@ -42,7 +42,7 @@
                                         <md-field>
                                             <label for="facultyRectorFIO">Ректор</label>
                                             <md-input type="text" id="facultyRectorFIO" v-model="facultyRectorFIO" :disabled="sendingFacultyInfo" maxlength="255" />
-                                            <span class="md-helper-text">ФИО ректора</span>
+                                            <span class="md-helper-text">ФИО декана</span>
                                         </md-field>
                                     </md-card-content>
 

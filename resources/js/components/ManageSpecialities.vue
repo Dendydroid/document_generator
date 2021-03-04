@@ -151,10 +151,10 @@
 
                     <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="multiple" md-auto-select>
                         <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
+                        <md-table-cell md-label="Номер" md-sort-by="department.number">{{ item.number }}</md-table-cell>
                         <md-table-cell md-label="Наименование" md-sort-by="fullName">{{ item.fullName }}</md-table-cell>
                         <md-table-cell md-label="Аббревиатура" md-sort-by="abbreviation">{{ item.abbreviation }}</md-table-cell>
                         <md-table-cell md-label="Кафедра" md-sort-by="department.fullName">{{ item.department.fullName }}</md-table-cell>
-                        <md-table-cell md-label="Номер" md-sort-by="department.number">{{ item.number }}</md-table-cell>
                     </md-table-row>
 
                 </md-table>
