@@ -23,7 +23,7 @@
 
             <md-dialog :md-active.sync="toggleModalAdd" class="pl-5 pr-5 of-auto" md-scrollbar>
                 <md-dialog-title class="fb-center">Добавить кафедру</md-dialog-title>
-                <div class="pl-2 pr-2 pb-3">
+                <div class="pl-2 pr-2 pb-3 slider-vertical">
                     <md-field>
                         <label>Наименование</label>
                         <md-input v-model="add_fullName" maxlength="255" ></md-input>
@@ -48,7 +48,7 @@
 
             <md-dialog :md-active.sync="toggleModalEdit" class="pl-5 pr-5 of-auto" md-scrollbar>
                 <md-dialog-title class="fb-center">Изменить кафедру</md-dialog-title>
-                <div class="pl-2 pr-2 pb-3">
+                <div class="pl-2 pr-2 pb-3 slider-vertical">
                     <md-field>
                         <label>Наименование</label>
                         <md-input v-model="edit_fullName" maxlength="255" required></md-input>

@@ -23,7 +23,7 @@
 
             <md-dialog :md-active.sync="toggleModalAdd" class="pl-5 pr-5 of-auto" md-scrollbar>
                 <md-dialog-title class="fb-center">Добавить группу</md-dialog-title>
-                <div class="pl-2 pr-2 pb-3">
+                <div class="pl-2 pr-2 pb-3 slider-vertical">
                     <md-field>
                         <label>Наименование</label>
                         <md-input v-model="add_id_name" maxlength="255" required></md-input>
@@ -78,7 +78,7 @@
 
             <md-dialog :md-active.sync="toggleModalEdit" class="pl-5 pr-5 of-auto" md-scrollbar>
                 <md-dialog-title class="fb-center">Изменить группу</md-dialog-title>
-                <div class="pl-2 pr-2 pb-3">
+                <div class="pl-2 pr-2 pb-3 slider-vertical">
                     <md-field>
                         <label>Наименование</label>
                         <md-input v-model="edit_id_name" maxlength="255" required></md-input>
