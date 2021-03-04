@@ -125,7 +125,7 @@ class UserController extends Controller {
         return $validator;
     }
 
-    public function validateProfileData(Array $request)
+    public function validateProfileData(Array $request, bool $noTeacher = false)
     {
         $id = $request['id'];
         $validator = Validator::make($request, [
@@ -133,7 +133,7 @@ class UserController extends Controller {
             "surname" => "required|alpha|max:255|",
             "middleName" => "required|alpha|max:255",
             "email" => "required|email|unique:App\Entities\User,email,$id|max:255|min:4",
-            "isTeacher" => "required|boolean|max:255",
+            "isTeacher" => !$noTeacher ? "required|boolean|max:255" : "",
         ]);
 
         return $validator;
@@ -223,7 +223,7 @@ class UserController extends Controller {
 
     public function updateProfileData(Request $request)
     {
-        $validation = $this->validateProfileData($request->all());
+        $validation = $this->validateProfileData($request->all(), true);
         if(!$validation->fails())
             return $this->userRepo->updateProfileData($request);
 
