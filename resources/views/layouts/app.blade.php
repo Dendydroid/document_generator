@@ -197,6 +197,9 @@
             width:100% !important;
             cursor: pointer;
         }
+        .slider-vertical{
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
