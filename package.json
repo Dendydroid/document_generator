@@ -24,7 +24,7 @@
         "vue-material": "^1.0.0-beta-11",
         "vue-template-compiler": "^2.6.10",
         "vue-waves-button": "^1.0.4",
-        "vuetify": "^2.0.12"
+        "vuetify": "^2.6.10"
     },
     "dependencies": {
         "body-parser": "^1.19.0",
